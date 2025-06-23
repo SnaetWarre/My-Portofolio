@@ -8,10 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <div class="parallax-container">
+    <div class="parallax-element">🔧</div>
+    <div class="parallax-element">⚡</div>
+    <div class="parallax-element">🚀</div>
+    <div class="parallax-element">💻</div>
+  </div>
   <main>
-    <section class="hero">
+    <section class="hero fade-in">
       <div class="hero-row">
-        <div class="hero-content">
+        <div class="hero-content fade-in-left">
           <h1 class="hero-title headline-animate">Hi! <span class="wave">👋</span> My name is <span class="hero-name">Warre</span> and I am an AI engineering student.</h1>
           <p class="hero-desc">Building innovative solutions with C# and Python, focused on creating meaningful technology that makes a positive impact.</p>
           <div class="hero-socials">
@@ -32,37 +39,37 @@
             </a>
           </div>
         </div>
-        <div class="hero-avatar-container">
+        <div class="hero-avatar-container fade-in-right">
           <img src="IMG_1022.jpg" alt="Warre Snaet" class="hero-avatar">
         </div>
       </div>
     </section>
-    <section class="about-section" id="about">
+    <section class="about-section fade-in" id="about">
       <div class="about-grid">
-        <div class="about-card">
+        <div class="about-card fade-in-left">
           <h2>How it started</h2>
           <p>I grew up in Belgium, always curious about how things work. My journey began with tinkering, coding, and a love for science. Over time, I found my passion in AI and software engineering, driven by a desire to solve real-world problems and create meaningful technology.</p>
         </div>
-        <div class="about-card">
+        <div class="about-card fade-in-right">
           <h2>How it's going</h2>
           <p>Now, I'm focused on AI engineering, building projects with C# and Python. My goal is to make a positive impact through technology and continuous growth.</p>
         </div>
       </div>
     </section>
-    <section class="projects-section" id="projects">
-      <h2 class="projects-title">Projects</h2>
+    <section class="projects-section fade-in" id="projects">
+      <h2 class="projects-title fade-in">Projects</h2>
       <div class="projects-grid">
-        <div class="project-card">
+        <div class="project-card fade-in">
           <h3><a href="https://github.com/ElliotHeyse/TeamProject_waterAdventure" target="_blank"><span class="icon">🌊</span> WaterAdventure - Early Water Confidence Platform</a></h3>
           <p>A platform connecting coaches and parents to help toddlers (2-6 years) develop water confidence through playful activities. Features coach dashboards, parent/child apps, progress tracking, and multi-language support.</p>
           <div class="tech-stack">SvelteKit, TypeScript, Prisma, PostgreSQL, TailwindCSS, Docker</div>
         </div>
-        <div class="project-card">
+        <div class="project-card fade-in">
           <h3><a href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group" target="_blank"><span class="icon">🤖</span> Event Chatbot & Vector Embedding Service</a></h3>
           <p>Full-stack solution for event Q&A using .NET-based vector embedding, Azure OpenAI, CosmosDB, and a web scraper for ingesting event data. Includes a Next.js dashboard for analytics and chat history.</p>
           <div class="tech-stack">.NET, Python, Azure OpenAI, CosmosDB, Next.js</div>
         </div>
-        <div class="project-card">
+        <div class="project-card fade-in">
           <h3><a href="https://github.com/SnaetWarre/Server-Client-Python" target="_blank"><span class="icon">📡</span> Dataset Query Socket Application</a></h3>
           <p>Client-server socket application for dataset analysis and querying, with user authentication and operator capabilities. Features real-time logs, query statistics, and broadcast messaging.</p>
           <div class="tech-stack">Python, Sockets, Threading, Pandas, Seaborn, Matplotlib</div>
@@ -70,7 +77,7 @@
       </div>
     </section>
   </main>
-  <footer>
+  <footer class="fade-in">
     <p>&copy; 2025 Warre Snaet</p>
   </footer>
   <script src="script.js"></script>
