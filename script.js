@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const motionReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const bgCanvas = document.getElementById('bg-canvas');
   const lightBlobsLayer = document.getElementById('light-blobs');
-  if (bgCanvas && !motionReduced) {
+  if (false && bgCanvas && !motionReduced) {
     // Dynamically load Three.js from CDN
     const threeScript = document.createElement('script');
     threeScript.src = 'https://unpkg.com/three@0.160.0/build/three.min.js';
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // === ENHANCED PARTICLE SYSTEM ===
   const particleContainer = document.querySelector('.wrap');
-  if (particleContainer) {
+  if (false && particleContainer) {
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
     
     function createParticle() {
@@ -461,6 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // === SECTION SNAP SCROLLING (OPTIONAL) ===
   let isScrolling = false;
   
+  if (false) {
   window.addEventListener('wheel', (e) => {
     if (isScrolling) return;
     
@@ -494,6 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 800);
     }
   });
+  }
   
   // === PERFORMANCE OPTIMIZATION ===
   let ticking = false;
@@ -524,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // === THEME TOGGLER ===
+  /* === THEME TOGGLER (disabled) ===
   const THEME_STORAGE_KEY = 'preferred-theme'; // 'light' | 'dark'
   const root = document.documentElement;
   const toggleButton = document.getElementById('theme-toggle');
@@ -583,6 +585,34 @@ document.addEventListener('DOMContentLoaded', function() {
       applyTheme(currentTheme);
     });
   }
+  */
+
+  // === LIGHT-ONLY THEME (no dark mode) ===
+  (function enforceLightTheme() {
+    document.body.classList.remove('theme-dark');
+    if (lightBlobsLayer && lightBlobsLayer.childElementCount === 0) {
+      const blobs = [
+        { cls: 'orange', left: '-10%', top: '-10%', w: 500, h: 500 },
+        { cls: 'soft', left: '60%', top: '-15%', w: 420, h: 420 },
+        { cls: 'orange', left: '70%', top: '60%', w: 520, h: 520 },
+        { cls: 'soft', left: '-15%', top: '65%', w: 460, h: 460 }
+      ];
+      blobs.forEach(b => {
+        const el = document.createElement('div');
+        el.className = `light-blob ${b.cls}`;
+        el.style.left = b.left;
+        el.style.top = b.top;
+        el.style.width = `${b.w}px`;
+        el.style.height = `${b.h}px`;
+        lightBlobsLayer.appendChild(el);
+      });
+      lightBlobsLayer.style.opacity = '1';
+    }
+    const canvas = document.getElementById('bg-canvas');
+    if (canvas) {
+      canvas.style.display = 'none';
+    }
+  })();
 
   // === MAKE PROJECT CARDS FULLY CLICKABLE ===
   document.querySelectorAll('.project-card').forEach(card => {
