@@ -632,15 +632,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
-  // === RICKROLL ON AVATAR CLICK ===
-  const avatar = document.querySelector('.hero-avatar');
-  if (avatar) {
-    avatar.addEventListener('click', () => {
-      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank', 'noopener,noreferrer');
-    });
-  }
-
   // === FORCE ALL NON-ANCHOR LINKS TO OPEN IN NEW TAB ===
   document.querySelectorAll('a[href]').forEach(a => {
     const href = a.getAttribute('href') || '';
