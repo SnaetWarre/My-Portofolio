@@ -83,6 +83,7 @@ body {
   padding: 0.5rem 0;
   z-index: 50;
   transition: box-shadow 0.2s ease, background 0.2s ease;
+  display: none; /* Hidden for visual preference, kept for SEO */
 }
 
 .site-header.scrolled {
@@ -399,6 +400,28 @@ body {
   outline: 2px solid rgba(227, 52, 3, 0.6);
   outline-offset: 2px;
 }
+
+/* Enhanced focus for icon links */
+.icon-link:focus-visible {
+  outline: 2px solid rgba(227, 52, 3, 0.6);
+  outline-offset: 2px;
+  border-color: var(--border-hover);
+  color: var(--accent);
+}
+
+/* Visually hidden utility for accessibility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 footer {
   text-align: center;
   padding: 2rem 0 1rem 0;
@@ -433,8 +456,8 @@ footer {
     gap: 1.5rem;
   }
   .hero {
-    padding: 0 1rem;
-    margin: 3rem auto 3rem auto;
+    padding: 0 1.5rem;
+    margin: 2rem auto 2.5rem auto;
   }
   .hero-row {
     flex-direction: column;
@@ -444,17 +467,104 @@ footer {
   .hero-content {
     max-width: 100%;
   }
-.hero-title { font-size: 2.1rem; }
-  .hero-desc { font-size: 1.06rem; }
+  .hero-title { 
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+  .hero-desc { 
+    font-size: 1.08rem;
+    line-height: 1.65;
+    margin-bottom: 1.8rem;
+  }
   .hero-socials {
     justify-content: center;
+    gap: 1.2rem;
+  }
+  .icon-link {
+    padding: 0.9rem;
+    /* Larger touch targets for mobile */
+    min-width: 48px;
+    min-height: 48px;
   }
   .hero-avatar {
     width: 240px;
     height: 240px;
   }
   .projects-section, .about-section {
-    padding: 0 0.5rem;
+    padding: 0 1.5rem;
+  }
+  .about-card {
+    padding: 0 0 0 1rem;
+  }
+  .about-card h2 {
+    font-size: 1.25rem;
+  }
+  .about-card p {
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .projects-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.8em;
+  }
+  .project-card {
+    padding: 1.2em 0;
+  }
+  .project-card h3 {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  .project-card p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .tech-stack {
+    font-size: 0.92em;
+  }
+  footer {
+    font-size: 0.95em;
+    padding: 1.5rem 0 1rem 0;
+  }
+}
+
+/* Extra small screens (phones < 480px) */
+@media (max-width: 480px) {
+  .hero {
+    padding: 0 1rem;
+    margin: 1.5rem auto 2rem auto;
+  }
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+  }
+  .hero-avatar {
+    width: 200px;
+    height: 200px;
+  }
+  .projects-section, .about-section {
+    padding: 0 1rem;
+  }
+  .about-card h2 {
+    font-size: 1.15rem;
+  }
+  .about-card p {
+    font-size: 0.98rem;
+  }
+  .projects-title {
+    font-size: 1.15rem;
+  }
+  .project-card h3 {
+    font-size: 1.05rem;
+  }
+  .project-card p {
+    font-size: 0.96rem;
+  }
+  .icon-link svg {
+    width: 1.6em;
+    height: 1.6em;
   }
 }
 .wrap {
@@ -664,4 +774,32 @@ section {
   }
 }
 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .fade-in,
+  .fade-in-left,
+  .fade-in-right {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .hero-avatar:hover {
+    transform: none;
+  }
+  
+  .icon-link:hover {
+    transform: none;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
