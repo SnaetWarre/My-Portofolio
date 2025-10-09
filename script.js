@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // === SCROLL PROGRESS BAR ===
   const progressBar = document.getElementById('scroll-progress');
   const headerEl = document.querySelector('.site-header');
+  const footerEl = document.querySelector('footer');
   
   let ticking = false;
   
@@ -86,6 +87,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update header scrolled state (even though it's hidden, for consistency)
     if (headerEl) {
       headerEl.classList.toggle('scrolled', window.scrollY > 8);
+    }
+    
+    // Update footer scrolled state
+    if (footerEl) {
+      footerEl.classList.toggle('scrolled', window.scrollY > document.documentElement.scrollHeight - window.innerHeight - 8);
     }
     
     ticking = false;
