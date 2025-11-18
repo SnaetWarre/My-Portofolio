@@ -84,14 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
       progressBar.style.width = scrollPercent + '%';
     }
     
-    // Update header scrolled state (even though it's hidden, for consistency)
+    // Update header scrolled state
     if (headerEl) {
-      headerEl.classList.toggle('scrolled', window.scrollY > 8);
-    }
-    
-    // Update footer scrolled state
-    if (footerEl) {
-      footerEl.classList.toggle('scrolled', window.scrollY > document.documentElement.scrollHeight - window.innerHeight - 8);
+      headerEl.classList.toggle('scrolled', window.scrollY > 20);
     }
     
     ticking = false;
@@ -111,16 +106,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
+  // === ACTIVE LINK HIGHLIGHTING ===
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  
+  function updateActiveLink() {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      // Offset by header height (approx 80px)
+      if (window.scrollY >= (sectionTop - 150)) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    // Handle "Home" case (when scroll is at top)
+    if (window.scrollY < 100) {
+      current = 'home';
+    }
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', () => {
+    updateActiveLink();
+  });
+  
   // === SMOOTH SCROLL FOR NAVIGATION ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const targetId = this.getAttribute('href');
+      const target = document.querySelector(targetId);
       if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        // Special offset for home to go to very top
+        if (targetId === '#home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        // Update active link immediately
+        navLinks.forEach(link => link.classList.remove('active'));
+        this.classList.add('active');
       }
     });
   });
@@ -131,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial scroll effects update
     updateScrollEffects();
+    updateActiveLink();
     
     // Trigger initial fade-ins for elements in viewport
     fadeElements.forEach(el => {
