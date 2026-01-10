@@ -95,7 +95,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 6rem;
   padding-bottom: 2rem;
   box-sizing: border-box;
   overflow: hidden;
