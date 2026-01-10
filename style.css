@@ -306,6 +306,11 @@ main {
   font-size: 0.9rem;
   text-transform: uppercase;
   color: var(--text-secondary);
+  flex-wrap: wrap; /* Allow tags to wrap on small screens */
+}
+
+.tech-tags span {
+  white-space: nowrap; /* Keep name and slash together */
 }
 
 .tech-tags span::after {
