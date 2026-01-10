@@ -258,7 +258,7 @@ main {
 .projects-list {
   display: flex;
   flex-direction: column;
-  border-top: var(--border-width) solid var(--border-color);
+  /* border-top: var(--border-width) solid var(--border-color); */
   border-bottom: var(--border-width) solid var(--border-color);
 }
 
