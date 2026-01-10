@@ -90,15 +90,15 @@ main {
 /* HERO SECTION - Magazine Style */
 .hero {
   min-height: 100svh;
-  max-height: 100svh;
-  height: 100svh;
+  /* max-height: 100svh;  <-- Removed strict constraint */
+  /* height: 100svh;      <-- Removed strict constraint */
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 6rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem; /* Increased bottom padding */
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden;    <-- Removed to prevent clipping */
 }
 
 .hero-container {
