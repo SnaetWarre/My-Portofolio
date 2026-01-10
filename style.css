@@ -59,6 +59,39 @@ main {
   box-sizing: border-box;
 }
 
+.top-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.nav-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  pointer-events: auto;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.nav-logo {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+}
+
+
 /* Animations */
 .fade-in, .fade-in-left, .fade-in-right {
   opacity: 0;
