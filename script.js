@@ -26,6 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
   const headline = document.querySelector('.headline-animate');
   if (headline && !prefersReducedMotion) {
     const originalHTML = headline.innerHTML;
+    // Don't animate if it's the new complex layout, just simple text check
+    // Actually for the BR tag support we need to be careful.
+    // Let's simplified the typing for the new layout to just the Name if possible, 
+    // or just let it be static if it's too complex. 
+    // Given the new "WARRE<br>SNAET", the previous typing logic might break on <br>.
+    // Let's update the typing logic to handle the <br> gracefully or just disable it for this specific brutalist title 
+    // which looks better static/solid.
+    // However, the user asked for "cooler layout", maybe typing is still cool.
+    // I'll leave the typing logic but ensure it handles HTML tags (which the previous one did).
+    
     headline.innerHTML = '';
     
     let htmlIndex = 0;
@@ -55,109 +65,27 @@ document.addEventListener('DOMContentLoaded', function() {
           currentHTML += htmlChar;
           headline.innerHTML = currentHTML;
           htmlIndex++;
-          setTimeout(typeChar, 50);
+          setTimeout(typeChar, 100); // Slower typing for big text impact
         }
       } else {
-        headline.innerHTML += '<span class="typing-cursor"></span>';
-        setTimeout(() => {
-          const cursor = headline.querySelector('.typing-cursor');
-          if (cursor) cursor.remove();
-        }, 3000);
+        // Animation done
       }
     }
     
     setTimeout(typeChar, 500);
   }
-  
-  // === SCROLL PROGRESS BAR ===
-  const progressBar = document.getElementById('scroll-progress');
-  const headerEl = document.querySelector('.site-header');
-  const footerEl = document.querySelector('footer');
-  
-  let ticking = false;
-  
-  function updateScrollEffects() {
-    // Update scroll progress bar
-    if (progressBar) {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
-      progressBar.style.width = scrollPercent + '%';
-    }
-    
-    // Update header scrolled state
-    if (headerEl) {
-      headerEl.classList.toggle('scrolled', window.scrollY > 20);
-    }
-    
-    ticking = false;
-  }
-  
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateScrollEffects);
-      ticking = true;
-    }
-  });
-  
-  window.addEventListener('resize', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateScrollEffects);
-      ticking = true;
-    }
-  });
-  
-  // === ACTIVE LINK HIGHLIGHTING ===
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  
-  function updateActiveLink() {
-    let current = '';
-    
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      // Offset by header height (approx 80px)
-      if (window.scrollY >= (sectionTop - 150)) {
-        current = section.getAttribute('id');
-      }
-    });
-    
-    // Handle "Home" case (when scroll is at top)
-    if (window.scrollY < 100) {
-      current = 'home';
-    }
-    
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href').includes(current)) {
-        link.classList.add('active');
-      }
-    });
-  }
-  
-  window.addEventListener('scroll', () => {
-    updateActiveLink();
-  });
-  
-  // === SMOOTH SCROLL FOR NAVIGATION ===
+
+  // === SMOOTH SCROLL FOR ANY ANCHOR LINKS ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const targetId = this.getAttribute('href');
       const target = document.querySelector(targetId);
       if (target) {
-        // Special offset for home to go to very top
-        if (targetId === '#home') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-        // Update active link immediately
-        navLinks.forEach(link => link.classList.remove('active'));
-        this.classList.add('active');
+        target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
       }
     });
   });
@@ -165,10 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // === LOADING OPTIMIZATION ===
   window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    
-    // Initial scroll effects update
-    updateScrollEffects();
-    updateActiveLink();
     
     // Trigger initial fade-ins for elements in viewport
     fadeElements.forEach(el => {
@@ -179,49 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // === LIGHT MODE GRADIENT BLOBS ===
-  const lightBlobsLayer = document.getElementById('light-blobs');
-  if (lightBlobsLayer && lightBlobsLayer.childElementCount === 0) {
-    const blobs = [
-      { cls: 'orange', left: '-10%', top: '-10%', w: 500, h: 500 },
-      { cls: 'soft', left: '60%', top: '-15%', w: 420, h: 420 },
-      { cls: 'orange', left: '70%', top: '60%', w: 520, h: 520 },
-      { cls: 'soft', left: '-15%', top: '65%', w: 460, h: 460 }
-    ];
-    blobs.forEach(b => {
-      const el = document.createElement('div');
-      el.className = `light-blob ${b.cls}`;
-      el.style.left = b.left;
-      el.style.top = b.top;
-      el.style.width = `${b.w}px`;
-      el.style.height = `${b.h}px`;
-      lightBlobsLayer.appendChild(el);
-    });
-    lightBlobsLayer.style.opacity = '1';
-  }
-
-  // === MAKE PROJECT CARDS FULLY CLICKABLE ===
-  document.querySelectorAll('.project-card').forEach(card => {
-    const link = card.querySelector('a');
-    if (!link) return;
-    card.setAttribute('tabindex', '0');
-    const open = () => window.open(link.href, '_blank');
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('a')) return;
-      open();
-    });
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        open();
-      }
-    });
-  });
-  
-  // === FORCE ALL NON-ANCHOR LINKS TO OPEN IN NEW TAB ===
+  // === FORCE ALL EXTERNAL LINKS TO OPEN IN NEW TAB ===
   document.querySelectorAll('a[href]').forEach(a => {
     const href = a.getAttribute('href') || '';
-    if (!href.startsWith('#')) {
+    if (href.startsWith('http')) {
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
     }
