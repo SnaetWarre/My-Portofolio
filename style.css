@@ -113,10 +113,11 @@ main {
 }
 
 .hero-title {
-  font-size: clamp(4rem, 15vw, 12rem);
-  line-height: 0.85;
+  font-size: clamp(3rem, 12vw, 10rem);
+  line-height: 0.9;
   margin-bottom: 1rem;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .hero-badges {
