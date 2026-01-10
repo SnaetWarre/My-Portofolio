@@ -403,3 +403,52 @@ footer {
     font-size: 15vw;
   }
 }
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 4rem;
+    padding-bottom: 1.5rem;
+    min-height: auto;
+    height: auto;
+    max-height: none;
+  }
+  
+  .hero-badges {
+    gap: 0.5rem;
+  }
+  
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .hero-desc {
+    font-size: 1.2rem;
+  }
+  
+  .social-links {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .social-link--button {
+    padding: 0.4rem 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .project-info h3 {
+    font-size: 1.8rem;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-container {
+    gap: 1.5rem;
+  }
+  
+  .hero-header {
+    padding-bottom: 1.5rem;
+  }
+}
