@@ -250,6 +250,46 @@ main {
   box-shadow: 6px 6px 0px 0px var(--text);
 }
 
+.bio-text {
+  max-width: 800px;
+  margin: 4rem auto 0;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+.bio-text p {
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.tech-stack-section {
+  margin-top: 4rem;
+  border-top: var(--border-width) solid var(--border-color);
+  padding-top: 3rem;
+}
+
+.tech-stack-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tech-list span {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background: white;
+}
+
 .card-label {
   font-family: var(--font-heading);
   font-size: 0.9rem;
