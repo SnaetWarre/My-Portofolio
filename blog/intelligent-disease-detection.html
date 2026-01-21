@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intelligent Disease Detection on the Edge | Warre Snaet</title>
+  <title>Rust, Rot, and ROI: Engineering Offline AI | Warre Snaet</title>
   
-  <meta name="description" content="Technical rationale for an edge-native AI solution for agricultural disease detection using Rust and Burn.">
+  <meta name="description" content="How we ditched the Cloud and dedicated hardware to build a 24MB offline AI for farmers using Rust and Burn.">
   <meta name="robots" content="index, follow">
   
   <link rel="stylesheet" href="../style.css">
@@ -25,216 +25,122 @@
       <header class="blog-header fade-in">
         <div class="blog-meta">
           <span>Jan 21, 2026</span>
-          <span>Rust / AI / Edge Computing</span>
+          <span>Rust / Edge AI / Case Study</span>
         </div>
-        <h1 class="blog-title">Intelligent Disease Detection on the Edge</h1>
+        <h1 class="blog-title">Rust, Rot, and ROI: Engineering an Offline AI to Save Harvests</h1>
       </header>
       
       <div class="article-content fade-in">
-        <p>Crop disease represents a significant systemic risk in agriculture. For a commercial producer, the interval between the first symptom and the application of a targeted treatment determines the difference between a minor operational cost and a catastrophic yield loss.</p>
+        <p><strong>Imagine standing in a greenhouse. You spot a small, discolored patch on a tomato leaf.</strong></p>
+        <p>Is it just nutrient burn? Or is it <em>Late Blight</em>, a pathogen that can decimate your entire harvest in 72 hours? In the current agricultural model, you have two bad choices: spray expensive chemicals "just in case" (wasting money and hurting the soil), or send a sample to a lab and wait 3 days for results. By the time the phone rings, your crop might already be gone.</p>
+        
+        <p>This project started with a simple mission: <strong>Give the farmer a lab-grade diagnosis in 3 seconds, not 3 days.</strong></p>
+        
+        <p>But building this required us to break almost every standard rule of modern AI deployment. We had to ditch the Cloud, abandon Python, and throw out our specialized hardware.</p>
 
-        <h2>The Decision-Making Bottleneck</h2>
-        <p>Currently, a producer faces three sub-optimal paths when a potential pathogen is identified:</p>
-        <ol>
-          <li><strong>Passive Observation:</strong> Risking exponential spread of the pathogen.</li>
-          <li><strong>Prophylactic Spraying:</strong> High OPEX (Chemical costs: €50–200/hectare) and environmental impact.</li>
-          <li><strong>Professional Consultation:</strong> High latency (24-72 hours) and high fixed costs (€150–300 per visit).</li>
-        </ol>
-        <p>The objective of this research is to provide a fourth path: <strong>Instantaneous, localized, and high-accuracy diagnostic capability.</strong></p>
+        <h2>The Edge Constraint</h2>
+        <p>Farms are notoriously hostile environments for tech. There is often no 5G, no Wi-Fi, and certainly no fiber connection to an AWS server. If our AI needed an internet connection to work, it was useless.</p>
+        <p>We needed <strong>Edge Computing</strong>—processing data right there on the device. But "Edge" is a buzzword. Making it work economically is an engineering nightmare.</p>
 
-        <h2>Economic Drivers for Edge-Native Solutions</h2>
-        <p>Farmers prioritize technology based on ROI and operational reliability rather than novelty. The value proposition of an edge-based diagnostic tool is found in the optimization of the following variables:</p>
+        <h3>Hypothesis vs. Reality: The Hardware Trap</h3>
+        <p>Initially, we followed the industry playbook. We bought an <strong>NVIDIA Jetson Orin Nano</strong>. It's the gold standard for Edge AI—a dedicated €350 computer with 8GB of Unified RAM designed specifically to run neural networks.</p>
+        <p>We thought we were done. Then we ran the benchmarks.</p>
+        
+        <p>We pitted the specialized Jetson against a standard consumer laptop (Ryzen 7 / RTX 3060) and a high-end smartphone. The results forced a complete pivot.</p>
 
         <table>
           <thead>
             <tr>
-              <th>Variable</th>
-              <th>Impact of Traditional Methods</th>
-              <th>Impact of Edge-Native AI</th>
+              <th>Device Target</th>
+              <th>Inference Latency</th>
+              <th>Throughput</th>
+              <th>Cost to Farmer</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Detection Latency</strong></td>
-              <td>Days (Expert arrival/Lab results)</td>
-              <td>Seconds (On-device inference)</td>
+              <td><strong>Laptop (RTX 3060)</strong></td>
+              <td><strong>~15 ms</strong></td>
+              <td><strong>~65 img/s</strong></td>
+              <td>€0 (Already owns it)</td>
             </tr>
             <tr>
-              <td><strong>Treatment Precision</strong></td>
-              <td>Blanket application (Wasteful)</td>
-              <td>Targeted application (Cost-effective)</td>
+              <td><strong>Jetson Orin Nano</strong></td>
+              <td>~120 ms</td>
+              <td>~8 img/s</td>
+              <td>€350 + Setup</td>
             </tr>
             <tr>
-              <td><strong>Connectivity Dependency</strong></td>
-              <td>High (Cloud/Mobile data required)</td>
-              <td>Zero (Works in remote/shielded areas)</td>
-            </tr>
-            <tr>
-              <td><strong>Recurring Costs</strong></td>
-              <td>High (Consultation fees/Subscriptions)</td>
-              <td>Low (Single CAPEX for hardware)</td>
+              <td><strong>Standard CPU</strong></td>
+              <td>~250 ms</td>
+              <td>~4 img/s</td>
+              <td>€0</td>
             </tr>
           </tbody>
         </table>
 
-        <h3>The ROI Projection</h3>
-        <p>Initially, we projected a deployment based on the NVIDIA Jetson Orin Nano (~€350). However, our benchmarking phase revealed a critical insight: modern consumer hardware (smartphones and laptops) now outperforms dedicated entry-level edge AI accelerators for this specific workload, effectively reducing the hardware CAPEX to €0 by utilizing the farmer's existing device.</p>
-
-        <h2>Technical Architecture Rationalization</h2>
-        <p>Every design choice in this research is engineered to solve specific operational constraints inherent to the agricultural environment.</p>
-
-        <h3>1. Edge Computing vs. Cloud Dependency</h3>
-        <ul>
-          <li><strong>Operational Continuity:</strong> Agricultural environments often lack reliable 4G/5G or WiFi infrastructure. Moving the compute to the edge ensures the tool is available 24/7.</li>
-          <li><strong>Data Sovereignty:</strong> Local processing ensures that proprietary farm data (yield indicators, pathogen locations) remains on-premises.</li>
-          <li><strong>Inference Latency:</strong> Eliminating the round-trip to a central server allows for real-time scanning as a producer walks through the rows.</li>
-        </ul>
+        <p><strong>The realization was brutal:</strong> Why ask a farmer to spend €350 on a complicated Linux box that is <em>slower</em> than the phone already in their pocket? The 8GB shared RAM on the Jetson also became a bottleneck, crashing whenever we tried to load larger batch sizes.</p>
+        
+        <p><strong>The Pivot:</strong> We scrapped the Jetson. The future wasn't dedicated hardware; it was <strong>BYOD (Bring Your Own Device)</strong>. But to run a neural network on <em>any</em> device (laptop, phone, tablet) without installation headaches, we needed a radical software shift.</p>
 
         <div class="blog-image-wrapper">
           <img src="images/mobile-pwa.png" alt="PlantVillage AI PWA running locally on mobile" class="blog-image">
-          <div class="blog-caption">Figure 1: The offline-first PWA running the Rust inference engine directly on a smartphone CPU.</div>
+          <div class="blog-caption">Figure 1: The result of the pivot. An offline PWA running the model natively on a smartphone CPU. No server, no Jetson, no latency.</div>
         </div>
 
-        <h3>2. Semi-Supervised Learning (SSL) for Data Scarcity</h3>
-        <ul>
-          <li><strong>The Problem:</strong> Expert-labeled datasets for specific regional pathogens are expensive and rare.</li>
-          <li><strong>The Solution:</strong> By utilizing SSL, the model can leverage a small set of labeled "anchor" images (20-30%) and improve its feature representation using the vast amounts of unlabeled data collected during daily operations. This reduces the barrier to entry for new crop types.</li>
-        </ul>
+        <h2>David vs. Goliath: Rust (Burn) vs. Python (PyTorch)</h2>
+        <p>If you want to run AI on a phone browser or a random laptop, you can't ask the user to "please install Python 3.10, create a virtual environment, and pip install torch (2.4GB)."</p>
+        <p>We needed something lightweight, portable, and fast. We chose <strong>Rust</strong> and the <strong>Burn</strong> framework. To prove this wasn't just a hipster choice, we benchmarked it against the industry titan, PyTorch.</p>
 
-        <h3>3. Incremental Learning for Dynamic Pathogen Evolution</h3>
-        <ul>
-          <li><strong>The Problem:</strong> Machine Learning models are typically static. Agriculture is dynamic; new disease strains emerge, and environmental conditions change.</li>
-          <li><strong>The Solution:</strong> Implementing incremental learning allows the device to incorporate new disease classes or adapt to local visual variations without requiring a full retraining cycle on a GPU cluster.</li>
-        </ul>
-
-        <h3>4. The Rust/Burn Stack: Reliability and Performance</h3>
-        <ul>
-          <li><strong>System Stability:</strong> In the field, software crashes lead to lost time. Rust’s memory safety guarantees eliminate common runtime errors found in Python-based deployments.</li>
-          <li><strong>Efficiency:</strong> The <a href="https://burn.dev" target="_blank">Burn framework</a> allows for deep learning models to be compiled into highly optimized binaries, squeezing maximum performance out of low-power edge hardware.</li>
-          <li><strong>Deployment:</strong> A single compiled binary reduces the "dependency hell" typically associated with deploying Python/PyTorch stacks on ARM-based edge devices.</li>
-        </ul>
-
-        <h2>Framework Battle: PyTorch vs. Burn</h2>
-        <p>A key research question was whether the immature Rust ecosystem (Burn) could compete with the industry standard (PyTorch). We benchmarked identical CNN architectures (approx 0.46M parameters) on an RTX 3060.</p>
-
-        <h3>Raw Performance vs. Deployment Reality</h3>
-        <p>While PyTorch demonstrated slightly faster raw inference dispatch (0.59ms vs 1.27ms), both frameworks performed orders of magnitude faster than the 200ms real-time requirement. The decision driver was <strong>deployment efficiency</strong>:</p>
-
+        <h3>The "Why Rust" Benchmark</h3>
         <table>
           <thead>
             <tr>
               <th>Metric</th>
               <th>Burn (Rust)</th>
               <th>PyTorch (Python)</th>
-              <th>Impact</th>
+              <th>The Reality</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>Deployment Size</strong></td>
-              <td><strong>~24 MB</strong> (Binary)</td>
-              <td>~7.1 GB (Venv)</td>
-              <td><strong>300x Smaller</strong></td>
+              <td><strong>~24 MB</strong></td>
+              <td>~7.1 GB</td>
+              <td><strong>Rust is 300x smaller</strong></td>
             </tr>
             <tr>
               <td><strong>Startup Time</strong></td>
               <td><strong>Instant</strong> (<0.1s)</td>
-              <td>Slow (~3s)</td>
-              <td>Enables "Cold Start"</td>
+              <td>~3.0s</td>
+              <td>User experience critical</td>
             </tr>
             <tr>
-              <td><strong>Memory Overhead</strong></td>
-              <td><strong>Minimal</strong></td>
-              <td>High (Interpreter + GC)</td>
-              <td>Leaves RAM for Data</td>
+              <td><strong>Inference Speed</strong></td>
+              <td>1.27 ms</td>
+              <td><strong>0.59 ms</strong></td>
+              <td>Negligible difference</td>
             </tr>
           </tbody>
         </table>
 
-        <p><strong>Verdict:</strong> For constrained edge environments, <strong>Burn is the superior choice</strong>. The negligible millisecond latency cost is a worthy trade-off for a 99% reduction in deployment size and the elimination of Python's "dependency hell."</p>
+        <p>While PyTorch was technically faster by 0.6 milliseconds (on an RTX 3060), it required a 7GB environment. <strong>Burn compiled down to a single 24MB binary.</strong></p>
+        <p>This was the key. With Rust, we could deploy the same model to a high-end server, a local desktop app, or—via WebAssembly—directly to the browser on a phone.</p>
 
-        <h2>Technical Deep Dive: The Semi-Supervised Engine</h2>
-        <p>Beyond the hardware, the software architecture itself drove significant efficiency gains. We employed a <strong>Pseudo-Labeling (Self-Training)</strong> strategy to address the scarcity of expert-labeled agricultural data.</p>
-        
-        <h3>The "Value Multiplier" Effect</h3>
-        <p>Our experiments demonstrated that by training on just <strong>20%</strong> of the labeled data and using a high-confidence threshold (τ=0.9) to automatically label the remaining stream, we achieved performance comparable to a model trained on <strong>60%</strong> fully labeled data.</p>
-        <ul>
-            <li><strong>Input:</strong> 20% Manual Labor + Unlabeled Stream</li>
-            <li><strong>Output:</strong> ~60% Data Value</li>
-            <li><strong>Result:</strong> Tripled the ROI of the manual labeling effort.</li>
-        </ul>
-
-        <h3>Why Rust & Burn? (Code Perspective)</h3>
-        <p>The choice of <a href="https://burn.dev" target="_blank">Burn</a> wasn't just for speed; it was for architectural flexibility. We leveraged Burn's <strong>Generic Backend</strong> trait system:</p>
-        <pre style="background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.9rem;"><code>struct Model<B: Backend> { ... }</code></pre>
-        <p>This single line of abstraction allows us to compile the <strong>exact same model code</strong> for:</p>
-        <ol>
-            <li><strong>LibTorch (CUDA):</strong> For high-performance training on the laptop (RTX 3060).</li>
-            <li><strong>NdArray (CPU):</strong> For compatibility on standard servers.</li>
-            <li><strong>Candle (WASM):</strong> For running directly in the browser on the farmer's smartphone.</li>
-        </ol>
-        <p>This "write once, run anywhere" capability is what enabled our pivot from the Jetson to a BYOD architecture without rewriting the inference engine.</p>
-
-        <h2>Research Objectives</h2>
-        <p>This project evaluates the technical feasibility of this integrated approach by answering the following:</p>
+        <h2>Making the AI Smarter (Cheaper)</h2>
+        <p>Hardware and software were solved, but data remained a problem. Expert-labeled agricultural datasets are rare and expensive. We couldn't afford to label 50,000 images.</p>
+        <p>We implemented a <strong>Semi-Supervised Learning (SSL)</strong> loop. We trained the model on just <strong>20%</strong> of our data, then let it "teach itself" by making predictions on the remaining 80%. If the model was more than 90% confident in a prediction, we accepted it as truth and retrained.</p>
         
         <div class="blog-image-wrapper">
           <img src="images/dashboard-gui.png" alt="Model Diagnostics Dashboard showing bias analysis" class="blog-image">
-          <div class="blog-caption">Figure 2: The research dashboard for analyzing model prediction bias and confidence distribution.</div>
+          <div class="blog-caption">Figure 2: Our custom diagnostics dashboard tracking the model's self-learning confidence.</div>
         </div>
 
-        <ol>
-          <li><strong>Performance Parity:</strong> Can a Rust/Burn implementation match the accuracy of traditional Python/PyTorch stacks for plant pathology?</li>
-          <li><strong>Data Efficiency:</strong> Can we maintain >85% F1-score with only 20% labeled data using Semi-Supervised techniques?</li>
-          <li><strong>Adaptability:</strong> Can the model learn a new pathogen class in a field environment without "catastrophic forgetting" of previous classes?</li>
-        </ol>
+        <p>The result? <strong>We tripled the value of our manual labor.</strong> The model achieved accuracy comparable to one trained on 60% fully labeled data, drastically reducing the barrier to entry for adding new crop types.</p>
 
-        <h2>Key Learning: The Hardware Pivot</h2>
-        <p>One of the core tenets of this research was to challenge assumptions. Our initial hypothesis was that a dedicated edge accelerator (NVIDIA Jetson Orin Nano, 8GB Unified RAM) was required for real-time inference. However, comprehensive benchmarking revealed a different reality.</p>
-
-        <p>We compared the inference latency of our Rust/Burn model across different hardware targets:</p>
-        
-        <table>
-          <thead>
-            <tr>
-              <th>Device Target</th>
-              <th>Inference Latency (Full Model)</th>
-              <th>Throughput</th>
-              <th>Verdict</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Laptop (RTX 3060 / Ryzen 7)</strong></td>
-              <td><strong>~15 ms</strong></td>
-              <td><strong>~65 img/s</strong></td>
-              <td><strong>Superior</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Jetson Orin Nano (8GB)</strong></td>
-              <td>~120 ms</td>
-              <td>~8 img/s</td>
-              <td>Deprecated</td>
-            </tr>
-            <tr>
-              <td><strong>Standard CPU</strong></td>
-              <td>~250 ms</td>
-              <td>~4 img/s</td>
-              <td>Baseline</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p><strong>The Conclusion:</strong> The dedicated Jetson hardware, while powerful, introduced a ~€350 cost barrier and complex deployment logistics without providing a speed advantage over a standard laptop or high-end smartphone. By pivoting to a <strong>WebAssembly (WASM) / Native CPU</strong> approach on existing devices, we:</p>
-        <ul>
-            <li>Reduced deployment cost to <strong>€0</strong> (BYOD - Bring Your Own Device).</li>
-            <li>Simplified the architecture (no physical device management).</li>
-            <li>Proved that <strong>optimization (Rust/Burn) > raw hardware power</strong>.</li>
-        </ul>
-
-        <h2>Conclusion: From Reactive to Proactive</h2>
-        <p>The goal is not just to build an app, but to create a robust, industrial-grade tool. By moving from cloud-dependent, static models to edge-native, continuously learning systems, we provide producers with a high-fidelity diagnostic instrument that functions as a force multiplier for their existing expertise.</p>
-        <p>This research serves as a proof-of-concept for the next generation of resilient agricultural technology.</p>
+        <h2>Conclusion</h2>
+        <p>This project proved that "Edge AI" doesn't always mean buying new sensors and devices. Sometimes, the most powerful edge device is the one you already own.</p>
+        <p>By moving from Python to Rust, and from dedicated hardware to a BYOD architecture, we turned a €350 hardware problem into a €0 software solution. The result isn't just a research paper; it's a tool that can run in a disconnected field, on a 4-year-old phone, and potentially save a harvest.</p>
         
         <p style="margin-top: 3rem; font-style: italic; opacity: 0.7;">Research Project - Semester 5 - Howest MCT</p>
       </div>
