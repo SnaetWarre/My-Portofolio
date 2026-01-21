@@ -661,7 +661,7 @@ main {
 /* FOOTER */
 footer {
   padding: 4rem 0;
-  /* border-top: var(--border-width) solid var(--border-color); */
+  border-top: var(--border-width) solid var(--border-color);
   margin-top: 4rem;
 }
 
