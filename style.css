@@ -552,6 +552,49 @@ main {
   font-style: italic;
 }
 
+/* NEXT STEPS NAVIGATION */
+.next-steps {
+  padding-bottom: 4rem;
+  margin-top: 2rem;
+  border-top: var(--border-width) solid var(--border-color);
+  padding-top: 3rem;
+}
+
+.next-step-link {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+
+.next-step-link:hover {
+  color: var(--accent-primary);
+}
+
+.next-step-label {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.next-step-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+  margin-left: 10px;
+}
+
+.next-step-link:hover .next-step-arrow {
+  transform: translateX(10px);
+}
+
 /* FOOTER */
 footer {
   padding: 4rem 0;
