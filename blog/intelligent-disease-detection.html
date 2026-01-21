@@ -30,26 +30,48 @@
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "Rust, Rot, and ROI: Engineering an Offline AI to Save Harvests",
-    "alternativeHeadline": "Optimizing Edge AI for Agriculture with Rust and Burn",
-    "image": "https://snaetwarre.github.io/My-Portofolio/blog/images/mobile-pwa.png",
-    "author": {
-      "@type": "Person",
-      "name": "Warre Snaet",
-      "url": "https://snaetwarre.github.io/My-Portofolio/"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Rust, Rot, and ROI: Engineering an Offline AI to Save Harvests",
+      "alternativeHeadline": "Optimizing Edge AI for Agriculture with Rust and Burn",
+      "image": "https://snaetwarre.github.io/My-Portofolio/blog/images/mobile-pwa.png",
+      "author": {
+        "@type": "Person",
+        "name": "Warre Snaet",
+        "url": "https://snaetwarre.github.io/My-Portofolio/"
+      },
+      "genre": "Artificial Intelligence",
+      "keywords": "Edge AI, Rust, Burn Framework, Computer Vision, Agriculture",
+      "wordcount": "1200",
+      "url": "https://snaetwarre.github.io/My-Portofolio/blog/intelligent-disease-detection.html",
+      "datePublished": "2026-01-21",
+      "dateModified": "2026-01-21",
+      "description": "A technical case study on building a 24MB offline AI for agricultural disease detection using Rust and Burn.",
+      "articleBody": "Imagine standing in a greenhouse..."
     },
-    "genre": "Artificial Intelligence",
-    "keywords": "Edge AI, Rust, Burn Framework, Computer Vision, Agriculture",
-    "wordcount": "1200",
-    "url": "https://snaetwarre.github.io/My-Portofolio/blog/intelligent-disease-detection.html",
-    "datePublished": "2026-01-21",
-    "dateModified": "2026-01-21",
-    "description": "A technical case study on building a 24MB offline AI for agricultural disease detection using Rust and Burn.",
-    "articleBody": "Imagine standing in a greenhouse. You spot a small, discolored patch on a tomato leaf..."
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://snaetwarre.github.io/My-Portofolio/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://snaetwarre.github.io/My-Portofolio/#writing"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Intelligent Disease Detection",
+        "item": "https://snaetwarre.github.io/My-Portofolio/blog/intelligent-disease-detection.html"
+      }]
+    }
+  ]
   </script>
   
   <link rel="stylesheet" href="../style.css">
@@ -82,7 +104,7 @@
         
         <p>But building this required us to break almost every standard rule of modern AI deployment. We had to ditch the Cloud, abandon Python, and throw out our specialized hardware.</p>
 
-        <h2>The Edge Constraint</h2>
+        <h2>The Edge AI Constraint in Agriculture</h2>
         <p>Farms are notoriously hostile environments for tech. There is often no 5G, no Wi-Fi, and certainly no fiber connection to an AWS server. If our AI needed an internet connection to work, it was useless.</p>
         <p>We needed <strong>Edge Computing</strong>—processing data right there on the device. But "Edge" is a buzzword. Making it work economically is an engineering nightmare.</p>
 
@@ -128,7 +150,7 @@
         <p><strong>The Pivot:</strong> We scrapped the Jetson. The future wasn't dedicated hardware; it was <strong>BYOD (Bring Your Own Device)</strong>. But to run a neural network on <em>any</em> device (laptop, phone, tablet) without installation headaches, we needed a radical software shift.</p>
 
         <div class="blog-image-wrapper">
-          <img src="images/mobile-pwa.png" alt="PlantVillage AI PWA running locally on mobile" class="blog-image">
+          <img src="images/mobile-pwa.png" alt="PlantVillage AI PWA running locally on mobile" class="blog-image" loading="lazy" width="800" height="600">
           <div class="blog-caption">Figure 1: The result of the pivot. An offline PWA running the model natively on a smartphone CPU. No server, no Jetson, no latency.</div>
         </div>
 
@@ -176,7 +198,7 @@
         <p>We implemented a <strong>Semi-Supervised Learning (SSL)</strong> loop. We trained the model on just <strong>20%</strong> of our data, then let it "teach itself" by making predictions on the remaining 80%. If the model was more than 90% confident in a prediction, we accepted it as truth and retrained.</p>
         
         <div class="blog-image-wrapper">
-          <img src="images/dashboard-gui.png" alt="Model Diagnostics Dashboard showing bias analysis" class="blog-image">
+          <img src="images/dashboard-gui.png" alt="Model Diagnostics Dashboard showing bias analysis" class="blog-image" loading="lazy" width="800" height="450">
           <div class="blog-caption">Figure 2: Our custom diagnostics dashboard tracking the model's self-learning confidence.</div>
         </div>
 
