@@ -39,7 +39,7 @@ body {
   align-items: center;
   padding: 1rem 2rem;
   background-color: var(--bg);
-  border-bottom: var(--border-width) solid var(--border-color);
+  border-bottom: none; /* Removed border */
   z-index: 1000;
   box-sizing: border-box;
 }
