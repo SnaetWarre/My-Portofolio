@@ -153,6 +153,28 @@
 
         <p><strong>Verdict:</strong> For constrained edge environments, <strong>Burn is the superior choice</strong>. The negligible millisecond latency cost is a worthy trade-off for a 99% reduction in deployment size and the elimination of Python's "dependency hell."</p>
 
+        <h2>Technical Deep Dive: The Semi-Supervised Engine</h2>
+        <p>Beyond the hardware, the software architecture itself drove significant efficiency gains. We employed a <strong>Pseudo-Labeling (Self-Training)</strong> strategy to address the scarcity of expert-labeled agricultural data.</p>
+        
+        <h3>The "Value Multiplier" Effect</h3>
+        <p>Our experiments demonstrated that by training on just <strong>20%</strong> of the labeled data and using a high-confidence threshold (τ=0.9) to automatically label the remaining stream, we achieved performance comparable to a model trained on <strong>60%</strong> fully labeled data.</p>
+        <ul>
+            <li><strong>Input:</strong> 20% Manual Labor + Unlabeled Stream</li>
+            <li><strong>Output:</strong> ~60% Data Value</li>
+            <li><strong>Result:</strong> Tripled the ROI of the manual labeling effort.</li>
+        </ul>
+
+        <h3>Why Rust & Burn? (Code Perspective)</h3>
+        <p>The choice of <a href="https://burn.dev" target="_blank">Burn</a> wasn't just for speed; it was for architectural flexibility. We leveraged Burn's <strong>Generic Backend</strong> trait system:</p>
+        <pre style="background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.9rem;"><code>struct Model<B: Backend> { ... }</code></pre>
+        <p>This single line of abstraction allows us to compile the <strong>exact same model code</strong> for:</p>
+        <ol>
+            <li><strong>LibTorch (CUDA):</strong> For high-performance training on the laptop (RTX 3060).</li>
+            <li><strong>NdArray (CPU):</strong> For compatibility on standard servers.</li>
+            <li><strong>Candle (WASM):</strong> For running directly in the browser on the farmer's smartphone.</li>
+        </ol>
+        <p>This "write once, run anywhere" capability is what enabled our pivot from the Jetson to a BYOD architecture without rewriting the inference engine.</p>
+
         <h2>Research Objectives</h2>
         <p>This project evaluates the technical feasibility of this integrated approach by answering the following:</p>
         
