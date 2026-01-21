@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent Disease Detection on the Edge | Warre Snaet</title>
+  
+  <meta name="description" content="Technical rationale for an edge-native AI solution for agricultural disease detection using Rust and Burn.">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="alternate icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="light-blobs" class="light-blobs" aria-hidden="true"></div>
+  
+  <main class="blog-post">
+    <a href="../index.html" class="back-link">← Back to Home</a>
+    
+    <article>
+      <header class="blog-header fade-in">
+        <div class="blog-meta">
+          <span>Jan 21, 2026</span>
+          <span>Rust / AI / Edge Computing</span>
+        </div>
+        <h1 class="blog-title">Intelligent Disease Detection on the Edge</h1>
+      </header>
+      
+      <div class="article-content fade-in">
+        <p>Crop disease represents a significant systemic risk in agriculture. For a commercial producer, the interval between the first symptom and the application of a targeted treatment determines the difference between a minor operational cost and a catastrophic yield loss.</p>
+
+        <h2>The Decision-Making Bottleneck</h2>
+        <p>Currently, a producer faces three sub-optimal paths when a potential pathogen is identified:</p>
+        <ol>
+          <li><strong>Passive Observation:</strong> Risking exponential spread of the pathogen.</li>
+          <li><strong>Prophylactic Spraying:</strong> High OPEX (Chemical costs: €50–200/hectare) and environmental impact.</li>
+          <li><strong>Professional Consultation:</strong> High latency (24-72 hours) and high fixed costs (€150–300 per visit).</li>
+        </ol>
+        <p>The objective of this research is to provide a fourth path: <strong>Instantaneous, localized, and high-accuracy diagnostic capability.</strong></p>
+
+        <h2>Economic Drivers for Edge-Native Solutions</h2>
+        <p>Farmers prioritize technology based on ROI and operational reliability rather than novelty. The value proposition of an edge-based diagnostic tool is found in the optimization of the following variables:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Impact of Traditional Methods</th>
+              <th>Impact of Edge-Native AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Detection Latency</strong></td>
+              <td>Days (Expert arrival/Lab results)</td>
+              <td>Seconds (On-device inference)</td>
+            </tr>
+            <tr>
+              <td><strong>Treatment Precision</strong></td>
+              <td>Blanket application (Wasteful)</td>
+              <td>Targeted application (Cost-effective)</td>
+            </tr>
+            <tr>
+              <td><strong>Connectivity Dependency</strong></td>
+              <td>High (Cloud/Mobile data required)</td>
+              <td>Zero (Works in remote/shielded areas)</td>
+            </tr>
+            <tr>
+              <td><strong>Recurring Costs</strong></td>
+              <td>High (Consultation fees/Subscriptions)</td>
+              <td>Low (Single CAPEX for hardware)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>The ROI Projection</h3>
+        <p>A single Jetson Orin Nano-based deployment (~€350) can achieve payback within a single growing season by preventing a 5-10% yield loss on a high-value crop (e.g., greenhouse tomatoes) or by reducing pesticide waste by 20-30%.</p>
+
+        <h2>Technical Architecture Rationalization</h2>
+        <p>Every design choice in this research is engineered to solve specific operational constraints inherent to the agricultural environment.</p>
+
+        <h3>1. Edge Computing vs. Cloud Dependency</h3>
+        <ul>
+          <li><strong>Operational Continuity:</strong> Agricultural environments often lack reliable 4G/5G or WiFi infrastructure. Moving the compute to the edge ensures the tool is available 24/7.</li>
+          <li><strong>Data Sovereignty:</strong> Local processing ensures that proprietary farm data (yield indicators, pathogen locations) remains on-premises.</li>
+          <li><strong>Inference Latency:</strong> Eliminating the round-trip to a central server allows for real-time scanning as a producer walks through the rows.</li>
+        </ul>
+
+        <div class="blog-image-wrapper">
+          <img src="images/mobile-pwa.png" alt="PlantVillage AI PWA running locally on mobile" class="blog-image">
+          <div class="blog-caption">Figure 1: The offline-first PWA running the Rust inference engine directly on a smartphone CPU.</div>
+        </div>
+
+        <h3>2. Semi-Supervised Learning (SSL) for Data Scarcity</h3>
+        <ul>
+          <li><strong>The Problem:</strong> Expert-labeled datasets for specific regional pathogens are expensive and rare.</li>
+          <li><strong>The Solution:</strong> By utilizing SSL, the model can leverage a small set of labeled "anchor" images (20-30%) and improve its feature representation using the vast amounts of unlabeled data collected during daily operations. This reduces the barrier to entry for new crop types.</li>
+        </ul>
+
+        <h3>3. Incremental Learning for Dynamic Pathogen Evolution</h3>
+        <ul>
+          <li><strong>The Problem:</strong> Machine Learning models are typically static. Agriculture is dynamic; new disease strains emerge, and environmental conditions change.</li>
+          <li><strong>The Solution:</strong> Implementing incremental learning allows the device to incorporate new disease classes or adapt to local visual variations without requiring a full retraining cycle on a GPU cluster.</li>
+        </ul>
+
+        <h3>4. The Rust/Burn Stack: Reliability and Performance</h3>
+        <ul>
+          <li><strong>System Stability:</strong> In the field, software crashes lead to lost time. Rust’s memory safety guarantees eliminate common runtime errors found in Python-based deployments.</li>
+          <li><strong>Efficiency:</strong> The <a href="https://burn.dev" target="_blank">Burn framework</a> allows for deep learning models to be compiled into highly optimized binaries, squeezing maximum performance out of low-power edge hardware.</li>
+          <li><strong>Deployment:</strong> A single compiled binary reduces the "dependency hell" typically associated with deploying Python/PyTorch stacks on ARM-based edge devices.</li>
+        </ul>
+
+        <h2>Research Objectives</h2>
+        <p>This project evaluates the technical feasibility of this integrated approach by answering the following:</p>
+        
+        <div class="blog-image-wrapper">
+          <img src="images/dashboard-gui.png" alt="Model Diagnostics Dashboard showing bias analysis" class="blog-image">
+          <div class="blog-caption">Figure 2: The research dashboard for analyzing model prediction bias and confidence distribution.</div>
+        </div>
+
+        <ol>
+          <li><strong>Performance Parity:</strong> Can a Rust/Burn implementation match the accuracy of traditional Python/PyTorch stacks for plant pathology?</li>
+          <li><strong>Data Efficiency:</strong> Can we maintain >85% F1-score with only 20% labeled data using Semi-Supervised techniques?</li>
+          <li><strong>Hardware Optimization:</strong> Can the system achieve sub-200ms inference on a Jetson Nano while maintaining a low thermal profile?</li>
+          <li><strong>Adaptability:</strong> Can the model learn a new pathogen class in a field environment without "catastrophic forgetting" of previous classes?</li>
+        </ol>
+
+        <h2>Conclusion: From Reactive to Proactive</h2>
+        <p>The goal is not just to build an app, but to create a robust, industrial-grade tool. By moving from cloud-dependent, static models to edge-native, continuously learning systems, we provide producers with a high-fidelity diagnostic instrument that functions as a force multiplier for their existing expertise.</p>
+        <p>This research serves as a proof-of-concept for the next generation of resilient agricultural technology.</p>
+        
+        <p style="margin-top: 3rem; font-style: italic; opacity: 0.7;">Research Project - Semester 5 - Howest MCT</p>
+      </div>
+    </article>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../logo.svg" alt="Warre Snaet Logo" class="footer-logo">
+        <p>WARRE SNAET © 2026</p>
+      </div>
+      <a href="mailto:warresnaet@student.howest.be" class="footer-cta">Let's Talk</a>
+    </div>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>
