@@ -37,9 +37,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 14px 2rem; /* Exact 14px spacing as requested */
   background-color: var(--bg);
-  border-bottom: none; /* Removed border */
+  border-bottom: none;
   z-index: 1000;
   box-sizing: border-box;
 }
@@ -165,28 +165,6 @@ main {
   margin-bottom: 1rem;
   overflow-wrap: break-word;
   word-break: break-word;
-}
-
-.hero-badges {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-
-.badge {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 600;
-  border: var(--border-width) solid var(--border-color);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  transition: all 0.2s ease;
-}
-
-.badge:hover {
-  background: var(--text);
-  color: var(--bg);
 }
 
 .hero-content-grid {
