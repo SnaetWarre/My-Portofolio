@@ -114,6 +114,45 @@
           <li><strong>Deployment:</strong> A single compiled binary reduces the "dependency hell" typically associated with deploying Python/PyTorch stacks on ARM-based edge devices.</li>
         </ul>
 
+        <h2>Framework Battle: PyTorch vs. Burn</h2>
+        <p>A key research question was whether the immature Rust ecosystem (Burn) could compete with the industry standard (PyTorch). We benchmarked identical CNN architectures (approx 0.46M parameters) on an RTX 3060.</p>
+
+        <h3>Raw Performance vs. Deployment Reality</h3>
+        <p>While PyTorch demonstrated slightly faster raw inference dispatch (0.59ms vs 1.27ms), both frameworks performed orders of magnitude faster than the 200ms real-time requirement. The decision driver was <strong>deployment efficiency</strong>:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Burn (Rust)</th>
+              <th>PyTorch (Python)</th>
+              <th>Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Deployment Size</strong></td>
+              <td><strong>~24 MB</strong> (Binary)</td>
+              <td>~7.1 GB (Venv)</td>
+              <td><strong>300x Smaller</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Startup Time</strong></td>
+              <td><strong>Instant</strong> (<0.1s)</td>
+              <td>Slow (~3s)</td>
+              <td>Enables "Cold Start"</td>
+            </tr>
+            <tr>
+              <td><strong>Memory Overhead</strong></td>
+              <td><strong>Minimal</strong></td>
+              <td>High (Interpreter + GC)</td>
+              <td>Leaves RAM for Data</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Verdict:</strong> For constrained edge environments, <strong>Burn is the superior choice</strong>. The negligible millisecond latency cost is a worthy trade-off for a 99% reduction in deployment size and the elimination of Python's "dependency hell."</p>
+
         <h2>Research Objectives</h2>
         <p>This project evaluates the technical feasibility of this integrated approach by answering the following:</p>
         
