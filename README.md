@@ -14,7 +14,7 @@ I build systems that bridge the gap between heavy AI research and real-world edg
 *   **Previously:** RAG Chatbots in .NET & Full-stack Web Apps.
 
 **Don't read the code, read the story:**
-[**Read my latest case study: "Rust, Rot, and ROI"** →](https://snaetwarre.github.io/My-Portofolio/blog/intelligent-disease-detection.html)
+[**Read my latest case study: "Rust, Rot, and ROI"** →](https://snaetwarre.github.io/My-Portofolio/blog/blog.html)
 
 ---
 

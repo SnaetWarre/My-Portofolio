@@ -1,169 +1,427 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Warre Snaet - AI Engineer & Portfolio | Belgium</title>
-  
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Warre Snaet is an AI Engineer and student in Belgium specializing in Machine Learning, Rust, Python, and C#. Explore his portfolio of innovative AI projects, from chatbots to edge-native disease detection systems.">
-  <meta name="keywords" content="Warre Snaet, Warre Snaet AI, Warre Snaet Belgium, AI Engineer, Machine Learning Engineer, Howest, Rust Developer, Python Developer, Portfolio">
-  <meta name="author" content="Warre Snaet">
-  <meta name="robots" content="index, follow">
-  <meta name="google-site-verification" content="6eWn6i2uGzI9GNa1ChJIQHg27HSQm1WzUL74ts5Uf0E" />
-  <link rel="canonical" href="https://snaetwarre.github.io/My-Portofolio/">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="profile">
-  <meta property="og:url" content="https://snaetwarre.github.io/My-Portofolio/">
-  <meta property="og:title" content="Warre Snaet - AI Engineer & Portfolio">
-  <meta property="og:description" content="Warre Snaet is an AI Engineer building the future with Rust, Python, and Machine Learning. View projects and technical case studies.">
-  <meta property="og:image" content="https://snaetwarre.github.io/My-Portofolio/warre-snaet-ai-engineer.jpg">
-  <meta property="profile:first_name" content="Warre">
-  <meta property="profile:last_name" content="Snaet">
-  <meta property="profile:username" content="SnaetWarre">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://snaetwarre.github.io/My-Portofolio/">
-  <meta name="twitter:title" content="Warre Snaet - AI Engineer">
-  <meta name="twitter:description" content="Portfolio of Warre Snaet, AI Engineer specializing in Edge AI, Rust, and Python.">
-  <meta name="twitter:image" content="https://snaetwarre.github.io/My-Portofolio/warre-snaet-ai-engineer.jpg">
-  
-  <!-- Preload Hero Image for Performance (LCP) -->
-  <link rel="preload" as="image" href="warre-snaet-ai-engineer.jpg">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Warre Snaet - AI Engineer & Portfolio | Belgium</title>
 
-  <!-- Structured Data (JSON-LD) for Google -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "mainEntity": {
-      "@type": "Person",
-      "name": "Warre Snaet",
-      "givenName": "Warre",
-      "familyName": "Snaet",
-      "alternateName": "SnaetWarre",
-      "jobTitle": "AI Engineer",
-      "url": "https://snaetwarre.github.io/My-Portofolio/",
-      "image": "https://snaetwarre.github.io/My-Portofolio/warre-snaet-ai-engineer.jpg",
-      "description": "AI Engineering student at Howest Belgium specializing in C#, Python, Rust, and machine learning.",
-      "nationality": "Belgium",
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Howest University of Applied Sciences"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/warre-snaet-272354370/",
-        "https://github.com/SnaetWarre"
-      ],
-      "knowsAbout": ["Artificial Intelligence", "Rust", "Machine Learning", "Python", "Deep Learning", "Edge AI"]
-    }
-  }
-  </script>
+        <!-- SEO Meta Tags -->
+        <meta
+            name="description"
+            content="Warre Snaet is an AI Engineer and student in Belgium specializing in Machine Learning, Rust, Python, and C#. Explore his portfolio of innovative AI projects, from chatbots to edge-native disease detection systems."
+        />
+        <meta
+            name="keywords"
+            content="Warre Snaet, Warre Snaet AI, Warre Snaet Belgium, AI Engineer, Machine Learning Engineer, Howest, Rust Developer, Python Developer, Portfolio"
+        />
+        <meta name="author" content="Warre Snaet" />
+        <meta name="robots" content="index, follow" />
+        <meta
+            name="google-site-verification"
+            content="6eWn6i2uGzI9GNa1ChJIQHg27HSQm1WzUL74ts5Uf0E"
+        />
+        <link
+            rel="canonical"
+            href="https://snaetwarre.github.io/My-Portofolio/"
+        />
 
-  
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="alternate icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!--
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
-    <span id="theme-toggle-icon" aria-hidden="true">🌞</span>
-  </button>
-  -->
-  <!-- <canvas id="bg-canvas" aria-hidden="true"></canvas> -->
-  <div id="light-blobs" class="light-blobs" aria-hidden="true"></div>
-  
-  <nav class="site-nav">
-    <a href="index.html" class="nav-logo">Warre Snaet</a>
-    <div class="nav-links">
-      <a href="projects.html" class="nav-link">Projects</a>
-      <a href="blog/intelligent-disease-detection.html" class="nav-link">Writing</a>
-    </div>
-  </nav>
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="profile" />
+        <meta
+            property="og:url"
+            content="https://snaetwarre.github.io/My-Portofolio/"
+        />
+        <meta
+            property="og:title"
+            content="Warre Snaet - AI Engineer & Portfolio"
+        />
+        <meta
+            property="og:description"
+            content="Warre Snaet is an AI Engineer building the future with Rust, Python, and Machine Learning. View projects and technical case studies."
+        />
+        <meta
+            property="og:image"
+            content="https://snaetwarre.github.io/My-Portofolio/warre-snaet-ai-engineer.jpg"
+        />
+        <meta property="profile:first_name" content="Warre" />
+        <meta property="profile:last_name" content="Snaet" />
+        <meta property="profile:username" content="SnaetWarre" />
 
-  <main>
-    <section class="hero fade-in" id="home">
-      <div class="hero-container">
-        <div class="hero-header">
-          <h1 class="hero-title headline-animate">WARRE<br>SNAET</h1>
-        </div>
-        
-        <div class="hero-content-grid">
-           <div class="hero-image-wrapper fade-in-right">
-            <img src="warre-snaet-ai-engineer.jpg" alt="Warre Snaet - AI Engineer & Student in Belgium" class="hero-avatar" width="400" height="400" decoding="async">
-          </div>
-          <div class="hero-text fade-in-left">
-            <p class="hero-desc">
-              <strong>Building cool things with AI.</strong><br>
-              I write C#, Python, and do some Machine Learning. Right now I'm deep diving into Rust & the <a href="https://burn.dev" target="_blank" style="text-decoration: underline; font-weight: 700; color: var(--text);">Burn framework</a>. Student at Howest Belgium.
-            </p>
-            <div class="hero-actions">
-              <div class="social-links-text">
-                <a href="https://github.com/SnaetWarre" target="_blank" aria-label="GitHub" class="social-link">GitHub ↗</a>
-                <a href="https://www.linkedin.com/in/warre-snaet-272354370/" target="_blank" aria-label="LinkedIn" class="social-link">LinkedIn ↗</a>
-              </div>
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:url"
+            content="https://snaetwarre.github.io/My-Portofolio/"
+        />
+        <meta name="twitter:title" content="Warre Snaet - AI Engineer" />
+        <meta
+            name="twitter:description"
+            content="Portfolio of Warre Snaet, AI Engineer specializing in Edge AI, Rust, and Python."
+        />
+        <meta
+            name="twitter:image"
+            content="https://snaetwarre.github.io/My-Portofolio/warre-snaet-ai-engineer.jpg"
+        />
+
+        <!-- Structured Data (JSON-LD) for Google -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "ProfilePage",
+                "mainEntity": {
+                    "@type": "Person",
+                    "name": "Warre Snaet",
+                    "givenName": "Warre",
+                    "familyName": "Snaet",
+                    "alternateName": "SnaetWarre",
+                    "jobTitle": "AI Engineer",
+                    "url": "https://snaetwarre.github.io/My-Portofolio/",
+                    "image": "https://snaetwarre.github.io/My-Portofolio/warre-snaet-ai-engineer.jpg",
+                    "description": "AI Engineering student at Howest Belgium specializing in C#, Python, Rust, and machine learning.",
+                    "nationality": "Belgium",
+                    "alumniOf": {
+                        "@type": "EducationalOrganization",
+                        "name": "Howest University of Applied Sciences"
+                    },
+                    "sameAs": [
+                        "https://www.linkedin.com/in/warre-snaet-272354370/",
+                        "https://github.com/SnaetWarre"
+                    ],
+                    "knowsAbout": [
+                        "Artificial Intelligence",
+                        "Rust",
+                        "Machine Learning",
+                        "Python",
+                        "Deep Learning",
+                        "Edge AI"
+                    ]
+                }
+            }
+        </script>
+
+        <!-- Preload Hero Image for Performance (LCP) -->
+        <link rel="preload" as="image" href="warre-snaet-ai-engineer.jpg" />
+
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <link rel="alternate icon" href="favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="light-blobs" class="light-blobs" aria-hidden="true"></div>
+
+        <nav class="site-nav">
+            <a href="index.html" class="nav-logo">Warre Snaet</a>
+            <div class="nav-links">
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="blog/blog.html" class="nav-link">Blog</a>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </nav>
 
-    <section class="about-section fade-in" id="about">
-      <div class="section-header">
-        <h2 class="section-title">ABOUT ME</h2>
-      </div>
-      <div class="about-list">
-        <div class="about-item">
-          <span class="about-label">01. ORIGIN</span>
-          <div class="about-content">
-            <h3>The Start</h3>
-            <p>Super interested in coding, figuring out how AI works, and solving real-world problems.</p>
-          </div>
-        </div>
-        <div class="about-item">
-          <span class="about-label">02. STATUS</span>
-          <div class="about-content">
-            <h3>Now</h3>
-            <p>Studying AI Engineering at Howest. Currently on an internship at IPCA in Barcelos, PT.</p>
-          </div>
-        </div>
-         <div class="about-item">
-          <span class="about-label">03. FOCUS</span>
-          <div class="about-content">
-            <h3>Building</h3>
-            <p>Working on a Semi-Supervised Learning pipeline in Rust using <a href="https://burn.dev" target="_blank" style="text-decoration: underline; color: var(--text);">Burn</a>.</p>
-          </div>
-         </div>
-      </div>
-    </section>
+        <main>
+            <!-- =============================================
+                 HERO
+                 ============================================= -->
+            <section class="hero fade-in" id="home">
+                <!-- Left col: photo fills the column top to bottom -->
+                <div class="hero-photo-col fade-in-left">
+                    <img
+                        src="warre-snaet-ai-engineer.jpg"
+                        alt="Warre Snaet - AI Engineer & Student in Belgium"
+                        class="hero-avatar"
+                        width="400"
+                        height="400"
+                        decoding="async"
+                    />
+                </div>
 
-    <section class="next-steps fade-in">
-      <a href="projects.html" class="next-step-link">
-        <span class="next-step-label">See what I've built</span>
-        Explore Projects <span class="next-step-arrow">→</span>
-      </a>
-      <a href="blog/intelligent-disease-detection.html" class="next-step-link">
-        <span class="next-step-label">Read about my process</span>
-        Latest Blog Post <span class="next-step-arrow">→</span>
-      </a>
-    </section>
-  </main>
-  
-  <footer>
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="logo.svg" alt="Warre Snaet Logo" class="footer-logo">
-        <p>WARRE SNAET © 2026</p>
-      </div>
-      <a href="mailto:warresnaet@student.howest.be" class="footer-cta">Let's Talk</a>
-    </div>
-  </footer>
-  <script src="script.js"></script>
-</body>
-</html> 
+                <!-- Right col: name at top, bio + links pinned to bottom -->
+                <div class="hero-text-col fade-in-right">
+                    <div class="hero-name-block">
+                        <p class="hero-eyebrow">
+                            <span class="hero-eyebrow-index">00</span>
+                            <span>AI Engineering · Howest · Belgium</span>
+                        </p>
+                        <h1 class="hero-title">WARRE<br />SNAET</h1>
+                    </div>
+
+                    <div class="hero-bio-block">
+                        <!-- Internship badge -->
+                        <div class="hero-internship">
+                            <span
+                                class="hero-internship-dot"
+                                aria-hidden="true"
+                            ></span>
+                            <span
+                                >Interning at
+                                <strong>2Ai · IPCA University</strong>, Barcelos
+                                — applying OCR to echocardiograms</span
+                            >
+                        </div>
+
+                        <p class="hero-bio">
+                            Third-year
+                            <a
+                                href="https://mct.be/programma/#profile-ai-engineer"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hero-text-link"
+                                >AI Engineering</a
+                            >
+                            student at Howest, Belgium. I spend most of my time
+                            getting ML models to work on local edge devices —
+                            training on phones, inference in browsers. Right now
+                            that means a lot of Rust and the
+                            <a
+                                href="https://burn.dev"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hero-text-link"
+                                >Burn framework</a
+                            >.
+                        </p>
+
+                        <div class="hero-stack">
+                            <span class="hero-stack-label">Stack</span>
+                            <div class="hero-stack-items">
+                                <span>Python</span>
+                                <span>Rust</span>
+                                <span>C#</span>
+                                <span>SvelteKit</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-links">
+                            <a
+                                href="https://github.com/SnaetWarre"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="GitHub"
+                                class="hero-cta"
+                                >GitHub ↗</a
+                            >
+                            <a
+                                href="https://www.linkedin.com/in/warre-snaet-272354370/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="LinkedIn"
+                                class="hero-cta hero-cta--ghost"
+                                >LinkedIn ↗</a
+                            >
+                            <a
+                                href="CV_Warre_Snaet.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Download CV"
+                                class="hero-cta hero-cta--ghost"
+                                download
+                                >CV ↓</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================
+                 PROJECTS
+                 ============================================= -->
+            <section class="projects-section fade-in" id="projects">
+                <div class="section-header">
+                    <span class="about-index">01</span>
+                    <h2 class="section-title">SELECTED WORK</h2>
+                </div>
+
+                <div class="projects-list">
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>Semi-Supervised Learning in Rust</h3>
+                            <p>
+                                Research project exploring pseudo-labeling on
+                                embedded edge devices for plant disease
+                                classification. Built entirely in Rust using the
+                                Burn framework — 0.39ms inference, 2579 FPS,
+                                runs on iPhone.
+                            </p>
+                            <div class="tech-tags">
+                                <span>Rust</span>
+                                <span>Burn</span>
+                                <span>Edge AI</span>
+                                <span>SSL</span>
+                                <span>WASM</span>
+                                <span>Tauri</span>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="blog/blog.html" class="project-link"
+                                >Read Write-up ↗</a
+                            >
+                            <a
+                                href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-link"
+                                >View Project ↗</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>Financial AI Agent</h3>
+                            <p>
+                                Conversational portfolio manager — ask
+                                questions, get advice, execute trades through
+                                natural language. RAG-powered with real market
+                                data, streaming responses, and full session
+                                persistence.
+                            </p>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>FastAPI</span>
+                                <span>React</span>
+                                <span>ChromaDB</span>
+                                <span>MCP</span>
+                                <span>Ollama</span>
+                            </div>
+                        </div>
+                        <a
+                            href="https://github.com/SnaetWarre/Financial_AI_Agent"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            >View Project ↗</a
+                        >
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>Event Chatbot — XPO Group</h3>
+                            <p>
+                                Full-stack RAG solution for event Q&A. .NET
+                                embedding service backed by Azure OpenAI and
+                                CosmosDB, Next.js analytics dashboard, and a
+                                Scrapy pipeline for live event ingestion.
+                            </p>
+                            <div class="tech-tags">
+                                <span>.NET</span>
+                                <span>Azure OpenAI</span>
+                                <span>CosmosDB</span>
+                                <span>Next.js</span>
+                                <span>Python</span>
+                            </div>
+                        </div>
+                        <a
+                            href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            >View Project ↗</a
+                        >
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>WaterAdventure</h3>
+                            <p>
+                                Platform connecting swim coaches and parents to
+                                help toddlers (2–6) build water confidence.
+                                Features activity planning, medal-based
+                                achievement tracking, real-time chat, and
+                                multilingual support.
+                            </p>
+                            <div class="tech-tags">
+                                <span>SvelteKit</span>
+                                <span>TypeScript</span>
+                                <span>Prisma</span>
+                                <span>PostgreSQL</span>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+                        <a
+                            href="https://github.com/ElliotHeyse/TeamProject_waterAdventure"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            >View Project ↗</a
+                        >
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>Dataset Query Socket App</h3>
+                            <p>
+                                Client-server socket application for dataset
+                                analysis with user authentication and moderator
+                                controls. Query LAPD arrest data, view
+                                popularity stats, and broadcast messages — all
+                                through a Qt GUI.
+                            </p>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>PySide6</span>
+                                <span>Sockets</span>
+                                <span>Pandas</span>
+                            </div>
+                        </div>
+                        <a
+                            href="https://github.com/SnaetWarre/Server-Client-Python"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            >View Project ↗</a
+                        >
+                    </div>
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h2>
+                                You are clearly interested, take a look further
+                                on my GitHub Page!
+                            </h2>
+                        </div>
+                        <a
+                            href="https://github.com/SnaetWarre/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-link"
+                            >View my page! ↗</a
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================================
+                 BLOG TEASER
+                 ============================================= -->
+            <section class="next-steps fade-in">
+                <a href="blog/blog.html" class="next-step-link">
+                    <span class="next-step-label">Latest post</span>
+                    Building a 24MB Offline AI with Rust + Burn
+                    <span class="next-step-arrow">→</span>
+                </a>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img
+                        src="logo.svg"
+                        alt="Warre Snaet Logo"
+                        class="footer-logo"
+                    />
+                    <p>WARRE SNAET © 2026</p>
+                </div>
+                <a href="mailto:warresnaet@student.howest.be" class="footer-cta"
+                    >Let's Talk</a
+                >
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>
