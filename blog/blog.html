@@ -140,13 +140,20 @@
             src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
             integrity="sha384-+VBxd8XP2jvYkO+avtMbMGMW1Dli3JFkqg9clFUhb7Fc/GBuHbAIC/0zhVBO0VY"
             crossorigin="anonymous"
-            onload="renderMathInElement(document.body, {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false}
-                ]
-            });"
         ></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError: false
+                });
+            });
+        </script>
     </head>
     <body>
         <nav class="site-nav">
