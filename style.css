@@ -704,15 +704,6 @@ footer::before {
     border-bottom: 1px solid var(--border-light);
 }
 
-/* Subtle dim on non-hovered siblings */
-.projects-list:hover .project-item:not(:hover) {
-    opacity: 0.55;
-}
-
-.projects-list:hover .project-item:hover {
-    opacity: 1;
-}
-
 /* Featured project row */
 .project-item--featured {
     border-top: 1px solid var(--foreground);
