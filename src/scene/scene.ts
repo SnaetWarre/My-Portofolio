@@ -62,7 +62,7 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
     const spherical = new THREE.Spherical().setFromVector3(offset);
     controls.distance = spherical.radius;
     controls.yaw = spherical.theta;
-    controls.pitch = Math.PI / 2 - spherical.phi;
+    controls.pitch = spherical.phi - Math.PI / 2;
     listeners.forEach((listener) => listener(node));
   }
 
