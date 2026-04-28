@@ -960,6 +960,39 @@ body:has(.blog-post) .nav-link:hover {
     color: var(--foreground);
 }
 
+body:has(.blog-post) footer {
+    background: #0c1323;
+    color: var(--foreground);
+    border-top: 1px solid var(--border-light);
+}
+
+body:has(.blog-post) footer::before {
+    background-image: radial-gradient(
+        circle at top center,
+        rgba(137, 180, 255, 0.1),
+        transparent 70%
+    );
+}
+
+body:has(.blog-post) .footer-content p {
+    color: #8fa6cc;
+}
+
+body:has(.blog-post) .footer-cta {
+    border-color: var(--border-light);
+    color: var(--foreground);
+}
+
+body:has(.blog-post) .footer-cta:hover {
+    background: #1a2740;
+    color: var(--foreground);
+    border-color: #395173;
+}
+
+body:has(.blog-post) .footer-cta:focus-visible {
+    outline: 2px solid var(--foreground);
+}
+
 body:has(.blog-post) .article-content tr:hover,
 body:has(.blog-post) .blog-comparison-row:hover {
     background: #141f33;
