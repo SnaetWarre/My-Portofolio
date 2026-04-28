@@ -961,17 +961,13 @@ body:has(.blog-post) .nav-link:hover {
 }
 
 body:has(.blog-post) footer {
-    background: #0c1323;
+    background: var(--background);
     color: var(--foreground);
-    border-top: 1px solid var(--border-light);
+    border-top: none;
 }
 
 body:has(.blog-post) footer::before {
-    background-image: radial-gradient(
-        circle at top center,
-        rgba(137, 180, 255, 0.1),
-        transparent 70%
-    );
+    background-image: none;
 }
 
 body:has(.blog-post) .footer-content p {
