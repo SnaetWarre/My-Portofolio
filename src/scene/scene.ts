@@ -102,16 +102,10 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
 
     const idle = new THREE.Vector3();
     if (!reducedMotion) {
-      idle.set(
-        Math.sin(elapsed * 0.24) * 0.2 + controls.pointer.x * 0.34,
-        Math.cos(elapsed * 0.18) * 0.12 + controls.pointer.y * 0.2,
-        0,
-      );
+      idle.set(Math.sin(elapsed * 0.24) * 0.2, Math.cos(elapsed * 0.18) * 0.12, 0);
       if (navigation.travelProgress >= 1) {
-        const orbitOffset = new THREE.Vector3().setFromSphericalCoords(
-          controls.distance,
-          Math.PI / 2 - controls.pitch,
-          controls.yaw,
+        const orbitOffset = new THREE.Vector3(0, 0, controls.distance).applyEuler(
+          new THREE.Euler(controls.pitch, controls.yaw, 0, "YXZ"),
         );
         navigation.cameraPosition.copy(navigation.lookTarget).add(orbitOffset);
         navigation.toPosition.copy(navigation.cameraPosition);

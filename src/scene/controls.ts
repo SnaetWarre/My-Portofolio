@@ -4,7 +4,6 @@ type ControlState = {
   yaw: number;
   pitch: number;
   distance: number;
-  pointer: THREE.Vector2;
   dragging: boolean;
   lastX: number;
   lastY: number;
@@ -16,23 +15,19 @@ export function createControls(canvas: HTMLCanvasElement) {
     yaw: 0,
     pitch: 0.08,
     distance: initialDistance,
-    pointer: new THREE.Vector2(),
     dragging: false,
     lastX: 0,
     lastY: 0,
   };
 
   const onPointerMove = (event: PointerEvent) => {
-    state.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    state.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
     if (!state.dragging) return;
     const dx = event.clientX - state.lastX;
     const dy = event.clientY - state.lastY;
     state.lastX = event.clientX;
     state.lastY = event.clientY;
     state.yaw -= dx * 0.0032;
-    state.pitch = THREE.MathUtils.clamp(state.pitch - dy * 0.0024, -0.48, 0.52);
+    state.pitch = THREE.MathUtils.euclideanModulo(state.pitch - dy * 0.0024 + Math.PI, Math.PI * 2) - Math.PI;
   };
 
   canvas.addEventListener("pointerdown", (event) => {
