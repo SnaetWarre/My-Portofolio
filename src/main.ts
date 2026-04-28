@@ -14,6 +14,8 @@ const panel = document.querySelector<HTMLElement>("#mission-panel");
 const panelContent = document.querySelector<HTMLElement>("#panel-content");
 const labels = document.querySelector<HTMLElement>(".scene-labels");
 const fallback = document.querySelector<HTMLElement>("#webgl-fallback");
+const storyNavShell = document.querySelector<HTMLElement>(".story-nav-shell");
+const storyNavTrigger = document.querySelector<HTMLButtonElement>(".story-nav-trigger");
 
 if (!canvas || !panel || !panelContent || !labels) {
   throw new Error("Portfolio shell is missing required DOM nodes.");
@@ -38,9 +40,16 @@ if (!hasWebGLSupport()) {
     } else {
       overlays.close();
     }
+    storyNavShell?.classList.remove("is-open");
+    storyNavTrigger?.setAttribute("aria-expanded", "false");
   });
 
   panel.querySelector<HTMLElement>(".panel-close")?.addEventListener("click", overlays.close);
+  storyNavTrigger?.addEventListener("click", () => {
+    const isOpen = storyNavShell?.classList.toggle("is-open") ?? false;
+    storyNavTrigger.setAttribute("aria-expanded", String(isOpen));
+  });
+
   const updateLabels = () => {
     overlays.updateLabelPositions(worldNodes, scene.projectNodeToScreen);
     window.requestAnimationFrame(updateLabels);

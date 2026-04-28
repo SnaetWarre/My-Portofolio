@@ -40,8 +40,12 @@
     font-size: 0.52rem;
   }
 
-  .story-nav {
+  .story-nav-shell {
+    right: 0.6rem;
     bottom: calc(0.6rem + env(safe-area-inset-bottom));
+  }
+
+  .story-nav {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     width: min(30rem, calc(100vw - 1rem));

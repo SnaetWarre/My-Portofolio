@@ -124,13 +124,23 @@
           <div id="panel-content"></div>
         </aside>
 
-        <div class="story-nav" aria-label="Unlocked destinations">
-          <button type="button" data-node-link="identity">Core</button>
-          <button type="button" data-node-link="projects">Projects</button>
-          <button type="button" data-node-link="about">Archive</button>
-          <button type="button" data-node-link="blog">Transmission</button>
-          <button type="button" data-node-link="cv">CV</button>
-          <button type="button" data-node-link="contact">Beacon</button>
+        <div class="story-nav-shell">
+          <button
+            type="button"
+            class="story-nav-trigger"
+            aria-controls="story-nav"
+            aria-expanded="false"
+          >
+            You lost in space?
+          </button>
+          <div class="story-nav" id="story-nav" aria-label="Unlocked destinations">
+            <button type="button" data-node-link="identity">Core</button>
+            <button type="button" data-node-link="projects">Projects</button>
+            <button type="button" data-node-link="about">Archive</button>
+            <button type="button" data-node-link="blog">Transmission</button>
+            <button type="button" data-node-link="cv">CV</button>
+            <button type="button" data-node-link="contact">Beacon</button>
+          </div>
         </div>
 
         <section class="seo-content" aria-label="Readable portfolio content">
