@@ -928,6 +928,80 @@ footer::before {
 }
 
 /* =====================================================
+   BLOG POST PAGE — DARK THEME OVERRIDES
+   ===================================================== */
+body:has(.blog-post) {
+    --background: #070b14;
+    --foreground: #e8eefc;
+    --muted: #111a2b;
+    --muted-foreground: #9db0d2;
+    --border: #d5e1fb;
+    --border-light: #2b3a56;
+    --border-subtle: #1a263b;
+
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+body:has(.blog-post)::before {
+    opacity: 0.045;
+}
+
+body:has(.blog-post) .site-nav {
+    background: rgba(7, 11, 20, 0.9);
+    border-bottom-color: var(--border-light);
+}
+
+body:has(.blog-post) .nav-link {
+    color: var(--muted-foreground);
+}
+
+body:has(.blog-post) .nav-link:hover {
+    color: var(--foreground);
+}
+
+body:has(.blog-post) .article-content tr:hover,
+body:has(.blog-post) .blog-comparison-row:hover {
+    background: #141f33;
+}
+
+body:has(.blog-post) .article-content code {
+    background: #121c30;
+    border-color: var(--border-light);
+}
+
+body:has(.blog-post) .article-content pre {
+    background: #0f1728;
+    color: #dfe9ff;
+    border: 1px solid var(--border-light);
+}
+
+body:has(.blog-post) .article-content th {
+    background: #17253e;
+    color: var(--foreground);
+    border-color: #304669;
+}
+
+body:has(.blog-post) .blog-comparison-col--alt .blog-comparison-header,
+body:has(.blog-post) .blog-pipeline-step:last-of-type {
+    background: #17253e;
+    color: var(--foreground);
+}
+
+body:has(.blog-post) .blog-pipeline-step:last-of-type .blog-pipeline-detail {
+    color: #8fa6cc;
+}
+
+body:has(.blog-post) .blog-method-card:hover {
+    background: #1b2943;
+    color: var(--foreground);
+}
+
+body:has(.blog-post) .blog-method-card:hover p {
+    color: #c5d2ea;
+}
+
+/* =====================================================
    BLOG POST PAGE
    ===================================================== */
 .blog-post {
