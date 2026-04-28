@@ -11,10 +11,11 @@ type ControlState = {
 };
 
 export function createControls(canvas: HTMLCanvasElement) {
+  const initialDistance = window.innerWidth < 720 ? 18.4 : 15.2;
   const state: ControlState = {
     yaw: 0,
     pitch: 0.08,
-    distance: 15.2,
+    distance: initialDistance,
     pointer: new THREE.Vector2(),
     dragging: false,
     lastX: 0,
@@ -53,7 +54,7 @@ export function createControls(canvas: HTMLCanvasElement) {
     "wheel",
     (event) => {
       event.preventDefault();
-      state.distance = THREE.MathUtils.clamp(state.distance + event.deltaY * 0.006, 3.2, 24);
+      state.distance = THREE.MathUtils.clamp(state.distance + event.deltaY * 0.006, 4.5, 26);
     },
     { passive: false },
   );
