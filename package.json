@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && mkdir -p dist/blog && cp blog/blog.html dist/blog/blog.html && cp -R blog/images dist/blog/images && cp style.css dist/style.css && cp script.js dist/script.js && cp favicon.svg dist/favicon.svg && cp favicon.ico dist/favicon.ico && cp logo.svg dist/logo.svg && cp robots.txt dist/robots.txt && cp sitemap.xml dist/sitemap.xml && cp CV_Warre_Snaet.pdf dist/CV_Warre_Snaet.pdf",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
