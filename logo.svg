@@ -81,11 +81,11 @@
   <rect x="44" y="62" width="16" height="1.5" fill="#000000" opacity="0.18"/>
 
   <!-- Name -->
-  <text x="85" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="200" fill="#000000" letter-spacing="3">WARRE</text>
-  <text x="85" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#000000" letter-spacing="3">SNAET</text>
+  <text x="85" y="32" font-family="'JetBrainsMono Nerd Font', 'JetBrains Mono Nerd Font', 'JetBrains Mono', monospace" font-size="22" font-weight="200" fill="#000000" letter-spacing="3">WARRE</text>
+  <text x="85" y="52" font-family="'JetBrainsMono Nerd Font', 'JetBrains Mono Nerd Font', 'JetBrains Mono', monospace" font-size="22" font-weight="700" fill="#000000" letter-spacing="3">SNAET</text>
   
   <!-- Binary AI -->
   <g opacity="0.3">
-    <text x="85" y="61" font-family="monospace" font-size="7" font-weight="500" fill="#000000" letter-spacing="1">01000001 01001001</text>
+    <text x="85" y="61" font-family="'JetBrainsMono Nerd Font', 'JetBrains Mono Nerd Font', 'JetBrains Mono', monospace" font-size="7" font-weight="500" fill="#000000" letter-spacing="1">01000001 01001001</text>
   </g>
 </svg>

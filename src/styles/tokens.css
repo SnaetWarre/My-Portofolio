@@ -11,7 +11,7 @@
   --panel-strong: rgba(5, 7, 13, 0.9);
   --line: rgba(247, 251, 255, 0.24);
   --line-strong: rgba(247, 251, 255, 0.58);
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Source Serif 4", Georgia, serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
+  --font-body: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
+  --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
 }

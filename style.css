@@ -19,9 +19,9 @@
     --text: var(--foreground);
     --text-secondary: var(--muted-foreground);
 
-    --font-heading: "Playfair Display", Georgia, serif;
-    --font-body: "Source Serif 4", Georgia, serif;
-    --font-mono: "JetBrains Mono", monospace;
+    --font-heading: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
+    --font-body: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
+    --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
 
     --nav-height: 60px;
     --spacing-section: 7rem;
