@@ -4,12 +4,18 @@ export function createDust(count = 900) {
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
-  const palette = [new THREE.Color("#89b4ff"), new THREE.Color("#ff8a3d"), new THREE.Color("#f7fbff")];
+  const palette = [
+    new THREE.Color("#6f9fff"),
+    new THREE.Color("#8f63ff"),
+    new THREE.Color("#ff8a3d"),
+    new THREE.Color("#ffcf96"),
+    new THREE.Color("#f7fbff"),
+  ];
 
   for (let i = 0; i < count; i += 1) {
-    positions[i * 3] = THREE.MathUtils.randFloatSpread(42);
-    positions[i * 3 + 1] = THREE.MathUtils.randFloatSpread(24);
-    positions[i * 3 + 2] = THREE.MathUtils.randFloat(-38, 8);
+    positions[i * 3] = THREE.MathUtils.randFloatSpread(52);
+    positions[i * 3 + 1] = THREE.MathUtils.randFloatSpread(28);
+    positions[i * 3 + 2] = THREE.MathUtils.randFloat(-48, 12);
 
     const color = palette[Math.floor(Math.random() * palette.length)];
     colors[i * 3] = color.r;
@@ -24,7 +30,7 @@ export function createDust(count = 900) {
     size: 0.032,
     vertexColors: true,
     transparent: true,
-    opacity: 0.42,
+    opacity: count > 1000 ? 0.32 : 0.4,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
   });

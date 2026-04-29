@@ -20,7 +20,13 @@ function createCircleTexture() {
 export function createStarfield(count = 4200) {
   const group = new THREE.Group();
   const texture = createCircleTexture();
-  const colors = [new THREE.Color("#f7fbff"), new THREE.Color("#89b4ff"), new THREE.Color("#ffd6a3")];
+  const colors = [
+    { color: new THREE.Color("#f7fbff"), weight: 0.72 },
+    { color: new THREE.Color("#9fc5ff"), weight: 0.11 },
+    { color: new THREE.Color("#8b6dff"), weight: 0.06 },
+    { color: new THREE.Color("#ffd08a"), weight: 0.07 },
+    { color: new THREE.Color("#ff8d6e"), weight: 0.04 },
+  ];
 
   for (let layer = 0; layer < 3; layer += 1) {
     const layerCount = Math.floor(count / (layer + 1.25));
@@ -36,7 +42,13 @@ export function createStarfield(count = 4200) {
       positions[i * 3 + 1] = Math.sin(phi) * Math.sin(theta) * r;
       positions[i * 3 + 2] = Math.cos(phi) * r - 16;
 
-      const color = colors[Math.floor(Math.random() * colors.length)];
+      const roll = Math.random();
+      let total = 0;
+      const color =
+        colors.find((candidate) => {
+          total += candidate.weight;
+          return roll <= total;
+        })?.color ?? colors[0].color;
       colorArray[i * 3] = color.r;
       colorArray[i * 3 + 1] = color.g;
       colorArray[i * 3 + 2] = color.b;
@@ -47,11 +59,11 @@ export function createStarfield(count = 4200) {
     geometry.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.035 + layer * 0.014,
+      size: 0.026 + layer * 0.019,
       map: texture ?? undefined,
       vertexColors: true,
       transparent: true,
-      opacity: 0.9 - layer * 0.13,
+      opacity: 0.86 - layer * 0.11,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });

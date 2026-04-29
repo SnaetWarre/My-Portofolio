@@ -7,10 +7,10 @@ import { createRaycaster } from "./interaction/raycast";
 import { addLighting } from "./lighting";
 import { createPostprocessing } from "./postprocessing";
 import { createRenderer, resizeRenderer, type QualityMode } from "./renderer";
+import { createAsteroids } from "./world/asteroids";
 import { createBlackHole } from "./world/blackHole";
 import { createDust } from "./world/dust";
 import { createNebula } from "./world/nebula";
-import { createMolecularField } from "./world/molecularField";
 import { createPortals } from "./world/portals";
 import { createStarfield } from "./world/starfield";
 
@@ -25,7 +25,7 @@ export type SpaceScene = {
 
 export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode, reducedMotion: boolean): SpaceScene {
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x010208, quality === "balanced" ? 0.026 : 0.033);
+  scene.fog = new THREE.FogExp2(0x000106, quality === "balanced" ? 0.029 : 0.036);
 
   const renderer = createRenderer(canvas, quality);
   const camera = createCamera();
@@ -41,11 +41,11 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
   const blackHole = createBlackHole();
   const starfield = createStarfieldByQuality(quality);
   const nebula = createNebula();
-  const molecularField = createMolecularField();
+  const asteroids = createAsteroids(quality);
   const dust = createDust(quality === "balanced" ? 2200 : 720);
   const portals = createPortals(worldNodes);
 
-  scene.add(starfield.group, nebula.group, molecularField.group, dust.group, blackHole.group, portals.group);
+  scene.add(starfield.group, nebula.group, dust.group, asteroids.group, blackHole.group, portals.group);
 
   function selectNode(node: WorldNode) {
     const hotspot = portals.hotspots.find((item) => item.userData.node.id === node.id);
@@ -116,7 +116,7 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
     blackHole.update(delta, elapsed);
     starfield.update(delta);
     nebula.update(delta);
-    molecularField.update(delta, elapsed);
+    asteroids.update(delta, elapsed);
     dust.update(delta);
     portals.update(delta, elapsed, camera);
 
