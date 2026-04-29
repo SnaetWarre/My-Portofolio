@@ -2,12 +2,15 @@ import * as THREE from "three";
 import { createCamera } from "./camera";
 import { createControls } from "./controls";
 import { worldNodes, type WorldNode } from "./content/portfolio-data";
-import { createNavigationState, travelToNode, updateNavigation } from "./interaction/navigation";
+import {
+  createNavigationState,
+  travelToNode,
+  updateNavigation,
+} from "./interaction/navigation";
 import { createRaycaster } from "./interaction/raycast";
 import { addLighting } from "./lighting";
 import { createPostprocessing } from "./postprocessing";
 import { createRenderer, resizeRenderer, type QualityMode } from "./renderer";
-import { createAsteroids } from "./world/asteroids";
 import { createBlackHole } from "./world/blackHole";
 import { createDust } from "./world/dust";
 import { createNebula } from "./world/nebula";
@@ -18,14 +21,25 @@ export type SpaceScene = {
   nodes: WorldNode[];
   travelTo: (node: WorldNode) => void;
   onNodeSelected: (callback: (node: WorldNode) => void) => void;
-  projectNodeToScreen: (node: WorldNode) => { x: number; y: number; visible: boolean };
+  projectNodeToScreen: (node: WorldNode) => {
+    x: number;
+    y: number;
+    visible: boolean;
+  };
   start: () => void;
   destroy: () => void;
 };
 
-export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode, reducedMotion: boolean): SpaceScene {
+export function createSpaceScene(
+  canvas: HTMLCanvasElement,
+  quality: QualityMode,
+  reducedMotion: boolean,
+): SpaceScene {
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x000003, quality === "balanced" ? 0.03 : 0.037);
+  scene.fog = new THREE.FogExp2(
+    0x000001,
+    quality === "balanced" ? 0.035 : 0.04,
+  );
 
   const renderer = createRenderer(canvas, quality);
   const camera = createCamera();
@@ -41,19 +55,30 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
   const blackHole = createBlackHole();
   const starfield = createStarfieldByQuality(quality);
   const nebula = createNebula();
-  const asteroids = createAsteroids(quality);
+  // const asteroids = createAsteroids(quality);
   const dust = createDust(quality === "balanced" ? 2200 : 720);
   const portals = createPortals(worldNodes);
 
-  scene.add(starfield.group, nebula.group, dust.group, asteroids.group, blackHole.group, portals.group);
+  scene.add(
+    starfield.group,
+    nebula.group,
+    dust.group,
+    blackHole.group,
+    portals.group,
+  );
 
   function selectNode(node: WorldNode) {
-    const hotspot = portals.hotspots.find((item) => item.userData.node.id === node.id);
+    const hotspot = portals.hotspots.find(
+      (item) => item.userData.node.id === node.id,
+    );
     const liveNode = hotspot
       ? {
           ...node,
           position: hotspot.position.toArray() as [number, number, number],
-          cameraTarget: hotspot.position.clone().multiplyScalar(0.92).toArray() as [number, number, number],
+          cameraTarget: hotspot.position
+            .clone()
+            .multiplyScalar(0.92)
+            .toArray() as [number, number, number],
         }
       : node;
     travelToNode(navigation, liveNode, camera);
@@ -102,11 +127,17 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
 
     const idle = new THREE.Vector3();
     if (!reducedMotion) {
-      idle.set(Math.sin(elapsed * 0.24) * 0.2, Math.cos(elapsed * 0.18) * 0.12, 0);
+      idle.set(
+        Math.sin(elapsed * 0.24) * 0.2,
+        Math.cos(elapsed * 0.18) * 0.12,
+        0,
+      );
       if (navigation.travelProgress >= 1) {
-        const orbitOffset = new THREE.Vector3(0, 0, controls.distance).applyEuler(
-          new THREE.Euler(controls.pitch, controls.yaw, 0, "YXZ"),
-        );
+        const orbitOffset = new THREE.Vector3(
+          0,
+          0,
+          controls.distance,
+        ).applyEuler(new THREE.Euler(controls.pitch, controls.yaw, 0, "YXZ"));
         navigation.cameraPosition.copy(navigation.lookTarget).add(orbitOffset);
         navigation.toPosition.copy(navigation.cameraPosition);
       }
@@ -116,7 +147,7 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
     blackHole.update(delta, elapsed);
     starfield.update(delta);
     nebula.update(delta);
-    asteroids.update(delta, elapsed);
+    // asteroids.update(delta, elapsed);
     dust.update(delta);
     portals.update(delta, elapsed, camera);
 
@@ -131,8 +162,11 @@ export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode
       listeners.add(callback);
     },
     projectNodeToScreen(node) {
-      const hotspot = portals.hotspots.find((item) => item.userData.node.id === node.id);
-      const worldPosition = hotspot?.position.clone() ?? new THREE.Vector3(...node.position);
+      const hotspot = portals.hotspots.find(
+        (item) => item.userData.node.id === node.id,
+      );
+      const worldPosition =
+        hotspot?.position.clone() ?? new THREE.Vector3(...node.position);
       const position = worldPosition.project(camera);
       return {
         x: (position.x * 0.5 + 0.5) * window.innerWidth,
