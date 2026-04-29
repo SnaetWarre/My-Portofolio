@@ -65,7 +65,8 @@ a {
 
 #app,
 #space-canvas,
-.webgl-fallback {
+.webgl-fallback,
+.mobile-unsupported {
   position: fixed;
   inset: 0;
 }
@@ -102,7 +103,8 @@ a {
   opacity: 0.035;
 }
 
-.webgl-fallback {
+.webgl-fallback,
+.mobile-unsupported {
   z-index: 3;
   display: grid;
   place-items: center;
@@ -113,8 +115,35 @@ a {
     var(--space);
 }
 
-.webgl-fallback > div {
+.mobile-unsupported {
+  z-index: 25;
+  text-align: left;
+}
+
+.webgl-fallback > div,
+.mobile-unsupported > div {
   max-width: 42rem;
+}
+
+.mobile-unsupported a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  margin-top: 1.5rem;
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: var(--space);
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.mobile-blocked .skip-link,
+.mobile-blocked #space-canvas,
+.mobile-blocked #portfolio-content {
+  display: none;
 }
 
 .cold-open,
@@ -186,9 +215,10 @@ a {
   font-weight: 700;
 }
 
-.webgl-fallback h1 {
+.webgl-fallback h1,
+.mobile-unsupported h1 {
   margin: 0;
-  max-width: 9ch;
+  max-width: 10ch;
   color: var(--ink);
   font-family: var(--font-display);
   font-size: clamp(4.25rem, 13vw, 9.5rem);
@@ -196,7 +226,8 @@ a {
   text-shadow: 0 0 34px rgba(137, 180, 255, 0.28);
 }
 
-.webgl-fallback p:not(.kicker) {
+.webgl-fallback p:not(.kicker),
+.mobile-unsupported p:not(.kicker) {
   max-width: 36rem;
   margin: 1rem 0 0;
   color: var(--muted);

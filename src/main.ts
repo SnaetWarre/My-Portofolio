@@ -4,7 +4,7 @@ import "./styles/overlays.css";
 import "./styles/responsive.css";
 import { createSpaceScene } from "./scene/scene";
 import { worldNodes } from "./scene/content/portfolio-data";
-import { hasWebGLSupport, getMotionPreference } from "./ui/accessibility";
+import { hasWebGLSupport, getMotionPreference, isUnsupportedPhoneViewport } from "./ui/accessibility";
 import { hideLoadingScreen } from "./ui/loading";
 import { bindNodeButtons } from "./ui/nav";
 import { createOverlayController } from "./ui/overlays";
@@ -14,6 +14,7 @@ const panel = document.querySelector<HTMLElement>("#mission-panel");
 const panelContent = document.querySelector<HTMLElement>("#panel-content");
 const labels = document.querySelector<HTMLElement>(".scene-labels");
 const fallback = document.querySelector<HTMLElement>("#webgl-fallback");
+const mobileUnsupported = document.querySelector<HTMLElement>("#mobile-unsupported");
 const storyNavShell = document.querySelector<HTMLElement>(".story-nav-shell");
 const storyNavTrigger = document.querySelector<HTMLButtonElement>(".story-nav-trigger");
 
@@ -24,7 +25,11 @@ if (!canvas || !panel || !panelContent || !labels) {
 const reducedMotion = getMotionPreference();
 const quality = reducedMotion || window.innerWidth < 720 ? "reduced" : "balanced";
 
-if (!hasWebGLSupport()) {
+if (isUnsupportedPhoneViewport()) {
+  document.documentElement.classList.add("mobile-blocked");
+  mobileUnsupported?.removeAttribute("hidden");
+  hideLoadingScreen();
+} else if (!hasWebGLSupport()) {
   fallback?.removeAttribute("hidden");
   hideLoadingScreen();
 } else {

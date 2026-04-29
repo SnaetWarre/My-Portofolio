@@ -72,6 +72,20 @@
 }
 
 @media (max-width: 560px) {
+  .mobile-unsupported {
+    padding: 1.25rem;
+  }
+
+  .mobile-unsupported h1 {
+    max-width: 9ch;
+    font-size: clamp(3.2rem, 18vw, 5.2rem);
+    line-height: 0.88;
+  }
+
+  .mobile-unsupported p:not(.kicker) {
+    font-size: 1rem;
+  }
+
   .scene-label:not([data-node-id="identity"]) {
     display: none;
   }
