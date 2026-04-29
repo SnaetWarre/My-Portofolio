@@ -10,7 +10,7 @@ export function createRenderer(canvas: HTMLCanvasElement, quality: QualityMode) 
     powerPreference: "high-performance",
   });
 
-  renderer.setClearColor(0x010208, 1);
+  renderer.setClearColor(0x00030a, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = quality === "balanced" ? 0.68 : 0.58;

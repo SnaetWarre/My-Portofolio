@@ -25,7 +25,7 @@ export type SpaceScene = {
 
 export function createSpaceScene(canvas: HTMLCanvasElement, quality: QualityMode, reducedMotion: boolean): SpaceScene {
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x000106, quality === "balanced" ? 0.029 : 0.036);
+  scene.fog = new THREE.FogExp2(0x000003, quality === "balanced" ? 0.03 : 0.037);
 
   const renderer = createRenderer(canvas, quality);
   const camera = createCamera();
