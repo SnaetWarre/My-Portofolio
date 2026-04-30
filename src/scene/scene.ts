@@ -49,6 +49,12 @@ export function createSpaceScene(
   const picker = createRaycaster();
   const clock = new THREE.Clock();
   const listeners = new Set<(node: WorldNode) => void>();
+  const pointerSelection = {
+    x: 0,
+    y: 0,
+    pointerId: -1,
+    moved: false,
+  };
 
   addLighting(scene);
 
@@ -91,10 +97,38 @@ export function createSpaceScene(
     listeners.forEach((listener) => listener(node));
   }
 
-  canvas.addEventListener("pointermove", (event) => picker.setPointer(event));
-  canvas.addEventListener("click", () => {
-    const node = picker.pick(camera, portals.hotspots);
-    if (node) selectNode(node);
+  canvas.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    pointerSelection.x = event.clientX;
+    pointerSelection.y = event.clientY;
+    pointerSelection.pointerId = event.pointerId;
+    pointerSelection.moved = false;
+    picker.setPointer(event);
+  });
+
+  canvas.addEventListener("pointermove", (event) => {
+    picker.setPointer(event);
+    if (event.pointerId !== pointerSelection.pointerId) return;
+    const dx = event.clientX - pointerSelection.x;
+    const dy = event.clientY - pointerSelection.y;
+    if (dx * dx + dy * dy > 36) {
+      pointerSelection.moved = true;
+    }
+  });
+
+  canvas.addEventListener("pointerup", (event) => {
+    if (event.pointerId === pointerSelection.pointerId && !pointerSelection.moved) {
+      picker.setPointer(event);
+      const node = picker.pick(camera, portals.hotspots);
+      if (node) selectNode(node);
+    }
+    pointerSelection.pointerId = -1;
+  });
+
+  canvas.addEventListener("pointercancel", (event) => {
+    if (event.pointerId === pointerSelection.pointerId) {
+      pointerSelection.pointerId = -1;
+    }
   });
 
   window.addEventListener("keydown", (event) => {

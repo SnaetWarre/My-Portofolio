@@ -31,6 +31,8 @@ export function createControls(canvas: HTMLCanvasElement) {
   };
 
   canvas.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
     state.dragging = true;
     state.lastX = event.clientX;
     state.lastY = event.clientY;
@@ -38,6 +40,12 @@ export function createControls(canvas: HTMLCanvasElement) {
   });
 
   canvas.addEventListener("pointerup", (event) => {
+    state.dragging = false;
+    if (canvas.hasPointerCapture(event.pointerId)) {
+      canvas.releasePointerCapture(event.pointerId);
+    }
+  });
+  canvas.addEventListener("pointercancel", (event) => {
     state.dragging = false;
     if (canvas.hasPointerCapture(event.pointerId)) {
       canvas.releasePointerCapture(event.pointerId);
