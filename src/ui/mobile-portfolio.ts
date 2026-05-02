@@ -110,11 +110,9 @@ function renderProjects(): string {
   const archive = projects.filter((p) => !p.featured);
 
   const projectCard = (p: (typeof projects)[number]) => {
-    const isFeatured = p.featured;
-    const cls = isFeatured ? "mp-project mp-project--featured" : "mp-project";
     return `
-      <article class="${cls} mp-fade">
-        <span class="mp-project-badge">${isFeatured ? "Featured" : "Archive"}</span>
+      <article class="mp-project mp-fade">
+        <span class="mp-project-badge">${p.featured ? "Featured" : "Archive"}</span>
         <h3 class="mp-project-title">${p.title}</h3>
         <p class="mp-project-desc">${p.summary}</p>
         <div class="mp-project-tags">${p.stack.map((s) => `<span>${s}</span>`).join("")}</div>
@@ -246,7 +244,7 @@ function renderDesktopTeaser(): string {
       <div class="mp-desktop-teaser-content mp-fade">
         <span class="mp-desktop-teaser-kicker">You're seeing the compact version</span>
         <h2 class="mp-desktop-teaser-title">This site has a secret.</h2>
-        <p class="mp-desktop-teaser-desc">Open this on a laptop or desktop and you'll find an interactive Three.js space scene — a gravity well you can actually fly through.</p>
+        <p class="mp-desktop-teaser-desc">Open this on a laptop or desktop and you'll find an interactive Three.js space scene, a gravity well you can actually fly through.</p>
         <span class="mp-desktop-teaser-hint">↑ Best on a screen wider than 768px</span>
       </div>
     </section>
