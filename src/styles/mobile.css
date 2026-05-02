@@ -19,11 +19,32 @@
 }
 
 /* ---- reset body for scrollable mobile ---- */
-.mobile-active,
+.mobile-active {
+  height: auto !important;
+  overflow: visible !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth;
+}
+
 .mobile-active body {
   height: auto !important;
   overflow: visible !important;
   overflow-x: hidden !important;
+  background: #ffffff;
+  color: #000000;
+}
+
+/* override the fixed positioning from base.css so content can scroll */
+.mobile-active #app {
+  position: relative !important;
+  inset: auto !important;
+  min-height: 100svh;
+}
+
+/* kill the space-scene overlays (scanlines + noise) on #app */
+.mobile-active #app::before,
+.mobile-active #app::after {
+  display: none !important;
 }
 
 .mobile-active #space-canvas,
@@ -34,19 +55,22 @@
 .mobile-active .webgl-fallback,
 .mobile-active .mobile-unsupported,
 .mobile-active .seo-content,
-.mobile-active .mission-panel {
+.mobile-active .mission-panel,
+.mobile-active #portfolio-content {
   display: none !important;
 }
 
 /* ---- portfolio wrapper ---- */
 .mobile-portfolio {
   position: relative;
+  z-index: 50;
   width: 100%;
   min-height: 100svh;
   background: var(--mp-bg);
   color: var(--mp-fg);
   font-family: var(--mp-font);
   line-height: 1.6;
+  touch-action: manipulation;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
