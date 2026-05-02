@@ -2,6 +2,7 @@ import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/overlays.css";
 import "./styles/responsive.css";
+import "./styles/mobile.css";
 import { createSpaceScene } from "./scene/scene";
 import { worldNodes } from "./scene/content/portfolio-data";
 import { hasWebGLSupport, getMotionPreference, isUnsupportedPhoneViewport } from "./ui/accessibility";
@@ -26,9 +27,10 @@ const reducedMotion = getMotionPreference();
 const quality = reducedMotion || window.innerWidth < 720 ? "reduced" : "balanced";
 
 if (isUnsupportedPhoneViewport()) {
-  document.documentElement.classList.add("mobile-blocked");
-  mobileUnsupported?.removeAttribute("hidden");
-  hideLoadingScreen();
+  import("./ui/mobile-portfolio").then(({ renderMobilePortfolio }) => {
+    renderMobilePortfolio();
+    hideLoadingScreen();
+  });
 } else if (!hasWebGLSupport()) {
   fallback?.removeAttribute("hidden");
   hideLoadingScreen();
