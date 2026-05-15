@@ -166,7 +166,7 @@ function renderAbout(): string {
           <span class="mp-about-value">Research prototype → deployable system</span>
         </div>
       </div>
-      <p class="mp-about-bio mp-fade">Third-year AI Engineering student at Howest, currently interning at 2Ai / IPCA University in Barcelos and applying OCR to echocardiograms.</p>
+      <p class="mp-about-bio mp-fade">Third-year AI Engineering student at Howest, currently interning at 2Ai / IPCA University in Barcelos and applying my Ai knowledge on Echocardiograms.</p>
     </section>
   `;
 }
