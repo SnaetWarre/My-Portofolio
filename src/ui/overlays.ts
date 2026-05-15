@@ -82,7 +82,7 @@ function renderPanel(type: PanelType) {
     return `
       <p class="kicker">Signal archive</p>
       <h2 id="panel-title">AI engineer building for real hardware</h2>
-      <p class="panel-lede">Third-year AI Engineering student at Howest, currently interning at 2Ai / IPCA University in Barcelos and applying OCR to echocardiograms.</p>
+      <p class="panel-lede">Third-year AI Engineering student at Howest, currently interning at 2Ai / IPCA University in Barcelos and applying my ML knowledge on Echocardiograms.</p>
       <div class="data-list">
         <span>Current focus</span><strong>Rust ML, Burn, OCR, local inference</strong>
         <span>Languages</span><strong>Python, Rust, C#, TypeScript</strong>
