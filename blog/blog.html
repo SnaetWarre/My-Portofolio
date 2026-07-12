@@ -82,7 +82,7 @@
                     "wordcount": "2500",
                     "url": "https://snaetwarre.github.io/My-Portofolio/blog/blog.html",
                     "datePublished": "2026-01-21",
-                    "dateModified": "2026-03-25",
+                    "dateModified": "2026-07-12",
                     "description": "Technical deep-dive into building an offline plant disease detection system in Rust using the Burn framework, with semi-supervised pseudo-labeling and multi-platform deployment via Tauri and ONNX."
                 },
                 {
@@ -192,7 +192,7 @@
                             <span class="blog-stat-label">Labeled Data</span>
                         </div>
                         <div class="blog-stat-item">
-                            <span class="blog-stat-number">1.27ms</span>
+                            <span class="blog-stat-number">0.42ms</span>
                             <span class="blog-stat-label"
                                 >Mean Inference</span
                             >
@@ -691,24 +691,17 @@ pub struct PlantClassifier&lt;B: Backend&gt; {
                         <tbody>
                             <tr>
                                 <td>Baseline</td>
-                                <td>1.30</td>
-                                <td>1.28</td>
-                                <td>1.42</td>
-                                <td>~769 FPS</td>
+                                <td>0.41</td>
+                                <td>0.31</td>
+                                <td>0.93</td>
+                                <td>~2,428 FPS</td>
                             </tr>
                             <tr>
                                 <td>SSL</td>
-                                <td>1.32</td>
-                                <td>1.30</td>
-                                <td>1.48</td>
-                                <td>~758 FPS</td>
-                            </tr>
-                            <tr>
-                                <td><strong>SSL Optimized</strong></td>
-                                <td><strong>1.27</strong></td>
-                                <td><strong>1.25</strong></td>
-                                <td><strong>1.38</strong></td>
-                                <td><strong>~793 FPS</strong></td>
+                                <td>0.42</td>
+                                <td>0.25</td>
+                                <td>1.09</td>
+                                <td>~2,406 FPS</td>
                             </tr>
                         </tbody>
                     </table>
@@ -726,8 +719,8 @@ pub struct PlantClassifier&lt;B: Backend&gt; {
                         <tbody>
                             <tr>
                                 <td><strong>Laptop (RTX 3060)</strong></td>
-                                <td><strong>1.27ms</strong></td>
-                                <td><strong>~793 FPS</strong></td>
+                                <td><strong>0.42ms</strong></td>
+                                <td><strong>~2,406 FPS</strong></td>
                                 <td>&euro;0 (BYOD)</td>
                             </tr>
                             <tr>
@@ -737,7 +730,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; {
                                 <td>&euro;350</td>
                             </tr>
                             <tr>
-                                <td>iPhone 12 (PWA/ONNX)</td>
+                                <td>iPhone 12 (Tauri Mobile / Rust)</td>
                                 <td>~80ms</td>
                                 <td>~12 FPS</td>
                                 <td>&euro;0 (BYOD)</td>

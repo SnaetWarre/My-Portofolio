@@ -1,0 +1,286 @@
+:root {
+  --ink: #171715;
+  --muted: #565650;
+  --line: #bbb9b1;
+  --paper: #fff;
+  --screen: #ecebe7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--screen);
+  color: var(--ink);
+  font-family: "Liberation Sans", Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.36;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: #88877f;
+  text-decoration-thickness: 0.7px;
+  text-underline-offset: 1.5px;
+}
+
+.screen-toolbar {
+  display: flex;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 0.7rem;
+  border-bottom: 1px solid #ccc9c1;
+  background: rgb(247 246 242 / 95%);
+  backdrop-filter: blur(10px);
+}
+
+.screen-toolbar a,
+.screen-toolbar button {
+  min-height: 34px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.screen-toolbar a:hover,
+.screen-toolbar button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.resume {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 1.5rem auto 3rem;
+  padding: 13mm 14mm 12mm;
+  background: var(--paper);
+  box-shadow: 0 10px 40px rgb(0 0 0 / 12%);
+}
+
+.resume-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 12mm;
+  padding-bottom: 5mm;
+  border-bottom: 2px solid var(--ink);
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 1.5mm;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 29pt;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.role {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 12pt;
+  font-weight: 700;
+}
+
+.contact-list {
+  display: grid;
+  gap: 0.55mm;
+  margin: 0;
+  font-size: 8.2pt;
+  font-style: normal;
+  text-align: right;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 27mm 1fr;
+  gap: 5mm;
+  padding: 4.5mm 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary h2,
+.summary p {
+  margin-bottom: 0;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.16fr) minmax(0, 0.84fr);
+  gap: 8mm;
+  padding-top: 5mm;
+}
+
+.side-column {
+  padding-left: 6mm;
+  border-left: 1px solid var(--line);
+}
+
+section + section {
+  margin-top: 5mm;
+}
+
+h2 {
+  margin-bottom: 3mm;
+  font-size: 9.4pt;
+  letter-spacing: 0.11em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin-bottom: 0.4mm;
+  font-size: 9.8pt;
+  line-height: 1.2;
+}
+
+p {
+  margin-bottom: 2mm;
+}
+
+ul {
+  margin-bottom: 0;
+  padding-left: 4mm;
+}
+
+li {
+  margin-bottom: 1.15mm;
+  padding-left: 0.5mm;
+}
+
+.entry + .entry {
+  margin-top: 4mm;
+}
+
+.entry-heading {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4mm;
+  margin-bottom: 1.5mm;
+}
+
+.organisation {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.date {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 8.2pt;
+  white-space: nowrap;
+}
+
+.compact-entry + .compact-entry {
+  margin-top: 2.7mm;
+}
+
+.compact-entry p {
+  margin-bottom: 0;
+}
+
+.side-column section + section {
+  margin-top: 6mm;
+}
+
+.side-column p {
+  margin-bottom: 1.4mm;
+}
+
+.side-date {
+  margin-top: 1mm;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 8.3pt;
+}
+
+.skill-group + .skill-group {
+  margin-top: 3mm;
+}
+
+.skill-group h3 {
+  margin-bottom: 0.8mm;
+  font-size: 8.4pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.skill-group p {
+  margin-bottom: 0;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    min-width: 210mm;
+    background: var(--paper);
+  }
+
+  .screen-toolbar {
+    display: none;
+  }
+
+  .resume {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .resume {
+    width: 100%;
+    min-height: auto;
+    margin: 0;
+    padding: 1.2rem;
+    box-shadow: none;
+  }
+
+  .resume-header,
+  .resume-grid,
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-list {
+    text-align: left;
+  }
+
+  .side-column {
+    padding: 0;
+    border: 0;
+  }
+}
