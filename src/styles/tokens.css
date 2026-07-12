@@ -1,17 +1,9 @@
 :root {
-  --space: #010208;
-  --space-2: #050913;
-  --ink: #f7fbff;
-  --muted: #aab7d4;
-  --cold: #89b4ff;
-  --violet: #8f63ff;
-  --orange: #ff8a3d;
-  --gold: #ffd6a3;
-  --panel: rgba(5, 7, 13, 0.72);
-  --panel-strong: rgba(5, 7, 13, 0.9);
-  --line: rgba(247, 251, 255, 0.24);
-  --line-strong: rgba(247, 251, 255, 0.58);
-  --font-display: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
-  --font-body: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
-  --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono Nerd Font", "JetBrains Mono", monospace;
+  --background: #fff;
+  --foreground: #111;
+  --muted: #f1f1f1;
+  --muted-foreground: #666;
+  --line: #d9d9d9;
+  --font: "JetBrains Mono", monospace;
+  --wrap: 74rem;
 }
