@@ -1,5 +1,5 @@
 # Warre Snaet
-**AI Engineer | Rust & Python**
+**Junior Software & AI Engineer | Python**
 
 > 🚧 **This profile is just the code storage.**
 > The real breakdown of my projects, deep-dive case studies, and edge-AI research is on my portfolio.
@@ -10,7 +10,9 @@
 
 ### What I'm Building
 I build systems that bridge the gap between heavy AI research and real-world edge devices.
-*   **Currently:** Building an offline-first Neural Network in **Rust (Burn)** that runs on smartphone CPUs.
+*   **Currently:** Open to junior software engineering and junior AI engineering roles, especially Python-focused work.
+*   **Education:** Graduated cum laude in AI Engineering from Howest.
+*   **On the side:** Exploring Rust, Burn, and edge AI through personal projects.
 *   **Previously:** RAG Chatbots in .NET & Full-stack Web Apps.
 
 **Don't read the code, read the story:**

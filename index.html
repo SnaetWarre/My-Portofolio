@@ -3,83 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Warre Snaet — AI Engineer</title>
-    <meta name="description" content="I’m Warre Snaet, an AI engineer building local-first machine learning systems, dependable software, and edge deployments in Rust and Python." />
+    <title>Warre Snaet — Software &amp; AI Engineer</title>
+    <meta name="description" content="Warre Snaet is a cum laude AI Engineering graduate from Belgium, open to junior software and AI engineering roles with a focus on Python." />
     <meta name="author" content="Warre Snaet" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://snaetwarre.github.io/My-Portofolio/" />
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Warre Snaet — AI Engineer" />
-    <meta property="og:description" content="AI engineering, local-first systems, Rust, Python, and selected work." />
+    <meta property="og:title" content="Warre Snaet — Software &amp; AI Engineer" />
+    <meta property="og:description" content="Cum laude AI Engineering graduate. Python, applied AI, and dependable software." />
     <meta property="og:url" content="https://snaetwarre.github.io/My-Portofolio/" />
     <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Warre Snaet","jobTitle":"AI Engineer","url":"https://snaetwarre.github.io/My-Portofolio/","sameAs":["https://www.linkedin.com/in/warre-snaet-272354370/","https://github.com/SnaetWarre"],"alumniOf":{"@type":"EducationalOrganization","name":"Howest University of Applied Sciences"}}}
+      {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Warre Snaet","jobTitle":"Junior Software and AI Engineer","url":"https://snaetwarre.github.io/My-Portofolio/","sameAs":["https://www.linkedin.com/in/warre-snaet-272354370/","https://github.com/SnaetWarre"],"alumniOf":{"@type":"EducationalOrganization","name":"Howest University of Applied Sciences"}}}
     </script>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="alternate icon" href="favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header wrap">
-      <a class="name" href="#top" aria-label="Warre Snaet, home">Warre Snaet</a>
-      <nav aria-label="Primary navigation">
-        <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
-      </nav>
-    </header>
 
     <main id="main">
-      <section class="intro wrap" id="top">
-        <h1>I build AI and software that works outside the demo.</h1>
-        <div class="intro-copy">
-          <p>I’m Warre Snaet, an AI engineer from Belgium. I build local-first machine learning systems, dependable full-stack software, OCR tooling, and edge deployments in Rust and Python.</p>
-          <p>I’m currently applying machine learning to echocardiograms during my internship at 2Ai / IPCA University in Barcelos.</p>
-        </div>
+      <header>
+        <h1>Warre Snaet</h1>
+        <nav aria-label="Contact and profile links">
+          <a href="mailto:warresnaet@student.howest.be">Email</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/SnaetWarre">GitHub</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>
+          <span aria-hidden="true">·</span>
+          <a href="CV_Warre_Snaet.pdf" download>CV</a>
+        </nav>
+      </header>
+
+      <section aria-labelledby="about-title">
+        <h2 class="visually-hidden" id="about-title">About</h2>
+        <p>I’m a software and AI engineer from Belgium. I recently graduated <em>cum laude</em> in AI Engineering at Howest.</p>
+        <p>Most of my work is in Python: applied machine learning, OCR, data processing, APIs, and the software around them. I care about turning an idea or research prototype into something dependable that people can actually use.</p>
+        <p>I’m currently open to junior software engineering and junior AI engineering roles. I also use C# and TypeScript when a project calls for them. Rust is something I enjoy exploring on the side.</p>
       </section>
 
-      <section class="section wrap" id="work">
-        <div class="section-title"><h2>Selected work</h2></div>
-        <div class="project-list">
-          <article class="project featured">
-            <div class="project-meta"><span>01</span><span>Apolloon</span></div>
-            <div><h3>24-hour run tracking system</h3><p>I built Apolloon’s complete tracking platform for their 24-hour run in Leuven: the full frontend and a resilient backend designed for the reality of a live event. Devices discover each other over UDP, synchronize across the local network, and automatically recover when a different machine needs to take over.</p><p class="stack">TypeScript · React · Electron · Node.js · SQLite · UDP · Local networking</p></div>
-          </article>
-          <article class="project">
-            <div class="project-meta"><span>02</span><span>Edge AI</span></div>
-            <div><h3>Semi-supervised learning in Rust</h3><p>I built a plant-disease classifier in Rust with Burn and packaged it for local edge devices. It reaches 0.39 ms inference, 2,579 FPS throughput, and runs as a 24 MB offline deployment on iPhone.</p><p class="stack">Rust · Burn · Semi-supervised learning · WASM · Tauri</p><div class="links"><a href="blog/blog.html">Read the case study ↗</a><a href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning">Source ↗</a></div></div>
-          </article>
-          <article class="project">
-            <div class="project-meta"><span>03</span><span>AI systems</span></div>
-            <div><h3>Financial AI agent</h3><p>I made a conversational portfolio manager with natural-language analysis, live market data, streaming responses, RAG memory, and persistent sessions.</p><p class="stack">Python · FastAPI · React · ChromaDB · MCP · Ollama</p><div class="links"><a href="https://github.com/SnaetWarre/Financial_AI_Agent">Source ↗</a></div></div>
-          </article>
-          <article class="project">
-            <div class="project-meta"><span>04</span><span>Industry project</span></div>
-            <div><h3>Event chatbot for XPO Group</h3><p>I worked on a full-stack RAG system for event questions, combining .NET embeddings, Azure OpenAI, Cosmos DB, a Next.js analytics interface, and Python ingestion.</p><p class="stack">.NET · Azure OpenAI · Cosmos DB · Next.js · Python</p><div class="links"><a href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group">Source ↗</a></div></div>
-          </article>
-          <article class="project compact"><div class="project-meta"><span>05</span><span>Full stack</span></div><div><h3>WaterAdventure</h3><p>I helped build a platform connecting swim coaches and parents for toddler water-confidence training, achievements, activity planning, chat, and multilingual support.</p><p class="stack">SvelteKit · TypeScript · Prisma · PostgreSQL · Docker</p><div class="links"><a href="https://github.com/ElliotHeyse/TeamProject_waterAdventure">Source ↗</a></div></div></article>
-          <article class="project compact"><div class="project-meta"><span>06</span><span>Desktop software</span></div><div><h3>Dataset query system</h3><p>I built a client-server analysis app with authentication, moderator controls, LAPD arrest-data queries, statistics, broadcasts, and a Qt GUI.</p><p class="stack">Python · PySide6 · Sockets · Pandas</p><div class="links"><a href="https://github.com/SnaetWarre/Server-Client-Python">Source ↗</a></div></div></article>
-        </div>
+      <section aria-labelledby="work-title">
+        <h2 id="work-title">Selected work</h2>
+        <ul class="work-list">
+          <li>
+            <a href="https://github.com/SnaetWarre/Financial_AI_Agent">Financial AI agent</a>
+            <span>— A conversational portfolio manager with live market data, streaming responses, RAG memory, and persistent sessions. Python, FastAPI, React, ChromaDB, MCP, and Ollama.</span>
+          </li>
+          <li>
+            <strong>Apolloon 24-hour run system</strong>
+            <span>— A resilient local-first race tracking platform with automatic device discovery, synchronization, and failover. React, Electron, Node.js, SQLite, and UDP.</span>
+          </li>
+          <li>
+            <a href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group">Event chatbot for XPO Group</a>
+            <span>— A full-stack RAG system using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion.</span>
+          </li>
+          <li>
+            <a href="blog/blog.html">Semi-supervised learning in Rust</a>
+            <span>— A plant-disease classifier built with Burn and packaged as a 24 MB offline deployment for iPhone. <a href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning">Source code</a>.</span>
+          </li>
+          <li>
+            <a href="https://github.com/SnaetWarre/Server-Client-Python">Dataset query system</a>
+            <span>— A Python client-server analysis application with authentication, moderation, statistics, broadcasts, and a PySide6 interface.</span>
+          </li>
+          <li>
+            <a href="https://github.com/ElliotHeyse/TeamProject_waterAdventure">WaterAdventure</a>
+            <span>— A SvelteKit platform connecting swim coaches and parents through activities, achievements, chat, and multilingual support.</span>
+          </li>
+        </ul>
       </section>
 
-      <section class="section wrap" id="about">
-        <div class="section-title"><h2>About</h2></div>
-        <div class="about-grid"><p>I’m a third-year AI Engineering student at Howest. I like taking research ideas all the way to software that can be deployed and trusted on real hardware—not just left in a notebook.</p><dl><div><dt>Based in</dt><dd>Belgium</dd></div><div><dt>Current focus</dt><dd>Rust ML, Burn, OCR, local inference</dd></div><div><dt>Languages</dt><dd>Python, Rust, C#, TypeScript</dd></div><div><dt>Current role</dt><dd>AI intern at 2Ai / IPCA University</dd></div></dl></div>
+      <section aria-labelledby="writing-title">
+        <h2 id="writing-title">Writing</h2>
+        <ul>
+          <li><a href="blog/blog.html">Building a 24 MB offline AI with Rust and Burn</a></li>
+        </ul>
       </section>
 
-      <section class="section wrap" id="writing">
-        <div class="section-title"><h2>Writing</h2></div>
-        <a class="writing-row" href="blog/blog.html"><span>Building a 24 MB offline AI with Rust + Burn</span><span>Case study ↗</span></a>
-      </section>
-
-      <section class="section wrap" id="contact">
-        <div class="section-title"><h2>Contact</h2></div>
-        <div class="contact-grid"><p>If you want to talk about AI systems, local-first software, Rust deployment, OCR, or an interesting technical problem, send me a message.</p><div class="contact-links"><a href="mailto:warresnaet@student.howest.be">Email ↗</a><a href="https://github.com/SnaetWarre">GitHub ↗</a><a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn ↗</a><a href="CV_Warre_Snaet.pdf" download>Download CV ↓</a></div></div>
-      </section>
+      <footer>
+        <p>Open to work. The easiest way to reach me is through <a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a> or <a href="mailto:warresnaet@student.howest.be">email</a>.</p>
+        <p>Warre Snaet, <span id="year"></span></p>
+      </footer>
     </main>
 
-    <footer class="wrap"><span>Warre Snaet</span><span id="year"></span></footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

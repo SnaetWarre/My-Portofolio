@@ -82,18 +82,16 @@ function renderHero(): string {
         <h1 class="mp-hero-name">Warre<br/>Snaet</h1>
       </div>
       <div class="mp-hero-bottom mp-fade">
-        <p class="mp-hero-bio"><strong>AI engineer</strong> building local-first machine learning systems, Rust deployment paths, OCR tooling, and edge inference that can survive outside a cloud demo.</p>
+        <p class="mp-hero-bio"><strong>Cum laude AI Engineering graduate</strong> building dependable software and applied AI systems, primarily in Python.</p>
         <div class="mp-status">
           <span class="mp-status-dot"></span>
-          <span>Interning at 2Ai / IPCA University, Barcelos</span>
+          <span>Open to junior software and AI engineering roles</span>
         </div>
         <div class="mp-stack">
-          <span>Rust</span>
           <span>Python</span>
           <span>C#</span>
           <span>TypeScript</span>
-          <span>Burn</span>
-          <span>SvelteKit</span>
+          <span>Rust</span>
         </div>
         <div class="mp-hero-ctas">
           <a class="mp-btn" href="#projects">View Work</a>
@@ -151,22 +149,22 @@ function renderAbout(): string {
         </div>
         <div class="mp-about-item mp-fade">
           <span class="mp-about-label">Current Signal</span>
-          <span class="mp-about-value">2Ai / IPCA University internship in Barcelos</span>
+          <span class="mp-about-value">Open to junior software and AI engineering roles</span>
         </div>
         <div class="mp-about-item mp-fade">
           <span class="mp-about-label">Stack</span>
-          <span class="mp-about-value">Rust, Python, C#, TypeScript, Burn, SvelteKit</span>
+          <span class="mp-about-value">Python, C#, TypeScript, Rust</span>
         </div>
         <div class="mp-about-item mp-fade">
-          <span class="mp-about-label">Current Focus</span>
-          <span class="mp-about-value">Rust ML, Burn, OCR, local inference</span>
+          <span class="mp-about-label">Primary Focus</span>
+          <span class="mp-about-value">Python, applied AI, OCR, software engineering</span>
         </div>
         <div class="mp-about-item mp-fade">
           <span class="mp-about-label">Pattern</span>
           <span class="mp-about-value">Research prototype → deployable system</span>
         </div>
       </div>
-      <p class="mp-about-bio mp-fade">Third-year AI Engineering student at Howest, currently interning at 2Ai / IPCA University in Barcelos and applying my Ai knowledge on Echocardiograms.</p>
+      <p class="mp-about-bio mp-fade">I graduated cum laude in AI Engineering from Howest. I turn research ideas into software that can be deployed, maintained, and trusted. Rust is a side interest for performance and edge experiments.</p>
     </section>
   `;
 }
@@ -206,7 +204,7 @@ function renderCV(): string {
         <span class="mp-section-index">05</span>
         <h2 class="mp-section-title">Signal Packet</h2>
       </div>
-      <p class="mp-cv-desc mp-fade">A compact CV with education, current internship context, stack, and selected technical work.</p>
+      <p class="mp-cv-desc mp-fade">My education, technical experience, stack, and selected work in one compact document.</p>
       <a class="mp-btn mp-fade" href="${profileLinks.cv}" download>Download CV ↓</a>
     </section>
   `;
@@ -219,7 +217,7 @@ function renderContact(): string {
         <span class="mp-section-index">06</span>
         <h2 class="mp-section-title">Beacon</h2>
       </div>
-      <p class="mp-about-bio mp-fade" style="margin-bottom:1.5rem;">Open to technical conversations around AI systems, Rust deployment, OCR, and edge inference.</p>
+      <p class="mp-about-bio mp-fade" style="margin-bottom:1.5rem;">Open to junior software and AI engineering roles, especially Python-focused work.</p>
       <div class="mp-contact-links mp-fade">
         <a class="mp-contact-link" href="${profileLinks.email}">
           <span>Email</span>

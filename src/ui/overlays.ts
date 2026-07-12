@@ -54,11 +54,11 @@ function renderPanel(type: PanelType) {
     return `
       <p class="kicker">Identity core / first contact</p>
       <h2 id="panel-title">Warre Snaet</h2>
-      <p class="panel-lede">AI engineer building local-first machine learning systems, Rust deployment paths, OCR tooling, and edge inference that can survive outside a cloud demo.</p>
+      <p class="panel-lede">Cum laude AI Engineering graduate building dependable software and applied AI systems, primarily in Python.</p>
       <div class="data-list">
         <span>Origin</span><strong>Howest AI Engineering / Belgium</strong>
-        <span>Current signal</span><strong>2Ai / IPCA University internship in Barcelos</strong>
-        <span>Stack</span><strong>Rust, Python, C#, TypeScript, Burn, SvelteKit</strong>
+        <span>Current signal</span><strong>Open to junior software and AI engineering roles</strong>
+        <span>Stack</span><strong>Python, C#, TypeScript, Rust</strong>
       </div>
       <div class="story-actions">
         <button type="button" data-node-link="projects">Trace the project field</button>
@@ -81,11 +81,11 @@ function renderPanel(type: PanelType) {
   if (type === "about") {
     return `
       <p class="kicker">Signal archive</p>
-      <h2 id="panel-title">AI engineer building for real hardware</h2>
-      <p class="panel-lede">Third-year AI Engineering student at Howest, currently interning at 2Ai / IPCA University in Barcelos and applying my ML knowledge on Echocardiograms.</p>
+      <h2 id="panel-title">From applied AI to dependable software</h2>
+      <p class="panel-lede">I graduated cum laude in AI Engineering from Howest. I turn research ideas into software that can be deployed, maintained, and trusted.</p>
       <div class="data-list">
-        <span>Current focus</span><strong>Rust ML, Burn, OCR, local inference</strong>
-        <span>Languages</span><strong>Python, Rust, C#, TypeScript</strong>
+        <span>Primary focus</span><strong>Python, applied AI, OCR, software engineering</strong>
+        <span>Also working with</span><strong>C#, TypeScript, Rust</strong>
         <span>Pattern</span><strong>Research prototype to deployable system</strong>
       </div>
     `;
@@ -109,7 +109,7 @@ function renderPanel(type: PanelType) {
     return `
       <p class="kicker">Capsule CV</p>
       <h2 id="panel-title">Download the signal packet</h2>
-      <p class="panel-lede">A compact CV with education, current internship context, stack, and selected technical work.</p>
+      <p class="panel-lede">My education, technical experience, stack, and selected work in one compact document.</p>
       <a class="panel-link" href="${profileLinks.cv}" download>Download CV</a>
     `;
   }
@@ -117,7 +117,7 @@ function renderPanel(type: PanelType) {
   return `
     <p class="kicker">Final beacon</p>
     <h2 id="panel-title">Contact</h2>
-    <p class="panel-lede">Open to technical conversations around AI systems, Rust deployment, OCR, and edge inference.</p>
+    <p class="panel-lede">Open to junior software and AI engineering roles, especially Python-focused work.</p>
     <div class="contact-links">
       <a href="${profileLinks.email}">Email</a>
       <a href="${profileLinks.github}" target="_blank" rel="noopener noreferrer">GitHub</a>

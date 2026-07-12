@@ -1,9 +1,7 @@
 :root {
-  --background: #fff;
-  --foreground: #111;
-  --muted: #f1f1f1;
-  --muted-foreground: #666;
-  --line: #d9d9d9;
-  --font: "JetBrains Mono", monospace;
-  --wrap: 74rem;
+  --background: #fdfcf8;
+  --foreground: #24231f;
+  --muted-foreground: #66635d;
+  --measure: 43rem;
+  --page-left: clamp(1.25rem, 11vw, 13rem);
 }
