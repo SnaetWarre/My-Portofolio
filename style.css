@@ -1952,3 +1952,223 @@ body:has(.blog-post) .blog-method-card:hover p {
         animation-duration: 0.01ms !important;
     }
 }
+
+/* Plain reading layout used by the current portfolio. */
+body:has(.blog-post) {
+    background: #fdfcf8;
+    color: #24231f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.08rem;
+    line-height: 1.55;
+}
+
+body:has(.blog-post)::before {
+    display: none;
+}
+
+body:has(.blog-post) .site-nav {
+    position: static;
+    width: min(43rem, calc(100% - clamp(1.25rem, 11vw, 13rem) - 2rem));
+    height: auto;
+    margin-left: clamp(1.25rem, 11vw, 13rem);
+    padding: 4.5rem 0 0;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+}
+
+body:has(.blog-post) .nav-logo,
+body:has(.blog-post) .nav-link {
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+body:has(.blog-post) .nav-links {
+    gap: 1rem;
+}
+
+body:has(.blog-post) main.blog-post {
+    width: min(43rem, calc(100% - clamp(1.25rem, 11vw, 13rem) - 2rem));
+    max-width: none;
+    margin: 0 0 0 clamp(1.25rem, 11vw, 13rem);
+    padding: 2.25rem 0 4rem;
+}
+
+body:has(.blog-post) .blog-header {
+    margin: 0 0 2rem;
+    padding: 0;
+    border: 0;
+}
+
+body:has(.blog-post) .blog-title {
+    max-width: none;
+    margin: 0;
+    font-family: inherit;
+    font-size: 1.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+body:has(.blog-post) .blog-meta {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: #66635d;
+    font-family: inherit;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+body:has(.blog-post) .blog-meta span + span::before {
+    content: " · ";
+}
+
+body:has(.blog-post) .article-content {
+    max-width: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+body:has(.blog-post) .article-content p,
+body:has(.blog-post) .article-content ul,
+body:has(.blog-post) .article-content ol {
+    margin: 0 0 1rem;
+}
+
+body:has(.blog-post) .article-content h2 {
+    margin: 2.25rem 0 0.75rem;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+body:has(.blog-post) .article-content h3,
+body:has(.blog-post) .article-content h4 {
+    margin: 1.75rem 0 0.6rem;
+    font-family: inherit;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+body:has(.blog-post) .article-content a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+body:has(.blog-post) .article-content > p:first-of-type::first-letter {
+    float: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+body:has(.blog-post) .blog-stat-grid,
+body:has(.blog-post) .blog-methods-grid,
+body:has(.blog-post) .blog-pipeline {
+    margin: 1.5rem 0;
+    border: 1px solid #d8d5ce;
+    background: transparent;
+}
+
+body:has(.blog-post) .blog-stat-item,
+body:has(.blog-post) .blog-method-card,
+body:has(.blog-post) .blog-pipeline-step {
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+}
+
+body:has(.blog-post) .blog-stat-number,
+body:has(.blog-post) .blog-stat-label,
+body:has(.blog-post) .blog-pipeline-label,
+body:has(.blog-post) .blog-pipeline-detail {
+    color: inherit;
+    font-family: inherit;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+body:has(.blog-post) .blog-image-wrapper {
+    margin: 1.5rem 0;
+    border: 0;
+}
+
+body:has(.blog-post) .blog-image {
+    width: 100%;
+    border: 0;
+}
+
+body:has(.blog-post) .blog-caption,
+body:has(.blog-post) .article-footer-meta {
+    color: #66635d;
+    font-family: inherit;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+body:has(.blog-post) .next-steps {
+    margin: 3rem 0 0;
+    padding: 0;
+    border: 0;
+}
+
+body:has(.blog-post) .next-step-link {
+    display: inline;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+    text-decoration: underline;
+}
+
+body:has(.blog-post) .next-step-label,
+body:has(.blog-post) .next-step-arrow {
+    display: none;
+}
+
+body:has(.blog-post) > footer {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    body:has(.blog-post) {
+        font-size: 1rem;
+    }
+
+    body:has(.blog-post) .site-nav,
+    body:has(.blog-post) main.blog-post {
+        width: auto;
+        margin-left: 0;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    body:has(.blog-post) .site-nav {
+        padding-top: 2rem;
+    }
+
+    body:has(.blog-post) main.blog-post {
+        padding-top: 2rem;
+    }
+
+    body:has(.blog-post) .blog-title {
+        font-size: 1.7rem;
+    }
+}

@@ -82,6 +82,31 @@ li {
   padding-left: 0.15rem;
 }
 
+.project-row {
+  position: relative;
+  margin: 0 0 0.25rem;
+  padding: 0.55rem 0.5rem 0.55rem 0.15rem;
+}
+
+.project-row:hover {
+  background: #f4f2eb;
+}
+
+.project-row > a:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.project-row .project-secondary-link {
+  position: relative;
+  z-index: 1;
+}
+
+.project-row--static:hover {
+  background: transparent;
+}
+
 .work-list span {
   color: var(--muted-foreground);
 }

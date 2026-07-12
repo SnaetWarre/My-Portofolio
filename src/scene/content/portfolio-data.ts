@@ -138,7 +138,7 @@ export const projects: ProjectEntry[] = [
 export const profileLinks = {
   github: "https://github.com/SnaetWarre",
   linkedin: "https://www.linkedin.com/in/warre-snaet-272354370/",
-  email: "mailto:warresnaet@student.howest.be",
+  email: "mailto:warresnaet@icloud.com",
   cv: "CV_Warre_Snaet.pdf",
   blog: "blog/blog.html",
 };

@@ -20,4 +20,4 @@ I build systems that bridge the gap between heavy AI research and real-world edg
 
 ---
 
-[LinkedIn](https://www.linkedin.com/in/warre-snaet-272354370/) • [Email](mailto:warresnaet@student.howest.be)
+[LinkedIn](https://www.linkedin.com/in/warre-snaet-272354370/) • [Email](mailto:warresnaet@icloud.com)
