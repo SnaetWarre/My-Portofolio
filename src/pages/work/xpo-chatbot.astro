@@ -1,0 +1,48 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="XPO Event Chatbot | Warre Snaet"
+  description="Case study of a full-stack event chatbot using .NET, Azure OpenAI, Cosmos DB, Next.js and Python ingestion."
+  kicker="Academic team project for an external client · 2025"
+  heading="Event chatbot for XPO Group"
+  lead="A retrieval-based event assistant that turns exhibitor and event-site content into answers, registration flows, and usable analytics."
+  meta={[
+    { label: "My role", value: "Backend, retrieval, ingestion, integration, and deployment work" },
+    { label: "Stack", value: ".NET, C#, Azure OpenAI, Cosmos DB, Next.js, Python, Scrapy" },
+    { label: "Context", value: "Team project for Kortrijk Xpo Group" },
+  ]}
+>
+  <CaseSection label="Problem" title="Answer event questions from changing source material">
+    <p>Visitors needed quick answers about exhibitors, stands, and event details across multiple event websites. The system had to collect that content, make it semantically searchable, generate grounded answers, and remain configurable for different events.</p>
+  </CaseSection>
+
+  <CaseSection label="Architecture" title="Connect ingestion, retrieval, chat, and analytics">
+    <div class="architecture" aria-label="XPO chatbot data flow">
+      <div class="flow-node"><small>Ingestion</small><strong>Python and Scrapy</strong><span>Collect and clean event-site content</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node"><small>Retrieval API</small><strong>.NET and Azure OpenAI</strong><span>Create embeddings and perform semantic search</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node"><small>Storage</small><strong>Cosmos DB</strong><span>Keep event documents, profiles, sessions, and analytics</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node"><small>Experience</small><strong>Chat widget and Next.js dashboard</strong><span>Serve visitors and expose operational insights</span></div>
+    </div>
+  </CaseSection>
+
+  <CaseSection label="Contribution" title="Build the path from source website to deployed answer">
+    <ul>
+      <li>Worked on the Python scraping and cleaning pipeline for several event websites.</li>
+      <li>Built and refined .NET endpoints for embeddings, semantic search, chat, authentication, registration, and analytics.</li>
+      <li>Integrated Azure OpenAI and Cosmos DB, including retry behavior for rate-limited bulk uploads.</li>
+      <li>Added event-specific prompts, multilingual stand-number handling, input sanitization, rate limiting, and configurable frontend behavior.</li>
+      <li>Contributed production deployment configuration, logging improvements, CORS configuration, and the analytics dashboard flow.</li>
+    </ul>
+    <div class="case-links"><a href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group">View repository ↗</a></div>
+  </CaseSection>
+
+  <CaseSection label="Result" title="One system, several event identities">
+    <p>The final application supported multiple event datasets and bot configurations through the same retrieval service. Event content could be scraped, embedded, queried through the chatbot, and followed through registration and analytics data without maintaining a separate backend for every event.</p>
+  </CaseSection>
+</CaseStudyLayout>

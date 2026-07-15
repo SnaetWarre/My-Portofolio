@@ -1,0 +1,46 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="Dataset Query System | Warre Snaet"
+  description="Case study of a Python client-server dataset analysis application with PySide6 and PostgreSQL."
+  kicker="Individual academic project · 2025"
+  heading="Dataset query system"
+  lead="A socket-based analysis application where authenticated clients query a server-owned dataset through a desktop interface."
+  meta={[
+    { label: "My role", value: "Designed and implemented the complete application" },
+    { label: "Stack", value: "Python, TCP sockets, PySide6, PostgreSQL, pandas, matplotlib" },
+    { label: "Data", value: "Los Angeles arrest dataset" },
+  ]}
+>
+  <CaseSection label="Problem" title="Query shared data without distributing the dataset">
+    <p>The server owns the dataset and analysis logic while clients request specific statistics and visualizations. The application therefore needed a clear network protocol, concurrent client handling, authentication, moderation, and responsive desktop interfaces on both sides.</p>
+  </CaseSection>
+
+  <CaseSection label="Architecture" title="Separate interface, protocol, and processing">
+    <div class="architecture" aria-label="Dataset query client-server architecture">
+      <div class="flow-node"><small>Client</small><strong>PySide6 desktop application</strong><span>Authentication, parameterized queries, results, messages, and history</span></div>
+      <div class="flow-arrow">↕ TCP</div>
+      <div class="flow-node"><small>Server</small><strong>Threaded client handlers</strong><span>One handler per connection with structured request routing</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node"><small>Data layer</small><strong>PostgreSQL and pandas</strong><span>Users, query history, dataset analysis, and generated plots</span></div>
+    </div>
+  </CaseSection>
+
+  <CaseSection label="Delivered" title="Support users and moderators in one system">
+    <ul>
+      <li>Implemented registration and login, stored user data, and role-aware moderator capabilities.</li>
+      <li>Built parameterized dataset queries and returned both structured results and generated visualizations.</li>
+      <li>Added query history, popularity statistics, connection monitoring, realtime logs, and server broadcasts.</li>
+      <li>Used worker threads and Qt signals to keep networking and large query results from blocking the interface.</li>
+      <li>Migrated persistence from SQLite to PostgreSQL and added pooling, timeout handling, and memory controls.</li>
+    </ul>
+    <div class="case-links"><a href="https://github.com/SnaetWarre/Server-Client-Python">View repository ↗</a></div>
+  </CaseSection>
+
+  <CaseSection label="Lesson" title="Concurrency is part of interface design">
+    <p>The most important engineering constraint was not the individual query logic but keeping network traffic, analysis work, and GUI updates separated. A correct result still produces a poor application if receiving data or generating a plot freezes the interface.</p>
+  </CaseSection>
+</CaseStudyLayout>

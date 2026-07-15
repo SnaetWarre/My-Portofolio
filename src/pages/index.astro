@@ -9,7 +9,10 @@ const year = new Date().getFullYear();
 const experience = [
   {
     title: "AI & software engineering intern, 2Ai IPCA",
+    href: `${base}work/medical-imaging.html`,
     description: "International internship using real clinical imaging data. I built a Python DICOM/OCR pipeline, validation and review tools, resumable batch processing, ECG extraction, and a source-video matcher. Metadata-guided alignment reduced one representative run from about 21 hours to 23 minutes.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/medical-imaging.html`,
   },
   {
     title: "Software engineer, Apolloon 24-hour run system",
@@ -44,21 +47,27 @@ const selectedWork = [
   },
   {
     title: "Event chatbot for XPO Group",
-    href: "https://github.com/SnaetWarre/Industry-Project-Xpo-Group",
+    href: `${base}work/xpo-chatbot.html`,
     description: "Academic team project for an external client: a full-stack RAG system using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/xpo-chatbot.html`,
   },
   {
     title: "Dataset query system",
-    href: "https://github.com/SnaetWarre/Server-Client-Python",
+    href: `${base}work/dataset-query.html`,
     description: "A Python client-server analysis application with authentication, moderation, statistics, broadcasts, and a PySide6 interface.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/dataset-query.html`,
   },
 ];
 
 const openSource = [
   {
     title: "Athas code editor · Maintainer & contributor",
-    href: "https://github.com/athasdev/athas",
+    href: `${base}work/athas.html`,
     description: "I contribute across its React/TypeScript and Tauri/Rust codebase. Merged work includes C# language support, image diffing, Linux UI improvements, dynamic proxy ports, resource- and memory-leak fixes, and an LSP race-condition fix.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/athas.html`,
   },
 ];
 

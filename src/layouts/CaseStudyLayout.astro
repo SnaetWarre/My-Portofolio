@@ -8,11 +8,6 @@ interface MetaItem {
   value: string;
 }
 
-interface LinkItem {
-  label: string;
-  href: string;
-}
-
 interface Props {
   title: string;
   description: string;
@@ -20,10 +15,9 @@ interface Props {
   heading: string;
   lead: string;
   meta: MetaItem[];
-  links: LinkItem[];
 }
 
-const { title, description, kicker, heading, lead, meta, links } = Astro.props;
+const { title, description, kicker, heading, lead, meta } = Astro.props;
 const base = basePath;
 ---
 
@@ -32,9 +26,7 @@ const base = basePath;
   <main class="case-study" id="case-content">
     <nav class="case-nav" aria-label="Case study navigation">
       <a href={base}>← Warre Snaet</a>
-      <div>
-        {links.map((link) => <a href={`${base}${link.href}`}>{link.label}</a>)}
-      </div>
+      <a href={`${base}#work-title`}>Selected work</a>
     </nav>
 
     <header class="case-header">

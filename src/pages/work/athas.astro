@@ -1,0 +1,46 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="Athas Open-Source Contributions | Warre Snaet"
+  description="Case study of Warre Snaet's maintained and merged contributions to the Athas code editor."
+  kicker="Open-source maintainer and contributor · 2025–2026"
+  heading="Athas code editor"
+  lead="Maintained contributions across a React and TypeScript interface, a Tauri and Rust desktop core, remote tooling, and language-server integration."
+  meta={[
+    { label: "My role", value: "Maintainer and contributor" },
+    { label: "Stack", value: "Rust, Tauri, React, TypeScript, LSP, SSH" },
+    { label: "Project", value: "Open-source code editor" },
+  ]}
+>
+  <CaseSection label="Scope" title="Work across product features and runtime reliability">
+    <p>My contributions were not limited to a single isolated feature. I worked across language support, editor interface behavior, remote connections, resource cleanup, and language-server lifecycle issues in a cross-platform desktop application.</p>
+  </CaseSection>
+
+  <CaseSection label="Merged work" title="Features, fixes, and maintenance">
+    <ul>
+      <li>Added C# language support and image diff functionality.</li>
+      <li>Improved Linux menu-bar behavior and cross-platform interface consistency.</li>
+      <li>Replaced a hard-coded proxy port with dynamic port selection.</li>
+      <li>Closed SSH and SFTP resource leaks and fixed memory leaks in React components.</li>
+      <li>Fixed a race condition that could start duplicate language servers.</li>
+      <li>Contributed supporting formatting, TypeScript, pre-commit, and CI corrections.</li>
+    </ul>
+    <div class="case-links"><a href="https://github.com/athasdev/athas">View Athas on GitHub ↗</a></div>
+  </CaseSection>
+
+  <CaseSection label="Engineering" title="Small fixes can protect the whole editor session">
+    <ul class="production-list">
+      <li><strong>Lifecycle correctness</strong>The LSP fix prevents duplicate processes and competing editor state.</li>
+      <li><strong>Resource ownership</strong>SSH and SFTP handles are closed explicitly instead of leaking across remote sessions.</li>
+      <li><strong>Cross-platform behavior</strong>Linux-specific interface work remains consistent with the broader desktop experience.</li>
+      <li><strong>Repository hygiene</strong>Formatting, type checks, hooks, and CI fixes keep contributions mergeable for other maintainers.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Open source" title="Contribute within an existing product direction">
+    <p>Working in a maintained project means fitting changes into an existing architecture, responding to review and CI feedback, and accepting that not every proposed feature belongs in the product. The merged work is the useful record: concrete improvements that became part of the shared codebase.</p>
+  </CaseSection>
+</CaseStudyLayout>

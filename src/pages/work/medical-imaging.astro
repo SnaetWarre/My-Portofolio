@@ -1,0 +1,44 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="Medical Imaging Pipeline | Warre Snaet"
+  description="Case study of a clinical imaging pipeline built during an international internship at 2Ai IPCA."
+  kicker="International internship · Feb–Jun 2026"
+  heading="Medical imaging pipeline"
+  lead="A Python pipeline that turns measurements embedded in echocardiographic studies into structured, reviewable research data."
+  meta={[
+    { label: "My role", value: "AI & software engineering intern" },
+    { label: "Stack", value: "Python, DICOM, OpenCV, OCR, image processing" },
+    { label: "Context", value: "2Ai IPCA · Barcelos, Portugal" },
+  ]}
+>
+  <CaseSection label="Problem" title="Recover structure from clinical images">
+    <p>Measurements needed for research were burned into echocardiographic images instead of being available as clean fields. Processing them manually was slow, difficult to repeat, and hard to audit across large study batches.</p>
+  </CaseSection>
+
+  <CaseSection label="Pipeline" title="Detection, extraction, and review">
+    <ul>
+      <li>Read echocardiographic DICOM studies and detected the regions containing burned-in measurements.</li>
+      <li>Combined OCR and image processing to extract values and export normalized JSON.</li>
+      <li>Built resumable batch processing so long runs could continue safely after interruption.</li>
+      <li>Added validation queues and review tools so uncertain output remained visible to a human reviewer.</li>
+      <li>Extracted ECG traces for downstream analysis.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Optimization" title="Use metadata before expensive visual matching">
+    <p>I developed a source-video matcher using DICOM metadata and OpenCV ECC alignment. Metadata narrowed the candidate set before image alignment, reducing one representative run from roughly 21 hours to 23 minutes.</p>
+  </CaseSection>
+
+  <CaseSection label="Engineering" title="Make research processing dependable">
+    <ul class="production-list">
+      <li><strong>Resumable work</strong>Intermediate state prevents an interrupted batch from restarting at zero.</li>
+      <li><strong>Human validation</strong>Review queues separate uncertain extraction from accepted output.</li>
+      <li><strong>Traceable output</strong>Structured exports retain the connection between source studies and extracted values.</li>
+      <li><strong>Practical handoff</strong>Cross-platform documentation makes the pipeline reproducible beyond my own workstation.</li>
+    </ul>
+  </CaseSection>
+</CaseStudyLayout>
