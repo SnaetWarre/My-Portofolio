@@ -4,13 +4,18 @@ from weasyprint import HTML
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "cv.html"
-OUTPUT = ROOT / "CV_Warre_Snaet.pdf"
+CVS = (
+    ("cv.html", "CV_Warre_Snaet.pdf"),
+    ("cv-variants/csharp/cv.html", "cv-variants/csharp/CV_Warre_Snaet_CSharp.pdf"),
+)
 
 
 def main() -> None:
-    HTML(filename=str(SOURCE), base_url=str(ROOT)).write_pdf(str(OUTPUT))
-    print(f"Wrote {OUTPUT}")
+    for source_name, output_name in CVS:
+        source = ROOT / source_name
+        output = ROOT / output_name
+        HTML(filename=str(source), base_url=str(source.parent)).write_pdf(str(output))
+        print(f"Wrote {output}")
 
 
 if __name__ == "__main__":

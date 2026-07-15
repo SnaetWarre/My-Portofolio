@@ -29,8 +29,19 @@ The editable CV is [`cv.html`](cv.html). Its print stylesheet keeps the browser 
 ```bash
 python -m venv .cv-venv
 .cv-venv/bin/python -m pip install -r requirements-cv.txt
-npm run build:cv
-npm run build
+.cv-venv/bin/python scripts/build_cv.py
+bash scripts/build_site.sh
 ```
 
-The first command only needs to be run once. `npm run build:cv` replaces `CV_Warre_Snaet.pdf`; the normal site build copies the web CV, stylesheet, and PDF into `dist/`.
+The first two commands only need to be run once. The CV script regenerates the
+public CV and the separate C# variant. The site script builds the dependency-free
+static website in `dist/`; only the public CV is included there.
+
+### Building the site
+
+The portfolio is plain HTML, CSS, and JavaScript and does not require Node.js or
+npm packages.
+
+```bash
+bash scripts/build_site.sh
+```
