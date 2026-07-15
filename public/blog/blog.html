@@ -82,7 +82,7 @@
                     "wordcount": "2500",
                     "url": "https://snaetwarre.github.io/My-Portofolio/blog/blog.html",
                     "datePublished": "2026-01-21",
-                    "dateModified": "2026-07-12",
+                    "dateModified": "2026-07-15",
                     "description": "Technical deep-dive into building an offline plant disease detection system in Rust using the Burn framework, with semi-supervised pseudo-labeling and multi-platform deployment via Tauri and ONNX."
                 },
                 {
@@ -213,16 +213,20 @@
                         data through semi-supervised learning, and deploy it
                         offline across desktop, browser, and mobile.
                     </p>
+                    <p>
+                        The implementation, experiment artifacts, and thesis
+                        documentation are available in the
+                        <a href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning" target="_blank">public repository</a>.
+                    </p>
 
                     <h2>The Problem</h2>
 
                     <p>
                         Plant disease detection for farmers in areas with
-                        limited or zero internet connectivity. The existing
-                        solutions require either sending physical samples to a
-                        lab (3-day turnaround) or cloud-based inference (which
-                        requires a stable connection). Neither works in a field
-                        in rural Portugal.
+                        limited or zero internet connectivity. Expert labeling
+                        and laboratory workflows can be costly and slow, while
+                        cloud inference requires a stable connection. Neither
+                        assumption is reliable in every field setting.
                     </p>
 
                     <p>The requirements:</p>
@@ -411,8 +415,9 @@ pub struct PlantClassifier&lt;B: Backend&gt; {
                     <p>
                         This 90% threshold is strict by design. Accepting
                         low-confidence predictions poisons the training set.
-                        In practice, this yields a pseudo-label precision above
-                        95%.
+                        The final evaluation did not independently recompute
+                        pseudo-label precision, so the threshold is treated as
+                        a pipeline control rather than a reported result.
                     </p>
 
                     <h3>Loss Function</h3>
@@ -506,10 +511,10 @@ pub struct PlantClassifier&lt;B: Backend&gt; {
                     <h3>Results</h3>
 
                     <p>
-                        Starting from 20% labeled data, the SSL pipeline
-                        reaches accuracy comparable to training with 60%
-                        labeled data. The pseudo-labels effectively triple the
-                        usable training set.
+                        Starting from 20% labeled data, the saved SSL checkpoint
+                        substantially outperformed the saved supervised
+                        baseline on the same held-out test split of 8,786
+                        images.
                     </p>
 
                     <table>
@@ -522,28 +527,30 @@ pub struct PlantClassifier&lt;B: Backend&gt; {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Validation Accuracy</td>
-                                <td>~70-75%</td>
-                                <td><strong>~78-85%</strong></td>
+                                <td>Held-out top-1 accuracy</td>
+                                <td>86.06%</td>
+                                <td><strong>94.90%</strong></td>
                             </tr>
                             <tr>
-                                <td>Pseudo-label Precision</td>
-                                <td>n/a</td>
-                                <td><strong>&gt;95%</strong></td>
+                                <td>Held-out macro F1</td>
+                                <td>86.08%</td>
+                                <td><strong>94.74%</strong></td>
                             </tr>
                             <tr>
-                                <td>Effective Data Utilization</td>
-                                <td>20%</td>
-                                <td><strong>~80%</strong></td>
+                                <td>Held-out test images</td>
+                                <td>8,786</td>
+                                <td><strong>8,786</strong></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <p>
-                        The precision above 95% validates the strict confidence
-                        threshold. A lower $\tau$ would accept more
-                        pseudo-labels but introduce noise that degrades the
-                        model over successive retraining rounds.
+                        This is an improvement of 8.84 percentage points in
+                        accuracy and 8.66 points in macro F1. The figures come
+                        from one saved split and one random seed. PlantVillage
+                        contains relatively uniform, lab-like images, so these
+                        results should not be treated as guaranteed field
+                        performance.
                     </p>
 
                     <hr />

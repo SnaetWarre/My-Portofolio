@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f1eb"/>
+  <rect x="64" y="64" width="1072" height="502" fill="none" stroke="#2d2a26" stroke-width="2"/>
+  <text x="112" y="265" fill="#26231f" font-family="Georgia, serif" font-size="76" font-weight="700">Warre Snaet</text>
+  <text x="112" y="345" fill="#5f5a52" font-family="Arial, sans-serif" font-size="38">Backend &amp; Applied AI Engineer</text>
+  <text x="112" y="450" fill="#5f5a52" font-family="Arial, sans-serif" font-size="25">Python · Agent infrastructure · MLOps · Edge AI</text>
+</svg>

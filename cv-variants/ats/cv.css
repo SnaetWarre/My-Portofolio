@@ -1,0 +1,72 @@
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #111;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.32;
+}
+
+main {
+  max-width: 178mm;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid #222;
+  padding-bottom: 5pt;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22pt;
+}
+
+.role {
+  margin: 1pt 0 4pt;
+  font-size: 12pt;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 10pt 0 4pt;
+  border-bottom: 1px solid #777;
+  padding-bottom: 1pt;
+  font-size: 12pt;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 5pt 0 1pt;
+  font-size: 10pt;
+}
+
+p {
+  margin: 2pt 0;
+}
+
+.date {
+  font-style: italic;
+}
+
+ul {
+  margin: 2pt 0 5pt;
+  padding-left: 16pt;
+}
+
+li {
+  margin: 1pt 0;
+}
+
+article {
+  break-inside: avoid;
+}

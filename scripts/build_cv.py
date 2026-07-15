@@ -6,6 +6,7 @@ from weasyprint import HTML
 ROOT = Path(__file__).resolve().parents[1]
 CVS = (
     ("cv.html", "CV_Warre_Snaet.pdf"),
+    ("cv-variants/ats/cv.html", "CV_Warre_Snaet_ATS.pdf"),
     ("cv-variants/csharp/cv.html", "cv-variants/csharp/CV_Warre_Snaet_CSharp.pdf"),
 )
 

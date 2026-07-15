@@ -12,6 +12,7 @@ const { title, description } = Astro.props;
 const base = basePath;
 const canonicalPath = Astro.url.pathname.replace(/index\.html$/, "");
 const canonical = new URL(canonicalPath, Astro.site);
+const socialImage = new URL(`${base}social-card.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -28,6 +29,12 @@ const canonical = new URL(canonicalPath, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Warre Snaet, Backend and Applied AI Engineer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="alternate icon" href={`${base}favicon.ico`} />
     <slot name="head" />
