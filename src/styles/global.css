@@ -98,6 +98,10 @@ li {
   inset: 0;
 }
 
+.project-row > a:first-child {
+  font-weight: 700;
+}
+
 .project-row .project-secondary-link {
   position: relative;
   z-index: 1;

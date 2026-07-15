@@ -1,0 +1,73 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="Apolloon Race Operations | Warre Snaet"
+  description="Case study of a local-first, fault-tolerant race operations platform built by Warre Snaet for Apolloon."
+  kicker="Paid client project · 2026"
+  heading="Apolloon race operations"
+  lead="A local-first platform for running a 24-hour relay when the network, internet connection, or a host laptop cannot be assumed to stay available."
+  meta={[
+    { label: "Role", value: "Software engineer · end-to-end implementation" },
+    { label: "Stack", value: "React, TypeScript, Express, tRPC, Socket.IO, SQLite, Electron" },
+    { label: "Context", value: "Real client · event operations" },
+  ]}
+  links={[
+    { label: "Financial agent", href: "work/financial-agent.html" },
+    { label: "Azure MLOps", href: "work/azure-mlops.html" },
+  ]}
+>
+  <CaseSection label="Problem" title="Reliability without cloud assumptions">
+    <p>Operators need to register runners, manage waiting order, record laps, correct mistakes, publish live displays, and export results throughout a 24-hour event. A cloud-only design would turn internet loss into an operational failure.</p>
+    <p>The system therefore treats the local wired network as the primary environment. Event laptops discover the application automatically, while operator and display browsers connect over the LAN.</p>
+    <ul class="case-facts">
+      <li><strong>Local-first</strong>No internet dependency during the event.</li>
+      <li><strong>Realtime</strong>Operator actions patch connected displays immediately.</li>
+      <li><strong>Recoverable</strong>Multiple hosts retain complete SQLite copies.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Architecture" title="One operational surface, three runtime layers">
+    <div class="architecture" role="img" aria-label="Apolloon architecture from browsers through the local server to replicated hosts">
+      <div class="flow-row">
+        <div class="flow-node"><small>Clients</small><strong>Operator screens</strong><span>Race control, imports, corrections and exports</span></div>
+        <div class="flow-node"><small>Clients</small><strong>Live displays</strong><span>Rankings, active runner and public race state</span></div>
+        <div class="flow-node"><small>Client state</small><strong>React Query</strong><span>Snapshot cache patched by realtime events</span></div>
+      </div>
+      <p class="flow-arrow">↓ tRPC + HTTP + Socket.IO ↓</p>
+      <div class="flow-row">
+        <div class="flow-node"><small>Server</small><strong>Express + tRPC</strong><span>Validated commands and export endpoints</span></div>
+        <div class="flow-node"><small>State</small><strong>SQLite primary</strong><span>Race invariants and transactional writes</span></div>
+        <div class="flow-node"><small>Desktop</small><strong>Electron package</strong><span>Starts and serves the complete local application</span></div>
+      </div>
+      <p class="flow-arrow">↓ discovery + replication + voting ↓</p>
+      <div class="flow-row">
+        <div class="flow-node"><small>Host A</small><strong>Writable primary</strong><span>Current authoritative database</span></div>
+        <div class="flow-node"><small>Host B</small><strong>Hot standby</strong><span>Full local replica and forwarded writes</span></div>
+        <div class="flow-node"><small>Host C</small><strong>Voting standby</strong><span>Enables safe promotion without split-brain</span></div>
+      </div>
+    </div>
+  </CaseSection>
+
+  <CaseSection label="Ownership" title="What I designed and implemented">
+    <ul>
+      <li>The typed browser/server boundary, SQLite state transitions, realtime cache bridge, and operator workflows.</li>
+      <li>CSV imports, structured exports, live public displays, LAN host discovery, and desktop packaging.</li>
+      <li>Replicated hot-standby behavior with a three-host voting rule to prevent unsafe promotion after a network split.</li>
+      <li>Regression and end-to-end tests around race completion, waiting order, runner status, historical labels, and realtime behavior.</li>
+    </ul>
+    <h3>Key engineering decision</h3>
+    <p>With only two hosts, neither side of a network split can prove it has the authoritative copy. Automatic failover is therefore deliberately limited to three voting hosts. Refusing an unsafe promotion is better than accepting two diverging primaries.</p>
+  </CaseSection>
+
+  <CaseSection label="Engineering" title="Operational constraints shaped the product">
+    <ul class="production-list">
+      <li><strong>Failure containment</strong>Each host keeps a full local copy, so a single laptop is not the only place where race state exists.</li>
+      <li><strong>Visible authority</strong>The primary/standby model creates one explicit writer instead of relying on optimistic multi-writer conflict resolution.</li>
+      <li><strong>Operator safety</strong>Race-state transitions live behind validated server procedures and regression tests rather than UI assumptions.</li>
+      <li><strong>Portable delivery</strong>Electron packages the server and frontend into an event-ready desktop application with no cloud setup.</li>
+    </ul>
+  </CaseSection>
+</CaseStudyLayout>

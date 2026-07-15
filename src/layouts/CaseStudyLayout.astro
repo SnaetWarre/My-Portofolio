@@ -1,0 +1,55 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import "../styles/case-study.css";
+import { basePath } from "../lib/paths";
+
+interface MetaItem {
+  label: string;
+  value: string;
+}
+
+interface LinkItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  kicker: string;
+  heading: string;
+  lead: string;
+  meta: MetaItem[];
+  links: LinkItem[];
+}
+
+const { title, description, kicker, heading, lead, meta, links } = Astro.props;
+const base = basePath;
+---
+
+<BaseLayout {title} {description}>
+  <a class="skip-link" href="#case-content">Skip to case study</a>
+  <main class="case-study" id="case-content">
+    <nav class="case-nav" aria-label="Case study navigation">
+      <a href={base}>← Warre Snaet</a>
+      <div>
+        {links.map((link) => <a href={`${base}${link.href}`}>{link.label}</a>)}
+      </div>
+    </nav>
+
+    <header class="case-header">
+      <div>
+        <p class="case-kicker">{kicker}</p>
+        <h1>{heading}</h1>
+        <p class="case-lead">{lead}</p>
+      </div>
+      <dl class="case-meta">
+        {meta.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+      </dl>
+    </header>
+
+    <slot />
+
+    <footer class="case-footer"><a href={`${base}#work-title`}>← Back to selected work</a></footer>
+  </main>
+</BaseLayout>

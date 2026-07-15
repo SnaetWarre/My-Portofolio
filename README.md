@@ -29,19 +29,22 @@ The editable CV is [`cv.html`](cv.html). Its print stylesheet keeps the browser 
 ```bash
 python -m venv .cv-venv
 .cv-venv/bin/python -m pip install -r requirements-cv.txt
-.cv-venv/bin/python scripts/build_cv.py
-bash scripts/build_site.sh
+npm run build:cv
+npm run build
 ```
 
 The first two commands only need to be run once. The CV script regenerates the
-public CV and the separate C# variant. The site script builds the dependency-free
-static website in `dist/`; only the public CV is included there.
+public CV and the separate C# variant. The Astro build copies only the public CV
+into `dist/`.
 
 ### Building the site
 
-The portfolio is plain HTML, CSS, and JavaScript and does not require Node.js or
-npm packages.
+The portfolio uses Astro layouts and components but builds to static HTML and CSS.
+No client framework is shipped to visitors.
 
 ```bash
-bash scripts/build_site.sh
+npm install
+npm run dev
+npm run check
+npm run build
 ```

@@ -1,0 +1,64 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+import { basePath } from "../../lib/paths";
+
+const base = basePath;
+---
+
+<CaseStudyLayout
+  title="Financial AI Agent | Warre Snaet"
+  description="Architecture and engineering case study of a financial AI agent built with FastAPI, MCP, RAG, PostgreSQL, React and Ollama."
+  kicker="Two-person academic project · 2026"
+  heading="Financial AI agent"
+  lead="A conversational portfolio application built as a real service architecture: streamed inference, retrieval, standardized tool execution, persistent sessions, and explicit trade confirmation."
+  meta={[
+    { label: "My role", value: "Implemented nearly all technical work end to end" },
+    { label: "Stack", value: "Python, FastAPI, MCP, React, PostgreSQL, ChromaDB, Ollama, Docker" },
+    { label: "Scope", value: "Proof of concept using projected historical market data" },
+  ]}
+  links={[
+    { label: "Apolloon", href: "work/apolloon.html" },
+    { label: "Azure MLOps", href: "work/azure-mlops.html" },
+  ]}
+>
+  <CaseSection label="Problem" title="Turn a chatbot into an inspectable application">
+    <p>The goal was not merely to generate financial text. The agent needed to retrieve relevant knowledge, distinguish advice from an instruction, call portfolio tools, persist state, stream progress, and require confirmation before changing a simulated portfolio.</p>
+    <ul class="case-facts">
+      <li><strong>6 services</strong>Containerized with health checks and persistent volumes.</li>
+      <li><strong>7 MCP tools</strong>Portfolio, market-data and order operations behind a protocol boundary.</li>
+      <li><strong>2-step trades</strong>Commands become pending actions before explicit confirmation.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Architecture" title="Separate reasoning, retrieval, and actions">
+    <p>The FastAPI orchestrator routes each request between general chat, RAG retrieval, and trade handling. MCP keeps executable tools separate from model inference; PostgreSQL owns portfolio and session state; ChromaDB stores retrievable knowledge; Ollama provides local generation and embeddings.</p>
+    <figure class="case-figure">
+      <img src={`${base}images/financial-agent-architecture.png`} alt="Architecture diagram connecting a React frontend to FastAPI inference, MCP and PostgreSQL, RAG and ChromaDB, and local Ollama models" />
+      <figcaption>Responses and processing events stream to the React client using server-sent events.</figcaption>
+    </figure>
+  </CaseSection>
+
+  <CaseSection label="Ownership" title="Nearly all engineering, end to end">
+    <p>This was submitted as a two-person course project. I implemented nearly all of the technical work across the repository, from persistence and tool execution to orchestration, tests, containers, and the user interface.</p>
+    <ul>
+      <li>Built and refined the FastAPI chat orchestrator, trade-intent flow, guardrails, error handling, and server-sent event protocol.</li>
+      <li>Migrated portfolio state from JSON to PostgreSQL and moved tool execution to FastMCP.</li>
+      <li>Integrated RAG queries, citations, MCP tool-call visibility, persistent sessions, and the React processing-step UI.</li>
+      <li>Containerized the frontend, inference API, MCP server, RAG pipeline, PostgreSQL, and Ollama with Docker Compose.</li>
+      <li>Added focused tests for guardrails, RAG price lookup, trade execution, persistence, and confirmation behavior.</li>
+    </ul>
+    <div class="case-links"><a href="https://github.com/SnaetWarre/Financial_AI_Agent">View repository ↗</a></div>
+  </CaseSection>
+
+  <CaseSection label="Engineering" title="Safety and transparency were part of the architecture">
+    <ul class="production-list">
+      <li><strong>Explicit confirmation</strong>Detected trade commands become pending actions; the agent cannot silently mutate the simulated portfolio.</li>
+      <li><strong>Protocol boundary</strong>MCP tools expose typed operations instead of giving the model direct database access.</li>
+      <li><strong>Traceable processing</strong>The interface shows RAG queries, tool calls, citations, and streaming progress instead of hiding the agent loop.</li>
+      <li><strong>Persistent state</strong>PostgreSQL stores portfolios and sessions; container health checks and volumes make the multi-service system reproducible.</li>
+      <li><strong>Input controls</strong>Guardrails and focused tests cover prompt injection patterns, financial intent, price lookup, and confirmation flow.</li>
+      <li><strong>Honest scope</strong>Projected historical prices make this a controlled proof of concept, not a claim of live financial advice or real trading.</li>
+    </ul>
+  </CaseSection>
+</CaseStudyLayout>

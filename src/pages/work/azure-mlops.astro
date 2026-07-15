@@ -1,0 +1,60 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="Azure ML Lifecycle | Warre Snaet"
+  description="An end-to-end Azure ML and MLOps coursework project covering cloud training, model registry, inference and CI/CD."
+  kicker="Individual MLOps coursework · 2026"
+  heading="Azure ML lifecycle"
+  lead="A reproducible machine-learning workflow from cloud data preparation and training to versioned models, containerized inference, deployment manifests, and automated verification."
+  meta={[
+    { label: "Role", value: "Individual implementation" },
+    { label: "Stack", value: "Azure ML, MLflow, Python, FastAPI, Docker, Kubernetes, GitHub Actions" },
+    { label: "Model", value: "15-class sports-ball image classifier" },
+  ]}
+  links={[
+    { label: "Apolloon", href: "work/apolloon.html" },
+    { label: "Financial agent", href: "work/financial-agent.html" },
+  ]}
+>
+  <CaseSection label="Lifecycle" title="More than model training">
+    <p>The coursework treated the model as one part of a larger system. Azure resources, data assets, environments, pipeline components, model versions, inference services, and deployment checks were represented explicitly.</p>
+    <div class="architecture" role="img" aria-label="Azure MLOps lifecycle from data assets to deployment verification">
+      <div class="flow-row">
+        <div class="flow-node"><small>Stage 1</small><strong>Azure data assets</strong><span>Fifteen classes prepared in parallel</span></div>
+        <div class="flow-node"><small>Stage 2</small><strong>Data split</strong><span>Combined, balanced 80/20 train-test split</span></div>
+        <div class="flow-node"><small>Stage 3</small><strong>Cloud training</strong><span>Versioned Azure ML environment and compute cluster</span></div>
+      </div>
+      <p class="flow-arrow">↓ metrics + artifacts ↓</p>
+      <div class="flow-row">
+        <div class="flow-node"><small>Stage 4</small><strong>Model registry</strong><span>Versioned model and associated metadata</span></div>
+        <div class="flow-node"><small>Serving</small><strong>FastAPI inference</strong><span>Predictions, health endpoint and PostgreSQL history</span></div>
+        <div class="flow-node"><small>Delivery</small><strong>CI/CD workflow</strong><span>Build, deploy, health check and notification</span></div>
+      </div>
+    </div>
+  </CaseSection>
+
+  <CaseSection label="Implementation" title="Concrete cloud and platform work">
+    <ul>
+      <li>Provisioned an Azure ML workspace and compute cluster and defined reusable command components and environments.</li>
+      <li>Built a four-stage Azure ML pipeline: parallel preprocessing, splitting, CNN training, and model registration.</li>
+      <li>Used MLflow-compatible tracking and versioned model artifacts rather than treating a local file as the deployment boundary.</li>
+      <li>Built a FastAPI inference service and Streamlit Grad-CAM dashboard backed by PostgreSQL prediction history.</li>
+      <li>Containerized the system with Docker Compose and authored Kubernetes deployments, services, persistent volumes, secrets, resource limits, and health probes.</li>
+      <li>Automated setup, training, model download, local deployment, health verification, cleanup, and Discord status notifications with GitHub Actions.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Engineering" title="A reproducible path from data to a running service">
+    <ul class="production-list">
+      <li><strong>Versioned boundaries</strong>Data assets, environments, components, models, and container tags are identifiable and reproducible.</li>
+      <li><strong>Cloud execution</strong>Preprocessing and model training run on created Azure ML resources rather than only on a local workstation.</li>
+      <li><strong>Deployment checks</strong>The workflow verifies service health and a test prediction and reports pipeline status to Discord.</li>
+      <li><strong>Explainability</strong>The Streamlit dashboard uses Grad-CAM to show which image regions influenced a prediction.</li>
+      <li><strong>Operational manifests</strong>Kubernetes definitions include probes, resource limits, persistence, secrets, and multiple API replicas.</li>
+      <li><strong>Precise scope</strong>Azure ML training and registration were executed in the cloud; Kubernetes was delivered as deployment manifests, not presented as a live production cluster.</li>
+    </ul>
+  </CaseSection>
+</CaseStudyLayout>

@@ -1,0 +1,27 @@
+---
+interface Project {
+  title: string;
+  href?: string;
+  description: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<ul class="work-list">
+  {projects.map((project) => (
+    <li class:list={["project-row", { "project-row--static": !project.href }]}>
+      {project.href ? <a href={project.href}>{project.title}</a> : <strong>{project.title}</strong>}
+      <span>
+        : {project.description}
+        {project.secondaryHref && <> <a class="project-secondary-link" href={project.secondaryHref}>{project.secondaryLabel}</a>.</>}
+      </span>
+    </li>
+  ))}
+</ul>
