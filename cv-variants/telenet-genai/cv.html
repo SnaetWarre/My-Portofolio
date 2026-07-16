@@ -16,19 +16,29 @@
 
       <section>
         <h2>Professional Summary</h2>
-        <p>AI Engineering graduate with distinction and hands-on experience building cloud ML workflows, agent infrastructure, retrieval pipelines, and containerized Python services. Built systems with Azure ML, FastAPI, MCP tool calling, RAG, vector search, PostgreSQL, Docker, Kubernetes manifests, MLflow, and GitHub Actions. My cloud experience is Azure-first; the platform engineering fundamentals are transferable to AWS, and I am motivated to deepen that stack in production.</p>
+        <p>AI Engineering graduate with distinction and hands-on project experience in AWS and Azure, infrastructure as code, agent infrastructure, retrieval pipelines, and containerized Python services. Built systems with Terraform, ECS Fargate, IAM, Vault, Azure ML, FastAPI, MCP tool calling, RAG, Docker, Kubernetes manifests, MLflow, and GitHub Actions. Looking to grow these cloud and GenAI platform skills in a production engineering team.</p>
       </section>
 
       <section>
         <h2>Relevant GenAI and Cloud Projects</h2>
+        <article>
+          <h3>AWS Fargate Infrastructure with Vault Workload Identity | Individual Project</h3>
+          <p>Terraform, AWS ECS Fargate, VPC, ALB, IAM, Vault, CloudWatch | 2026</p>
+          <ul>
+            <li>Designed reusable Terraform modules for a two-availability-zone VPC, public load balancer subnets, private Fargate tasks, routing, IAM roles, and application autoscaling.</li>
+            <li>Implemented Vault AWS authentication using the ECS task role, a least-privilege Vault policy, and an Agent sidecar that renders runtime content into an ephemeral shared volume without a static Vault token.</li>
+            <li>Added CloudWatch logging and Container Insights, container and ALB health checks, deployment circuit-breaker rollback, optional ACM TLS, and Fargate Spot capacity for cost awareness.</li>
+            <li>Created a non-deploying GitHub Actions quality gate and credential-free Terraform tests for AWS-only, Vault-enabled, and HTTPS plans. Locally verified with Terraform 1.15.8: three tests passed.</li>
+          </ul>
+        </article>
+
         <article>
           <h3>Financial AI Agent | Backend, Agent Infrastructure, and Delivery</h3>
           <p>github.com/SnaetWarre/Financial_AI_Agent | Two-person academic project | 2026</p>
           <ul>
             <li>Owned backend architecture, agent orchestration, MCP integration, PostgreSQL persistence, containerization, tests, and most frontend integration across a six-service application.</li>
             <li>Built a FastAPI orchestrator with streamed responses, retrieval through ChromaDB, local Ollama inference and embeddings, seven typed MCP tools, citations, and persistent sessions.</li>
-            <li>Implemented guardrails and a two-step confirmation flow so LLM-generated instructions cannot silently change the simulated portfolio.</li>
-            <li>Packaged the frontend, inference API, MCP server, RAG pipeline, PostgreSQL, and Ollama with Docker Compose, health checks, and persistent volumes.</li>
+            <li>Implemented guardrails and a two-step confirmation flow, then packaged the services with Docker Compose, health checks, and persistent volumes.</li>
           </ul>
         </article>
 
@@ -37,18 +47,8 @@
           <p>github.com/SnaetWarre/mlops-sports-ball-classification | 2026</p>
           <ul>
             <li>Provisioned Azure ML workspace and compute resources and built reusable components for parallel preprocessing, data splitting, cloud training, and model registration.</li>
-            <li>Tracked metrics and versioned artifacts with MLflow-compatible tooling and served the resulting model through FastAPI with PostgreSQL prediction history.</li>
             <li>Containerized the application with Docker Compose and authored Kubernetes manifests with secrets, persistent volumes, resource limits, health probes, and multiple API replicas.</li>
             <li>Automated setup, training, model download, deployment, health verification, rollback-friendly image versioning, cleanup, and notifications with GitHub Actions.</li>
-          </ul>
-        </article>
-
-        <article>
-          <h3>Event Chatbot for XPO Group | Backend, Retrieval, and Integration</h3>
-          <p>github.com/SnaetWarre/Industry-Project-Xpo-Group | Academic team project for an external client | 2025</p>
-          <ul>
-            <li>Built and refined .NET endpoints for embeddings, semantic search, chat, authentication, registration, and analytics using Azure OpenAI and Cosmos DB.</li>
-            <li>Worked on Python ingestion for multiple event websites and added retry handling, input sanitization, rate limiting, event-specific prompts, logging, and deployment configuration.</li>
           </ul>
         </article>
       </section>
@@ -85,7 +85,7 @@
       <section>
         <h2>Technical Skills</h2>
         <p><strong>Agentic AI and retrieval:</strong> MCP, LLM tool calling, RAG, embeddings, vector search, ChromaDB, Ollama, guardrails, prompt design</p>
-        <p><strong>Cloud and platform:</strong> Azure ML, MLflow, Docker, Kubernetes, GitHub Actions, CI/CD, Linux, health checks, versioned artifacts</p>
+        <p><strong>Cloud and platform:</strong> AWS ECS Fargate, VPC, ALB, IAM, CloudWatch, Terraform, Vault, Azure ML, MLflow, Docker, Kubernetes, GitHub Actions, CI/CD, Linux</p>
         <p><strong>Backend and data:</strong> Python, FastAPI, PostgreSQL, SQL, REST APIs, server-sent events, testing, logging, C#/.NET</p>
         <p><strong>Additional:</strong> Azure OpenAI, Cosmos DB, React, TypeScript, Git, OpenCV, Rust</p>
       </section>
