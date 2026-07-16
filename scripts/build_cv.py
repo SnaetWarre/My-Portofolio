@@ -8,6 +8,10 @@ CVS = (
     ("cv.html", "CV_Warre_Snaet.pdf"),
     ("cv-variants/ats/cv.html", "CV_Warre_Snaet_ATS.pdf"),
     ("cv-variants/csharp/cv.html", "cv-variants/csharp/CV_Warre_Snaet_CSharp.pdf"),
+    (
+        "cv-variants/telenet-genai/cv.html",
+        "cv-variants/telenet-genai/CV_Warre_Snaet_Telenet_Cloud_Engineer_GenAI.pdf",
+    ),
 )
 
 

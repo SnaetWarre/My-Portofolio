@@ -1,0 +1,5 @@
+@import url("../ats/cv.css");
+
+.page-two {
+  break-before: page;
+}
