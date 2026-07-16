@@ -1,0 +1,83 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseSection from "../../components/CaseSection.astro";
+---
+
+<CaseStudyLayout
+  title="AWS Fargate and Vault Infrastructure | Warre Snaet"
+  description="Terraform case study for private AWS ECS Fargate workloads with ALB, IAM-based Vault authentication, CloudWatch, autoscaling, and tested deployment safeguards."
+  kicker="Individual cloud infrastructure project · 2026"
+  heading="AWS Fargate infrastructure with Vault workload identity"
+  lead="A production-minded Terraform design for running private Fargate workloads without embedding cloud credentials or Vault tokens in the task definition."
+  meta={[
+    { label: "Role", value: "Architecture, Terraform implementation, security model, tests, and documentation" },
+    { label: "Stack", value: "AWS, Terraform, ECS Fargate, VPC, ALB, IAM, Vault, CloudWatch" },
+    { label: "Scope", value: "Locally validated architecture; no live AWS environment claimed" },
+  ]}
+>
+  <CaseSection label="Problem" title="Give a private workload an identity, not a static secret">
+    <p>The design needed to expose a small service safely while keeping its containers private. Runtime content had to come from Vault without placing a long-lived Vault token or AWS access key in the task definition.</p>
+    <ul class="case-facts">
+      <li><strong>2 availability zones</strong>Public load-balancer subnets and private Fargate subnets.</li>
+      <li><strong>0 static tokens</strong>The ECS task role authenticates directly through Vault AWS auth.</li>
+      <li><strong>3 tested variants</strong>AWS-only, Vault-enabled, and ACM-backed HTTPS plans.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Architecture" title="Public routing, private execution">
+    <div class="architecture" role="img" aria-label="AWS architecture with internet traffic entering an Application Load Balancer, private Fargate tasks, IAM workload identity, Vault, and CloudWatch">
+      <div class="flow-row">
+        <div class="flow-node"><small>Ingress</small><strong>Application Load Balancer</strong><span>Public HTTP or ACM TLS across two availability zones</span></div>
+        <div class="flow-node"><small>Network</small><strong>Public subnets</strong><span>Internet gateway, ALB, and one cost-conscious NAT gateway</span></div>
+        <div class="flow-node"><small>Boundary</small><strong>Security groups</strong><span>Port 8080 reaches tasks only from the ALB</span></div>
+      </div>
+      <p class="flow-arrow">↓ private routing, no public task IPs ↓</p>
+      <div class="flow-row">
+        <div class="flow-node"><small>Compute</small><strong>ECS Fargate service</strong><span>Application and Vault Agent containers with read-only roots</span></div>
+        <div class="flow-node"><small>Identity</small><strong>IAM task role</strong><span>Rotating workload credentials used for signed Vault authentication</span></div>
+        <div class="flow-node"><small>Runtime data</small><strong>Ephemeral volume</strong><span>Vault Agent renders the permitted KV path for the application</span></div>
+      </div>
+      <p class="flow-arrow">↓ operations and external secret service ↓</p>
+      <div class="flow-row">
+        <div class="flow-node"><small>Secrets</small><strong>Vault AWS auth</strong><span>Exact role binding, short token lifetime, and narrow read policy</span></div>
+        <div class="flow-node"><small>Observability</small><strong>CloudWatch</strong><span>Container logs, 30-day retention, and Container Insights</span></div>
+        <div class="flow-node"><small>Reliability</small><strong>Health and scaling</strong><span>ALB checks, container checks, rollback, and CPU autoscaling</span></div>
+      </div>
+    </div>
+  </CaseSection>
+
+  <CaseSection label="Runtime flow" title="Authenticate and render before accepting traffic">
+    <ol>
+      <li>ECS supplies rotating task-role credentials to the Vault Agent sidecar.</li>
+      <li>The agent signs an AWS IAM request and authenticates to a Vault role bound to that exact task-role ARN.</li>
+      <li>A least-privilege policy permits reads only from the required KV v2 path.</li>
+      <li>The agent renders the returned content into a task-scoped ephemeral volume.</li>
+      <li>The application becomes healthy after the file exists; the ALB then begins routing requests.</li>
+    </ol>
+    <p>The application container never needs a Vault token, AWS access key, or direct permission to retrieve broader secrets.</p>
+  </CaseSection>
+
+  <CaseSection label="Delivery" title="A quality gate that cannot deploy by accident">
+    <p>GitHub Actions runs Terraform formatting, initialization without a backend, configuration validation, and credential-free plan tests with mocked AWS and Vault providers. The workflow deliberately has read-only repository permissions and no cloud credentials.</p>
+    <ul>
+      <li>The Makefile creates a saved Terraform plan but never applies during planning.</li>
+      <li>Applying requires both an existing reviewed plan and an explicit <code>ALLOW_APPLY=yes</code> gate.</li>
+      <li>The service uses a deployment circuit breaker with automatic rollback.</li>
+      <li>Optional ACM configuration redirects HTTP to HTTPS using a modern TLS policy.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Engineering" title="Reliability, security, and cost are design inputs">
+    <ul class="production-list">
+      <li><strong>Network isolation</strong>Only the load balancer is public; tasks run privately without public IP addresses.</li>
+      <li><strong>Workload identity</strong>ECS-managed credentials replace long-lived keys and static Vault tokens.</li>
+      <li><strong>Observability</strong>Both containers emit structured runtime output through awslogs and Container Insights.</li>
+      <li><strong>Availability</strong>The service spans two availability zones and combines health checks, rolling replacement, rollback, and autoscaling.</li>
+      <li><strong>Cost awareness</strong>Fargate Spot receives most scheduling weight, scaling is bounded, and the NAT topology is an explicit demo tradeoff.</li>
+      <li><strong>Precise scope</strong>The configuration and three mocked plan variants are locally verified. No live AWS deployment is presented as production experience.</li>
+    </ul>
+    <div class="case-links">
+      <a href="https://github.com/SnaetWarre/aws-fargate-vault-terraform">View repository and diagrams ↗</a>
+    </div>
+  </CaseSection>
+</CaseStudyLayout>
