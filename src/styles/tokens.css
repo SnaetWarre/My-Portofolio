@@ -1,7 +1,12 @@
 :root {
-  --background: #fdfcf8;
-  --foreground: #24231f;
-  --muted-foreground: #66635d;
+  --background: #ffffff;
+  --foreground: #000000;
+  --muted: #f2f2f2;
+  --muted-foreground: #4a4a4a;
+  --border: #000000;
+  --border-light: #d4d4d4;
   --measure: 43rem;
   --page-left: clamp(1.25rem, 11vw, 13rem);
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }

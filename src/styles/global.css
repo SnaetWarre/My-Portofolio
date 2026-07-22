@@ -13,7 +13,7 @@ body {
   min-width: 320px;
   background: var(--background);
   color: var(--foreground);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-body);
   font-size: 1.08rem;
   line-height: 1.55;
   text-rendering: optimizeLegibility;
@@ -89,7 +89,7 @@ li {
 }
 
 .project-row:hover {
-  background: #f4f2eb;
+  background: var(--muted);
 }
 
 .project-row > a:first-child::after {

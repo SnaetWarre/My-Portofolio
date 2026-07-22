@@ -1,0 +1,17 @@
+Beste Sean,
+
+Bedankt voor je bericht op LinkedIn. Ik kwam Mantyx eerder via mijn nonkel op het spoor. Hij kent Wim Hugo Eeckelaers. Later zag ik het profiel van Pieter De Backer op LinkedIn passeren en ben ik Mantyx verder gaan bekijken. De combinatie van AI, software engineering en geneeskunde sprak mij meteen aan.
+
+Ik ben pas afgestudeerd als AI Engineer aan Howest en deed een internationale stage in Portugal bij 2Ai IPCA (https://2ai.ipca.pt/). Dit onderzoeksteam werkt aan technologische oplossingen voor medische toepassingen. Ik werkte er vier maanden onder begeleiding van Sandro Queirós.
+
+Tijdens mijn stage bouwde ik een datapipeline in Python die ingebrande meetgegevens uit echocardiografische DICOM-beelden uitleest met beeldverwerking en OCR. Daarnaast werkte ik aan de volledige batchverwerking, matching op basis van beeldgelijkenis en een validatie- en reviewflow in een GUI. Het project leerde me niet alleen veel over AI en medische beeldvorming, maar ook over het omzetten van onderzoek naar betrouwbare software die praktisch bruikbaar is.
+
+Ik herken in Mantyx veel van wat mij bij 2Ai motiveerde: AI ontwikkelen in een medische context, met technologie die professionals echt moet ondersteunen. Daarom voelt Mantyx voor mij als een logische volgende stap. Ik zou er graag verder leren, samenwerken met mensen met veel technische en medische kennis en mezelf ontwikkelen tot een nog betere engineer.
+
+Ik ben erg leergierig, kan zelfstandig complexe problemen uitwerken en werk ook graag in teamverband. Het vooruitzicht om technologie te bouwen die chirurgen ondersteunt en hun werk eenvoudiger en betrouwbaarder maakt, motiveert me enorm.
+
+Ik praat hier graag verder over tijdens een eerste kennismaking. Alvast bedankt voor je tijd.
+
+Met vriendelijke groeten,
+
+Warre Snaet
