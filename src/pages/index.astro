@@ -11,11 +11,15 @@ const experience = [
     title: "AI & software engineering intern, 2Ai IPCA",
     href: `${base}work/medical-imaging.html`,
     description: "International internship using real clinical imaging data. I built a Python DICOM/OCR pipeline, validation and review tools, resumable batch processing, ECG extraction, and a source-video matcher. Metadata-guided alignment reduced one representative run from about 21 hours to 23 minutes.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/medical-imaging.html`,
   },
   {
     title: "Software engineer, Apolloon 24-hour run system",
     href: `${base}work/apolloon.html`,
     description: "Paid client work. I designed and implemented a local-first race operations platform with realtime synchronisation, automatic LAN discovery, SQLite replication, and failover for unreliable event conditions.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/apolloon.html`,
   },
 ];
 
@@ -24,31 +28,43 @@ const selectedWork = [
     title: "AWS Fargate infrastructure with Vault workload identity",
     href: `${base}work/aws-fargate-vault.html`,
     description: "A tested Terraform architecture for private ECS Fargate workloads behind an ALB, with two-AZ networking, IAM-based Vault authentication, CloudWatch observability, autoscaling, health checks, and deployment safeguards.",
+    secondaryLabel: "Architecture and infrastructure case study",
+    secondaryHref: `${base}work/aws-fargate-vault.html`,
   },
   {
     title: "Financial AI agent",
     href: `${base}work/financial-agent.html`,
     description: "A six-service application with FastAPI streaming, MCP tool execution, RAG, PostgreSQL, React, ChromaDB, and local Ollama inference. In this two-person academic project, I owned the backend architecture, orchestration, persistence, containers, tests, and most frontend integration.",
+    secondaryLabel: "Architecture and engineering case study",
+    secondaryHref: `${base}work/financial-agent.html`,
   },
   {
     title: "Azure ML lifecycle",
     href: `${base}work/azure-mlops.html`,
     description: "Individual MLOps coursework covering Azure ML compute, parallel data preparation, model registration, MLflow, FastAPI, Docker, Kubernetes manifests, and GitHub Actions.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/azure-mlops.html`,
   },
   {
     title: "Semi-supervised learning in Rust",
     href: `${base}blog/blog.html`,
     description: "Bachelor research into data-efficient plant-disease classification on edge devices. The saved SSL checkpoint reached 94.90% held-out accuracy and shipped as an approximately 26 MB offline application tested on iPhone.",
+    secondaryLabel: "Read the technical case study",
+    secondaryHref: `${base}blog/blog.html`,
   },
   {
     title: "Event chatbot for XPO Group",
     href: `${base}work/xpo-chatbot.html`,
     description: "Academic team project for an external client: a full-stack RAG system using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/xpo-chatbot.html`,
   },
   {
     title: "Dataset query system",
     href: `${base}work/dataset-query.html`,
     description: "A Python client-server analysis application with authentication, moderation, statistics, broadcasts, and a PySide6 interface.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/dataset-query.html`,
   },
 ];
 
@@ -57,6 +73,8 @@ const openSource = [
     title: "Athas code editor · Maintainer & contributor",
     href: `${base}work/athas.html`,
     description: "I contribute across its React/TypeScript and Tauri/Rust codebase. Merged work includes C# language support, image diffing, Linux UI improvements, dynamic proxy ports, resource- and memory-leak fixes, and an LSP race-condition fix.",
+    secondaryLabel: "Case study",
+    secondaryHref: `${base}work/athas.html`,
   },
 ];
 
@@ -80,99 +98,52 @@ const profileSchema = {
 >
   <Fragment slot="head"><script is:inline type="application/ld+json" set:html={JSON.stringify(profileSchema)} /></Fragment>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="site-header">
-    <div class="site-header__inner">
-      <a class="site-name" href={base} aria-label="Warre Snaet, home">Warre Snaet</a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#experience-title">Experience</a>
-        <a href="#work-title">Work</a>
-        <a href="#open-source-title">Open source</a>
+  <main id="main">
+    <header>
+      <h1>Warre Snaet</h1>
+      <nav aria-label="Contact and profile links">
+        <a href="#work-title">Work</a><span aria-hidden="true">·</span>
+        <a href="#open-source-title">Open source</a><span aria-hidden="true">·</span>
+        <button class="copy-email-link" type="button" data-copy-email>Email</button><span aria-hidden="true">·</span>
+        <a href="https://github.com/SnaetWarre">GitHub</a><span aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a><span aria-hidden="true">·</span>
         <a href={`${base}cv.html`}>CV</a>
-        <button class="site-nav__copy-email" type="button" data-copy-email>Contact</button>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main class="portfolio-main" id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <p class="hero__eyebrow">Backend & applied AI engineer</p>
-        <h1 id="hero-title">I build dependable software for complex systems.</h1>
-        <p class="hero__introduction">I work across Python backends, data pipelines, applied machine learning, agent infrastructure, and cloud delivery. My focus is the engineering that makes AI and operational software reliable outside a demo.</p>
-        <div class="hero__actions">
-          <a class="primary-action" href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download my CV</a>
-          <button class="secondary-action" type="button" data-copy-email>Send an email</button>
-        </div>
-      </div>
-
-      <dl class="hero__details">
-        <div>
-          <dt>Based in</dt>
-          <dd>Belgium</dd>
-        </div>
-        <div>
-          <dt>Education</dt>
-          <dd>AI Engineering at Howest, with distinction</dd>
-        </div>
-        <div>
-          <dt>Current focus</dt>
-          <dd>Backend, cloud, data, applied AI, and MLOps roles</dd>
-        </div>
-      </dl>
+    <section aria-labelledby="about-title">
+      <h2 class="visually-hidden" id="about-title">About</h2>
+      <p>I’m a backend and applied AI engineer from Belgium. I graduated <em>with distinction</em> in AI Engineering at Howest.</p>
+      <p>My strongest work is in Python: APIs, data pipelines, computer vision, OCR, applied machine learning, Reinforcement Learning, Generative AI, and the software required to make those systems dependable. During my international internship at 2Ai IPCA, I built a medical-imaging pipeline that turns measurements embedded in echocardiograms into structured research data.</p>
+      <p>I’m open to junior cloud, backend, software, data, and applied AI engineering roles, with a particular interest in agent infrastructure and MLOps. My platform work spans AWS and Azure, Terraform, containers, Kubernetes, CI/CD, and the services around reliable AI delivery.</p>
     </section>
 
-    <section class="chapter chapter--first" aria-labelledby="experience-title">
-      <div class="chapter__heading">
-        <p class="chapter__index">01</p>
-        <h2 id="experience-title">Experience</h2>
-        <p class="chapter__summary">Client work and an international internship where software had to work with real constraints and real data.</p>
-      </div>
+    <section aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
       <ProjectList projects={experience} />
     </section>
 
-    <div class="chapter-band">
-      <section class="chapter" aria-labelledby="work-title">
-        <div class="chapter__heading">
-          <p class="chapter__index">02</p>
-          <h2 id="work-title">Selected work</h2>
-          <p class="chapter__summary">Systems work across cloud infrastructure, AI applications, data platforms, and edge deployment.</p>
-        </div>
-        <ProjectList projects={selectedWork} />
-      </section>
-    </div>
+    <section aria-labelledby="work-title">
+      <h2 id="work-title">Selected work</h2>
+      <ProjectList projects={selectedWork} />
+    </section>
 
-    <div class="closing-grid">
-      <section class="closing-section" aria-labelledby="open-source-title">
-        <h2 id="open-source-title">Open source</h2>
-        <p>Contributions maintained in a shared product and reviewed in public.</p>
-        <ProjectList projects={openSource} />
-      </section>
+    <section aria-labelledby="open-source-title">
+      <h2 id="open-source-title">Open source</h2>
+      <ProjectList projects={openSource} />
+    </section>
 
-      <section class="closing-section" aria-labelledby="writing-title">
-        <h2 id="writing-title">Writing</h2>
-        <p>A technical breakdown of my Rust research project, from semi-supervised training to offline deployment.</p>
-        <a class="writing-link" href={`${base}blog/blog.html`}>How I built a 26 MB offline AI with Rust and Burn&nbsp;→</a>
-      </section>
-    </div>
-  </main>
+    <section aria-labelledby="writing-title">
+      <h2 id="writing-title">Writing</h2>
+      <ul><li><a href={`${base}blog/blog.html`}>How I built a 26 MB offline AI with Rust and Burn</a></li></ul>
+    </section>
 
-  <div class="site-footer-band">
-    <footer class="site-footer" id="contact" aria-labelledby="contact-title">
-      <div>
-        <p class="site-footer__label">Contact</p>
-        <h2 class="site-footer__lead" id="contact-title">Open to junior engineering roles where reliability matters.</h2>
-        <button class="primary-action secondary-action" type="button" data-copy-email>warresnaet@icloud.com</button>
-      </div>
-      <div class="site-footer__links">
-        <a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn ↗</a>
-        <a href="https://github.com/SnaetWarre">GitHub ↗</a>
-        <a href={`${base}cv.html`}>View CV</a>
-        <a href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download ATS CV</a>
-      </div>
-      <p class="site-footer__meta"><span>Warre Snaet, {year}</span><span>Backend & applied AI engineer · Belgium</span></p>
+    <footer>
+      <p>Open to junior backend, software, data, and applied AI engineering roles. The easiest way to reach me is through <a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a> or <button class="copy-email-link" type="button" data-copy-email>email</button>.</p>
+      <p>Recruiter or application system? <a href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download the single-column ATS CV</a>.</p>
+      <p>Warre Snaet, {year}</p>
     </footer>
-  </div>
+  </main>
 
   <div class="copy-notification" id="copy-notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>
 

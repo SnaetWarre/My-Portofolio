@@ -3,6 +3,8 @@ interface Project {
   title: string;
   href?: string;
   description: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
 }
 
 interface Props {
@@ -15,14 +17,11 @@ const { projects } = Astro.props;
 <ul class="work-list">
   {projects.map((project) => (
     <li class:list={["project-row", { "project-row--static": !project.href }]}>
-      <article>
-        <h3>
-          {project.href
-            ? <a href={project.href}>{project.title}<span aria-hidden="true">→</span></a>
-            : project.title}
-        </h3>
-        <p>{project.description}</p>
-      </article>
+      {project.href ? <a href={project.href}>{project.title}</a> : <strong>{project.title}</strong>}
+      <span>
+        : {project.description}
+        {project.secondaryHref && <> <a class="project-secondary-link" href={project.secondaryHref}>{project.secondaryLabel}</a>.</>}
+      </span>
     </li>
   ))}
 </ul>

@@ -1,29 +1,12 @@
 :root {
-  --canvas: #ffffff;
-  --surface: #ffffff;
-  --surface-subtle: rgb(0 0 0 / 4%);
-  --ink-primary: #000000;
-  --ink-secondary: rgb(0 0 0 / 64%);
-  --ink-tertiary: rgb(0 0 0 / 56%);
-  --border-subtle: rgb(0 0 0 / 10%);
-  --border-strong: rgb(0 0 0 / 18%);
-  --hover-fill: rgb(0 0 0 / 5%);
-  --pressed-fill: rgb(0 0 0 / 9%);
-
-  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --content-wide: 80rem;
-  --content-prose: 43rem;
-  --page-gutter: clamp(1.5rem, 4vw, 4rem);
-
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2rem;
-  --space-5: 3rem;
-  --space-6: 4rem;
-  --space-7: 6rem;
-  --space-8: 8rem;
-
-  --radius-control: 0.5rem;
-  --radius-surface: 0.75rem;
+  --background: #ffffff;
+  --foreground: #000000;
+  --muted: rgb(0 0 0 / 5%);
+  --muted-foreground: rgb(0 0 0 / 64%);
+  --border: rgb(0 0 0 / 18%);
+  --border-light: rgb(0 0 0 / 10%);
+  --measure: 43rem;
+  --page-left: clamp(1.25rem, 11vw, 13rem);
+  --font-body: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
