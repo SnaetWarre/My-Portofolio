@@ -110,14 +110,22 @@ a:hover {
   font-weight: 500;
 }
 
-.site-nav a {
+.site-nav a,
+.site-nav__copy-email {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
   text-decoration: none;
 }
 
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav__copy-email:hover {
   text-decoration: underline;
   text-underline-offset: 0.35em;
 }
@@ -183,10 +191,13 @@ a:hover {
   min-height: 3rem;
   align-items: center;
   justify-content: center;
+  border: 0;
   border-radius: var(--radius-control);
   padding: 0.7rem 1.1rem;
+  font-family: inherit;
   font-size: 0.92rem;
   font-weight: 500;
+  cursor: pointer;
   text-decoration: none;
   transition: background-color 160ms ease, color 160ms ease, transform 120ms ease;
 }
@@ -355,6 +366,14 @@ a:hover {
   grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 0.8fr);
   gap: var(--space-5);
   padding-block: var(--space-7) var(--space-5);
+  scroll-margin-top: 4.5rem;
+}
+
+.site-footer__label {
+  margin-bottom: var(--space-2);
+  color: rgb(255 255 255 / 56%);
+  font-size: 0.82rem;
+  font-weight: 500;
 }
 
 .site-footer__lead {
@@ -395,6 +414,25 @@ a:hover {
   margin: var(--space-5) 0 0;
   color: rgb(255 255 255 / 56%);
   font-size: 0.82rem;
+}
+
+.copy-notification {
+  position: fixed;
+  right: var(--page-gutter);
+  bottom: var(--space-4);
+  z-index: 50;
+  max-width: min(24rem, calc(100% - (2 * var(--page-gutter))));
+  border-radius: var(--radius-control);
+  background: var(--ink-primary);
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 16%);
+  color: var(--canvas);
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.copy-notification[hidden] {
+  display: none;
 }
 
 .visually-hidden {

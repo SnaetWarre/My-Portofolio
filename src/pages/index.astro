@@ -89,7 +89,7 @@ const profileSchema = {
         <a href="#work-title">Work</a>
         <a href="#open-source-title">Open source</a>
         <a href={`${base}cv.html`}>CV</a>
-        <a href="mailto:warresnaet@icloud.com">Contact</a>
+        <button class="site-nav__copy-email" type="button" data-copy-email>Contact</button>
       </nav>
     </div>
   </header>
@@ -102,7 +102,7 @@ const profileSchema = {
         <p class="hero__introduction">I work across Python backends, data pipelines, applied machine learning, agent infrastructure, and cloud delivery. My focus is the engineering that makes AI and operational software reliable outside a demo.</p>
         <div class="hero__actions">
           <a class="primary-action" href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download my CV</a>
-          <a class="secondary-action" href="mailto:warresnaet@icloud.com">Send an email</a>
+          <button class="secondary-action" type="button" data-copy-email>Send an email</button>
         </div>
       </div>
 
@@ -158,10 +158,11 @@ const profileSchema = {
   </main>
 
   <div class="site-footer-band">
-    <footer class="site-footer">
+    <footer class="site-footer" id="contact" aria-labelledby="contact-title">
       <div>
-        <p class="site-footer__lead">Open to junior engineering roles where reliability matters.</p>
-        <a class="primary-action secondary-action" href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>
+        <p class="site-footer__label">Contact</p>
+        <h2 class="site-footer__lead" id="contact-title">Open to junior engineering roles where reliability matters.</h2>
+        <button class="primary-action secondary-action" type="button" data-copy-email>warresnaet@icloud.com</button>
       </div>
       <div class="site-footer__links">
         <a href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn ↗</a>
@@ -172,4 +173,45 @@ const profileSchema = {
       <p class="site-footer__meta"><span>Warre Snaet, {year}</span><span>Backend & applied AI engineer · Belgium</span></p>
     </footer>
   </div>
+
+  <div class="copy-notification" id="copy-notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+  <script>
+    const portfolioEmailAddress = "warresnaet@icloud.com";
+    const copyEmailButtons = document.querySelectorAll<HTMLButtonElement>("[data-copy-email]");
+    const copyNotification = document.querySelector<HTMLDivElement>("#copy-notification");
+    let copyNotificationDismissalTimer: number | undefined;
+
+    const copyPortfolioEmailAddress = async (): Promise<boolean> => {
+      try {
+        if (!navigator.clipboard?.writeText) return false;
+
+        await navigator.clipboard.writeText(portfolioEmailAddress);
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    copyEmailButtons.forEach((copyEmailButton) => {
+      copyEmailButton.addEventListener("click", async () => {
+        const emailWasCopied = await copyPortfolioEmailAddress();
+
+        if (!copyNotification) return;
+
+        copyNotification.textContent = emailWasCopied
+          ? `Email address copied: ${portfolioEmailAddress}`
+          : `Copy failed. Email address: ${portfolioEmailAddress}`;
+        copyNotification.hidden = false;
+
+        if (copyNotificationDismissalTimer !== undefined) {
+          window.clearTimeout(copyNotificationDismissalTimer);
+        }
+
+        copyNotificationDismissalTimer = window.setTimeout(() => {
+          copyNotification.hidden = true;
+        }, 3500);
+      });
+    });
+  </script>
 </BaseLayout>
