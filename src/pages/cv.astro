@@ -1,0 +1,151 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import StyleXDevStyles from "../components/StyleXDevStyles.astro";
+import { basePath } from "../lib/paths";
+import { cvStyles } from "../styles/cvStyles";
+import "../styles/reset.css";
+
+const base = basePath;
+---
+
+<!doctype html>
+<html lang="en" {...stylex.attrs(cvStyles.document)}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warre Snaet | CV</title>
+    <meta name="description" content="CV of Warre Snaet, a junior backend and applied AI engineer from Belgium." />
+    <meta name="author" content="Warre Snaet" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://snaetwarre.github.io/My-Portofolio/cv.html" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <StyleXDevStyles />
+  </head>
+  <body {...stylex.attrs(cvStyles.body)}>
+    <nav {...stylex.attrs(cvStyles.toolbar)} aria-label="CV actions">
+      <a {...stylex.attrs(cvStyles.link, cvStyles.toolbarAction)} href={`${base}index.html`}>← Portfolio</a>
+      <a {...stylex.attrs(cvStyles.link, cvStyles.toolbarAction)} href={`${base}CV_Warre_Snaet.pdf`} download>Download PDF</a>
+    </nav>
+
+    <main {...stylex.attrs(cvStyles.resume)} id="resume">
+      <header {...stylex.attrs(cvStyles.resumeHeader)}>
+        <div>
+          <h1 {...stylex.attrs(cvStyles.primaryHeading)}>Warre Snaet</h1>
+          <p {...stylex.attrs(cvStyles.role)}>Junior Backend &amp; Applied AI Engineer</p>
+        </div>
+        <address {...stylex.attrs(cvStyles.contactList)}>
+          <span>Vilvoorde, Belgium</span>
+          <a {...stylex.attrs(cvStyles.link)} href="tel:+32474829493">+32 474 82 94 93</a>
+          <a {...stylex.attrs(cvStyles.link)} href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>
+          <a {...stylex.attrs(cvStyles.link)} href="https://snaetwarre.github.io/My-Portofolio/">snaetwarre.github.io/My-Portofolio</a>
+          <a {...stylex.attrs(cvStyles.link)} href="https://github.com/SnaetWarre">github.com/SnaetWarre</a>
+          <a {...stylex.attrs(cvStyles.link)} href="https://www.linkedin.com/in/warre-snaet-272354370/">linkedin.com/in/warre-snaet-272354370</a>
+        </address>
+      </header>
+
+      <section {...stylex.attrs(cvStyles.summary)} aria-labelledby="profile-heading">
+        <h2 {...stylex.attrs(cvStyles.sectionHeading, cvStyles.summaryContent)} id="profile-heading">Profile</h2>
+        <p {...stylex.attrs(cvStyles.paragraph, cvStyles.summaryContent)}>
+          AI Engineering graduate with distinction who builds dependable Python backends, agent infrastructure, applied AI systems, and data pipelines. Experienced in taking unfamiliar problems from raw data to validated software, cloud ML workflows, APIs, and deployable applications. Looking for a junior backend, applied AI, or MLOps role where I can contribute and grow with experienced engineers.
+        </p>
+      </section>
+
+      <div {...stylex.attrs(cvStyles.resumeGrid)}>
+        <div>
+          <section aria-labelledby="experience-heading">
+            <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="experience-heading">Technical experience</h2>
+
+            <article>
+              <div {...stylex.attrs(cvStyles.entryHeading)}>
+                <div>
+                  <h3 {...stylex.attrs(cvStyles.subsectionHeading)}>AI &amp; Software Engineering Intern</h3>
+                  <p {...stylex.attrs(cvStyles.organisation)}>2Ai IPCA · Barcelos, Portugal</p>
+                </div>
+                <p {...stylex.attrs(cvStyles.date)}>Feb–Jun 2026</p>
+              </div>
+              <ul {...stylex.attrs(cvStyles.list)}>
+                <li {...stylex.attrs(cvStyles.listItem)}>Built a Python pipeline that reads echocardiographic DICOM studies, detects burned-in measurement regions, extracts values with OCR and image processing, and exports structured JSON.</li>
+                <li {...stylex.attrs(cvStyles.listItem)}>Designed resumable batch processing, validation queues, review tooling, ECG trace extraction, and cross-platform handoff documentation.</li>
+                <li {...stylex.attrs(cvStyles.listItem)}>Developed a source-video matcher with OpenCV ECC alignment and DICOM metadata, reducing one representative run from roughly 21 hours to 23 minutes.</li>
+              </ul>
+            </article>
+
+            <article {...stylex.attrs(cvStyles.spacedEntry)}>
+              <div {...stylex.attrs(cvStyles.entryHeading)}>
+                <div>
+                  <h3 {...stylex.attrs(cvStyles.subsectionHeading)}>Software Engineer · Paid Client Project</h3>
+                  <p {...stylex.attrs(cvStyles.organisation)}>Apolloon 24-Hour Run System · Belgium</p>
+                </div>
+                <p {...stylex.attrs(cvStyles.date)}>2026</p>
+              </div>
+              <ul {...stylex.attrs(cvStyles.list)}>
+                <li {...stylex.attrs(cvStyles.listItem)}>Built a local-first race operations platform with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.</li>
+                <li {...stylex.attrs(cvStyles.listItem)}>Implemented operator workflows, live displays, imports and exports, automatic LAN discovery, realtime synchronisation, and replicated hot-standby failover for unreliable event conditions.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section {...stylex.attrs(cvStyles.projectsSection)} aria-labelledby="projects-heading">
+            <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="projects-heading">Selected projects</h2>
+
+            <article>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading)}><a {...stylex.attrs(cvStyles.link)} href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning">Offline Semi-Supervised AI in Rust</a></h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.compactParagraph)}>Built an end-to-end Burn/Rust plant-disease classifier. The saved SSL checkpoint reached 94.90% held-out top-1 accuracy; packaged weights were about 916 KB and the offline application about 26 MB, with inference tested on an iPhone 12.</p>
+            </article>
+
+            <article {...stylex.attrs(cvStyles.compactEntry)}>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading)}><a {...stylex.attrs(cvStyles.link)} href="https://github.com/SnaetWarre/Financial_AI_Agent">Financial AI Agent</a></h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.compactParagraph)}>In a two-person academic project, owned backend architecture, orchestration, MCP integration, persistence, containers, tests, and most frontend integration across a six-service application.</p>
+            </article>
+
+            <article {...stylex.attrs(cvStyles.compactEntry)}>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading)}><a {...stylex.attrs(cvStyles.link)} href="https://github.com/athasdev/athas">Athas Code Editor · Open-Source Maintainer</a></h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.compactParagraph)}>Merged contributions across React/TypeScript and Tauri/Rust: C# support, image diffing, Linux UI, proxy handling, resource and memory leaks, and an LSP race-condition fix.</p>
+            </article>
+          </section>
+        </div>
+
+        <aside {...stylex.attrs(cvStyles.sideColumn)} aria-label="Education and skills">
+          <section aria-labelledby="education-heading">
+            <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="education-heading">Education</h2>
+            <h3 {...stylex.attrs(cvStyles.subsectionHeading)}>Professional Bachelor in Multimedia &amp; Creative Technologies</h3>
+            <p {...stylex.attrs(cvStyles.organisation, cvStyles.sideParagraph)}>AI Engineering track · Howest</p>
+            <p {...stylex.attrs(cvStyles.date, cvStyles.sideDate, cvStyles.sideParagraph)}>Sep 2023–Jun 2026</p>
+            <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph)}><strong>Graduated with distinction</strong></p>
+            <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph, cvStyles.smallText)}>MLOps 18/20 · Azure ML pipelines, MLflow, Docker, Kubernetes &amp; CI/CD</p>
+          </section>
+
+          <section {...stylex.attrs(cvStyles.sideSection)} aria-labelledby="skills-heading">
+            <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="skills-heading">Skills</h2>
+            <div>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading, cvStyles.skillHeading)}>Primary</h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph, cvStyles.compactParagraph)}>Python · FastAPI · OpenCV · SQL/PostgreSQL · Git · Linux</p>
+            </div>
+            <div {...stylex.attrs(cvStyles.skillGroup)}>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading, cvStyles.skillHeading)}>AI &amp; data</h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph, cvStyles.compactParagraph)}>Computer vision · OCR · RAG · MCP · Model evaluation · NumPy · pandas</p>
+            </div>
+            <div {...stylex.attrs(cvStyles.skillGroup)}>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading, cvStyles.skillHeading)}>Cloud &amp; platform</h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph, cvStyles.compactParagraph)}>Azure ML · MLflow · Docker · GitHub Actions · REST APIs · Testing</p>
+            </div>
+            <div {...stylex.attrs(cvStyles.skillGroup)}>
+              <h3 {...stylex.attrs(cvStyles.subsectionHeading, cvStyles.skillHeading)}>Additional</h3>
+              <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph, cvStyles.compactParagraph)}>C#/.NET · TypeScript/React · Rust/Burn · Tauri</p>
+            </div>
+          </section>
+
+          <section {...stylex.attrs(cvStyles.sideSection)} aria-labelledby="languages-heading">
+            <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="languages-heading">Languages</h2>
+            <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph)}>Dutch (native) · English (C1) · French (B1–B2)</p>
+          </section>
+
+          <section {...stylex.attrs(cvStyles.sideSection)} aria-labelledby="additional-heading">
+            <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="additional-heading">Additional</h2>
+            <p {...stylex.attrs(cvStyles.paragraph, cvStyles.sideParagraph, cvStyles.smallText)}>Driving licence B<br />Hospitality work since 2021 in fast-paced customer-facing teams</p>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

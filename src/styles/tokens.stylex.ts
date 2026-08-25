@@ -18,3 +18,9 @@ export const layoutTokens = stylex.defineVars({
   contentMeasure: "43rem",
   pageLeft: "clamp(1.25rem, 11vw, 13rem)",
 });
+
+export const cvColorTokens = stylex.defineVars({
+  secondaryInk: "rgb(0 0 0 / 68%)",
+  subtleRule: "rgb(0 0 0 / 26%)",
+  screenCanvas: "#f5f5f5",
+});

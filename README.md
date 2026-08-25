@@ -24,7 +24,10 @@ I build dependable software around applied AI: Python backends, data pipelines, 
 
 ### Updating the CV
 
-The editable CV is [`cv.html`](cv.html). Its print stylesheet keeps the browser and generated PDF on one A4 page.
+The published HTML CV is [`src/pages/cv.astro`](src/pages/cv.astro), with its
+StyleX rules in [`src/styles/cvStyles.ts`](src/styles/cvStyles.ts). The separate
+downloadable PDF and application variants are generated from the document
+sources in the repository root and [`cv-variants/`](cv-variants/).
 
 ```bash
 uv sync
@@ -33,8 +36,9 @@ npm run build
 ```
 
 `uv sync` creates and updates the locked local Python environment. The CV script
-regenerates the public CV and the separate variants. The Astro build copies only
-the public CV into `dist/`.
+regenerates the downloadable PDFs and application variants. The Astro build
+generates `cv.html` from the Astro/StyleX source and copies only the public PDFs
+into `dist/`.
 
 ### Building the site
 
