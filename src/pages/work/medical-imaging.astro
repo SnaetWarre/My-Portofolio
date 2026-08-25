@@ -1,6 +1,8 @@
 ---
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
 import CaseSection from "../../components/CaseSection.astro";
+import * as stylex from "@stylexjs/stylex";
+import { caseStudyStyles } from "../../styles/caseStudyStyles";
 ---
 
 <CaseStudyLayout
@@ -16,29 +18,29 @@ import CaseSection from "../../components/CaseSection.astro";
   ]}
 >
   <CaseSection label="Problem" title="Recover structure from clinical images">
-    <p>Measurements needed for research were burned into echocardiographic images instead of being available as clean fields. Processing them manually was slow, difficult to repeat, and hard to audit across large study batches.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Measurements needed for research were burned into echocardiographic images instead of being available as clean fields. Processing them manually was slow, difficult to repeat, and hard to audit across large study batches.</p>
   </CaseSection>
 
   <CaseSection label="Pipeline" title="Detection, extraction, and review">
-    <ul>
-      <li>Read echocardiographic DICOM studies and detected the regions containing burned-in measurements.</li>
-      <li>Combined OCR and image processing to extract values and export normalized JSON.</li>
-      <li>Built resumable batch processing so long runs could continue safely after interruption.</li>
-      <li>Added validation queues and review tools so uncertain output remained visible to a human reviewer.</li>
-      <li>Extracted ECG traces for downstream analysis.</li>
+    <ul {...stylex.attrs(caseStudyStyles.list)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Read echocardiographic DICOM studies and detected the regions containing burned-in measurements.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Combined OCR and image processing to extract values and export normalized JSON.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built resumable batch processing so long runs could continue safely after interruption.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added validation queues and review tools so uncertain output remained visible to a human reviewer.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Extracted ECG traces for downstream analysis.</li>
     </ul>
   </CaseSection>
 
   <CaseSection label="Optimization" title="Use metadata before expensive visual matching">
-    <p>I developed a source-video matcher using DICOM metadata and OpenCV ECC alignment. Metadata narrowed the candidate set before image alignment, reducing one representative run from roughly 21 hours to 23 minutes.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>I developed a source-video matcher using DICOM metadata and OpenCV ECC alignment. Metadata narrowed the candidate set before image alignment, reducing one representative run from roughly 21 hours to 23 minutes.</p>
   </CaseSection>
 
   <CaseSection label="Engineering" title="Make research processing dependable">
-    <ul class="production-list">
-      <li><strong>Resumable work</strong>Intermediate state prevents an interrupted batch from restarting at zero.</li>
-      <li><strong>Human validation</strong>Review queues separate uncertain extraction from accepted output.</li>
-      <li><strong>Traceable output</strong>Structured exports retain the connection between source studies and extracted values.</li>
-      <li><strong>Practical handoff</strong>Cross-platform documentation makes the pipeline reproducible beyond my own workstation.</li>
+    <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resumable work</strong>Intermediate state prevents an interrupted batch from restarting at zero.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Human validation</strong>Review queues separate uncertain extraction from accepted output.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Traceable output</strong>Structured exports retain the connection between source studies and extracted values.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Practical handoff</strong>Cross-platform documentation makes the pipeline reproducible beyond my own workstation.</li>
     </ul>
   </CaseSection>
 </CaseStudyLayout>

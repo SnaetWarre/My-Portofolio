@@ -1,6 +1,8 @@
 ---
-import "../styles/tokens.css";
-import "../styles/global.css";
+import "../styles/reset.css";
+import * as stylex from "@stylexjs/stylex";
+import StyleXDevStyles from "../components/StyleXDevStyles.astro";
+import { portfolioStyles } from "../styles/portfolioStyles";
 import { basePath } from "../lib/paths";
 
 interface Props {
@@ -16,7 +18,7 @@ const socialImage = new URL(`${base}social-card.png`, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" {...stylex.attrs(portfolioStyles.document)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,9 +39,10 @@ const socialImage = new URL(`${base}social-card.png`, Astro.site);
     <meta name="twitter:image" content={socialImage} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="alternate icon" href={`${base}favicon.ico`} />
+    <StyleXDevStyles />
     <slot name="head" />
   </head>
-  <body>
+  <body {...stylex.attrs(portfolioStyles.body)}>
     <slot />
   </body>
 </html>

@@ -1,0 +1,52 @@
+{
+  "company": "Accenture",
+  "target_role": "Young Graduate Agentic AI Engineer",
+  "headline": "Junior Agentic AI Engineer",
+  "summary": "AI Engineering graduate with distinction who builds agentic applications and reliable Python backends. Hands-on work includes tool calling, multi-step orchestration, RAG, vector retrieval, persistent sessions, guardrails, evaluation, containers, APIs, and cloud ML delivery. Combines applied AI depth with full-stack engineering and experience translating unfamiliar problems into working systems.",
+  "internship_bullets": [
+    "Built a Python pipeline for echocardiographic DICOM studies using computer vision and OCR, with structured outputs for downstream research use.",
+    "Converted an open-ended problem into resumable processing, validation queues, review tooling, logging, and a documented cross-platform handoff.",
+    "Optimised a metadata-guided OpenCV source-video matcher from roughly 21 hours to 23 minutes on one representative run."
+  ],
+  "apolloon_bullets": [
+    "Built a paid full-stack operations system with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.",
+    "Implemented API-driven workflows, realtime synchronisation, LAN discovery, replicated hot-standby failover, monitoring, and operator-safe recovery."
+  ],
+  "projects": [
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Built the FastAPI orchestration layer with streamed responses, seven typed MCP tools, RAG, PostgreSQL, ChromaDB, local LLMs, citations, tests, and two-step confirmation guardrails."
+    },
+    {
+      "title": "Event Chatbot for XPO Group",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/xpo-chatbot.html",
+      "description": "Contributed to an external-client RAG application using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion."
+    },
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Implemented cloud data preparation, training, model registration, MLflow, FastAPI serving, Docker, Kubernetes manifests, and GitHub Actions."
+    }
+  ],
+  "education_note": "MLOps 18/20 · GenAI, Azure ML, MLflow, Docker, Kubernetes, CI/CD and backend engineering",
+  "skills": [
+    {
+      "title": "Agentic AI",
+      "text": "MCP · Tool calling · RAG · Orchestration · Guardrails · Evaluation · Embeddings"
+    },
+    {
+      "title": "Backend & data",
+      "text": "Python · FastAPI · REST APIs · PostgreSQL · SQL · ChromaDB"
+    },
+    {
+      "title": "Cloud & delivery",
+      "text": "Azure ML · Docker · Kubernetes · GitHub Actions · CI/CD · AWS"
+    },
+    {
+      "title": "Additional",
+      "text": "TypeScript/React · C#/.NET · Git · Linux · Testing · Agile teamwork"
+    }
+  ],
+  "letter_language": "en"
+}

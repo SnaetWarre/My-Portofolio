@@ -1,0 +1,17 @@
+Dear Sopra Steria recruitment team,
+
+The AI-Native Engineering Traineeship immediately stood out to me because it brings together the areas in which I want to grow: software engineering, agentic AI, cloud-native delivery, APIs and automation. I am not looking for a purely theoretical AI role. I want to build complete solutions, understand why they work and make them reliable enough to be useful in practice.
+
+I recently graduated with distinction in AI Engineering at Howest. In a two-person Financial AI Agent project, I owned the backend architecture and most of the integration work across six services. I built the FastAPI orchestration layer, connected seven typed MCP tools, added RAG and persistent sessions, and implemented citations, tests and confirmation guardrails. That project taught me that useful AI depends just as much on sound software engineering and evaluation as on the model itself.
+
+During my international internship at 2Ai IPCA in Portugal, I worked with echocardiographic DICOM data. I developed a Python pipeline that extracts measurements using computer vision and OCR, together with resumable batch processing, validation queues and review tooling. I also reduced one representative source-video matching run from roughly 21 hours to 23 minutes. The assignment started as an open research problem, so I had to turn uncertainty into a system that other researchers could understand and continue using.
+
+I also built Apolloon, a paid local-first operations platform for a 24-hour running event. It combines React, TypeScript, Express, Electron and SQLite with realtime synchronisation, automatic LAN discovery and hot-standby failover. Building something that operators must be able to trust under time pressure gave me valuable experience beyond coursework.
+
+What appeals to me in your traineeship is the combination of structured learning and contribution to real engineering environments. I already bring a broad technical foundation, curiosity and experience taking ownership. I would now like to sharpen that foundation alongside experienced engineers and learn how AI-native systems are designed and delivered at a larger scale.
+
+I would be happy to discuss my projects and motivation in an introductory conversation. Thank you for considering my application.
+
+Kind regards,
+
+Warre Snaet

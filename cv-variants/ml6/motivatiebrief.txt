@@ -1,0 +1,15 @@
+Dear ML6 Talent team,
+
+I am submitting a spontaneous application because I would like to start my career as a Junior AI Engineer at ML6 in Ghent. What attracts me to ML6 is the combination of technical depth and practical delivery. You work across data, algorithms, infrastructure and integration, and you take AI beyond the prototype into systems that have to be reliable, secure and useful. That is exactly the kind of engineering environment in which I want to grow.
+
+I recently graduated with distinction in AI Engineering at Howest. During my international internship at 2Ai IPCA in Portugal, I built a Python pipeline for echocardiographic DICOM studies. It extracts measurements with computer vision and OCR and turns them into structured research data. Around that core, I developed resumable batch processing, validation queues, traceable outputs and human review tooling. I also reduced one representative source-video matching run from roughly 21 hours to 23 minutes. The project taught me how much real AI work depends on data quality, performance, validation and clear handover, not only on choosing an algorithm.
+
+My other projects cover both modern and classical machine learning. For a Financial AI Agent, I owned the FastAPI backend, multi-step orchestration, RAG, seven typed MCP tools, PostgreSQL persistence, containers and tests. I added citations and confirmation guardrails because useful AI should be inspectable and controlled. In an Azure MLOps project, I worked with Azure ML, MLflow, Docker, Kubernetes and GitHub Actions across the model lifecycle. For my bachelor's research, I built and evaluated a semi-supervised plant-disease classifier in Rust and packaged it as a small offline mobile application.
+
+I also enjoy the software engineering surrounding AI. For Apolloon, a paid client project, I built a local-first event platform with realtime synchronisation, automatic network discovery, SQLite replication and failover. That experience strengthened my ability to reason about reliability, testing and the conditions in which software actually has to operate.
+
+I am early in my professional career, but I bring a broad technical foundation, honest judgement and the persistence to turn open-ended problems into working systems. ML6's focus on engineering trustworthy AI with real impact strongly matches how I want to develop. I would value the opportunity to show you my work and discuss where I could contribute to a team in Ghent.
+
+Kind regards,
+
+Warre Snaet

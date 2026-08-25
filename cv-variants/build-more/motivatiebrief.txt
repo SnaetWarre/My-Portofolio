@@ -1,0 +1,15 @@
+Beste Build More-team,
+
+Ik zag dat de vacature voor AI-Driven Software Engineer op LinkedIn ondertussen gesloten staat. Toch herkende ik mezelf zo sterk in de beschrijving dat ik graag rechtstreeks contact opneem. Vooral het denken in systemen en trade-offs, ownership nemen en software van idee tot livegang brengen sluit aan bij de manier waarop ik zelf het liefst werk.
+
+Ik studeerde recent met onderscheiding af als AI Engineer aan Howest. Hoewel ik aan het begin van mijn loopbaan sta, heb ik al verschillende projecten zelfstandig van een onduidelijk probleem naar een werkend geheel gebracht. Het duidelijkste voorbeeld is Apolloon, een betaald softwareproject voor een 24-urenevenement. Ik bouwde een local-first platform met React, TypeScript, Express, Electron en SQLite. Naast de zichtbare functies werkte ik ook de systeemkant uit: API-grenzen, realtime synchronisatie, automatische LAN-detectie, replicatie, statusinformatie en failover wanneer een toestel uitvalt.
+
+Tijdens mijn stage bij 2Ai IPCA in Portugal kreeg ik een open onderzoeksvraag rond echocardiografische beelden. Ik maakte daarvan een bruikbare Python-applicatie met DICOM-verwerking, computer vision, OCR, hervatbare batches en een reviewflow. Door metadata en beeldalignering slim te combineren bracht ik één representatieve matchingrun terug van ongeveer 21 uur naar 23 minuten. Dat project vroeg zowel experimenteren als pragmatische keuzes maken over performantie, foutafhandeling en onderhoudbaarheid.
+
+Mijn AI-achtergrond gebruik ik als onderdeel van software engineering, niet als doel op zich. Voor een Financial AI Agent bouwde ik de FastAPI-backend, RAG, MCP-tooling, persistentie, containers en tests. Daarnaast ontwierp ik met Terraform een AWS-architectuur voor private Fargate-services met observability, health checks en veilige secret delivery. Via de open-source-editor Athas werk ik bovendien geregeld in een bestaande TypeScript- en Rust-codebase.
+
+Ik ben nog geen softwarearchitect in de betekenis van jaren ervaring. Ik denk wel spontaan in complete systemen, stel technische aannames graag ter discussie en neem verantwoordelijkheid om iets werkelijk af te werken. Daarom hoor ik graag of er bij Build More, nu of binnenkort, ruimte is voor een junior engineer met dat profiel.
+
+Met vriendelijke groeten,
+
+Warre Snaet

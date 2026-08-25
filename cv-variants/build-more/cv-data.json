@@ -1,0 +1,52 @@
+{
+  "company": "Build More",
+  "target_role": "AI-Driven Software Engineer",
+  "headline": "Junior Software & Applied AI Engineer",
+  "summary": "AI Engineering graduate with distinction who thinks in complete systems rather than isolated features. Has taken products from ambiguous requirements to working software across backend, frontend, data, infrastructure, realtime synchronisation, and applied AI. Works pragmatically, documents trade-offs, and enjoys owning technical problems from first design to reliable delivery.",
+  "internship_bullets": [
+    "Turned an open-ended medical research question into a usable Python product with DICOM processing, computer vision, OCR, structured output, and GUI review tooling.",
+    "Designed resumable workflows, validation queues, logging, and cross-platform handoff documentation with reliability and future maintenance in mind.",
+    "Reduced one representative source-video matching run from roughly 21 hours to 23 minutes through metadata-guided OpenCV alignment."
+  ],
+  "apolloon_bullets": [
+    "Designed and delivered a paid local-first operations product with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.",
+    "Owned system-level concerns including operator UX, API boundaries, LAN discovery, realtime synchronisation, replication, health visibility, and failover."
+  ],
+  "projects": [
+    {
+      "title": "AWS Fargate Infrastructure with Vault",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/aws-fargate-vault.html",
+      "description": "Designed reusable Terraform infrastructure with private services, identity-based secret delivery, observability, health checks, autoscaling, and rollback safeguards."
+    },
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Owned the backend architecture and most integration work for a six-service React and FastAPI application with RAG, MCP tools, PostgreSQL, containers, and tests."
+    },
+    {
+      "title": "Athas Code Editor · Open-Source Maintainer",
+      "url": "https://github.com/athasdev/athas",
+      "description": "Contributes across React/TypeScript and Tauri/Rust, resolving product, platform, networking, and resource-management problems in a real open-source codebase."
+    }
+  ],
+  "education_note": "MLOps 18/20 · architecture, backend, frontend, cloud, automation and applied AI",
+  "skills": [
+    {
+      "title": "Product engineering",
+      "text": "TypeScript · React · Python · FastAPI · Express · C#/.NET"
+    },
+    {
+      "title": "Systems & data",
+      "text": "REST APIs · tRPC · PostgreSQL · SQLite · Realtime sync · Integrations"
+    },
+    {
+      "title": "Cloud & automation",
+      "text": "AWS · Azure ML · Docker · Kubernetes · GitHub Actions · Terraform"
+    },
+    {
+      "title": "Applied AI",
+      "text": "RAG · MCP · Agent workflows · Computer vision · Model evaluation"
+    }
+  ],
+  "letter_language": "nl"
+}

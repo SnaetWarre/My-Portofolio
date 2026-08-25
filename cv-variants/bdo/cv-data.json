@@ -1,0 +1,52 @@
+{
+  "company": "BDO Belgium",
+  "target_role": "Data Engineer Junior Consultant",
+  "headline": "Junior Data & Software Engineer",
+  "summary": "AI Engineering graduate with distinction who builds dependable data pipelines, Python services, and cloud-ready applications. Experienced in turning raw and inconsistent inputs into validated structured data, designing backend and persistence layers, and automating delivery with containers and CI/CD. Brings a practical engineering mindset and enjoys translating operational problems into maintainable technical solutions.",
+  "internship_bullets": [
+    "Built a Python data pipeline that processes echocardiographic DICOM studies, extracts measurements with OCR and image processing, and exports structured JSON.",
+    "Designed resumable batch processing, validation queues, review tooling, logging, and traceable outputs for large clinical datasets.",
+    "Optimised a metadata-guided OpenCV matching workflow from roughly 21 hours to 23 minutes on one representative run."
+  ],
+  "apolloon_bullets": [
+    "Built a paid local-first application with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.",
+    "Translated real operator requirements into imports, exports, data validation, realtime synchronisation, replication, monitoring, and resilient failover."
+  ],
+  "projects": [
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Built reusable pipeline components for data preparation, splitting, cloud training and registration, then packaged serving with FastAPI, Docker, Kubernetes, MLflow, and CI/CD."
+    },
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Owned backend architecture, PostgreSQL persistence, retrieval, FastAPI services, containers, tests, and most frontend integration in a six-service application."
+    },
+    {
+      "title": "AWS Fargate Infrastructure with Vault",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/aws-fargate-vault.html",
+      "description": "Designed and tested Terraform modules for secure private workloads, IAM-based secret delivery, observability, autoscaling, health checks, and deployment safeguards."
+    }
+  ],
+  "education_note": "MLOps 18/20 · data engineering, Azure ML, MLflow, Docker, Kubernetes, CI/CD and APIs",
+  "skills": [
+    {
+      "title": "Data engineering",
+      "text": "Python · SQL/PostgreSQL · Data pipelines · Validation · NumPy · pandas"
+    },
+    {
+      "title": "Backend",
+      "text": "FastAPI · REST APIs · SQLite · C#/.NET · TypeScript/React"
+    },
+    {
+      "title": "Cloud & delivery",
+      "text": "Azure ML · AWS · Docker · Kubernetes · GitHub Actions · Terraform"
+    },
+    {
+      "title": "Engineering practice",
+      "text": "Git · Testing · CI/CD · Documentation · Requirements analysis · Agile"
+    }
+  ],
+  "letter_language": "nl"
+}

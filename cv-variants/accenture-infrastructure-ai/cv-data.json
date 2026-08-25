@@ -1,0 +1,54 @@
+{
+  "company": "Accenture",
+  "target_role": "Junior Infrastructure AI Specialist",
+  "headline": "Junior Infrastructure AI & MLOps Engineer",
+  "summary": "Ik studeerde met onderscheiding af in AI Engineering en combineer toegepaste AI met platform engineering. Ik bouw Python-datapijplijnen, Azure ML-workflows, modelservices in containers, RAG-toepassingen en betrouwbare infrastructuurautomatisering. Mijn praktijkervaring omvat MLflow, TensorFlow, scikit-learn, Docker, Kubernetes-manifests, REST-API’s, GitHub Actions, Terraform en operationele monitoring.",
+  "internship_bullets": [
+    "Bouwde een Python-pipeline die echocardiografische DICOM-studies met computer vision en OCR omzet in gestructureerde onderzoeksdata.",
+    "Ontwierp hervatbare batchverwerking, validatiewachtrijen, logging, traceerbare output, reviewtools en een gedocumenteerde cross-platform overdracht.",
+    "Optimaliseerde een metadata- en OpenCV-gebaseerde videomatcher van ongeveer 21 uur naar 23 minuten tijdens een representatieve run."
+  ],
+  "apolloon_bullets": [
+    "Bouwde een betaald local-first operationeel platform met React, TypeScript, Express, Electron, SQLite, tRPC en Socket.IO.",
+    "Implementeerde realtime synchronisatie, automatische LAN-detectie, health checks, gerepliceerde hot-standby failover en veilige herstelprocedures voor operatoren."
+  ],
+  "projects": [
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Bouwde een vierdelige Azure ML-pipeline voor datavoorbereiding, training en modelregistratie met TensorFlow, scikit-learn en MLflow; leverde FastAPI-serving, Docker, Kubernetes-manifests en GitHub Actions."
+    },
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Ontwierp de FastAPI-orchestratie met zeven getypeerde MCP-tools, RAG, PostgreSQL, ChromaDB, lokale LLM’s, containers, tests, bronvermeldingen en bevestigingsregels voor gevoelige acties."
+    },
+    {
+      "title": "AWS Fargate-infrastructuur met Vault",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/aws-fargate-vault.html",
+      "description": "Ontwierp en testte Terraform-modules voor private ECS Fargate-workloads met IAM-gebaseerde secrets, CloudWatch-observability, autoscaling, health checks en veilige deploymentcontroles."
+    }
+  ],
+  "education_note": "MLOps 18/20 · Azure ML-pipelines, TensorFlow, scikit-learn, MLflow, Docker, Kubernetes en CI/CD",
+  "skills": [
+    {
+      "title": "AI & MLOps",
+      "text": "Python · Azure ML · MLflow · TensorFlow · scikit-learn · Modelevaluatie"
+    },
+    {
+      "title": "Cloud & platform",
+      "text": "Docker · Kubernetes · AWS · Terraform · GitHub Actions · Linux/Bash"
+    },
+    {
+      "title": "GenAI & data",
+      "text": "RAG · MCP · Tool calling · ChromaDB · PostgreSQL · Datavalidatie"
+    },
+    {
+      "title": "Backend & operations",
+      "text": "FastAPI · REST/JSON · Monitoring · Health checks · Testing · Git"
+    }
+  ],
+  "languages": "Nederlands (moedertaal) · Engels (C1) · Frans (B1–B2)",
+  "letter_language": "nl",
+  "cv_language": "nl"
+}

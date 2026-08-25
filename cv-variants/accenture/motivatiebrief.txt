@@ -1,0 +1,17 @@
+Dear Accenture recruitment team,
+
+I first spoke with Accenture representatives at Howest’s internship fair. That conversation stayed with me because I came away with the clear impression that graduates from Multimedia & Creative Technologies were also considered for technical engineering roles. When I later found the Young Graduate Agentic AI Engineer position, the content matched my project experience far more closely than I expected.
+
+I recently graduated with distinction from the AI Engineering track at Howest. For a two-person Financial AI Agent project, I owned the backend architecture and most of the integration work across six services. I built the FastAPI orchestration layer with streamed responses, seven typed MCP tools, RAG, PostgreSQL persistence, ChromaDB and local LLM inference. I also added citations, tests and a two-step confirmation flow for sensitive actions. This gave me direct experience with tool calling, multi-step execution, retrieval and the engineering controls needed around an agent.
+
+During my international internship at 2Ai IPCA in Portugal, I worked on an open-ended medical imaging problem. I developed a Python pipeline that processes echocardiographic DICOM studies with computer vision and OCR, together with resumable batches, validation queues and review tooling. I also reduced one representative source-video matching run from roughly 21 hours to 23 minutes. The work required me to define success criteria, test uncertain approaches and turn research into software that other people could continue using.
+
+Beyond AI, I built Apolloon, a paid full-stack operations platform with React, TypeScript, Express, Electron and SQLite. It supports realtime synchronisation, automatic LAN discovery and hot-standby failover. That project taught me to think about reliability, users and operational constraints from the beginning.
+
+I noticed that the vacancy lists a master’s degree. I hold a professional bachelor in MCT, not a master, and I want to be transparent about that. I am applying because our conversation at Howest and the unusually direct overlap with my agentic AI work suggest that my practical profile is still worth considering.
+
+I would welcome the opportunity to demonstrate my projects and discuss what I could bring to the Software & Platform Engineering team.
+
+Kind regards,
+
+Warre Snaet

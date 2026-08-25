@@ -1,0 +1,17 @@
+Dear dotOcean team,
+
+I first met someone from your team at the Howest internship fair in 2025, where we spoke about a possible internship. I ultimately completed my internship elsewhere, but dotOcean's combination of AI, autonomous systems and maritime technology stayed with me. Now that I have graduated with distinction as an AI Engineer and am looking for my first full-time position, I would like to submit a spontaneous application.
+
+What attracts me to dotOcean is that AI does not exist in isolation from the real world. Sensor data, computer vision, edge systems and cloud software come together to give people better operational information. This is exactly the direction in which I want to develop my career: building AI that not only performs well in an experiment, but also becomes a reliable part of a useful system.
+
+During my internship at 2Ai IPCA in Portugal, I developed a Python application that uses computer vision and OCR to turn measurements from echocardiographic images into structured research data. I made the processing resumable, added validation and a review workflow, and reduced one representative matching run from approximately 21 hours to 23 minutes. This taught me how to combine experimentation with performance, traceability and practical usability.
+
+I have also built several AI systems outside my internship. For a Financial AI Agent, I developed the FastAPI backend, RAG pipeline, MCP tools, persistence, tests and safety controls. For my bachelor's research, I used Rust and Burn to build a semi-supervised classifier for offline use on a smartphone. I also worked with Azure ML, MLflow, Docker, Kubernetes and GitHub Actions across a complete machine-learning lifecycle.
+
+My software engineering background helps me look beyond the model itself. For Apolloon, I built a paid local-first platform with real-time synchronisation, automatic LAN discovery, replication and failover. This taught me to account for unreliable connections and systems that must remain dependable under operational conditions.
+
+I am at the beginning of my career, but I bring a broad foundation in AI, strong software engineering skills and a genuine willingness to learn. I would be glad to discuss whether there could be an opportunity for a Junior AI Engineer at dotOcean and to explain my projects in more detail.
+
+Kind regards,
+
+Warre Snaet

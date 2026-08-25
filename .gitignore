@@ -1,5 +1,6 @@
 dist/
 node_modules/
 .astro/
+.venv/
 .cv-venv/
 *.local

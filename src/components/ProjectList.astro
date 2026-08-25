@@ -1,4 +1,7 @@
 ---
+import * as stylex from "@stylexjs/stylex";
+import { portfolioStyles } from "../styles/portfolioStyles";
+
 interface Project {
   title: string;
   href?: string;
@@ -14,13 +17,13 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<ul class="work-list">
+<ul {...stylex.attrs(portfolioStyles.list)}>
   {projects.map((project) => (
-    <li class:list={["project-row", { "project-row--static": !project.href }]}>
-      {project.href ? <a href={project.href}>{project.title}</a> : <strong>{project.title}</strong>}
-      <span>
+    <li {...stylex.attrs(portfolioStyles.listItem, portfolioStyles.projectRow, !project.href && portfolioStyles.staticProjectRow)}>
+      {project.href ? <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.primaryProjectLink)} href={project.href}>{project.title}</a> : <strong>{project.title}</strong>}
+      <span {...stylex.attrs(portfolioStyles.projectDescription)}>
         : {project.description}
-        {project.secondaryHref && <> <a class="project-secondary-link" href={project.secondaryHref}>{project.secondaryLabel}</a>.</>}
+        {project.secondaryHref && <> <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.secondaryProjectLink)} href={project.secondaryHref}>{project.secondaryLabel}</a>.</>}
       </span>
     </li>
   ))}

@@ -1,0 +1,11 @@
+[project]
+name = "warre-portfolio-tools"
+version = "0.1.0"
+description = "Local document-generation tools for Warre Snaet's portfolio"
+requires-python = ">=3.11"
+dependencies = [
+  "weasyprint>=66,<70",
+]
+
+[tool.uv]
+package = false

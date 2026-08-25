@@ -1,0 +1,15 @@
+Beste recruitmentteam van Accenture,
+
+De functie Junior Infrastructure AI Specialist spreekt me aan omdat ze precies het domein combineert waarin ik verder wil groeien: toegepaste AI, MLOps en betrouwbare cloud- en platforminfrastructuur. Tijdens de stagebeurs van Howest sprak ik al met vertegenwoordigers van Accenture. Het beeld van een organisatie waar jonge engineers aan uiteenlopende technische problemen kunnen werken, is me bijgebleven.
+
+Ik studeerde met onderscheiding af in het traject AI Engineering aan Howest. Voor mijn MLOps-project bouwde ik een Azure ML-pipeline voor datavoorbereiding, TensorFlow-training, evaluatie en modelregistratie met MLflow. Ik verpakte de modelservice met FastAPI en Docker en maakte Kubernetes-manifests en een GitHub Actions-workflow. Daardoor leerde ik het model niet als een los experiment te bekijken, maar als één onderdeel van een reproduceerbaar en beheersbaar systeem.
+
+Die combinatie komt ook terug in mijn andere projecten. Voor een Financial AI Agent ontwierp ik de Python-backend met RAG, ChromaDB, zeven MCP-tools, persistente sessies, tests en controles voor gevoelige acties. In een individueel infrastructuurproject ontwierp ik daarnaast Terraform-modules voor private AWS Fargate-workloads met IAM, Vault, CloudWatch, health checks en autoscaling. Met Apolloon bouwde ik een operationeel platform dat tijdens een echt evenement betrouwbaar moet blijven werken, inclusief monitoring, realtime synchronisatie en automatische failover.
+
+Mijn moedertaal is Nederlands en ik werk professioneel in het Engels. Mijn Frans bevindt zich momenteel op B1–B2-niveau. Omdat de vacature professioneel Frans als vereiste noemt, wil ik daar transparant over zijn; ik ben bereid om dat niveau gericht verder te versterken.
+
+Ik licht mijn projecten en motivatie graag verder toe in een gesprek.
+
+Met vriendelijke groeten,
+
+Warre Snaet

@@ -1,0 +1,52 @@
+{
+  "company": "Biztory",
+  "target_role": "AI+Data Engineer",
+  "headline": "Junior AI & Data Engineer",
+  "summary": "AI Engineering graduate with distinction who builds agentic applications, data pipelines, and reliable Python services. Hands-on experience spans RAG, MCP tool execution, PostgreSQL, vector retrieval, model evaluation, cloud ML workflows, and containerised delivery. Enjoys turning messy data and ambiguous requirements into systems that are useful, testable, and ready to run.",
+  "internship_bullets": [
+    "Built a Python data pipeline that processes echocardiographic DICOM studies, extracts measurements with OCR and computer vision, and exports structured JSON.",
+    "Designed resumable batches, validation queues, review tooling, structured logging, and traceable outputs for large collections of clinical data.",
+    "Combined metadata and OpenCV ECC alignment to reduce one representative source-video matching run from roughly 21 hours to 23 minutes."
+  ],
+  "apolloon_bullets": [
+    "Built a local-first platform with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO for live event operations.",
+    "Implemented imports, exports, realtime data synchronisation, LAN discovery, replication, monitoring, and failover under unreliable network conditions."
+  ],
+  "projects": [
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Built the backend and orchestration for a six-service application with FastAPI, seven typed MCP tools, RAG, PostgreSQL, ChromaDB, local LLMs, citations, tests, and guardrails."
+    },
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Created reusable cloud pipeline components for data preparation, training and registration, then packaged serving with MLflow, FastAPI, Docker, Kubernetes, and CI/CD."
+    },
+    {
+      "title": "AWS Fargate Infrastructure with Vault",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/aws-fargate-vault.html",
+      "description": "Designed tested Terraform infrastructure for private ECS workloads with IAM-based Vault authentication, observability, autoscaling, health checks, and deployment safeguards."
+    }
+  ],
+  "education_note": "MLOps 18/20 · data pipelines, Azure ML, MLflow, Docker, Kubernetes, CI/CD and GenAI",
+  "skills": [
+    {
+      "title": "AI & agents",
+      "text": "RAG · MCP · Tool calling · Agent workflows · Embeddings · Model evaluation"
+    },
+    {
+      "title": "Data & backend",
+      "text": "Python · FastAPI · SQL/PostgreSQL · ChromaDB · NumPy · pandas"
+    },
+    {
+      "title": "Cloud & LLMOps",
+      "text": "Azure ML · MLflow · Docker · Kubernetes · GitHub Actions · Terraform"
+    },
+    {
+      "title": "Additional",
+      "text": "TypeScript/React · REST APIs · Git · Linux · Testing · Documentation"
+    }
+  ],
+  "letter_language": "en"
+}

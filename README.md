@@ -27,20 +27,19 @@ I build dependable software around applied AI: Python backends, data pipelines, 
 The editable CV is [`cv.html`](cv.html). Its print stylesheet keeps the browser and generated PDF on one A4 page.
 
 ```bash
-python -m venv .cv-venv
-.cv-venv/bin/python -m pip install -r requirements-cv.txt
+uv sync
 npm run build:cv
 npm run build
 ```
 
-The first two commands only need to be run once. The CV script regenerates the
-public CV and the separate C# variant. The Astro build copies only the public CV
-into `dist/`.
+`uv sync` creates and updates the locked local Python environment. The CV script
+regenerates the public CV and the separate variants. The Astro build copies only
+the public CV into `dist/`.
 
 ### Building the site
 
-The portfolio uses Astro layouts and components but builds to static HTML and CSS.
-No client framework is shipped to visitors.
+The portfolio uses Astro layouts and components with StyleX, then builds to
+static HTML and extracted atomic CSS. No client framework is shipped to visitors.
 
 ```bash
 npm install

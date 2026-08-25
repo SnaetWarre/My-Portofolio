@@ -1,0 +1,17 @@
+Beste BDO Digital-team,
+
+De functie van Data Engineer Junior Consultant trok mijn aandacht omdat ze niet stopt bij analyse of advies. Het vertalen van operationele problemen naar werkende ICT-oplossingen en die oplossingen vervolgens ook ontwikkelen en implementeren is precies het soort werk waarin ik mijn technische basis verder wil uitbouwen.
+
+Ik studeerde recent met onderscheiding af als AI Engineer aan Howest. Tijdens mijn internationale stage bij 2Ai IPCA in Portugal bouwde ik een Python-datapipeline voor echocardiografische DICOM-studies. De software verwerkt medische beelden, extraheert meetwaarden met beeldverwerking en OCR en zet de resultaten om naar gestructureerde JSON. Omdat de brondata niet altijd voorspelbaar was, ontwikkelde ik ook hervatbare batchverwerking, validatiewachtrijen, reviewtools en duidelijke logging.
+
+Daarnaast werkte ik aan een matcher die op basis van metadata en beeldgelijkenis de juiste bronvideo terugvindt. Door de verwerking anders te structureren en OpenCV-alignering gericht toe te passen, bracht ik één representatieve run terug van ongeveer 21 uur naar 23 minuten. Dat project heeft mij geleerd om niet alleen een pipeline te bouwen, maar ook gegevenskwaliteit, performantie en controleerbaarheid mee te nemen.
+
+In mijn MLOps-opleiding bouwde ik herbruikbare Azure ML-componenten voor datavoorbereiding, training en modelregistratie. Ik werkte daarbij met MLflow, FastAPI, Docker, Kubernetes en GitHub Actions. Voor een Financial AI Agent was ik verantwoordelijk voor de backendarchitectuur, PostgreSQL-persistentie, retrieval, containers en tests. Ook buiten data heb ik ervaring met volledige systemen: voor Apolloon bouwde ik een betaald local-first platform met realtime synchronisatie, SQLite-replicatie en failover.
+
+Ik heb een professionele bachelor en geen master. Daartegenover staat een portfolio waarin ik kan aantonen dat ik zelfstandig technische problemen analyseer, oplossingen bouw en ze grondig valideer. Ik communiceer vlot in het Nederlands en Engels en kan mij ook in het Frans behelpen.
+
+Ik vertel graag meer over mijn projecten en hoe ik mijn technische ervaring binnen BDO Digital verder zou kunnen ontwikkelen.
+
+Met vriendelijke groeten,
+
+Warre Snaet

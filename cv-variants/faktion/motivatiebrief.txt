@@ -1,0 +1,15 @@
+Dear Faktion team,
+
+The sentence in your vacancy that caught my attention was that you do not stop at prototypes. That is exactly the direction I want for my career. I enjoy exploring AI, but I am most motivated when the result becomes a dependable system with an API, data flow, evaluation, deployment and a clear use for the people working with it.
+
+I recently graduated with distinction in AI Engineering at Howest. During my internship at 2Ai IPCA in Portugal, I built a Python pipeline for echocardiographic DICOM studies. It detects measurement regions, extracts values with computer vision and OCR, and supports resumable batches, validation queues and human review. I also developed an OpenCV and metadata-based source-video matcher and reduced one representative run from roughly 21 hours to 23 minutes. This taught me to combine experimentation with performance, traceability and practical handoff.
+
+Your mix of GenAI, classical ML, computer vision and agentic systems matches my own project work unusually well. For a Financial AI Agent, I owned the FastAPI backend, orchestration, seven typed MCP tools, RAG, PostgreSQL persistence, ChromaDB retrieval, containers and tests. I added citations and confirmation guardrails because I wanted the system to be inspectable rather than merely impressive in a demo. In a separate MLOps project, I worked with Azure ML, MLflow, Docker, Kubernetes and GitHub Actions. I also maintain and contribute to the open-source Athas editor across TypeScript and Rust.
+
+I realise that I am applying at the start of my professional career and that the role asks for substantial hands-on ability. I will not pretend to have years of production experience. What I can bring is a strong public portfolio, fast learning, honest technical judgement and repeated experience of carrying difficult work from an unclear starting point to a tested result.
+
+Faktion feels like a place where my interests in reliable AI and serious software engineering could reinforce each other. I would value the opportunity to show you my work and discuss where I could contribute while continuing to grow.
+
+Kind regards,
+
+Warre Snaet

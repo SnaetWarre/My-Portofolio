@@ -1,6 +1,9 @@
 ---
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
 import CaseSection from "../../components/CaseSection.astro";
+import * as stylex from "@stylexjs/stylex";
+import { caseStudyStyles } from "../../styles/caseStudyStyles";
+import { portfolioStyles } from "../../styles/portfolioStyles";
 ---
 
 <CaseStudyLayout
@@ -16,37 +19,37 @@ import CaseSection from "../../components/CaseSection.astro";
   ]}
 >
   <CaseSection label="Scope" title="Work across product features and runtime reliability">
-    <p>My contributions were not limited to a single isolated feature. I worked across language support, editor interface behavior, remote connections, resource cleanup, and language-server lifecycle issues in a cross-platform desktop application.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>My contributions were not limited to a single isolated feature. I worked across language support, editor interface behavior, remote connections, resource cleanup, and language-server lifecycle issues in a cross-platform desktop application.</p>
   </CaseSection>
 
   <CaseSection label="Merged work" title="Features, fixes, and maintenance">
-    <ul>
-      <li>Added C# language support and image diff functionality.</li>
-      <li>Improved Linux menu-bar behavior and cross-platform interface consistency.</li>
-      <li>Replaced a hard-coded proxy port with dynamic port selection.</li>
-      <li>Closed SSH and SFTP resource leaks and fixed memory leaks in React components.</li>
-      <li>Fixed a race condition that could start duplicate language servers.</li>
-      <li>Contributed supporting formatting, TypeScript, pre-commit, and CI corrections.</li>
+    <ul {...stylex.attrs(caseStudyStyles.list)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added C# language support and image diff functionality.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Improved Linux menu-bar behavior and cross-platform interface consistency.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Replaced a hard-coded proxy port with dynamic port selection.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Closed SSH and SFTP resource leaks and fixed memory leaks in React components.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Fixed a race condition that could start duplicate language servers.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Contributed supporting formatting, TypeScript, pre-commit, and CI corrections.</li>
     </ul>
-    <div class="case-links">
-      <a href="https://github.com/athasdev/athas">View Athas on GitHub ↗</a>
-      <a href="https://github.com/athasdev/athas/pull/319">Linux UI contribution ↗</a>
-      <a href="https://github.com/athasdev/athas/pull/336">Dynamic proxy port ↗</a>
-      <a href="https://github.com/athasdev/athas/pull/410">SSH resource cleanup ↗</a>
-      <a href="https://github.com/athasdev/athas/pull/496">LSP race-condition fix ↗</a>
+    <div {...stylex.attrs(caseStudyStyles.links)}>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas">View Athas on GitHub ↗</a>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/319">Linux UI contribution ↗</a>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/336">Dynamic proxy port ↗</a>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/410">SSH resource cleanup ↗</a>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/496">LSP race-condition fix ↗</a>
     </div>
   </CaseSection>
 
   <CaseSection label="Engineering" title="Small fixes can protect the whole editor session">
-    <ul class="production-list">
-      <li><strong>Lifecycle correctness</strong>The LSP fix prevents duplicate processes and competing editor state.</li>
-      <li><strong>Resource ownership</strong>SSH and SFTP handles are closed explicitly instead of leaking across remote sessions.</li>
-      <li><strong>Cross-platform behavior</strong>Linux-specific interface work remains consistent with the broader desktop experience.</li>
-      <li><strong>Repository hygiene</strong>Formatting, type checks, hooks, and CI fixes keep contributions mergeable for other maintainers.</li>
+    <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Lifecycle correctness</strong>The LSP fix prevents duplicate processes and competing editor state.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resource ownership</strong>SSH and SFTP handles are closed explicitly instead of leaking across remote sessions.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cross-platform behavior</strong>Linux-specific interface work remains consistent with the broader desktop experience.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Repository hygiene</strong>Formatting, type checks, hooks, and CI fixes keep contributions mergeable for other maintainers.</li>
     </ul>
   </CaseSection>
 
   <CaseSection label="Open source" title="Contribute within an existing product direction">
-    <p>Working in a maintained project means fitting changes into an existing architecture, responding to review and CI feedback, and accepting that not every proposed feature belongs in the product. The merged work is the useful record: concrete improvements that became part of the shared codebase.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Working in a maintained project means fitting changes into an existing architecture, responding to review and CI feedback, and accepting that not every proposed feature belongs in the product. The merged work is the useful record: concrete improvements that became part of the shared codebase.</p>
   </CaseSection>
 </CaseStudyLayout>

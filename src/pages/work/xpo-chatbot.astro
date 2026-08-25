@@ -1,6 +1,9 @@
 ---
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
 import CaseSection from "../../components/CaseSection.astro";
+import * as stylex from "@stylexjs/stylex";
+import { caseStudyStyles } from "../../styles/caseStudyStyles";
+import { portfolioStyles } from "../../styles/portfolioStyles";
 ---
 
 <CaseStudyLayout
@@ -16,33 +19,33 @@ import CaseSection from "../../components/CaseSection.astro";
   ]}
 >
   <CaseSection label="Problem" title="Answer event questions from changing source material">
-    <p>Visitors needed quick answers about exhibitors, stands, and event details across multiple event websites. The system had to collect that content, make it semantically searchable, generate grounded answers, and remain configurable for different events.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Visitors needed quick answers about exhibitors, stands, and event details across multiple event websites. The system had to collect that content, make it semantically searchable, generate grounded answers, and remain configurable for different events.</p>
   </CaseSection>
 
   <CaseSection label="Architecture" title="Connect ingestion, retrieval, chat, and analytics">
-    <div class="architecture" aria-label="XPO chatbot data flow">
-      <div class="flow-node"><small>Ingestion</small><strong>Python and Scrapy</strong><span>Collect and clean event-site content</span></div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-node"><small>Retrieval API</small><strong>.NET and Azure OpenAI</strong><span>Create embeddings and perform semantic search</span></div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-node"><small>Storage</small><strong>Cosmos DB</strong><span>Keep event documents, profiles, sessions, and analytics</span></div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-node"><small>Experience</small><strong>Chat widget and Next.js dashboard</strong><span>Serve visitors and expose operational insights</span></div>
+    <div {...stylex.attrs(caseStudyStyles.architecture)} aria-label="XPO chatbot data flow">
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Ingestion</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Python and Scrapy</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Collect and clean event-site content</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Retrieval API</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>.NET and Azure OpenAI</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Create embeddings and perform semantic search</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Storage</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Cosmos DB</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Keep event documents, profiles, sessions, and analytics</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Experience</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Chat widget and Next.js dashboard</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Serve visitors and expose operational insights</span></div>
     </div>
   </CaseSection>
 
   <CaseSection label="Contribution" title="Build the path from source website to deployed answer">
-    <ul>
-      <li>Worked on the Python scraping and cleaning pipeline for several event websites.</li>
-      <li>Built and refined .NET endpoints for embeddings, semantic search, chat, authentication, registration, and analytics.</li>
-      <li>Integrated Azure OpenAI and Cosmos DB, including retry behavior for rate-limited bulk uploads.</li>
-      <li>Added event-specific prompts, multilingual stand-number handling, input sanitization, rate limiting, and configurable frontend behavior.</li>
-      <li>Contributed production deployment configuration, logging improvements, CORS configuration, and the analytics dashboard flow.</li>
+    <ul {...stylex.attrs(caseStudyStyles.list)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Worked on the Python scraping and cleaning pipeline for several event websites.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built and refined .NET endpoints for embeddings, semantic search, chat, authentication, registration, and analytics.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Integrated Azure OpenAI and Cosmos DB, including retry behavior for rate-limited bulk uploads.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added event-specific prompts, multilingual stand-number handling, input sanitization, rate limiting, and configurable frontend behavior.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Contributed production deployment configuration, logging improvements, CORS configuration, and the analytics dashboard flow.</li>
     </ul>
-    <div class="case-links"><a href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group">View repository ↗</a></div>
+    <div {...stylex.attrs(caseStudyStyles.links)}><a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group">View repository ↗</a></div>
   </CaseSection>
 
   <CaseSection label="Result" title="One system, several event identities">
-    <p>The final application supported multiple event datasets and bot configurations through the same retrieval service. Event content could be scraped, embedded, queried through the chatbot, and followed through registration and analytics data without maintaining a separate backend for every event.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The final application supported multiple event datasets and bot configurations through the same retrieval service. Event content could be scraped, embedded, queried through the chatbot, and followed through registration and analytics data without maintaining a separate backend for every event.</p>
   </CaseSection>
 </CaseStudyLayout>

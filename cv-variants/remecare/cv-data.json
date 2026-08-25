@@ -1,0 +1,52 @@
+{
+  "company": "Remecare",
+  "target_role": "Junior Software Engineer",
+  "headline": "Junior Software Engineer · Digital Health",
+  "summary": "AI Engineering graduate with distinction who combines software engineering with first-hand experience in medical imaging research. Builds dependable backend, data, and full-stack systems with attention to clean code, validation, practical users, and long-term maintainability. Motivated to apply this foundation to healthcare software that supports clinicians and patients beyond a research prototype.",
+  "internship_bullets": [
+    "Built a Python pipeline for echocardiographic DICOM studies that extracts clinical measurements with OCR and image processing and exports structured data.",
+    "Designed resumable batches, validation queues, review tooling, ECG trace extraction, and clear handoff documentation for a medical research workflow.",
+    "Developed an OpenCV and DICOM metadata-based source-video matcher, reducing one representative run from roughly 21 hours to 23 minutes."
+  ],
+  "apolloon_bullets": [
+    "Built a real-world operations platform with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.",
+    "Translated operator needs into reliable workflows, imports and exports, realtime synchronisation, LAN discovery, health visibility, and safe failover behaviour."
+  ],
+  "projects": [
+    {
+      "title": "Event Chatbot for XPO Group",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/xpo-chatbot.html",
+      "description": "Contributed to a full-stack RAG system for an external client using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion."
+    },
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Owned backend architecture, FastAPI services, persistence, containers, tests, and most frontend integration across a six-service application."
+    },
+    {
+      "title": "Athas Code Editor · Open-Source Maintainer",
+      "url": "https://github.com/athasdev/athas",
+      "description": "Merged C# support and reliability fixes across a React/TypeScript and Tauri/Rust codebase, including memory leaks and an LSP race condition."
+    }
+  ],
+  "education_note": "MLOps 18/20 · software architecture, testing, Azure, Docker, APIs and data engineering",
+  "skills": [
+    {
+      "title": "Software",
+      "text": "C#/.NET · TypeScript/React · Python · FastAPI · REST APIs"
+    },
+    {
+      "title": "Data & healthcare",
+      "text": "SQL/PostgreSQL · DICOM · Computer vision · OCR · Validation workflows"
+    },
+    {
+      "title": "Cloud & delivery",
+      "text": "Azure ML · Docker · GitHub Actions · CI/CD · Testing · Git"
+    },
+    {
+      "title": "Additional",
+      "text": "SQLite · Electron · Tauri/Rust · Agile teamwork · Technical documentation"
+    }
+  ],
+  "letter_language": "nl"
+}

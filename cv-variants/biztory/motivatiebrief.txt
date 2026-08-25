@@ -1,0 +1,17 @@
+Dear Biztory team,
+
+Your AI+Data Engineer role stood out because it is aimed at builders. The combination of data workflows, RAG, autonomous agents and systems that interact with real tools is closely aligned with the work I have already chosen to pursue in my studies and personal projects.
+
+I recently graduated with distinction in AI Engineering at Howest. In a two-person Financial AI Agent project, I owned the backend architecture and most of the integration work across six services. I built a FastAPI orchestration layer with streamed responses, seven typed MCP tools, RAG through ChromaDB, PostgreSQL persistence and local LLM inference. I also implemented citations, tests and a two-step confirmation flow for sensitive actions. The most valuable part of that project was not simply connecting an LLM. It was designing the data, tool and control layers around it so the application behaved predictably.
+
+During my international internship at 2Ai IPCA, I built a Python pipeline for echocardiographic DICOM studies. It transforms raw imaging data into structured JSON through computer vision and OCR, with resumable batch processing, validation queues and human review. I also combined metadata with OpenCV alignment to reduce one representative matching run from roughly 21 hours to 23 minutes. This gave me practical experience with messy data, performance bottlenecks and workflows where traceability matters.
+
+My MLOps coursework complements that application work. I created reusable Azure ML pipeline components, tracked models with MLflow and packaged a FastAPI service with Docker, Kubernetes manifests and GitHub Actions. In a separate infrastructure project, I used Terraform to design tested AWS Fargate infrastructure with observability, health checks and identity-based secret delivery.
+
+I am at the beginning of my career, but I already know that I enjoy building the full path from data and experimentation to an application that can run reliably. Biztory’s focus on AI-enabled data infrastructure and agentic services makes this a particularly relevant next step for me.
+
+I would be glad to walk you through my portfolio and discuss how I could contribute to the team.
+
+Kind regards,
+
+Warre Snaet

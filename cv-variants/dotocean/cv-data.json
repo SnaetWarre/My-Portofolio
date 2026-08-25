@@ -1,0 +1,52 @@
+{
+  "company": "dotOcean",
+  "target_role": "Junior AI Engineer",
+  "headline": "Junior AI Engineer",
+  "summary": "AI Engineering graduate with distinction and hands-on experience in computer vision, OCR, RAG, agentic systems, classical machine learning, and edge AI. Builds the software around AI as well: Python pipelines, APIs, validation workflows, databases, tests, containers, and cloud deployment. Especially motivated by operational AI that turns sensor and system data into reliable decisions in autonomous and maritime environments.",
+  "internship_bullets": [
+    "Built a Python application that turns echocardiographic DICOM studies into structured research data using computer vision, OCR, and review tooling.",
+    "Designed resumable processing, validation queues, traceable outputs, and cross-platform documentation so the workflow could be used and extended reliably.",
+    "Reduced one representative OpenCV and metadata-based source-video matching run from roughly 21 hours to 23 minutes."
+  ],
+  "apolloon_bullets": [
+    "Engineered a paid local-first operations platform with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.",
+    "Designed operator-focused workflows, realtime synchronisation, automatic LAN discovery, replicated failover, health checks, and reliable offline operation."
+  ],
+  "projects": [
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Owned the FastAPI backend, multi-step orchestration, seven typed MCP tools, RAG, PostgreSQL, ChromaDB, containers, tests, citations, and confirmation guardrails in a six-service application."
+    },
+    {
+      "title": "Offline Semi-Supervised AI in Rust",
+      "url": "https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning",
+      "description": "Built and evaluated a Burn/Rust plant-disease classifier that reached 94.90% held-out accuracy and shipped as an approximately 26 MB offline application tested on iPhone."
+    },
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Built reusable cloud pipeline components and packaged a FastAPI model service with Azure ML, MLflow, Docker, Kubernetes manifests, health checks, and GitHub Actions."
+    }
+  ],
+  "education_note": "MLOps 18/20 · computer vision, deep learning, GenAI, reinforcement learning, edge AI, and model evaluation",
+  "skills": [
+    {
+      "title": "AI engineering",
+      "text": "Python · Computer vision · OCR · RAG · MCP · Agentic systems"
+    },
+    {
+      "title": "ML & data",
+      "text": "PyTorch · Burn · NumPy · pandas · PostgreSQL · ChromaDB"
+    },
+    {
+      "title": "MLOps & cloud",
+      "text": "Azure ML · MLflow · Docker · Kubernetes · GitHub Actions · FastAPI"
+    },
+    {
+      "title": "Software engineering",
+      "text": "TypeScript/React · Rust · C#/.NET · REST APIs · Linux · Testing"
+    }
+  ],
+  "letter_language": "en"
+}

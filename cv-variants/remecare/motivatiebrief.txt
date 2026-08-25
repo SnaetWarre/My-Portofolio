@@ -1,0 +1,17 @@
+Beste Remecare-team,
+
+De vacature voor Junior Software Engineer sprak mij meteen aan omdat ze twee zaken samenbrengt die voor mij belangrijk zijn: degelijke software bouwen en werken aan technologie die in de gezondheidszorg echt gebruikt wordt. Tijdens mijn stage heb ik gemerkt dat medische software pas waarde krijgt wanneer ze niet alleen technisch interessant is, maar ook betrouwbaar en praktisch bruikbaar is voor de mensen die ermee werken.
+
+Ik studeerde in juni met onderscheiding af als AI Engineer aan Howest. Voor mijn internationale stage bij 2Ai IPCA in Portugal werkte ik met echocardiografische DICOM-beelden. Ik bouwde een Python-pipeline die ingebrande meetgegevens detecteert en uitleest met beeldverwerking en OCR. Daaromheen ontwikkelde ik hervatbare batchverwerking, validatiewachtrijen en reviewtools. Ik maakte ook een matcher die bronvideo’s terugvindt op basis van metadata en beeldgelijkenis. Voor één representatieve run bracht ik de verwerkingstijd terug van ongeveer 21 uur naar 23 minuten.
+
+Die stage leerde me omgaan met medische data, maar vooral ook om kritisch na te denken over validatie, uitzonderingen en overdraagbaarheid. Onderzoekssoftware moest een workflow worden die andere mensen konden begrijpen, controleren en verder gebruiken. Dat sluit sterk aan bij de kwaliteitsgerichte aanpak die jullie in de vacature beschrijven.
+
+Daarnaast bouwde ik Apolloon, een betaald softwareproject voor een 24-urenevenement. De applicatie gebruikt React, TypeScript, Express, Electron en SQLite en ondersteunt realtime synchronisatie, automatische netwerkdetectie en failover. Daarbij vertaalde ik de noden van operatoren naar concrete workflows die ook onder tijdsdruk duidelijk en betrouwbaar moesten blijven.
+
+Mijn sterkste ervaring ligt momenteel in Python, backendontwikkeling en TypeScript. Ik heb ook met C#/.NET gewerkt in een full-stack RAG-project voor een externe klant en voegde C#-ondersteuning toe aan de open-sourcecode-editor Athas. Ik zie jullie .NET- en Angular-stack daarom niet als een drempel, maar als een logische kans om mijn softwarebasis verder te verdiepen.
+
+Ik zou graag mee bouwen aan een platform dat artsen en patiënten dagelijks ondersteunt. Ik licht mijn projecten en motivatie met plezier verder toe in een kennismakingsgesprek.
+
+Met vriendelijke groeten,
+
+Warre Snaet

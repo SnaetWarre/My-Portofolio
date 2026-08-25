@@ -1,4 +1,7 @@
 ---
+import * as stylex from "@stylexjs/stylex";
+import { caseStudyStyles } from "../styles/caseStudyStyles";
+
 interface Props {
   label: string;
   title: string;
@@ -7,10 +10,10 @@ interface Props {
 const { label, title } = Astro.props;
 ---
 
-<section class="case-section">
-  <p class="case-section-label">{label}</p>
+<section {...stylex.attrs(caseStudyStyles.section)}>
+  <p {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.sectionLabel)}>{label}</p>
   <div>
-    <h2>{title}</h2>
+    <h2 {...stylex.attrs(caseStudyStyles.sectionHeading)}>{title}</h2>
     <slot />
   </div>
 </section>

@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* KaTeX creates this element at runtime, so it cannot receive a StyleX class. */
+.katex-display {
+  margin: 1.75rem 0;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-top: 1px solid rgb(0 0 0 / 10%);
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+}

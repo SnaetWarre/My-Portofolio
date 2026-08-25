@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import "../styles/case-study.css";
+import * as stylex from "@stylexjs/stylex";
 import { basePath } from "../lib/paths";
+import { caseStudyStyles } from "../styles/caseStudyStyles";
+import { portfolioStyles } from "../styles/portfolioStyles";
 
 interface MetaItem {
   label: string;
@@ -22,26 +24,31 @@ const base = basePath;
 ---
 
 <BaseLayout {title} {description}>
-  <a class="skip-link" href="#case-content">Skip to case study</a>
-  <main class="case-study" id="case-content">
-    <nav class="case-nav" aria-label="Case study navigation">
-      <a href={base}>← Warre Snaet</a>
-      <a href={`${base}#work-title`}>Selected work</a>
+  <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
+  <main {...stylex.attrs(caseStudyStyles.mainContent)} id="case-content">
+    <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation)} aria-label="Case study navigation">
+      <a {...stylex.attrs(portfolioStyles.link)} href={base}>← Warre Snaet</a>
+      <a {...stylex.attrs(portfolioStyles.link)} href={`${base}#work-title`}>Selected work</a>
     </nav>
 
-    <header class="case-header">
+    <header {...stylex.attrs(caseStudyStyles.header)}>
       <div>
-        <p class="case-kicker">{kicker}</p>
-        <h1>{heading}</h1>
-        <p class="case-lead">{lead}</p>
+        <p {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.kicker)}>{kicker}</p>
+        <h1 {...stylex.attrs(caseStudyStyles.heading)}>{heading}</h1>
+        <p {...stylex.attrs(caseStudyStyles.lead)}>{lead}</p>
       </div>
-      <dl class="case-meta">
-        {meta.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+      <dl {...stylex.attrs(caseStudyStyles.metadataList)}>
+        {meta.map((metadataItem) => (
+          <div {...stylex.attrs(caseStudyStyles.metadataRow)}>
+            <dt {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.metadataTerm)}>{metadataItem.label}</dt>
+            <dd {...stylex.attrs(caseStudyStyles.metadataDescription)}>{metadataItem.value}</dd>
+          </div>
+        ))}
       </dl>
     </header>
 
     <slot />
 
-    <footer class="case-footer"><a href={`${base}#work-title`}>← Back to selected work</a></footer>
+    <footer {...stylex.attrs(caseStudyStyles.footer)}><a {...stylex.attrs(portfolioStyles.link)} href={`${base}#work-title`}>← Back to selected work</a></footer>
   </main>
 </BaseLayout>
