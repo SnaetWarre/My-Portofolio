@@ -1,0 +1,54 @@
+{
+  "company": "KU Leuven",
+  "target_role": "Junior AI Engineer",
+  "headline": "Junior AI Engineer · LLMs, Agentic AI & MLOps",
+  "summary": "Met onderscheiding afgestudeerde AI Engineer met praktijkervaring in lokale LLM-inference, RAG, agentic workflows en de software eromheen. Bouwde Python- en FastAPI-services met Ollama, MCP-tools, vector retrieval, tests en beveiligingscontroles. Werkte daarnaast met TensorFlow, Azure ML, Docker, Kubernetes en CI/CD. Kijkt nuchter naar bruikbaarheid, risico's en de grenzen van AI.",
+  "internship_bullets": [
+    "Bouwde een Python-pipeline die echocardiografische DICOM-studies met computer vision en OCR omzet in gestructureerde onderzoeksdata.",
+    "Ontwierp hervatbare batchverwerking, validatiewachtrijen, traceerbare output en menselijke reviewtools zodat onzekere resultaten zichtbaar en controleerbaar bleven.",
+    "Optimaliseerde een metadata- en OpenCV-gebaseerde videomatcher van ongeveer 21 uur naar 23 minuten tijdens een representatieve run."
+  ],
+  "apolloon_bullets": [
+    "Bouwde een betaald local-first operationeel platform met React, TypeScript, Express, Electron, SQLite, tRPC en Socket.IO.",
+    "Implementeerde realtime synchronisatie, automatische netwerkdetectie, health checks, monitoring en gerepliceerde failover voor betrouwbaar gebruik tijdens een echt evenement."
+  ],
+  "projects": [
+    {
+      "title": "Financial AI Agent",
+      "url": "https://github.com/SnaetWarre/Financial_AI_Agent",
+      "description": "Bouwde de FastAPI-orchestratie met lokale Ollama-inference, RAG, ChromaDB, zeven getypeerde MCP-tools, PostgreSQL, containers, tests, bronvermeldingen en controles voor promptinjectie en gevoelige acties."
+    },
+    {
+      "title": "Event Chatbot voor XPO Group",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/xpo-chatbot.html",
+      "description": "Werkte mee aan een RAG-toepassing voor een externe klant met Azure OpenAI, Cosmos DB, .NET, Next.js en Python-ingestie."
+    },
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Bouwde cloud-datavoorbereiding, TensorFlow-training, modelregistratie, MLflow-tracking, FastAPI-serving, Docker, Kubernetes-manifests en GitHub Actions."
+    }
+  ],
+  "education_note": "MLOps 18/20 · GenAI, computer vision, deep learning, Azure ML, MLflow, Docker, Kubernetes en CI/CD",
+  "skills": [
+    {
+      "title": "LLMs & agentic AI",
+      "text": "Ollama · RAG · MCP · Tool calling · Embeddings · ChromaDB"
+    },
+    {
+      "title": "AI & evaluatie",
+      "text": "Python · PyTorch · TensorFlow · Modelevaluatie · Promptinjectiecontroles"
+    },
+    {
+      "title": "Infrastructuur & MLOps",
+      "text": "Docker · Kubernetes · Azure ML · MLflow · GitHub Actions · Git"
+    },
+    {
+      "title": "Backend & data",
+      "text": "FastAPI · PostgreSQL · REST-API's · Testen · Linux · Technische documentatie"
+    }
+  ],
+  "languages": "Nederlands (moedertaal) · Engels (C1) · Frans (B1-B2)",
+  "letter_language": "nl",
+  "cv_language": "nl"
+}

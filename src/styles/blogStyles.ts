@@ -5,11 +5,14 @@ const mobileBreakpoint = "@media (max-width: 700px)";
 
 export const blogStyles = stylex.create({
   document: {
-    scrollBehavior: "smooth",
+    scrollBehavior: {
+      default: "smooth",
+      "@media (prefers-reduced-motion: reduce)": "auto",
+    },
   },
   pageColumn: {
     width: {
-      default: `min(${layoutTokens.contentMeasure}, calc(100% - ${layoutTokens.pageLeft} - 2rem))`,
+      default: `min(${layoutTokens.contentMeasure}, calc(100% - ${layoutTokens.pageLeft} - ${layoutTokens.pageGutter}))`,
       [mobileBreakpoint]: "auto",
     },
     marginLeft: {
@@ -22,11 +25,11 @@ export const blogStyles = stylex.create({
     },
     paddingLeft: {
       default: 0,
-      [mobileBreakpoint]: "1.25rem",
+      [mobileBreakpoint]: layoutTokens.pageGutter,
     },
     paddingRight: {
       default: 0,
-      [mobileBreakpoint]: "1.25rem",
+      [mobileBreakpoint]: layoutTokens.pageGutter,
     },
   },
   image: {
@@ -42,7 +45,7 @@ export const blogStyles = stylex.create({
     justifyContent: "space-between",
     paddingTop: {
       default: "4.5rem",
-      [mobileBreakpoint]: "2rem",
+      [mobileBreakpoint]: "2.5rem",
     },
   },
   navigationLinks: {
@@ -91,6 +94,7 @@ export const blogStyles = stylex.create({
     },
     lineHeight: 1.08,
     letterSpacing: "-0.025em",
+    fontWeight: 500,
   },
   articleContent: {
     maxWidth: layoutTokens.contentMeasure,
@@ -115,6 +119,7 @@ export const blogStyles = stylex.create({
     marginLeft: 0,
     fontSize: "1.45rem",
     lineHeight: 1.25,
+    fontWeight: 500,
   },
   articleSubheading: {
     marginTop: "2rem",
@@ -123,6 +128,7 @@ export const blogStyles = stylex.create({
     marginLeft: 0,
     fontSize: "1.12rem",
     lineHeight: 1.3,
+    fontWeight: 500,
   },
   articleMinorHeading: {
     margin: 0,

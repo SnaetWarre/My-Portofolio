@@ -1,0 +1,17 @@
+Beste mevrouw Barcena Roig,
+
+Ik solliciteer voor de functie van Junior AI Engineer bij ICTS. De bonsAI-service spreekt me aan omdat de functie eigen inference-infrastructuur combineert met toepassingen die veilig en bruikbaar moeten zijn. Zo wil ik zelf ook met LLMs werken: kansen zien, maar tegelijk de grenzen benoemen en controles inbouwen.
+
+Ik studeerde in juni met onderscheiding af in het traject AI Engineering aan Howest. Voor een Financial AI Agent, een academisch project met twee studenten, nam ik de backendarchitectuur en het grootste deel van de integratie voor mijn rekening. Ik bouwde de FastAPI-orchestratie met lokale Ollama-inference, RAG via ChromaDB, zeven getypeerde MCP-tools, PostgreSQL en gestreamde antwoorden. De zes services draaiden samen in Docker Compose.
+
+Ik bouwde bewust controles rond het model in. Ik voegde bronvermeldingen, zichtbare tool calls en tests toe, samen met controles voor promptinjectie en een bevestigingsstap voor gevoelige acties. De agent kreeg geen rechtstreekse toegang tot de databank, maar werkte via afgebakende tools. Zo bleef zichtbaar wat het model opzocht, welke actie het wilde uitvoeren en wanneer de gebruiker zelf moest bevestigen.
+
+Ik werkte ook mee aan een RAG-chatbot voor XPO Group met Azure OpenAI, Cosmos DB, .NET, Next.js en een Python-ingestiepipeline. Voor een individueel MLOps-project bouwde ik met TensorFlow een Azure ML-pipeline voor datavoorbereiding, training, evaluatie en modelregistratie. Ik verpakte de inference-service met FastAPI en Docker en maakte Kubernetes-manifests en een GitHub Actions-workflow met health checks. Tijdens mijn stage rond medische beeldvorming leerde ik daarnaast hoe belangrijk menselijke validatie, traceerbare output en duidelijke documentatie zijn wanneer brondata onzeker is.
+
+Mijn praktische ervaring met GDPR en de EU AI Act is voorlopig beperkter dan mijn technische ervaring met AI-beveiliging en evaluatie. Ik wil mij daar gericht verder in verdiepen. Ik vind het net interessant dat KU Leuven die juridische en ethische vragen samen met de infrastructuur en toepassingen behandelt, in plaats van ze pas achteraf te bekijken.
+
+Als starter spreekt de gerichte mentoring in de vacature me aan. Tegelijk kan ik al concreet bijdragen met Python, lokale LLMs, RAG, agentic tooling, containers en CI/CD. Ik leg technische keuzes graag helder uit en werk het liefst aan toepassingen waarvan gebruikers begrijpen wat ze doen en waar de grenzen liggen. Mijn ervaring en projecten licht ik graag verder toe in een gesprek.
+
+Met vriendelijke groeten,
+
+Warre Snaet

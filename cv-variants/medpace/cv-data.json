@@ -1,0 +1,52 @@
+{
+  "company": "Medpace",
+  "target_role": "Software Engineer - Medical Imaging (Fullstack)",
+  "headline": "Software Engineer · Medical Imaging & Full Stack",
+  "summary": "AI Engineering graduate with distinction and hands-on experience building software for medical imaging research. Combines Python, DICOM, image processing, and machine learning with full-stack development in TypeScript, React, C#/.NET, APIs, and databases. Works carefully around validation, testing, traceability, technical documentation, and the needs of people using the software.",
+  "internship_bullets": [
+    "Built a Python pipeline for echocardiographic DICOM studies that extracts clinical measurements with OCR and image processing and exports structured research data.",
+    "Designed resumable batches, validation queues, human review tooling, ECG trace extraction, traceable outputs, and cross-platform handoff documentation.",
+    "Developed a source-video matcher using DICOM metadata and OpenCV ECC alignment, reducing one representative run from roughly 21 hours to 23 minutes."
+  ],
+  "apolloon_bullets": [
+    "Built a paid full-stack operations platform with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO for a real 24-hour event.",
+    "Translated operator requirements into tested workflows, imports and exports, realtime synchronisation, network discovery, monitoring, and safe failover behaviour."
+  ],
+  "projects": [
+    {
+      "title": "Event Chatbot for XPO Group",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/xpo-chatbot.html",
+      "description": "Contributed to a full-stack RAG application for an external client using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion."
+    },
+    {
+      "title": "Azure ML Lifecycle",
+      "url": "https://snaetwarre.github.io/My-Portofolio/work/azure-mlops.html",
+      "description": "Built cloud data preparation, TensorFlow training, model registration, MLflow tracking, FastAPI serving, Docker, Kubernetes manifests, and GitHub Actions."
+    },
+    {
+      "title": "Athas Code Editor · Open-Source Maintainer",
+      "url": "https://github.com/athasdev/athas",
+      "description": "Merged C# support and reliability fixes across a React/TypeScript and Tauri/Rust codebase, including memory leaks and an LSP race condition."
+    }
+  ],
+  "education_note": "MLOps 18/20 · computer vision, deep learning, software architecture, testing, Azure, Docker, APIs, and data engineering",
+  "skills": [
+    {
+      "title": "Full-stack development",
+      "text": "TypeScript/React · C#/.NET · Python · FastAPI · REST APIs · SQL"
+    },
+    {
+      "title": "Medical imaging",
+      "text": "DICOM · OpenCV · OCR · Image alignment · ECG traces · Human validation"
+    },
+    {
+      "title": "Machine learning & cloud",
+      "text": "TensorFlow · Azure ML · MLflow · Docker · AWS · GitHub Actions"
+    },
+    {
+      "title": "Software quality",
+      "text": "Git · Unit testing · Validation workflows · Technical documentation · CI/CD"
+    }
+  ],
+  "letter_language": "en"
+}

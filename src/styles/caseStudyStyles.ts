@@ -4,7 +4,7 @@ import { colorTokens, layoutTokens, typographyTokens } from "./tokens.stylex";
 export const caseStudyStyles = stylex.create({
   mainContent: {
     width: {
-      default: `min(${layoutTokens.contentMeasure}, calc(100% - ${layoutTokens.pageLeft} - 2rem))`,
+      default: `min(${layoutTokens.contentMeasure}, calc(100% - ${layoutTokens.pageLeft} - ${layoutTokens.pageGutter}))`,
       "@media (max-width: 700px)": "auto",
     },
     marginLeft: {
@@ -13,7 +13,7 @@ export const caseStudyStyles = stylex.create({
     },
     padding: {
       default: "4.5rem 0 6rem",
-      "@media (max-width: 700px)": "2rem 1.25rem 4rem",
+      "@media (max-width: 700px)": `2.5rem ${layoutTokens.pageGutter} 4rem`,
     },
   },
   navigation: {
@@ -26,7 +26,7 @@ export const caseStudyStyles = stylex.create({
   metadataLabel: {
     color: colorTokens.mutedForeground,
     fontFamily: typographyTokens.bodyFont,
-    fontSize: "0.72rem",
+    fontSize: "0.8125rem",
     fontWeight: 500,
     letterSpacing: 0,
     textTransform: "none",
@@ -38,14 +38,19 @@ export const caseStudyStyles = stylex.create({
   heading: {
     marginTop: 0,
     marginBottom: "0.75rem",
-    fontSize: "1.85rem",
-    fontWeight: 600,
-    letterSpacing: "-0.025em",
+    fontSize: {
+      default: "2.25rem",
+      "@media (max-width: 700px)": "1.85rem",
+    },
+    fontWeight: 500,
+    letterSpacing: "-0.035em",
     lineHeight: 1.2,
   },
   lead: {
     marginTop: 0,
     marginBottom: "1.25rem",
+    fontSize: "1.125rem",
+    lineHeight: 1.65,
   },
   metadataList: {
     margin: 0,
@@ -65,9 +70,10 @@ export const caseStudyStyles = stylex.create({
   },
   metadataDescription: {
     margin: 0,
+    fontSize: "0.9375rem",
   },
   section: {
-    marginTop: "2.25rem",
+    marginTop: "2.75rem",
   },
   sectionLabel: {
     marginTop: 0,
@@ -79,7 +85,7 @@ export const caseStudyStyles = stylex.create({
     marginBottom: "0.75rem",
     marginLeft: 0,
     fontSize: "1.3rem",
-    fontWeight: 600,
+    fontWeight: 500,
     letterSpacing: "-0.02em",
     lineHeight: 1.3,
   },

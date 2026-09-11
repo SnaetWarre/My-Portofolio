@@ -6,8 +6,7 @@ interface Project {
   title: string;
   href?: string;
   description: string;
-  secondaryLabel?: string;
-  secondaryHref?: string;
+  context?: string;
 }
 
 interface Props {
@@ -17,14 +16,14 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<ul {...stylex.attrs(portfolioStyles.list)}>
+<ul {...stylex.attrs(portfolioStyles.projectList)} role="list">
   {projects.map((project) => (
-    <li {...stylex.attrs(portfolioStyles.listItem, portfolioStyles.projectRow, !project.href && portfolioStyles.staticProjectRow)}>
-      {project.href ? <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.primaryProjectLink)} href={project.href}>{project.title}</a> : <strong>{project.title}</strong>}
-      <span {...stylex.attrs(portfolioStyles.projectDescription)}>
-        : {project.description}
-        {project.secondaryHref && <> <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.secondaryProjectLink)} href={project.secondaryHref}>{project.secondaryLabel}</a>.</>}
-      </span>
+    <li {...stylex.attrs(portfolioStyles.projectRow)}>
+      <h3 {...stylex.attrs(portfolioStyles.projectHeading)}>
+        {project.href ? <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.primaryProjectLink)} href={project.href}>{project.title}</a> : project.title}
+        {project.context && <span {...stylex.attrs(portfolioStyles.projectContext)}>{project.context}</span>}
+      </h3>
+      <p {...stylex.attrs(portfolioStyles.projectDescription)}>{project.description}</p>
     </li>
   ))}
 </ul>

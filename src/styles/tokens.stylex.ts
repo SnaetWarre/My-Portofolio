@@ -7,6 +7,8 @@ export const colorTokens = stylex.defineVars({
   mutedForeground: "rgb(0 0 0 / 64%)",
   border: "rgb(0 0 0 / 18%)",
   borderLight: "rgb(0 0 0 / 10%)",
+  accent: "#335e7a",
+  accentHover: "#26495f",
 });
 
 export const typographyTokens = stylex.defineVars({
@@ -16,7 +18,10 @@ export const typographyTokens = stylex.defineVars({
 
 export const layoutTokens = stylex.defineVars({
   contentMeasure: "43rem",
+  portfolioMeasure: "52rem",
   pageLeft: "clamp(1.25rem, 11vw, 13rem)",
+  pageGutter: "1.5rem",
+  sectionGap: "3.5rem",
 });
 
 export const cvColorTokens = stylex.defineVars({

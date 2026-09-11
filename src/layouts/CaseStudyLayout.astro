@@ -27,8 +27,8 @@ const base = basePath;
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
   <main {...stylex.attrs(caseStudyStyles.mainContent)} id="case-content">
     <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation)} aria-label="Case study navigation">
-      <a {...stylex.attrs(portfolioStyles.link)} href={base}>← Warre Snaet</a>
-      <a {...stylex.attrs(portfolioStyles.link)} href={`${base}#work-title`}>Selected work</a>
+      <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={base}>Warre Snaet</a>
+      <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>Selected work</a>
     </nav>
 
     <header {...stylex.attrs(caseStudyStyles.header)}>
@@ -49,6 +49,6 @@ const base = basePath;
 
     <slot />
 
-    <footer {...stylex.attrs(caseStudyStyles.footer)}><a {...stylex.attrs(portfolioStyles.link)} href={`${base}#work-title`}>← Back to selected work</a></footer>
+    <footer {...stylex.attrs(caseStudyStyles.footer)}><a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>Back to selected work</a></footer>
   </main>
 </BaseLayout>

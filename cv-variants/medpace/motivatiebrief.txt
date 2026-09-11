@@ -1,0 +1,17 @@
+Dear Medpace recruitment team,
+
+I am applying for the Software Engineer - Medical Imaging (Fullstack) position in Leuven. The role immediately caught my attention because it brings together the areas I most want to work in: medical imaging, full-stack software, and applications that need to be dependable enough for clinical research.
+
+I recently graduated with distinction in AI Engineering at Howest. During my international internship at 2Ai IPCA in Portugal, I built a Python pipeline for echocardiographic DICOM studies. It detects measurements embedded in the images, extracts them with image processing and OCR, and exports structured research data. I also developed ECG trace extraction and a source-video matcher based on DICOM metadata and OpenCV alignment. For one representative run, I reduced the matching time from roughly 21 hours to 23 minutes.
+
+The most useful lesson from that internship was that medical imaging software is about much more than an algorithm. The source data was not always predictable, so I added resumable batch processing, validation queues, traceable outputs, and human review tooling. I documented the workflow for use across different systems and made uncertain results visible instead of hiding them. That experience fits closely with Medpace's focus on software validation, test scripts, maintenance, and technical documentation in a regulated clinical-trial environment.
+
+I also have practical full-stack experience. For Apolloon, a paid client project used during a 24-hour event, I built an operations platform with React, TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO. It includes realtime synchronisation, automatic network discovery, monitoring, and failover. In another external-client project, I contributed to a RAG application built with .NET, Next.js, Azure OpenAI, Cosmos DB, and Python. I have not worked professionally with Angular yet, but my TypeScript and React experience gives me a solid base for learning it quickly.
+
+Alongside software development, I have worked with TensorFlow, Azure ML, MLflow, Docker, GitHub Actions, and AWS. I would like to bring that mix of medical imaging, applied machine learning, and full-stack engineering to Medpace, while learning from a team that develops software for real clinical trials.
+
+I would be glad to discuss my experience and projects in more detail.
+
+Kind regards,
+
+Warre Snaet

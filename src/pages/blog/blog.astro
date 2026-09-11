@@ -159,11 +159,11 @@ import "../../styles/reset.css";
     <body {...stylex.attrs(portfolioStyles.body)}>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink, blogStyles.skipLink)} href="#article">Skip to article</a>
 
-        <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)}>
-            <a href="../index.html" {...stylex.attrs(portfolioStyles.link)}>Warre Snaet</a>
+        <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)} aria-label="Article navigation">
+            <a href="../index.html" {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
             <div {...stylex.attrs(blogStyles.navigationLinks)}>
-                <a href="../index.html#work-title" {...stylex.attrs(portfolioStyles.link)}>Projects</a>
-                <a href="blog.html" {...stylex.attrs(portfolioStyles.link)}>Blog</a>
+                <a href="../index.html#work-title" {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
+                <a href="blog.html" {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} aria-current="page">Writing</a>
             </div>
         </nav>
 
@@ -836,8 +836,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             <strong
                                 >Burn is production-ready for
-                                inference.</strong
-                            >
+                                inference.</strong>{" "}
                             The API is clean, the multi-backend system works,
                             and the community is responsive. Training
                             ergonomics are still maturing compared to
@@ -846,8 +845,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             <strong
                                 >ONNX is the pragmatic bridge to the
-                                browser.</strong
-                            >
+                                browser.</strong>{" "}
                             Rather than fighting to compile Burn directly to
                             WASM, exporting to ONNX and letting ONNX Runtime
                             Web handle inference was the practical path. Ship
@@ -856,8 +854,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             <strong
                                 >Dedicated edge hardware is often
-                                overkill.</strong
-                            >
+                                overkill.</strong>{" "}
                             The Jetson costs &euro;350 and was slower than the
                             phone. Consumer devices are fast enough for most
                             inference tasks at this model scale.
@@ -865,8 +862,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             <strong
                                 >Preprocessing parity is
-                                non-negotiable.</strong
-                            >
+                                non-negotiable.</strong>{" "}
                             A subtle difference in resize interpolation between
                             training and inference silently destroys accuracy.
                             Match your preprocessing pipeline exactly across
@@ -874,8 +870,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             <strong
-                                >Rust's compile times are real.</strong
-                            >
+                                >Rust's compile times are real.</strong>{" "}
                             Plan for 5+ minute release builds. Incremental
                             debug builds are fast, but CI and release cycles
                             feel the weight.
@@ -883,8 +878,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             <strong
                                 >Tauri v2 is well-suited for ML
-                                applications.</strong
-                            >
+                                applications.</strong>{" "}
                             Rust backend with a web frontend gives you native
                             GPU access with modern UI tooling. The
                             command/event system bridges both worlds cleanly.
@@ -964,12 +958,12 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         alt="Warre Snaet Logo"
                         {...stylex.attrs(blogStyles.image, blogStyles.footerLogo)}
                     />
-                    <p {...stylex.attrs(blogStyles.footerBrandParagraph)}>WARRE SNAET &copy; 2026</p>
+                    <p {...stylex.attrs(blogStyles.footerBrandParagraph)}>Warre Snaet &copy; 2026</p>
                 </div>
                 <a
                     href="mailto:warresnaet@icloud.com"
-                    {...stylex.attrs(portfolioStyles.link, blogStyles.footerCallToAction)}
-                    >Let&rsquo;s Talk</a
+                    {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink, blogStyles.footerCallToAction)}
+                    >Email me</a
                 >
             </div>
         </footer>
