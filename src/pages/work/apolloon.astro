@@ -7,66 +7,69 @@ import { caseStudyStyles } from "../../styles/caseStudyStyles";
 
 <CaseStudyLayout
   title="Apolloon Race Operations | Warre Snaet"
-  description="Case study of a local-first, fault-tolerant race operations platform built by Warre Snaet for Apolloon."
+  description="Case study of Apolloon, a local-first race operations system with offline-capable Electron hosts, LAN discovery, and SQLite replication."
   kicker="Paid client project · 2026"
   heading="Apolloon race operations"
-  lead="A local-first platform for running a 24-hour relay when the network, internet connection, or a host laptop cannot be assumed to stay available."
+  lead="I built the event infrastructure for a 24-hour relay around the wired LAN: each Electron host carries its own Node backend and writable SQLite database instead of depending on a cloud service."
   meta={[
     { label: "Role", value: "Software engineer · end-to-end implementation" },
     { label: "Stack", value: "React, TypeScript, Express, tRPC, Socket.IO, SQLite, Electron" },
-    { label: "Context", value: "Real client · event operations" },
+    { label: "Runtime", value: "Electron hosts · wired LAN · local SQLite" },
   ]}
 >
-  <CaseSection label="Problem" title="Reliability without cloud assumptions">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Operators need to register runners, manage waiting order, record laps, correct mistakes, publish live displays, and export results throughout a 24-hour event. A cloud-only design would turn internet loss into an operational failure.</p>
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The system therefore treats the local wired network as the primary environment. Event laptops discover the application automatically, while operator and display browsers connect over the LAN.</p>
+  <CaseSection label="Purpose" title="Race operations without a cloud dependency">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The job is to register runners, manage the queue, record laps, correct mistakes, show live race state, and export results through a 24-hour event. Losing Wi-Fi, internet access, or one laptop should not turn those jobs into an outage.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Apolloon treats the event LAN as the deployment target. A single Electron laptop can run alone; when several host laptops are connected to the same wired switch, each keeps a complete writable database and catches up after a disconnect.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Local-first</strong>No internet dependency during the event.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Realtime</strong>Operator actions patch connected displays immediately.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Recoverable</strong>Multiple hosts retain complete SQLite copies.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Standalone by default</strong>One packaged host can operate an event without internet, PostgreSQL, or another managed service.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Local hosts, thin clients</strong>Browser-only operator laptops and displays use the LAN but do not carry a database.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Realtime where it matters</strong>Small Socket.IO deltas update connected screens after a successful local write.</li>
     </ul>
   </CaseSection>
 
-  <CaseSection label="Architecture" title="One operational surface, three runtime layers">
-    <div {...stylex.attrs(caseStudyStyles.architecture)} role="img" aria-label="Apolloon architecture from browsers through the local server to replicated hosts">
+  <CaseSection label="Runtime" title="A desktop app that carries its own backend">
+    <div {...stylex.attrs(caseStudyStyles.architecture)}>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Clients</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Operator screens</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Race control, imports, corrections and exports</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Clients</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Live displays</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Rankings, active runner and public race state</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Client state</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>React Query</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Snapshot cache patched by realtime events</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>LAN clients</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Operator and display browsers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Connect to an Electron host for race control, live state, imports, and exports</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host runtime</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Electron + local Node process</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Packages the React UI, Express and tRPC API, Socket.IO bridge, and static files</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host storage</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>SQLite state and operation log</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Each host owns its own writable data and records replication work with every local change</span></div>
       </div>
-      <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ tRPC + HTTP + Socket.IO ↓</p>
+      <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ signed UDP discovery + authenticated HTTP delta sync ↓</p>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Server</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Express + tRPC</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Validated commands and export endpoints</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>State</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>SQLite primary</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Race invariants and transactional writes</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Desktop</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Electron package</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Starts and serves the complete local application</span></div>
-      </div>
-      <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ discovery + replication + voting ↓</p>
-      <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host A</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Writable primary</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Current authoritative database</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host B</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Hot standby</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Full local replica and forwarded writes</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host C</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Voting standby</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Enables safe promotion without split-brain</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Pair once</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Persisted host identities</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>An additional host joins from a creator URL and short pairing code, with a recovery copy before replacement</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Rediscover routes</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>HMAC-signed UDP announcements</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Hosts find one another again after reconnects or LAN IP changes without relying on a central server</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Reconcile state</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Missing operation deltas only</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Authenticated exchanges validate compatibility and replay operations in a canonical order</span></div>
       </div>
     </div>
   </CaseSection>
 
-  <CaseSection label="Ownership" title="What I designed and implemented">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>This is paid client work. The source code cannot be shared publicly, but the architecture, operational constraints, and my contribution can be described.</p>
+  <CaseSection label="Consistency" title="A write is more than a button click">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The local server validates a command and its race-state preconditions before changing data. The application update and its immutable replication record commit in the same SQLite transaction, then the UI receives a response and connected clients receive a realtime delta.</p>
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The typed browser/server boundary, SQLite state transitions, realtime cache bridge, and operator workflows.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>CSV imports, structured exports, live public displays, LAN host discovery, and desktop packaging.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Replicated hot-standby behavior with a three-host voting rule to prevent unsafe promotion after a network split.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Regression and end-to-end tests around race completion, waiting order, runner status, historical labels, and realtime behavior.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Exactly-once retries</strong>Reusing a command ID with the same payload returns the original result; reusing it for another write is rejected.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Atomic replication</strong>An invalid incoming batch changes neither race data, the operation log, nor the peer's recorded progress.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Deterministic recovery</strong>Concurrent histories can be rebuilt from a checkpoint and canonical operation order after hosts reconnect.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Durable local storage</strong>SQLite runs in WAL mode with full production synchronization on every host.</li>
     </ul>
-    <h3 {...stylex.attrs(caseStudyStyles.subheading)}>Key engineering decision</h3>
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>With only two hosts, neither side of a network split can prove it has the authoritative copy. Automatic failover is therefore deliberately limited to three voting hosts. Refusing an unsafe promotion is better than accepting two diverging primaries.</p>
   </CaseSection>
 
-  <CaseSection label="Engineering" title="Operational constraints shaped the product">
+  <CaseSection label="Safety" title="Failure handling is deliberately not magic failover">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Registration, queue, and administration remain writable on every host. Timing is different: it has one assigned controller, and a planned handover only targets a reachable peer that has caught up. Apolloon does not pretend a two-laptop network split can safely elect a new controller on its own.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Failure containment</strong>Each host keeps a full local copy, so a single laptop is not the only place where race state exists.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Visible authority</strong>The primary/standby model creates one explicit writer instead of relying on optimistic multi-writer conflict resolution.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Operator safety</strong>Race-state transitions live behind validated server procedures and regression tests rather than UI assumptions.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Portable delivery</strong>Electron packages the server and frontend into an event-ready desktop application with no cloud setup.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Guarded timing takeover</strong>A caught-up replica can take over after controller loss with explicit operator confirmation; an uncertain recovery path warns instead of hiding possible missing timing actions.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Replication is not backup</strong>Each production host creates a verified SQLite snapshot every five minutes, with integrity checks and a SHA-256 manifest.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Version gates</strong>Peers compare schema, replication format, app version, and release identity before exchanging replayable data.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Portable delivery</strong>The same self-contained Electron runtime is packaged for Linux, Windows, and macOS.</li>
+    </ul>
+  </CaseSection>
+
+  <CaseSection label="Ownership" title="What I designed and implemented">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>This is paid client work, so the source code is not public. I can describe the product and systems work I owned.</p>
+    <ul {...stylex.attrs(caseStudyStyles.list)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The local-first architecture, Electron runtime, typed browser and server boundary, SQLite data model, and operation-log replication path.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>LAN host discovery, authenticated delta exchange, peer compatibility checks, reconnect behavior, backups, and timing handover safeguards.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Operator flows for registration, queue management, timing, corrections, imports, exports, and live race state.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Regression and end-to-end coverage for standalone writes, multi-host convergence, reconnect catch-up, invalid batch rollback, peer address changes, and timing conflicts.</li>
     </ul>
   </CaseSection>
 </CaseStudyLayout>
