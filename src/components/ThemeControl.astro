@@ -49,7 +49,43 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
     updateToggle();
   }
 
-  toggle?.addEventListener("click", () => choose(effectiveTheme() === "dark" ? "light" : "dark"));
+  type SameDocumentTransition = { ready: Promise<void>; finished: Promise<void> };
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let revealing = false;
+
+  function toggleTheme() {
+    const next = effectiveTheme() === "dark" ? "light" : "dark";
+    const doc = document as Document & {
+      startViewTransition?: (update: () => void) => SameDocumentTransition;
+    };
+    // Instant fallback: no API, reduced motion, missing button, or already revealing.
+    if (!doc.startViewTransition || reducedMotion.matches || !toggle || revealing) {
+      choose(next);
+      return;
+    }
+    const rect = toggle.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    revealing = true;
+    let transition: SameDocumentTransition;
+    try {
+      transition = doc.startViewTransition(() => choose(next));
+    } catch {
+      choose(next);
+      revealing = false;
+      return;
+    }
+    transition.ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 480, easing: "ease-out", pseudoElement: "::view-transition-new(root)" } as KeyframeAnimationOptions,
+      );
+    }).catch(() => { /* A skipped transition still leaves the new theme applied. */ });
+    transition.finished.finally(() => { revealing = false; }).catch(() => { revealing = false; });
+  }
+
+  toggle?.addEventListener("click", toggleTheme);
   systemTheme.addEventListener("change", updateToggle);
   window.addEventListener("storage", (event) => {
     if (event.key !== storageKey && event.key !== null) return;

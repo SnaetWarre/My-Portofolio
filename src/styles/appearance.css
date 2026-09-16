@@ -19,3 +19,17 @@ html[data-obsidian][data-theme="dark"] {
   --obsidian-invert: 0;
   color-scheme: dark;
 }
+
+/* Circular ink reveal for the theme toggle. JS animates the clip-path;
+   CSS just disables the default cross-fade so the wipe stays crisp. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
