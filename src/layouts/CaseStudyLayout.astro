@@ -1,4 +1,5 @@
 ---
+import { obsidianStyles } from "../styles/obsidianStyles";
 import BaseLayout from "./BaseLayout.astro";
 import * as stylex from "@stylexjs/stylex";
 import { basePath } from "../lib/paths";
@@ -23,9 +24,9 @@ const { title, description, kicker, heading, lead, meta } = Astro.props;
 const base = basePath;
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout {title} {description} sculpture>
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
-  <main {...stylex.attrs(caseStudyStyles.mainContent)} id="case-content">
+  <main {...stylex.attrs(caseStudyStyles.mainContent, obsidianStyles.article)} id="case-content" tabindex="-1">
     <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation)} aria-label="Case study navigation">
       <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={base}>Warre Snaet</a>
       <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>Selected work</a>

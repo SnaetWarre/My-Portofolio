@@ -1,0 +1,64 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import ControlIcon from "./ControlIcon.astro";
+import { obsidianStyles as styles } from "../styles/obsidianStyles";
+---
+
+<div {...stylex.attrs(styles.controlsHost)} data-theme-controls hidden transition:persist="appearance-controls" transition:animate="none">
+  <div {...stylex.attrs(styles.themeControls)} role="group" aria-label="Appearance and animation">
+    <div {...stylex.attrs(styles.themeOptions)} role="group" aria-label="Color theme">
+      <button {...stylex.attrs(styles.iconButton)} type="button" data-theme-choice="light" aria-label="Light theme" title="Light theme" aria-pressed="false"><ControlIcon name="sun" /></button>
+      <button {...stylex.attrs(styles.iconButton)} type="button" data-theme-choice="dark" aria-label="Dark theme" title="Dark theme" aria-pressed="false"><ControlIcon name="moon" /></button>
+      <button {...stylex.attrs(styles.iconButton)} type="button" data-theme-choice="system" aria-label="Follow system theme" title="Follow system theme" aria-pressed="true"><ControlIcon name="system" /></button>
+    </div>
+    <span data-scene-controls hidden>
+      <button {...stylex.attrs(styles.iconButton)} type="button" data-motion-toggle aria-label="Pause animation" title="Pause animation" aria-pressed="false">
+        <span data-pause-icon><ControlIcon name="pause" /></span>
+        <span data-play-icon hidden><ControlIcon name="play" /></span>
+      </button>
+    </span>
+  </div>
+</div>
+
+<script>
+  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
+  const root = document.documentElement;
+  const choices = document.querySelectorAll<HTMLButtonElement>("[data-theme-choice]");
+  const controls = document.querySelector<HTMLElement>("[data-theme-controls]");
+  const systemTheme = matchMedia("(prefers-color-scheme: dark)");
+  const storageKey = "portfolio-theme";
+
+  function updateControls() {
+    const preference = root.dataset.theme ?? "system";
+    for (const button of choices) {
+      button.setAttribute("aria-pressed", String(button.dataset.themeChoice === preference));
+    }
+  }
+
+  function choose(theme: string | undefined) {
+    if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+    else delete root.dataset.theme;
+    try {
+      if (root.dataset.theme) localStorage.setItem(storageKey, root.dataset.theme);
+      else localStorage.removeItem(storageKey);
+    } catch { /* The selection still works for this page. */ }
+    updateControls();
+  }
+
+  choices.forEach((button) => button.addEventListener("click", () => choose(button.dataset.themeChoice)));
+  systemTheme.addEventListener("change", updateControls);
+  window.addEventListener("storage", (event) => {
+    if (event.key !== storageKey && event.key !== null) return;
+    if (event.newValue === "light" || event.newValue === "dark") root.dataset.theme = event.newValue;
+    else delete root.dataset.theme;
+    updateControls();
+  });
+  // Apply the current choice to the incoming document before any new content paints.
+  document.addEventListener("astro:before-swap", (event: TransitionBeforeSwapEvent) => {
+    const incoming = event.newDocument.documentElement;
+    if (root.dataset.theme) incoming.dataset.theme = root.dataset.theme;
+    else delete incoming.dataset.theme;
+  });
+  updateControls();
+  if (controls) controls.hidden = false;
+</script>

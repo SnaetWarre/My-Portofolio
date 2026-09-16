@@ -1,0 +1,14 @@
+---
+import "../styles/appearance.css";
+import { ClientRouter } from "astro:transitions";
+---
+
+<ClientRouter fallback="swap" />
+
+<script is:inline>
+      // Resolve before paint so a saved choice never flashes the opposite theme.
+      try {
+        const saved = localStorage.getItem("portfolio-theme");
+        if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+      } catch { /* System appearance remains available without storage. */ }
+</script>

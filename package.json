@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@stylexjs/stylex": "^0.19.0",
-    "astro": "^7.0.9"
+    "astro": "^7.0.9",
+    "katex": "^0.18.7",
+    "three": "^0.186.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@stylexjs/unplugin": "^0.19.0",
+    "@types/three": "^0.186.0",
     "typescript": "^6.0.3",
     "unplugin": "^2.3.11"
   }

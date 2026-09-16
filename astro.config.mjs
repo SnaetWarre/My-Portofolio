@@ -8,6 +8,9 @@ export default defineConfig({
     format: "file",
   },
   vite: {
+    // StyleX injects its global rules into one CSS asset. Share that asset
+    // across all routes, including pages with additional KaTeX styles.
+    build: { cssCodeSplit: false },
     plugins: [stylex.vite()],
   },
 });

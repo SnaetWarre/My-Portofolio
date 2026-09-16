@@ -1,0 +1,26 @@
+/* Defaults also work before JavaScript and when scripts are disabled. */
+html[data-obsidian] {
+  --obsidian-paper: 255 255 255;
+  --obsidian-ink: 0 0 0;
+  --obsidian-invert: 1;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-obsidian]:not([data-theme="light"]) {
+    --obsidian-paper: 0 0 0;
+    --obsidian-ink: 255 255 255;
+    --obsidian-invert: 0;
+    color-scheme: dark;
+  }
+}
+html[data-obsidian][data-theme="dark"] {
+  --obsidian-paper: 0 0 0;
+  --obsidian-ink: 255 255 255;
+  --obsidian-invert: 0;
+  color-scheme: dark;
+}
+
+[data-theme-choice][aria-pressed="true"] {
+  color: rgb(var(--obsidian-ink));
+  background: rgb(var(--obsidian-ink) / 9%);
+}

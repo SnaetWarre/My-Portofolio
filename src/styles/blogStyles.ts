@@ -11,12 +11,14 @@ export const blogStyles = stylex.create({
     },
   },
   pageColumn: {
+    position: "relative",
+    zIndex: 1,
     width: {
-      default: `min(${layoutTokens.contentMeasure}, calc(100% - ${layoutTokens.pageLeft} - ${layoutTokens.pageGutter}))`,
+      default: `min(${layoutTokens.contentMeasure}, 49vw)`,
       [mobileBreakpoint]: "auto",
     },
     marginLeft: {
-      default: layoutTokens.pageLeft,
+      default: "7vw",
       [mobileBreakpoint]: 0,
     },
     marginRight: {
@@ -44,8 +46,8 @@ export const blogStyles = stylex.create({
     alignItems: "baseline",
     justifyContent: "space-between",
     paddingTop: {
-      default: "4.5rem",
-      [mobileBreakpoint]: "2.5rem",
+      default: "5.5rem",
+      [mobileBreakpoint]: "5rem",
     },
   },
   navigationLinks: {
@@ -427,6 +429,7 @@ export const blogStyles = stylex.create({
     margin: 0,
   },
   footerLogo: {
+    filter: "invert(calc(1 - var(--obsidian-invert)))",
     width: "2rem",
     height: "2rem",
   },

@@ -1,0 +1,201 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectList from "./ProjectList.astro";
+import { obsidianStyles } from "../styles/obsidianStyles";
+
+import * as stylex from "@stylexjs/stylex";
+import { basePath } from "../lib/paths";
+import { portfolioStyles } from "../styles/portfolioStyles";
+
+interface Props { experimental?: boolean; }
+const { experimental = false } = Astro.props;
+
+const base = basePath;
+const year = new Date().getFullYear();
+
+const experience = [
+  {
+    title: "Medical imaging at 2Ai IPCA",
+    context: "AI & software engineering intern",
+    href: `${base}work/medical-imaging.html`,
+    description: "International internship using real clinical imaging data. I built a Python DICOM/OCR pipeline, validation and review tools, resumable batch processing, ECG extraction, and a source-video matcher. Metadata-guided alignment reduced one representative run from about 23 hours to 21 minutes.",
+  },
+  {
+    title: "Apolloon 24-hour run system",
+    context: "Software engineer, paid client work",
+    href: `${base}work/apolloon.html`,
+    description: "I built local event infrastructure where every Electron host owns a writable SQLite database. Hosts pair once, rediscover peers through signed UDP on the LAN, and reconcile only missing operation deltas over authenticated HTTP.",
+  },
+];
+
+const selectedWork = [
+  {
+    title: "AWS Fargate & Vault workload identity",
+    href: `${base}work/aws-fargate-vault.html`,
+    description: "A tested Terraform architecture for private ECS Fargate workloads behind an ALB, with two-AZ networking, IAM-based Vault authentication, CloudWatch observability, autoscaling, health checks, and deployment safeguards.",
+  },
+  {
+    title: "Financial AI agent",
+    href: `${base}work/financial-agent.html`,
+    description: "A six-service application with FastAPI streaming, MCP tool execution, RAG, PostgreSQL, React, ChromaDB, and local Ollama inference. In this two-person academic project, I owned the backend architecture, orchestration, persistence, containers, tests, and most frontend integration.",
+  },
+  {
+    title: "Azure ML lifecycle",
+    href: `${base}work/azure-mlops.html`,
+    description: "Individual MLOps coursework covering Azure ML compute, parallel data preparation, model registration, MLflow, FastAPI, Docker, Kubernetes manifests, and GitHub Actions.",
+  },
+  {
+    title: "Semi-supervised learning in Rust",
+    href: `${base}blog/blog.html`,
+    description: "Bachelor research into data-efficient plant-disease classification on edge devices. The saved SSL checkpoint reached 94.90% held-out accuracy and shipped as an approximately 26 MB offline application tested on iPhone.",
+  },
+  {
+    title: "Event chatbot for XPO Group",
+    href: `${base}work/xpo-chatbot.html`,
+    description: "Academic team project for an external client: a full-stack RAG system using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion.",
+  },
+  {
+    title: "Dataset query system",
+    href: `${base}work/dataset-query.html`,
+    description: "A Python client-server analysis application with authentication, moderation, statistics, broadcasts, and a PySide6 interface.",
+  },
+];
+
+const openSource = [
+  {
+    title: "Athas code editor",
+    context: "Maintainer & contributor",
+    href: `${base}work/athas.html`,
+    description: "I contribute across its React/TypeScript and Tauri/Rust codebase. Merged work includes C# language support, image diffing, Linux UI improvements, dynamic proxy ports, resource- and memory-leak fixes, and an LSP race-condition fix.",
+  },
+];
+
+const profileSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: "Warre Snaet",
+    jobTitle: "Junior Backend and Applied AI Engineer",
+    url: "https://snaetwarre.github.io/My-Portofolio/",
+    sameAs: ["https://www.linkedin.com/in/warre-snaet-272354370/", "https://github.com/SnaetWarre"],
+    alumniOf: { "@type": "EducationalOrganization", name: "Howest University of Applied Sciences" },
+  },
+};
+---
+
+<BaseLayout
+  experimental={experimental}
+  sculpture
+  title="Warre Snaet | Backend & Applied AI Engineer"
+  description="Warre Snaet is an AI Engineering graduate with distinction from Belgium, building dependable Python backends, agent infrastructure, applied AI systems, and data pipelines."
+>
+  <Fragment slot="head"><script is:inline type="application/ld+json" set:html={JSON.stringify(profileSchema)} /></Fragment>
+  <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#main">Skip to content</a>
+  <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="main" tabindex="-1">
+    <div {...stylex.attrs(obsidianStyles.hero)}>
+    <header {...stylex.attrs(portfolioStyles.pageHeader)}>
+      <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading)}>Warre Snaet</h1>
+      <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Portfolio and profile links">
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="#work-title">Work</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="#open-source-title">Open source</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="#writing-title">Writing</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://github.com/SnaetWarre">GitHub</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>CV</a>
+      </nav>
+    </header>
+
+    <section {...stylex.attrs(portfolioStyles.introduction)} aria-labelledby="about-title">
+      <h2 {...stylex.attrs(portfolioStyles.visuallyHidden)} id="about-title">About</h2>
+      <p {...stylex.attrs(portfolioStyles.lead)}>I’m a backend and applied AI engineer from Belgium. I graduated with distinction in AI Engineering at Howest.</p>
+      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>My strongest work is in Python: APIs, data pipelines, computer vision, OCR, and applied machine learning, including reinforcement learning and generative AI. I also work with AWS and Azure, Terraform, containers, Kubernetes, and CI/CD, with a particular interest in agent infrastructure and MLOps.</p>
+      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I’m open to junior cloud, backend, software, data, and applied AI engineering roles.</p>
+      <div {...stylex.attrs(portfolioStyles.contactRow)}>
+        <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>View my CV</a>
+      </div>
+    </section>
+
+    </div>
+
+    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="experience-title">
+      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="experience-title">Experience</h2>
+      <ProjectList projects={experience} />
+    </section>
+
+    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="work-title">
+      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="work-title">Selected work</h2>
+      <ProjectList projects={selectedWork} />
+    </section>
+
+    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="open-source-title">
+      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="open-source-title">Open source</h2>
+      <ProjectList projects={openSource} />
+    </section>
+
+    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="writing-title">
+      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="writing-title">Writing</h2>
+      <ProjectList projects={[{
+        title: "How I built a 26 MB offline AI with Rust and Burn",
+        href: `${base}blog/blog.html`,
+        description: "The research and implementation behind my bachelor project, from semi-supervised learning to running the model on a phone.",
+      }]} />
+    </section>
+
+    <footer {...stylex.attrs(portfolioStyles.pageFooter)}>
+      <h2 {...stylex.attrs(portfolioStyles.footerHeading)}>Get in touch</h2>
+      <p {...stylex.attrs(portfolioStyles.paragraph)}>Have a role or a project in mind? Reach me at warresnaet@icloud.com.</p>
+      <div {...stylex.attrs(portfolioStyles.contactRow)}>
+        <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>
+      </div>
+      <div {...stylex.attrs(portfolioStyles.footerMeta)}>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download the ATS CV</a>
+        <span>Warre Snaet, {year}</span>
+      </div>
+    </footer>
+  </main>
+
+  <div {...stylex.attrs(portfolioStyles.copyNotification)} id="copy-notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+  <script>
+    const portfolioEmailAddress = "warresnaet@icloud.com";
+    let copyNotificationDismissalTimer: number | undefined;
+
+    const copyPortfolioEmailAddress = async (): Promise<boolean> => {
+      try {
+        if (!navigator.clipboard?.writeText) return false;
+
+        await navigator.clipboard.writeText(portfolioEmailAddress);
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    // Delegation also covers the new homepage DOM after client-side navigation.
+    document.addEventListener("click", async (event) => {
+        if (!(event.target instanceof Element) || !event.target.closest("[data-copy-email]")) return;
+        const emailWasCopied = await copyPortfolioEmailAddress();
+
+        const copyNotification = document.querySelector<HTMLDivElement>("#copy-notification");
+        if (!copyNotification) return;
+
+        copyNotification.textContent = emailWasCopied
+          ? `Email address copied: ${portfolioEmailAddress}`
+          : `Copy failed. Email address: ${portfolioEmailAddress}`;
+        copyNotification.hidden = false;
+
+        if (copyNotificationDismissalTimer !== undefined) {
+          window.clearTimeout(copyNotificationDismissalTimer);
+        }
+
+        if (emailWasCopied) {
+          copyNotificationDismissalTimer = window.setTimeout(() => {
+            copyNotification.hidden = true;
+          }, 5000);
+        }
+    });
+  </script>
+</BaseLayout>

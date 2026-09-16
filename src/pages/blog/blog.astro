@@ -1,14 +1,21 @@
 ---
+import { basePath } from "../../lib/paths";
+import ThemeSetup from "../../components/ThemeSetup.astro";
+import ThemeControl from "../../components/ThemeControl.astro";
+import ObsidianScene from "../../components/ObsidianScene.astro";
+import { obsidianTheme } from "../../styles/obsidianStyles";
 import * as stylex from "@stylexjs/stylex";
 import StyleXDevStyles from "../../components/StyleXDevStyles.astro";
 import { blogStyles } from "../../styles/blogStyles";
 import { portfolioStyles } from "../../styles/portfolioStyles";
+import "katex/dist/katex.min.css";
 import "../../styles/reset.css";
 ---
 
 <!doctype html>
-<html lang="en" {...stylex.attrs(portfolioStyles.document, blogStyles.document)}>
+<html transition:animate="none" lang="en" data-obsidian {...stylex.attrs(portfolioStyles.document, blogStyles.document, obsidianTheme)}>
     <head>
+        <ThemeSetup />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
@@ -120,31 +127,15 @@ import "../../styles/reset.css";
             ]
         </script>
 
-        <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-        <link rel="alternate icon" href="../favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
+        <link rel="alternate icon" href={`${basePath}favicon.ico`} />
         <StyleXDevStyles />
-        <!-- KaTeX for math rendering -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
-            integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
-            crossorigin="anonymous"
-        />
-        <script is:inline
-            defer
-            src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
-            integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
-            crossorigin="anonymous"
-        ></script>
-        <script is:inline
-            defer
-            src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-            integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
-            crossorigin="anonymous"
-        ></script>
-        <script is:inline>
-            document.addEventListener("DOMContentLoaded", function() {
-                renderMathInElement(document.body, {
+        <script>
+            import renderMathInElement from "katex/contrib/auto-render";
+            document.addEventListener("astro:page-load", function() {
+                const article = document.querySelector<HTMLElement>("#article");
+                if (!article) return;
+                renderMathInElement(article, {
                     delimiters: [
                         {left: '$$', right: '$$', display: true},
                         {left: '$', right: '$', display: false},
@@ -160,14 +151,14 @@ import "../../styles/reset.css";
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink, blogStyles.skipLink)} href="#article">Skip to article</a>
 
         <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)} aria-label="Article navigation">
-            <a href="../index.html" {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
+            <a href={`${basePath}index.html`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
             <div {...stylex.attrs(blogStyles.navigationLinks)}>
-                <a href="../index.html#work-title" {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
-                <a href="blog.html" {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} aria-current="page">Writing</a>
+                <a href={`${basePath}index.html#work-title`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
+                <a href={`${basePath}blog/blog.html`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} aria-current="page">Writing</a>
             </div>
         </nav>
 
-        <main {...stylex.attrs(blogStyles.blogPost, blogStyles.pageColumn)} id="article">
+        <main {...stylex.attrs(blogStyles.blogPost, blogStyles.pageColumn)} id="article" tabindex="-1">
             <article>
                 <header {...stylex.attrs(blogStyles.blogHeader)}>
                     <div {...stylex.attrs(blogStyles.metadata)}>
@@ -590,7 +581,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <div {...stylex.attrs(blogStyles.imageWrapper)}>
                         <img
-                            src="images/dashboard-gui.png"
+                            src={`${basePath}blog/images/dashboard-gui.png`}
                             alt="Tauri desktop GUI showing model diagnostics and training progress"
                             {...stylex.attrs(blogStyles.image, blogStyles.articleImage)}
                             loading="lazy"
@@ -667,7 +658,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <div {...stylex.attrs(blogStyles.imageWrapper)}>
                         <img
-                            src="images/mobile-pwa.png"
+                            src={`${basePath}blog/images/mobile-pwa.png`}
                             alt="PlantVillage AI running on iPhone 12 as an offline PWA"
                             {...stylex.attrs(blogStyles.image, blogStyles.articleImage)}
                             loading="lazy"
@@ -942,7 +933,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
             </article>
 
             <section {...stylex.attrs(blogStyles.nextSteps)}>
-                <a href="../index.html#work-title" {...stylex.attrs(portfolioStyles.link, blogStyles.nextStepLink)}>
+                <a href={`${basePath}index.html#work-title`} {...stylex.attrs(portfolioStyles.link, blogStyles.nextStepLink)}>
                     <span {...stylex.attrs(blogStyles.nextStepLabel)}>Liked this deep dive?</span>
                     See all my projects
                     <span >&rarr;</span>
@@ -954,7 +945,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
             <div {...stylex.attrs(blogStyles.pageColumn, blogStyles.footerContent)}>
                 <div {...stylex.attrs(blogStyles.footerBrand)}>
                     <img
-                        src="../logo.svg"
+                        src={`${basePath}logo.svg`}
                         alt="Warre Snaet Logo"
                         {...stylex.attrs(blogStyles.image, blogStyles.footerLogo)}
                     />
@@ -967,5 +958,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                 >
             </div>
         </footer>
+        <ThemeControl />
+        <ObsidianScene />
     </body>
 </html>

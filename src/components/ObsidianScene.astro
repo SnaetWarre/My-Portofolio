@@ -1,0 +1,17 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import { obsidianStyles as styles } from "../styles/obsidianStyles";
+---
+
+<div {...stylex.attrs(styles.scene)} aria-hidden="true" transition:persist="obsidian-scene" transition:animate="none">
+  <canvas {...stylex.attrs(styles.canvas)} data-obsidian></canvas>
+  <div {...stylex.attrs(styles.veil)}></div>
+</div>
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>("canvas[data-obsidian]");
+  if (canvas) {
+    import("../scripts/obsidian")
+      .then(({ mountObsidian }) => mountObsidian(canvas))
+      .catch(() => { canvas.dataset.state = "unavailable"; });
+  }
+</script>

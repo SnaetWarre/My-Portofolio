@@ -1,16 +1,22 @@
 ---
 import "../styles/reset.css";
+import ThemeSetup from "../components/ThemeSetup.astro";
+import ObsidianScene from "../components/ObsidianScene.astro";
+import ThemeControl from "../components/ThemeControl.astro";
 import * as stylex from "@stylexjs/stylex";
 import StyleXDevStyles from "../components/StyleXDevStyles.astro";
 import { portfolioStyles } from "../styles/portfolioStyles";
+import { obsidianTheme } from "../styles/obsidianStyles";
 import { basePath } from "../lib/paths";
 
 interface Props {
+  experimental?: boolean;
+  sculpture?: boolean;
   title: string;
   description: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, experimental = false, sculpture = false } = Astro.props;
 const base = basePath;
 const canonicalPath = Astro.url.pathname.replace(/index\.html$/, "");
 const canonical = new URL(canonicalPath, Astro.site);
@@ -18,14 +24,15 @@ const socialImage = new URL(`${base}social-card.png`, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" {...stylex.attrs(portfolioStyles.document)}>
+<html transition:animate="none" lang="en" data-obsidian={sculpture || undefined} {...stylex.attrs(portfolioStyles.document, sculpture && obsidianTheme)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {sculpture && <ThemeSetup />}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Warre Snaet" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={experimental ? "noindex, nofollow" : "index, follow"} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -44,5 +51,6 @@ const socialImage = new URL(`${base}social-card.png`, Astro.site);
   </head>
   <body {...stylex.attrs(portfolioStyles.body)}>
     <slot />
+    {sculpture && <><ThemeControl /><ObsidianScene /></>}
   </body>
 </html>
