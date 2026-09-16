@@ -107,8 +107,6 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     return rib;
   });
   const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-  const controls = document.querySelector<HTMLElement>("[data-scene-controls]");
-  const toggle = document.querySelector<HTMLButtonElement>("[data-motion-toggle]");
   let paused = motionPreference.matches;
   let frame = 0;
   let last = 0;
@@ -120,18 +118,6 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
   let mobile = false;
   let disposed = false;
 
-  const updateButton = () => {
-    if (toggle) {
-      const label = paused ? "Resume animation" : "Pause animation";
-      toggle.setAttribute("aria-label", label);
-      toggle.title = label;
-      const play = toggle.querySelector<HTMLElement>("[data-play-icon]");
-      const pause = toggle.querySelector<HTMLElement>("[data-pause-icon]");
-      if (play) play.hidden = !paused;
-      if (pause) pause.hidden = paused;
-      toggle.setAttribute("aria-pressed", String(paused));
-    }
-  };
   const draw = () => {
     const unfold = Math.min(scroll, 3) * 0.16;
     for (const rib of ribs) {
@@ -205,16 +191,13 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     paused = value;
     cancelAnimationFrame(frame);
     frame = 0;
-    updateButton();
     start();
   };
-  const onToggle = () => setPaused(!paused);
   const onPreference = () => setPaused(motionPreference.matches);
   const contextLost = (event: Event) => {
     event.preventDefault();
     setPaused(true);
     canvas.dataset.state = "unavailable";
-    if (controls) controls.hidden = true;
   };
   const contextRestored = () => {
     // PMREM render targets lose their contents with the WebGL context.
@@ -225,7 +208,6 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     applyAppearance();
     resize();
     canvas.dataset.state = "ready";
-    if (controls) controls.hidden = false;
     setPaused(motionPreference.matches);
   };
   applyAppearance();
@@ -233,8 +215,6 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
   appearanceObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   systemAppearance.addEventListener("change", applyAppearance);
   canvas.dataset.state = "ready";
-  if (controls) controls.hidden = false;
-  updateButton();
   start();
   window.addEventListener("resize", resize);
   window.addEventListener("pointermove", move, { passive: true });
@@ -242,7 +222,6 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
   document.addEventListener("visibilitychange", visibility);
   document.addEventListener("astro:page-load", onScroll);
   motionPreference.addEventListener("change", onPreference);
-  toggle?.addEventListener("click", onToggle);
   canvas.addEventListener("webglcontextlost", contextLost);
   canvas.addEventListener("webglcontextrestored", contextRestored);
   window.addEventListener("pagehide", (event) => {
@@ -255,7 +234,6 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     document.removeEventListener("visibilitychange", visibility);
     document.removeEventListener("astro:page-load", onScroll);
     motionPreference.removeEventListener("change", onPreference);
-    toggle?.removeEventListener("click", onToggle);
     canvas.removeEventListener("webglcontextlost", contextLost);
     canvas.removeEventListener("webglcontextrestored", contextRestored);
     geometry.dispose();

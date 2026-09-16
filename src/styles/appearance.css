@@ -19,8 +19,3 @@ html[data-obsidian][data-theme="dark"] {
   --obsidian-invert: 0;
   color-scheme: dark;
 }
-
-[data-theme-choice][aria-pressed="true"] {
-  color: rgb(var(--obsidian-ink));
-  background: rgb(var(--obsidian-ink) / 9%);
-}

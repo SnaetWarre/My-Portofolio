@@ -65,11 +65,6 @@ export const obsidianStyles = stylex.create({
       "@media (max-width: 700px)": "linear-gradient(180deg, rgb(var(--obsidian-paper) / 84%), rgb(var(--obsidian-paper) / 88%) 55%, rgb(var(--obsidian-paper) / 82%))",
     },
   },
-  themeOptions: {
-    display: "flex",
-    alignItems: "center",
-    gap: 2,
-  },
   iconButton: {
     display: "inline-flex",
     justifyContent: "center",
