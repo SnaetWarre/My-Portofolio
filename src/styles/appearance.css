@@ -20,15 +20,16 @@ html[data-obsidian][data-theme="dark"] {
   color-scheme: dark;
 }
 
-/* Circular ink reveal for the theme toggle. Coordinates come from
-   --reveal-x / --reveal-y / --reveal-r set by ThemeControl before
-   startViewTransition, so the wipe works without any WAAPI call. */
-::view-transition-old(root) {
+/* Circular ink reveal for the theme toggle. The toggle temporarily folds
+   every Astro-renamed snapshot into one "theme-wipe" group (see
+   ThemeControl), so the wipe always has the full page to reveal.
+   Coordinates come from --reveal-x / --reveal-y / --reveal-r. */
+::view-transition-old(theme-wipe) {
   animation: none;
   mix-blend-mode: normal;
   z-index: 1;
 }
-::view-transition-new(root) {
+::view-transition-new(theme-wipe) {
   mix-blend-mode: normal;
   z-index: 2147483646;
   animation: reveal-in 750ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -42,8 +43,8 @@ html[data-obsidian][data-theme="dark"] {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-old(theme-wipe),
+  ::view-transition-new(theme-wipe) {
     animation: none;
   }
 }

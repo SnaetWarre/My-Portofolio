@@ -56,15 +56,39 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
   const boundFlag = "__themeToggleBound";
   const alreadyBound =
     (window as Window & { [boundFlag]?: boolean })[boundFlag] === true;
+  let wiping = false;
+
+  function dipToTheme(next: "light" | "dark") {
+    // No View Transitions API: cover in the current paper color (seamless,
+    // same as the background), swap underneath, then fade back in.
+    const paper = effectiveTheme() === "dark" ? "#000000" : "#ffffff";
+    const veil = document.createElement("div");
+    veil.setAttribute("aria-hidden", "true");
+    veil.style.cssText = `position:fixed;inset:0;z-index:2147483646;background:${paper};opacity:0;pointer-events:none;transition:opacity 160ms ease-out;`;
+    document.body.appendChild(veil);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      veil.style.opacity = "1";
+      window.setTimeout(() => {
+        choose(next);
+        veil.style.transition = "opacity 320ms ease-out";
+        veil.style.opacity = "0";
+        window.setTimeout(() => veil.remove(), 360);
+      }, 180);
+    }));
+  }
 
   function toggleTheme() {
     const next = effectiveTheme() === "dark" ? "light" : "dark";
     const doc = document as Document & {
       startViewTransition?: (update: () => void) => SameDocumentTransition;
     };
-    // Instant fallback: no API, reduced motion, or missing button.
-    if (!doc.startViewTransition || reducedMotion.matches || !toggle) {
+    // Reduced motion stays instant by design; a mid-wipe click applies at once.
+    if (reducedMotion.matches || !toggle || wiping) {
       choose(next);
+      return;
+    }
+    if (!doc.startViewTransition) {
+      dipToTheme(next);
       return;
     }
     // Aim the wipe at the button. CSS keyframes read these custom props,
@@ -76,9 +100,33 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
     root.style.setProperty("--reveal-x", `${x}px`);
     root.style.setProperty("--reveal-y", `${y}px`);
     root.style.setProperty("--reveal-r", `${radius}px`);
+    // Astro's ClientRouter gives html/scene/controls generated
+    // view-transition-names (with animation:none), which leaves the default
+    // "root" snapshot empty and the wipe with nothing to reveal. Fold every
+    // named snapshot back into one "theme-wipe" group for this toggle only.
+    const renamed: Array<{ el: HTMLElement; prev: string }> = [];
+    const rename = (el: Element, name: string) => {
+      if (!(el instanceof HTMLElement)) return;
+      renamed.push({ el, prev: el.style.getPropertyValue("view-transition-name") });
+      el.style.setProperty("view-transition-name", name);
+    };
+    rename(root, "theme-wipe");
+    for (const el of document.querySelectorAll("*")) {
+      if (el !== root && getComputedStyle(el).viewTransitionName !== "none") rename(el, "none");
+    }
+    const restore = () => {
+      for (const { el, prev } of renamed) el.style.setProperty("view-transition-name", prev);
+    };
+    wiping = true;
     try {
-      doc.startViewTransition(() => choose(next));
+      const transition = doc.startViewTransition(() => choose(next));
+      transition.finished.then(
+        () => { wiping = false; restore(); },
+        () => { wiping = false; restore(); },
+      );
     } catch {
+      wiping = false;
+      restore();
       choose(next);
     }
   }
