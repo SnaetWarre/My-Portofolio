@@ -51,57 +51,58 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
 
   type SameDocumentTransition = { ready: Promise<void>; finished: Promise<void> };
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  let revealing = false;
+  // The button persists across Astro navigations while this script re-runs,
+  // so guard against stacking duplicate listeners on the same element.
+  const boundFlag = "__themeToggleBound";
+  const alreadyBound =
+    (window as Window & { [boundFlag]?: boolean })[boundFlag] === true;
 
   function toggleTheme() {
     const next = effectiveTheme() === "dark" ? "light" : "dark";
     const doc = document as Document & {
       startViewTransition?: (update: () => void) => SameDocumentTransition;
     };
-    // Instant fallback: no API, reduced motion, missing button, or already revealing.
-    if (!doc.startViewTransition || reducedMotion.matches || !toggle || revealing) {
+    // Instant fallback: no API, reduced motion, or missing button.
+    if (!doc.startViewTransition || reducedMotion.matches || !toggle) {
       choose(next);
       return;
     }
+    // Aim the wipe at the button. CSS keyframes read these custom props,
+    // so no WAAPI pseudo-element animation is required.
     const rect = toggle.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
     const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
-    revealing = true;
-    let transition: SameDocumentTransition;
+    root.style.setProperty("--reveal-x", `${x}px`);
+    root.style.setProperty("--reveal-y", `${y}px`);
+    root.style.setProperty("--reveal-r", `${radius}px`);
     try {
-      transition = doc.startViewTransition(() => choose(next));
+      doc.startViewTransition(() => choose(next));
     } catch {
       choose(next);
-      revealing = false;
-      return;
     }
-    transition.ready.then(() => {
-      root.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-        { duration: 480, easing: "ease-out", pseudoElement: "::view-transition-new(root)" } as KeyframeAnimationOptions,
-      );
-    }).catch(() => { /* A skipped transition still leaves the new theme applied. */ });
-    transition.finished.finally(() => { revealing = false; }).catch(() => { revealing = false; });
   }
 
-  toggle?.addEventListener("click", toggleTheme);
-  systemTheme.addEventListener("change", updateToggle);
-  window.addEventListener("storage", (event) => {
-    if (event.key !== storageKey && event.key !== null) return;
-    if (event.newValue === "light" || event.newValue === "dark") root.dataset.theme = event.newValue;
-    else delete root.dataset.theme;
-    updateToggle();
-  });
-  // Apply the current choice to the incoming document before any new content paints.
-  document.addEventListener("astro:before-swap", (event: TransitionBeforeSwapEvent) => {
-    // Native transition snapshots can briefly hide a paused WebGL canvas.
-    // Keep Astro's DOM swap and persistence, but show the live scene throughout.
-    event.viewTransition.skipTransition();
-    const incoming = event.newDocument.documentElement;
-    if (root.dataset.theme) incoming.dataset.theme = root.dataset.theme;
-    else delete incoming.dataset.theme;
-  });
+  if (!alreadyBound) {
+    (window as Window & { [boundFlag]?: boolean })[boundFlag] = true;
+    toggle?.addEventListener("click", toggleTheme);
+    systemTheme.addEventListener("change", updateToggle);
+    window.addEventListener("storage", (event) => {
+      if (event.key !== storageKey && event.key !== null) return;
+      if (event.newValue === "light" || event.newValue === "dark") root.dataset.theme = event.newValue;
+      else delete root.dataset.theme;
+      updateToggle();
+    });
+    // Apply the current choice to the incoming document before any new content paints.
+    document.addEventListener("astro:before-swap", (event: TransitionBeforeSwapEvent) => {
+      // Native transition snapshots can briefly hide a paused WebGL canvas.
+      // Keep Astro's DOM swap and persistence, but show the live scene throughout.
+      event.viewTransition.skipTransition();
+      const incoming = event.newDocument.documentElement;
+      if (root.dataset.theme) incoming.dataset.theme = root.dataset.theme;
+      else delete incoming.dataset.theme;
+    });
+  }
   updateToggle();
   if (controls) controls.hidden = false;
 </script>

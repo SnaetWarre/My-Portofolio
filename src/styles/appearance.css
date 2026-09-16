@@ -20,16 +20,30 @@ html[data-obsidian][data-theme="dark"] {
   color-scheme: dark;
 }
 
-/* Circular ink reveal for the theme toggle. JS animates the clip-path;
-   CSS just disables the default cross-fade so the wipe stays crisp. */
-::view-transition-old(root),
-::view-transition-new(root) {
+/* Circular ink reveal for the theme toggle. Coordinates come from
+   --reveal-x / --reveal-y / --reveal-r set by ThemeControl before
+   startViewTransition, so the wipe works without any WAAPI call. */
+::view-transition-old(root) {
   animation: none;
   mix-blend-mode: normal;
-}
-::view-transition-old(root) {
   z-index: 1;
 }
 ::view-transition-new(root) {
+  mix-blend-mode: normal;
   z-index: 2147483646;
+  animation: reveal-in 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes reveal-in {
+  from {
+    clip-path: circle(0px at var(--reveal-x, 100vw) var(--reveal-y, 0px));
+  }
+  to {
+    clip-path: circle(var(--reveal-r, 150vmax) at var(--reveal-x, 100vw) var(--reveal-y, 0px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }
