@@ -20,7 +20,8 @@ const { title, description, experimental = false, sculpture = false } = Astro.pr
 const base = basePath;
 const canonicalPath = Astro.url.pathname.replace(/index\.html$/, "");
 const canonical = new URL(canonicalPath, Astro.site);
-const socialImage = new URL(`${base}social-card.png`, Astro.site);
+const socialImage = new URL(`${base}social-card-v2.png`, Astro.site);
+const socialImageAlt = "Warre Snaet, Backend and Applied AI Engineer";
 ---
 
 <!doctype html>
@@ -35,15 +36,22 @@ const socialImage = new URL(`${base}social-card.png`, Astro.site);
     <meta name="robots" content={experimental ? "noindex, nofollow" : "index, follow"} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Warre Snaet" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content="Warre Snaet, Backend and Applied AI Engineer" />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="alternate icon" href={`${base}favicon.ico`} />
     <StyleXDevStyles />
