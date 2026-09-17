@@ -22,9 +22,12 @@ interface Props {
 
 const { title, description, kicker, heading, lead, meta } = Astro.props;
 const base = basePath;
+const slug = Astro.url.pathname.split("/").at(-1)?.replace(/\.html$/, "") ?? "work";
+const socialImage = `social/${slug}.png`;
+const socialImageAlt = `${heading}, an engineering case study by Warre Snaet`;
 ---
 
-<BaseLayout {title} {description} sculpture>
+<BaseLayout {title} {description} {socialImage} {socialImageAlt} sculpture>
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
   <main {...stylex.attrs(caseStudyStyles.mainContent, obsidianStyles.article)} id="case-content" tabindex="-1">
     <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation)} aria-label="Case study navigation">

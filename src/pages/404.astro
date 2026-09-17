@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { basePath } from "../lib/paths";
+import { obsidianStyles } from "../styles/obsidianStyles";
+import { portfolioStyles } from "../styles/portfolioStyles";
+import * as stylex from "@stylexjs/stylex";
+
+const base = basePath;
+---
+
+<BaseLayout
+  title="Page not found | Warre Snaet"
+  description="The requested page could not be found. Return to Warre Snaet's portfolio or browse the selected work."
+  experimental
+  sculpture
+>
+  <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#not-found">Skip to message</a>
+  <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="not-found" tabindex="-1">
+    <header {...stylex.attrs(portfolioStyles.pageHeader)}>
+      <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading)}>Page not found</h1>
+      <p {...stylex.attrs(portfolioStyles.lead)}>This address does not lead anywhere, but the rest of the portfolio is still here.</p>
+      <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Page not found actions">
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={base}>Return home</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>View selected work</a>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>Open CV</a>
+      </nav>
+    </header>
+  </main>
+</BaseLayout>

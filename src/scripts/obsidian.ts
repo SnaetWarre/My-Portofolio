@@ -74,9 +74,17 @@ function studioEnvironment(renderer: THREE.WebGLRenderer, light = false) {
 }
 
 export function mountObsidian(canvas: HTMLCanvasElement) {
+  // Keep a deterministic frame available for regenerating the social preview.
+  const captureMode = new URLSearchParams(window.location.search).has("social-capture");
   let renderer: THREE.WebGLRenderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "low-power" });
+    renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: "low-power",
+      preserveDrawingBuffer: captureMode,
+    });
   } catch {
     canvas.dataset.state = "unavailable";
     return;
@@ -107,10 +115,10 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     return rib;
   });
   const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-  let paused = motionPreference.matches;
+  let paused = captureMode || motionPreference.matches;
   let frame = 0;
   let last = 0;
-  let elapsed = 0;
+  let elapsed = captureMode ? 2.4 : 0;
   let scroll = 0;
   let scrollTarget = window.scrollY / window.innerHeight;
   const pointer = new THREE.Vector2();

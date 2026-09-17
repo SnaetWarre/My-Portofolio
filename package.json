@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && bash scripts/copy_cv.sh",
+    "build": "astro build && node scripts/build_sitemap.mjs && bash scripts/copy_cv.sh",
     "build:cv": "uv run python scripts/build_cv.py",
     "check": "astro check",
     "preview": "astro preview"

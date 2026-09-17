@@ -1,11 +1,16 @@
 ---
 import * as stylex from "@stylexjs/stylex";
+import SiteIcons from "../components/SiteIcons.astro";
+import SocialMetadata from "../components/SocialMetadata.astro";
 import StyleXDevStyles from "../components/StyleXDevStyles.astro";
 import { basePath } from "../lib/paths";
 import { cvStyles } from "../styles/cvStyles";
 import "../styles/reset.css";
 
 const base = basePath;
+const title = "Warre Snaet | CV";
+const description = "CV of Warre Snaet, a backend and applied AI engineer from Belgium working across Python systems, applied machine learning, cloud, and MLOps.";
+const canonical = new URL("/My-Portofolio/cv.html", Astro.site);
 ---
 
 <!doctype html>
@@ -13,12 +18,17 @@ const base = basePath;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Warre Snaet | CV</title>
-    <meta name="description" content="CV of Warre Snaet, a junior backend and applied AI engineer from Belgium." />
+    <SiteIcons />
+    <title>{title}</title>
     <meta name="author" content="Warre Snaet" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://snaetwarre.github.io/My-Portofolio/cv.html" />
-    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <SocialMetadata
+      {title}
+      {description}
+      {canonical}
+      imagePath="social/cv.png"
+      imageAlt="Curriculum vitae of Warre Snaet, Backend and Applied AI Engineer"
+    />
     <StyleXDevStyles />
   </head>
   <body {...stylex.attrs(cvStyles.body)}>

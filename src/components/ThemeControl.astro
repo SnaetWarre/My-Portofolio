@@ -28,8 +28,9 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
   }
 
   function updateToggle() {
-    if (!toggle) return;
     const isDark = effectiveTheme() === "dark";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#000000" : "#ffffff");
+    if (!toggle) return;
     const label = isDark ? "Switch to light theme" : "Switch to dark theme";
     toggle.setAttribute("aria-pressed", String(isDark));
     toggle.setAttribute("aria-label", label);
