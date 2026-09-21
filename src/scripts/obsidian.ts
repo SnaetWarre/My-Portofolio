@@ -76,6 +76,15 @@ function studioEnvironment(renderer: THREE.WebGLRenderer, light = false) {
 export function mountObsidian(canvas: HTMLCanvasElement) {
   // Keep a deterministic frame available for regenerating the social preview.
   const captureMode = new URLSearchParams(window.location.search).has("social-capture");
+  // No 3D sculpture on phones, in dark or light mode. Bail before creating
+  // a WebGL context so mobile never pays the GPU / download cost.
+  // (ObsidianScene.astro already skips the import; this is defense in depth
+  // for direct mounts and Astro view-transition re-mounts.)
+  const phoneQuery = window.matchMedia("(max-width: 700px)");
+  if (phoneQuery.matches && !captureMode) {
+    canvas.dataset.state = "unavailable";
+    return;
+  }
   let renderer: THREE.WebGLRenderer;
   try {
     renderer = new THREE.WebGLRenderer({
@@ -125,6 +134,7 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
   const pointerTarget = new THREE.Vector2();
   let mobile = false;
   let disposed = false;
+  let phoneHidden = false;
 
   const draw = () => {
     const unfold = Math.min(scroll, 3) * 0.16;
@@ -161,7 +171,7 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
   const appearanceObserver = new MutationObserver(applyAppearance);
   const animate = (now: number) => {
     frame = 0;
-    if (disposed || paused || document.hidden) return;
+    if (disposed || paused || phoneHidden || document.hidden) return;
     const dt = Math.min((now - last) / 1000 || 0, 0.05);
     last = now;
     elapsed += dt;
@@ -172,13 +182,21 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     frame = requestAnimationFrame(animate);
   };
   const start = () => {
-    if (!frame && !paused && !document.hidden && !disposed) {
+    if (!frame && !paused && !phoneHidden && !document.hidden && !disposed) {
       last = performance.now();
       frame = requestAnimationFrame(animate);
     }
   };
   const resize = () => {
     mobile = window.innerWidth <= 700;
+    phoneHidden = phoneQuery.matches && !captureMode;
+    if (phoneHidden) {
+      // Desktop -> phone (narrowed window): stop GPU work. CSS already hides
+      // the fixed scene container on phones in both themes.
+      cancelAnimationFrame(frame);
+      frame = 0;
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.5));
     renderer.setSize(window.innerWidth, window.innerHeight, false);
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -202,6 +220,19 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     start();
   };
   const onPreference = () => setPaused(motionPreference.matches);
+  const onPhoneChange = () => {
+    phoneHidden = phoneQuery.matches && !captureMode;
+    if (phoneHidden) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      canvas.dataset.state = "unavailable";
+      return;
+    }
+    applyAppearance();
+    resize();
+    canvas.dataset.state = "ready";
+    start();
+  };
   const contextLost = (event: Event) => {
     event.preventDefault();
     setPaused(true);
@@ -230,6 +261,7 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
   document.addEventListener("visibilitychange", visibility);
   document.addEventListener("astro:page-load", onScroll);
   motionPreference.addEventListener("change", onPreference);
+  phoneQuery.addEventListener("change", onPhoneChange);
   canvas.addEventListener("webglcontextlost", contextLost);
   canvas.addEventListener("webglcontextrestored", contextRestored);
   window.addEventListener("pagehide", (event) => {
@@ -242,6 +274,7 @@ export function mountObsidian(canvas: HTMLCanvasElement) {
     document.removeEventListener("visibilitychange", visibility);
     document.removeEventListener("astro:page-load", onScroll);
     motionPreference.removeEventListener("change", onPreference);
+    phoneQuery.removeEventListener("change", onPhoneChange);
     canvas.removeEventListener("webglcontextlost", contextLost);
     canvas.removeEventListener("webglcontextrestored", contextRestored);
     geometry.dispose();

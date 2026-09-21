@@ -55,6 +55,7 @@ export const obsidianStyles = stylex.create({
     zIndex: 0,
     pointerEvents: "none",
     overflow: "hidden",
+    display: { default: "block", "@media (max-width: 700px)": "none" },
   },
   canvas: { display: "block", width: "100%", height: "100%" },
   veil: {
