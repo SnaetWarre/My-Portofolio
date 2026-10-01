@@ -8,76 +8,76 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
 <CaseStudyLayout
   title="AWS Fargate and Vault Infrastructure | Warre Snaet"
-  description="Terraform case study for private AWS ECS Fargate workloads with ALB, IAM-based Vault authentication, CloudWatch, autoscaling, and tested deployment safeguards."
+  description="Terraform for private ECS Fargate workloads on AWS: an ALB in front, Vault login through IAM, CloudWatch, autoscaling, and tested safeguards around deploys."
   kicker="Individual cloud infrastructure project · 2026"
   heading="AWS Fargate infrastructure with Vault workload identity"
-  lead="A production-minded Terraform design for running private Fargate workloads without embedding cloud credentials or Vault tokens in the task definition."
+  lead="Terraform for running private Fargate workloads, written with production in mind. The task definition contains no cloud credentials and no Vault tokens."
   meta={[
     { label: "Role", value: "Architecture, Terraform implementation, security model, tests, and documentation" },
     { label: "Stack", value: "AWS, Terraform, ECS Fargate, VPC, ALB, IAM, Vault, CloudWatch" },
-    { label: "Scope", value: "Locally validated architecture; no live AWS environment claimed" },
+    { label: "Scope", value: "Validated locally; not presented as a live AWS environment" },
   ]}
 >
-  <CaseSection label="Problem" title="Give a private workload an identity, not a static secret">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The design needed to expose a small service safely while keeping its containers private. Runtime content had to come from Vault without placing a long-lived Vault token or AWS access key in the task definition.</p>
+  <CaseSection label="Problem" title="An identity instead of a static secret">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>A small service had to be reachable from the internet while its containers stayed private. It also had to read its runtime content from Vault, without a long-lived Vault token or AWS access key sitting in the task definition.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>2 availability zones</strong>Public load-balancer subnets and private Fargate subnets.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>0 static tokens</strong>The ECS task role authenticates directly through Vault AWS auth.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>3 tested variants</strong>AWS-only, Vault-enabled, and ACM-backed HTTPS plans.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>2 availability zones</strong>Public subnets for the load balancer and private subnets for Fargate.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>0 static tokens</strong>The ECS task role logs in to Vault directly through the AWS auth method.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>3 tested variants</strong>Plans for AWS only, with Vault, and with HTTPS through ACM.</li>
     </ul>
   </CaseSection>
 
-  <CaseSection label="Architecture" title="Public routing, private execution">
+  <CaseSection label="Architecture" title="Public load balancer, private tasks">
     <div {...stylex.attrs(caseStudyStyles.architecture)} role="img" aria-label="AWS architecture with internet traffic entering an Application Load Balancer, private Fargate tasks, IAM workload identity, Vault, and CloudWatch">
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
         <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Ingress</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Application Load Balancer</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Public HTTP or ACM TLS across two availability zones</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Network</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Public subnets</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Internet gateway, ALB, and one cost-conscious NAT gateway</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Boundary</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Security groups</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Port 8080 reaches tasks only from the ALB</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Network</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Public subnets</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Internet gateway, the ALB, and a single NAT gateway to keep costs down</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Boundary</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Security groups</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Only the ALB can reach the tasks on port 8080</span></div>
       </div>
       <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ private routing, no public task IPs ↓</p>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Compute</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>ECS Fargate service</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Application and Vault Agent containers with read-only roots</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Identity</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>IAM task role</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Rotating workload credentials used for signed Vault authentication</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Runtime data</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Ephemeral volume</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Vault Agent renders the permitted KV path for the application</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Compute</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>ECS Fargate service</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>App and Vault Agent containers with read-only root filesystems</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Identity</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>IAM task role</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Rotating credentials that sign the Vault login request</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Runtime data</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Ephemeral volume</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Vault Agent renders the one KV path the app is allowed to read</span></div>
       </div>
       <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ operations and external secret service ↓</p>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Secrets</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Vault AWS auth</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Exact role binding, short token lifetime, and narrow read policy</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Secrets</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Vault AWS auth</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Role bound to one exact ARN, short token lifetime, and a narrow read policy</span></div>
         <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Observability</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>CloudWatch</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Container logs, 30-day retention, and Container Insights</span></div>
         <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Reliability</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Health and scaling</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>ALB checks, container checks, rollback, and CPU autoscaling</span></div>
       </div>
     </div>
   </CaseSection>
 
-  <CaseSection label="Runtime flow" title="Authenticate and render before accepting traffic">
+  <CaseSection label="Runtime flow" title="Log in and fetch secrets before taking traffic">
     <ol {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>ECS supplies rotating task-role credentials to the Vault Agent sidecar.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The agent signs an AWS IAM request and authenticates to a Vault role bound to that exact task-role ARN.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>A least-privilege policy permits reads only from the required KV v2 path.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The agent renders the returned content into a task-scoped ephemeral volume.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The application becomes healthy after the file exists; the ALB then begins routing requests.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>ECS gives the Vault Agent sidecar rotating task-role credentials.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The agent signs an AWS IAM request and logs in to a Vault role that is bound to that exact task-role ARN.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>A least-privilege policy only allows reads from the one KV v2 path the app needs.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The agent writes what it gets back to an ephemeral volume scoped to the task.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Once that file exists, the app reports healthy and the ALB starts sending it requests.</li>
     </ol>
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The application container never needs a Vault token, AWS access key, or direct permission to retrieve broader secrets.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The app container itself never holds a Vault token or an AWS access key, and it has no permission to read any other secrets.</p>
   </CaseSection>
 
-  <CaseSection label="Delivery" title="A quality gate that cannot deploy by accident">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>GitHub Actions runs Terraform formatting, initialization without a backend, configuration validation, and credential-free plan tests with mocked AWS and Vault providers. The workflow deliberately has read-only repository permissions and no cloud credentials.</p>
+  <CaseSection label="Delivery" title="CI that can't deploy by accident">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>GitHub Actions checks the Terraform formatting, runs init without a backend, validates the configuration, and runs plan tests against mocked AWS and Vault providers, so it needs no credentials. On purpose, the workflow only has read access to the repository and has no cloud credentials at all.</p>
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The Makefile creates a saved Terraform plan but never applies during planning.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Applying requires both an existing reviewed plan and an explicit <code>ALLOW_APPLY=yes</code> gate.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The service uses a deployment circuit breaker with automatic rollback.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Optional ACM configuration redirects HTTP to HTTPS using a modern TLS policy.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The Makefile saves a Terraform plan and never applies anything while planning.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Applying needs a plan that already exists and has been reviewed, plus an explicit <code>ALLOW_APPLY=yes</code>.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The service has a deployment circuit breaker that rolls back automatically.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>When ACM is configured, HTTP redirects to HTTPS with a modern TLS policy.</li>
     </ul>
   </CaseSection>
 
-  <CaseSection label="Engineering" title="Reliability, security, and cost are design inputs">
+  <CaseSection label="Engineering" title="Reliability, security, and cost">
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Network isolation</strong>Only the load balancer is public; tasks run privately without public IP addresses.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Workload identity</strong>ECS-managed credentials replace long-lived keys and static Vault tokens.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Observability</strong>Both containers emit structured runtime output through awslogs and Container Insights.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Availability</strong>The service spans two availability zones and combines health checks, rolling replacement, rollback, and autoscaling.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cost awareness</strong>Fargate Spot receives most scheduling weight, scaling is bounded, and the NAT topology is an explicit demo tradeoff.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Precise scope</strong>The configuration and three mocked plan variants are locally verified. No live AWS deployment is presented as production experience.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Network isolation</strong>Only the load balancer is public. The tasks run privately and have no public IP addresses.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Workload identity</strong>Credentials managed by ECS take the place of long-lived keys and static Vault tokens.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Observability</strong>Both containers send structured output through awslogs, and Container Insights is enabled.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Availability</strong>The service runs in two availability zones with health checks, rolling replacement, rollback, and autoscaling.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cost</strong>Most of the scheduling weight goes to Fargate Spot, scaling has fixed limits, and the NAT setup is a deliberate tradeoff for a demo.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Scope</strong>I verified the configuration and the three mocked plan variants locally. I don't present this as production experience with a live AWS deployment.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}>
       <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/aws-fargate-vault-terraform">View repository and diagrams ↗</a>

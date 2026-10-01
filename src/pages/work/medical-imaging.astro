@@ -7,40 +7,40 @@ import { caseStudyStyles } from "../../styles/caseStudyStyles";
 
 <CaseStudyLayout
   title="Medical Imaging Pipeline | Warre Snaet"
-  description="Case study of a clinical imaging pipeline built during an international internship at 2Ai IPCA."
+  description="A clinical imaging pipeline Warre Snaet built during an international internship at 2Ai IPCA in Barcelos, Portugal."
   kicker="International internship · Feb–Jun 2026"
   heading="Medical imaging pipeline"
-  lead="A Python pipeline that turns measurements embedded in echocardiographic studies into structured, reviewable research data."
+  lead="A Python pipeline that reads the measurements embedded in echocardiographic studies and turns them into structured research data that a person can review."
   meta={[
     { label: "My role", value: "AI & software engineering intern" },
     { label: "Stack", value: "Python, DICOM, OpenCV, OCR, image processing" },
     { label: "Context", value: "2Ai IPCA · Barcelos, Portugal" },
   ]}
 >
-  <CaseSection label="Problem" title="Recover structure from clinical images">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Measurements needed for research were burned into echocardiographic images instead of being available as clean fields. Processing them manually was slow, difficult to repeat, and hard to audit across large study batches.</p>
+  <CaseSection label="Problem" title="Measurements stuck inside images">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The measurements the research needed were burned into the echocardiographic images instead of being stored as separate fields. Copying them out by hand was slow, hard to repeat, and hard to check across large batches of studies.</p>
   </CaseSection>
 
   <CaseSection label="Pipeline" title="Detection, extraction, and review">
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Read echocardiographic DICOM studies and detected the regions containing burned-in measurements.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Combined OCR and image processing to extract values and export normalized JSON.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built resumable batch processing so long runs could continue safely after interruption.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added validation queues and review tools so uncertain output remained visible to a human reviewer.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Extracted ECG traces for downstream analysis.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Read echocardiographic DICOM studies and found the regions that contain burned-in measurements.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Combined OCR and image processing to extract the values and export them as normalized JSON.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Made batch processing resumable, so a long run can pick up where it left off after an interruption.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added validation queues and review tools so a person can see and check any output the pipeline is unsure about.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Extracted ECG traces for later analysis.</li>
     </ul>
   </CaseSection>
 
-  <CaseSection label="Optimization" title="Use metadata before expensive visual matching">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>I developed a source-video matcher using DICOM metadata and OpenCV ECC alignment. Metadata narrowed the candidate set before image alignment, reducing one representative run from roughly 21 hours to 23 minutes.</p>
+  <CaseSection label="Optimization" title="Check the metadata before matching images">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>I wrote a source-video matcher that uses DICOM metadata and OpenCV ECC alignment. Filtering on metadata first leaves far fewer candidates to align, which brought one representative run down from roughly 21 hours to 23 minutes.</p>
   </CaseSection>
 
-  <CaseSection label="Engineering" title="Make research processing dependable">
+  <CaseSection label="Engineering" title="Reliable enough for research work">
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resumable work</strong>Intermediate state prevents an interrupted batch from restarting at zero.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Human validation</strong>Review queues separate uncertain extraction from accepted output.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Traceable output</strong>Structured exports retain the connection between source studies and extracted values.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Practical handoff</strong>Cross-platform documentation makes the pipeline reproducible beyond my own workstation.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resumable work</strong>Saved intermediate state means an interrupted batch doesn't start over from zero.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Human validation</strong>Uncertain extractions go to a review queue, separate from accepted output.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Traceable output</strong>The structured exports record which source study each extracted value came from.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Practical handoff</strong>Documentation for each platform lets other people run the pipeline on their own machines, not just mine.</li>
     </ul>
   </CaseSection>
 </CaseStudyLayout>

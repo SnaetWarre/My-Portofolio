@@ -13,7 +13,7 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 import "katex/dist/katex.min.css";
 import "../../styles/reset.css";
 
-const title = "Semi-Supervised Plant Disease Detection in Rust | Warre Snaet";
+const title = "Semi-supervised plant disease detection in Rust | Warre Snaet";
 const description = "Building an offline plant disease classifier with Rust, the Burn ML framework, and a pseudo-labeling pipeline that triples usable training data.";
 const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
 ---
@@ -49,7 +49,7 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                 {
                     "@context": "https://schema.org",
                     "@type": "TechArticle",
-                    "headline": "Semi-Supervised Plant Disease Detection in Rust",
+                    "headline": "Semi-supervised plant disease detection in Rust",
                     "alternativeHeadline": "Building an offline ML pipeline with Burn, pseudo-labeling, and multi-platform deployment",
                     "image": "https://snaetwarre.github.io/My-Portofolio/social/blog-rust.png",
                     "author": {
@@ -63,7 +63,7 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                     "url": "https://snaetwarre.github.io/My-Portofolio/blog/blog.html",
                     "datePublished": "2026-01-21",
                     "dateModified": "2026-09-17",
-                    "description": "Technical deep-dive into building an offline plant disease detection system in Rust using the Burn framework, with semi-supervised pseudo-labeling and multi-platform deployment via Tauri and ONNX."
+                    "description": "How I built an offline plant disease detector in Rust with the Burn framework, trained it with semi-supervised pseudo-labeling, and deployed it to several platforms through Tauri and ONNX."
                 },
                 {
                     "@context": "https://schema.org",
@@ -84,7 +84,7 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                         {
                             "@type": "ListItem",
                             "position": 3,
-                            "name": "Semi-Supervised Plant Disease Detection",
+                            "name": "Semi-supervised plant disease detection",
                             "item": "https://snaetwarre.github.io/My-Portofolio/blog/blog.html"
                         }
                     ]
@@ -129,12 +129,11 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                     <div {...stylex.attrs(blogStyles.metadata)}>
                         <span {...stylex.attrs(blogStyles.metadataItem)}>Jan 24, 2026</span>
                         <span {...stylex.attrs(blogStyles.metadataItem)}
-                            >Rust / Burn / Semi-Supervised Learning / Edge
-                            AI</span
+                            >Rust / Burn / semi-supervised learning / edge AI</span
                         >
                     </div>
                     <h1 {...stylex.attrs(blogStyles.title)}>
-                        Semi-Supervised Plant Disease Detection in Rust
+                        Semi-supervised plant disease detection in Rust
                     </h1>
                 </header>
 
@@ -148,71 +147,71 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                         <div {...stylex.attrs(blogStyles.statisticItem)}>
                             <span {...stylex.attrs(blogStyles.statisticNumber)}>38</span>
                             <span {...stylex.attrs(blogStyles.statisticLabel)}
-                                >Disease Classes</span
+                                >Disease classes</span
                             >
                         </div>
                         <div {...stylex.attrs(blogStyles.statisticItem)}>
                             <span {...stylex.attrs(blogStyles.statisticNumber)}>20%</span>
-                            <span {...stylex.attrs(blogStyles.statisticLabel)}>Labeled Data</span>
+                            <span {...stylex.attrs(blogStyles.statisticLabel)}>Labeled data</span>
                         </div>
                         <div {...stylex.attrs(blogStyles.statisticItem)}>
                             <span {...stylex.attrs(blogStyles.statisticNumber)}>0.42ms</span>
                             <span {...stylex.attrs(blogStyles.statisticLabel)}
-                                >Mean Inference</span
+                                >Mean inference</span
                             >
                         </div>
                     </div>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        This is a technical breakdown of a research project I
-                        built during my fifth semester at Howest. The goal:
-                        build an end-to-end machine learning pipeline entirely
-                        in Rust using the{" "}
+                        In my fifth semester at Howest I did a research project
+                        with three goals. I wanted to build a complete machine
+                        learning pipeline in Rust with the{" "}
                         <a
                             href="https://burn.dev"
                             target="_blank"
                             {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
                             >Burn framework</a
-                        >, train a plant disease classifier with minimal labeled
-                        data through semi-supervised learning, and deploy it
-                        offline across desktop, browser, and mobile.
+                        >, train a plant disease classifier on very little labeled
+                        data using semi-supervised learning, and get it running
+                        offline on desktop, in the browser, and on mobile.
                     </p>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The implementation, experiment artifacts, and thesis
-                        documentation are available in the{" "}
+                        The code, experiment outputs, and thesis documents are
+                        in the{" "}
                         <a {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)} href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning" target="_blank">public repository</a>.
                     </p>
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>The Problem</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>The problem</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Plant disease detection for farmers in areas with
-                        limited or zero internet connectivity. Expert labeling
-                        and laboratory workflows can be costly and slow, while
-                        cloud inference requires a stable connection. Neither
-                        assumption is reliable in every field setting.
+                        The users are farmers who need to recognize plant
+                        diseases in places with poor or no internet. Getting an
+                        expert or a lab to identify a disease can be slow and
+                        expensive, and running the model in the cloud needs a
+                        stable connection. In a lot of fields you can't count
+                        on either.
                     </p>
 
-                    <p {...stylex.attrs(blogStyles.articleParagraph)}>The requirements:</p>
+                    <p {...stylex.attrs(blogStyles.articleParagraph)}>So the app had to:</p>
                     <ul {...stylex.attrs(blogStyles.articleList)}>
-                        <li {...stylex.attrs(blogStyles.articleListItem)}>Must work 100% offline</li>
+                        <li {...stylex.attrs(blogStyles.articleListItem)}>work 100% offline</li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            Must run on devices farmers already own (phones,
+                            run on devices farmers already own (phones,
                             laptops)
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            No installation complexity (farmers are not
+                            install without any hassle (farmers are not
                             sysadmins)
                         </li>
-                        <li {...stylex.attrs(blogStyles.articleListItem)}>Sub-second inference for real-time feedback</li>
+                        <li {...stylex.attrs(blogStyles.articleListItem)}>return a result in under a second, so the feedback feels immediate</li>
                     </ul>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        On top of that, labeled agricultural data is expensive.
-                        Expert annotation runs about &euro;2 per image. For
-                        50,000 images, that is &euro;100K we do not have. So
-                        the pipeline needs to learn effectively from a small
-                        labeled subset.
+                        Labeled agricultural data is also expensive. Expert
+                        annotation costs about &euro;2 per image, so 50,000
+                        images would cost &euro;100K, which we don't have. The
+                        pipeline has to learn well from a small labeled
+                        subset.
                     </p>
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
@@ -227,22 +226,22 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                             {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
                             >Burn</a
                         >{" "}
-                        (v0.20.0-pre) because the constraints of this project
-                        play directly to Rust's strengths.
+                        (v0.20.0-pre) because what this project needed lines up
+                        well with what Rust is good at.
                     </p>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Single-Binary Deployment</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>One binary to ship</h3>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         Burn compiles to a single binary with no external
                         runtime dependencies. With LTO and
                         <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>codegen-units = 1</code> in the release profile,
-                        the entire model and inference runtime ship as one
-                        file. No virtual environments, no dependency managers,
-                        no installation steps. For farmers who are not going to
-                        run <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>pip install</code>, this matters.
+                        the model and the inference runtime ship as one file.
+                        There's no virtual environment, package manager, or
+                        install step, which matters when your users are farmers
+                        who are never going to run <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>pip install</code>, this matters.
                     </p>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Multi-Backend from One Codebase</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Several backends, one codebase</h3>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         Burn supports multiple compute backends through Rust's
                         trait system:
@@ -257,31 +256,30 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
                             Vulkan, Metal, and DX12
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>burn-ndarray</code> for pure-CPU fallback
-                            with zero dependencies
+                            <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>burn-ndarray</code> as a CPU-only fallback with no
+                            dependencies
                         </li>
                     </ul>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The same model definition compiles to all of these.
-                        Same weights, different targets, one language from
-                        training to production.
+                        The same model definition compiles for all of them and
+                        uses the same weights, and everything from training to
+                        production is written in one language.
                     </p>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Instant Startup</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Fast startup</h3>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Burn loads in under 100ms. For a mobile app where users
-                        expect instant feedback, startup time matters as much
-                        as inference time.
+                        Burn loads in under 100ms. People expect a phone app to
+                        respond right away, so startup time matters as much as
+                        inference time.
                     </p>
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Model Architecture</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Model architecture</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The classifier is a compact CNN with four convolutional
-                        blocks, totaling around 460,000 parameters. The
-                        architecture:
+                        The classifier is a small CNN with four convolutional
+                        blocks and about 460,000 parameters:
                     </p>
 
                     <pre {...stylex.attrs(blogStyles.monospace, blogStyles.codeBlock)}><code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode, blogStyles.codeInsideBlock)}>Input: [B, 3, 128, 128]
@@ -298,17 +296,16 @@ Linear(256, 38)
 Output: [B, 38] logits</code></pre>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Input images are 128x128 RGB, normalized with ImageNet
-                        statistics (mean = [0.485, 0.456, 0.406], std =
-                        [0.229, 0.224, 0.225]). The output covers 38 plant
-                        disease classes from the PlantVillage dataset.
+                        Inputs are 128x128 RGB images, normalized with the
+                        ImageNet statistics (mean = [0.485, 0.456, 0.406], std =
+                        [0.229, 0.224, 0.225]). The 38 outputs are the plant disease classes from the
+                        PlantVillage dataset.
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The Burn model definition makes the backend generic
-                        through the <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>B: Backend</code> trait bound. This
-                        exact struct compiles to CUDA, CPU, or wgpu with no
-                        code duplication:
+                        The <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>B: Backend</code> trait bound makes the model generic over
+                        the backend, so this one struct compiles to CUDA, CPU,
+                        or wgpu without any duplicated code:
                     </p>
 
                     <pre {...stylex.attrs(blogStyles.monospace, blogStyles.codeBlock)}><code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode, blogStyles.codeInsideBlock)}>#[derive(Module, Debug)]
@@ -327,20 +324,20 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Semi-Supervised Learning Pipeline</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>The semi-supervised pipeline</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        This is the core of the project. With only 20% of the
-                        data labeled, I needed a way to leverage the remaining
-                        80%. The approach: iterative pseudo-labeling (also
-                        called self-training).
+                        This is the main part of the project. Only 20% of the
+                        data had labels, so I needed a way to use the other
+                        80%. I went with iterative pseudo-labeling, also called
+                        self-training.
                     </p>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Data Splitting</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Splitting the data</h3>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The ~87,000 PlantVillage images are split in a
-                        stratified manner:
+                        The ~87,000 PlantVillage images are split with
+                        stratification:
                     </p>
 
                     <pre {...stylex.attrs(blogStyles.monospace, blogStyles.codeBlock)}><code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode, blogStyles.codeInsideBlock)}>Total dataset (~87K images)
@@ -350,40 +347,40 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
        |-- Labeled pool:  20% (~13.9K)  -- used for supervised training
        |-- Stream pool:   80% (~55.7K)  -- unlabeled, used for SSL</code></pre>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>The Pseudo-Labeling Algorithm</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Pseudo-labeling</h3>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The idea is simple: train a model on what you have,
-                        use it to label what you do not, then retrain on the
-                        expanded dataset. But the details determine whether
-                        this works or spirals into noise.
+                        You train a model on the labeled data, use it to label
+                        the rest, and retrain on the bigger set. Whether that
+                        works or slowly fills the training set with noise
+                        depends on the details.
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>For each unlabeled sample $x_u$, the model produces:</p>
                     $$p = \text&lbrace;softmax&rbrace;(f(x_u))$$
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The predicted class and confidence score are:
+                        The predicted class and its confidence are:
                     </p>
 
                     $$\hat&lbrace;y&rbrace; = \arg\max(p), \quad c = \max(p)$$
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        A pseudo-label is accepted only when the confidence
-                        exceeds a threshold $\tau$:
+                        A pseudo-label is only accepted when the confidence
+                        reaches a threshold $\tau$:
                     </p>
 
                     $$c \geq \tau \quad (\tau = 0.9)$$
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        This 90% threshold is strict by design. Accepting
-                        low-confidence predictions poisons the training set.
-                        The final evaluation did not independently recompute
-                        pseudo-label precision, so the threshold is treated as
-                        a pipeline control rather than a reported result.
+                        A 90% threshold is strict on purpose, because
+                        low-confidence predictions poison the training set. The
+                        final evaluation didn't separately measure how many
+                        pseudo-labels were correct, so read the threshold as a
+                        setting in the pipeline, not as a result.
                     </p>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Loss Function</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Loss function</h3>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         For labeled data, the loss is standard cross-entropy:
@@ -392,10 +389,10 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     $$\mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;labeled&rbrace;&rbrace; = -\frac&lbrace;1&rbrace;&lbrace;N&rbrace;\sum_&lbrace;i=1&rbrace;^&lbrace;N&rbrace; \log\left(\text&lbrace;softmax&rbrace;(f(x_i))_&lbrace;y_i&rbrace;\right)$$
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        For pseudo-labeled data, a confidence-weighted negative
-                        log-likelihood is used. Each sample's contribution is
-                        scaled by how confident the model was when it generated
-                        the pseudo-label:
+                        Pseudo-labeled data uses a negative log-likelihood
+                        weighted by confidence. Each sample counts in
+                        proportion to how confident the model was when it made
+                        that pseudo-label:
                     </p>
 
                     $$\mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;pseudo&rbrace;&rbrace; = \frac&lbrace;\sum_&lbrace;i=1&rbrace;^&lbrace;M&rbrace; w_i \cdot \left(-\log\left(\text&lbrace;softmax&rbrace;(f(x_i))_&lbrace;\hat&lbrace;y&rbrace;_i&rbrace;\right)\right)&rbrace;&lbrace;\sum_&lbrace;i=1&rbrace;^&lbrace;M&rbrace; w_i + \epsilon&rbrace;$$
@@ -405,86 +402,85 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         $i$ and $\epsilon = 10^&lbrace;-8&rbrace;$ prevents division by zero.
                     </p>
 
-                    <p {...stylex.attrs(blogStyles.articleParagraph)}>The total loss combines both with a ramp-up schedule:</p>
+                    <p {...stylex.attrs(blogStyles.articleParagraph)}>The total loss adds the two, with a ramp-up on the pseudo-label term:</p>
 
                     $$\mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;total&rbrace;&rbrace; = \mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;labeled&rbrace;&rbrace; + \lambda \cdot \text&lbrace;ramp&rbrace;(t) \cdot \mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;pseudo&rbrace;&rbrace;$$
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The ramp-up function linearly increases the pseudo-label
-                        weight over the first $T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace;$ epochs:
+                        The ramp-up raises the pseudo-label weight linearly over
+                        the first $T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace;$ epochs:
                     </p>
 
                     $$\text&lbrace;ramp&rbrace;(t) = \min\left(\frac&lbrace;t&rbrace;&lbrace;T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace;&rbrace;, 1\right), \quad T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace; = 10$$
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        This prevents the model from being overwhelmed by
-                        pseudo-labels early in training, when the predictions
-                        are still unreliable.
+                        Early in training the predictions are still unreliable,
+                        and this keeps the pseudo-labels from taking over
+                        before the model is ready.
                     </p>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>The Simulation Loop</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Simulating deployment</h3>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The SSL pipeline simulates a realistic deployment
-                        scenario where new images arrive daily (like a farmer
-                        photographing crops over time):
+                        The SSL pipeline simulates new images arriving every
+                        day, the way they would if a farmer kept photographing
+                        their crops:
                     </p>
 
                     <ol {...stylex.attrs(blogStyles.articleList)}>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong>Supervised pre-training</strong> on the 20%
-                            labeled pool using cross-entropy with Adam (lr =
-                            0.0001, weight decay = 1e-4).
+                            Train on the 20% labeled pool first, with
+                            cross-entropy and Adam (lr = 0.0001, weight decay =
+                            1e-4).
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong>Daily inference</strong> on batches of 100
+                            Each simulated day, run inference on a batch of 100
                             images from the stream pool.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong>Confidence filtering</strong> at
-                            $\tau = 0.9$, with a per-class cap of 500
-                            pseudo-labels to prevent class imbalance.
+                            Keep predictions with a confidence of at least
+                            $\tau = 0.9$, capped at 500 pseudo-labels per class
+                            so the classes stay balanced.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong>Buffer accumulation</strong> until a
-                            retrain threshold (200-500 samples) is reached.
+                            Collect them in a buffer until it reaches the
+                            retraining threshold (200-500 samples).
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong>Retraining</strong> on the union of labeled
-                            data + accumulated pseudo-labels, with data
-                            augmentation applied on-the-fly.
+                            Retrain on the labeled data plus the collected
+                            pseudo-labels, with augmentation applied on the
+                            fly.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong>Repeat</strong> until the stream pool is
-                            exhausted.
+                            Repeat until the stream pool is empty.
                         </li>
                     </ol>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Augmentation is deliberately not applied during
-                        inference (clean predictions for pseudo-labels), but is
-                        applied during retraining to prevent overfitting. The
-                        augmentation pipeline includes horizontal flips
-                        (p=0.5), rotation up to 20 degrees (p=0.5), brightness
-                        and contrast jitter (p=0.5), and light Gaussian noise
-                        (p=0.1). All implemented from scratch in Rust, with no
-                        external image augmentation libraries.
+                        Inference runs on clean, unaugmented images, so the
+                        pseudo-labels come from clean predictions. Retraining
+                        does use augmentation, to prevent overfitting:
+                        horizontal flips (p=0.5), rotation up to 20 degrees
+                        (p=0.5), brightness and contrast jitter (p=0.5), and
+                        light Gaussian noise (p=0.1). I wrote all of it from
+                        scratch in Rust, without an image augmentation
+                        library.
                     </p>
 
                     <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Results</h3>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Starting from 20% labeled data, the saved SSL checkpoint
-                        substantially outperformed the saved supervised
-                        baseline on the same held-out test split of 8,786
-                        images.
+                        Both models started from the same 20% of labeled data
+                        and were tested on the same held-out split of 8,786
+                        images. The saved SSL checkpoint did a lot better than
+                        the saved supervised baseline:
                     </p>
 
                     <table {...stylex.attrs(blogStyles.monospace, blogStyles.table)}>
                         <thead>
                             <tr {...stylex.attrs(blogStyles.tableRow)}>
                                 <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>Metric</th>
-                                <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>Supervised Only</th>
+                                <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>Supervised only</th>
                                 <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>After SSL</th>
                             </tr>
                         </thead>
@@ -508,12 +504,12 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     </table>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        This is an improvement of 8.84 percentage points in
-                        accuracy and 8.66 points in macro F1. The figures come
-                        from one saved split and one random seed. PlantVillage
-                        contains relatively uniform, lab-like images, so these
-                        results should not be treated as guaranteed field
-                        performance.
+                        That's 8.84 percentage points more accuracy and 8.66
+                        points more macro F1. The numbers come from one saved
+                        split and one random seed. PlantVillage images are
+                        fairly uniform and look like they were taken in a lab,
+                        so don't expect the same performance out in a real
+                        field.
                     </p>
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
@@ -521,8 +517,8 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Deployment</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The deployment spans three targets, each with a
-                        different strategy.
+                        There are three deployment targets, and they don't all
+                        work the same way.
                     </p>
 
                     <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Desktop: Tauri v2 + SvelteKit</h3>
@@ -534,14 +530,13 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
                             >Tauri v2</a
                         >{" "}
-                        with a SvelteKit 5 frontend and a Rust backend. This is
-                        not a simple webview wrapper. The Rust backend exposes
-                        30+ Tauri commands that bridge the Svelte UI directly to
-                        GPU operations. Training runs happen inside
-                        <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>tokio::task::spawn_blocking</code> with live
-                        event emission to the frontend, so the GUI shows
-                        real-time training progress, confidence distributions,
-                        and benchmark results.
+                        with a SvelteKit 5 frontend and a Rust backend. The
+                        backend exposes more than 30 Tauri commands that connect
+                        the Svelte UI straight to GPU operations, so it does a
+                        lot more than wrap a webview. Training runs inside
+                        <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>tokio::task::spawn_blocking</code> and sends events to the frontend as it goes, so the GUI
+                        can show training progress, confidence distributions,
+                        and benchmark results live.
                     </p>
 
                     <div {...stylex.attrs(blogStyles.imageWrapper)}>
@@ -554,23 +549,23 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             height="450"
                         />
                         <div {...stylex.attrs(blogStyles.monospace, blogStyles.imageCaption)}>
-                            Figure 1: Tauri v2 desktop GUI with SvelteKit
-                            frontend. Real-time training, SSL simulation, and
-                            benchmark visualization.
+                            Figure 1: The Tauri v2 desktop app with its SvelteKit
+                            frontend, showing live training, the SSL simulation,
+                            and benchmark charts.
                         </div>
                     </div>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Browser and Mobile: ONNX Runtime Web</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Browser and mobile: ONNX Runtime Web</h3>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        For browser and mobile deployment, compiling Burn
-                        directly to WASM was not viable. Instead, I built an
-                        export pipeline:
+                        Compiling Burn straight to WASM for the browser and
+                        mobile wasn't viable, so I built an export pipeline
+                        instead:
                     </p>
 
                     <!-- ONNX Pipeline Flow -->
                     <div {...stylex.attrs(blogStyles.monospace, blogStyles.pipeline)}>
                         <div {...stylex.attrs(blogStyles.pipelineStep)}>
-                            <span {...stylex.attrs(blogStyles.pipelineLabel)}>Burn Model</span>
+                            <span {...stylex.attrs(blogStyles.pipelineLabel)}>Burn model</span>
                             <span {...stylex.attrs(blogStyles.pipelineDetail)}
                                 >Rust weights</span
                             >
@@ -580,7 +575,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         >
                         <div {...stylex.attrs(blogStyles.pipelineStep)}>
                             <span {...stylex.attrs(blogStyles.pipelineLabel)}
-                                >JSON Export</span
+                                >JSON export</span
                             >
                             <span {...stylex.attrs(blogStyles.pipelineDetail)}
                                 >Weight extraction</span
@@ -591,10 +586,10 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         >
                         <div {...stylex.attrs(blogStyles.pipelineStep)}>
                             <span {...stylex.attrs(blogStyles.pipelineLabel)}
-                                >ONNX Conversion</span
+                                >ONNX conversion</span
                             >
                             <span {...stylex.attrs(blogStyles.pipelineDetail)}
-                                >Via PyTorch bridge</span
+                                >via a PyTorch bridge</span
                             >
                         </div>
                         <span {...stylex.attrs(blogStyles.pipelineArrow)} aria-hidden="true"
@@ -611,14 +606,15 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     </div>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The PWA runs entirely offline via Service Worker. The
-                        first load caches the ~1.8MB ONNX model, and from that
-                        point it is airplane-mode ready. One critical detail:
-                        I had to write a custom bilinear resize in JavaScript
-                        that exactly matches PIL/Pillow's implementation to
-                        ensure consistent preprocessing between the training
-                        pipeline and browser inference. A 1-pixel difference
-                        in resize interpolation will silently destroy accuracy.
+                        The PWA works fully offline through a service worker.
+                        The first visit caches the ~1.8MB ONNX model, and after
+                        that it works in airplane mode. I also had to write my
+                        own bilinear resize in JavaScript that matches
+                        PIL/Pillow's implementation exactly, so the browser
+                        preprocesses images the same way the training pipeline
+                        does. If the resize interpolation is off by a single
+                        pixel, accuracy collapses and nothing tells you
+                        why.
                     </p>
 
                     <div {...stylex.attrs(blogStyles.imageWrapper)}>
@@ -631,9 +627,9 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             height="600"
                         />
                         <div {...stylex.attrs(blogStyles.monospace, blogStyles.imageCaption)}>
-                            Figure 2: The model running on my iPhone 12 as an
-                            offline PWA. ONNX Runtime Web handles inference,
-                            no native app install required.
+                            Figure 2: The model running offline as a PWA on my
+                            iPhone 12. ONNX Runtime Web does the inference, so
+                            there is no native app to install.
                         </div>
                     </div>
 
@@ -642,16 +638,16 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Benchmarks</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Standardized benchmarks across hardware configurations.
-                        All tests: 100 iterations, 10 warmup, batch size 1,
-                        128x128 input.
+                        I ran the same benchmark on every hardware setup: 100
+                        iterations after 10 warmup runs, batch size 1, 128x128
+                        input.
                     </p>
 
                     <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Burn (Rust) on CUDA</h3>
                     <table {...stylex.attrs(blogStyles.monospace, blogStyles.table)}>
                         <thead>
                             <tr {...stylex.attrs(blogStyles.tableRow)}>
-                                <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>Model Version</th>
+                                <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>Model version</th>
                                 <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>Mean (ms)</th>
                                 <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>p50 (ms)</th>
                                 <th {...stylex.attrs(blogStyles.tableCell, blogStyles.tableHeading)}>p99 (ms)</th>
@@ -676,7 +672,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         </tbody>
                     </table>
 
-                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Hardware Comparison</h3>
+                    <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Hardware comparison</h3>
                     <table {...stylex.attrs(blogStyles.monospace, blogStyles.table)}>
                         <thead>
                             <tr {...stylex.attrs(blogStyles.tableRow)}>
@@ -706,7 +702,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                                 <td {...stylex.attrs(blogStyles.tableCell)}>&euro;0 (BYOD)</td>
                             </tr>
                             <tr {...stylex.attrs(blogStyles.tableRow)}>
-                                <td {...stylex.attrs(blogStyles.tableCell)}>CPU Only</td>
+                                <td {...stylex.attrs(blogStyles.tableCell)}>CPU only</td>
                                 <td {...stylex.attrs(blogStyles.tableCell)}>~250ms</td>
                                 <td {...stylex.attrs(blogStyles.tableCell)}>~4 FPS</td>
                                 <td {...stylex.attrs(blogStyles.tableCell)}>&euro;0</td>
@@ -715,23 +711,23 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     </table>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The Jetson numbers were surprising. At &euro;350 it was
-                        8x slower than a phone the farmer already owns. That
-                        led to pivoting entirely to a BYOD (Bring Your Own
-                        Device) strategy. Every device hits the &lt;200ms
-                        real-time target except bare CPU, which still comes in
-                        at 250ms.
+                        The Jetson surprised me. It costs &euro;350 and took
+                        ~120ms per image, while a phone the farmer already owns
+                        took ~80ms. After that I switched completely to a BYOD
+                        (bring your own device) approach. Every device stays
+                        under the 200ms real-time target except plain CPU, which
+                        comes in at 250ms.
                     </p>
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Incremental Learning</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Incremental learning</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        A model that cannot learn new diseases post-deployment
-                        has an expiration date. I built an incremental learning
-                        system with four strategies, all implementing a generic
-                        Rust trait:
+                        If the model can't learn new diseases after it's
+                        deployed, it will go out of date. So I built incremental
+                        learning with four strategies, each implementing the
+                        same generic Rust trait:
                     </p>
 
                     <pre {...stylex.attrs(blogStyles.monospace, blogStyles.codeBlock)}><code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode, blogStyles.codeInsideBlock)}>pub trait IncrementalLearner&lt;B: Backend&gt; &lbrace;
@@ -746,98 +742,82 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         <div {...stylex.attrs(blogStyles.methodCard)}>
                             <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>Fine-tuning</h4>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
-                                Retrain on new data. Simple, but risks
-                                catastrophic forgetting of previously learned
-                                classes.
+                                Retrain on the new data. It's simple, but the model can
+                                forget classes it learned before (catastrophic
+                                forgetting).
                             </p>
                         </div>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
                             <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>LwF (Learning without Forgetting)</h4>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
-                                Knowledge distillation from the old model.
-                                Preserves prior knowledge without storing
-                                training data.
+                                Distills knowledge from the old model, so it keeps what
+                                it learned without storing the old training
+                                data.
                             </p>
                         </div>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
                             <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>EWC (Elastic Weight Consolidation)</h4>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
-                                Uses the Fisher information matrix to penalize
-                                changes to important weights. Memory-efficient
-                                and principled.
+                                Uses the Fisher information matrix to penalize changes
+                                to important weights. It needs little memory and
+                                has a solid theoretical basis.
                             </p>
                         </div>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
                             <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>Rehearsal</h4>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
-                                Memory replay with herding, random, or
-                                distance-based sample selection from previous
-                                tasks.
+                                Replays stored samples from earlier tasks, picked by
+                                herding, at random, or by distance.
                             </p>
                         </div>
                     </div>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        This means a farmer could photograph a new disease
+                        With this, a farmer could photograph a new disease
                         variant, have an expert label a small batch, and the
-                        model updates itself on-device. No cloud round-trip, no
-                        redeployment.
+                        model would update on the device itself, without going
+                        through the cloud or being redeployed.
                     </p>
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Lessons Learned</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>What I learned</h2>
 
                     <ul {...stylex.attrs(blogStyles.articleList)}>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong
-                                >Burn is production-ready for
-                                inference.</strong>{" "}
-                            The API is clean, the multi-backend system works,
-                            and the community is responsive. Training
-                            ergonomics are still maturing compared to
-                            established frameworks.
+                            Burn is ready for production inference. The API is
+                            clean, switching backends works, and the community
+                            responds quickly. Training is still less comfortable
+                            than in the established frameworks.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong
-                                >ONNX is the pragmatic bridge to the
-                                browser.</strong>{" "}
-                            Rather than fighting to compile Burn directly to
-                            WASM, exporting to ONNX and letting ONNX Runtime
-                            Web handle inference was the practical path. Ship
-                            what works.
+                            For the browser, ONNX was the practical route.
+                            Exporting to ONNX and letting ONNX Runtime Web run
+                            the model worked, and fighting to compile Burn to
+                            WASM didn't.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong
-                                >Dedicated edge hardware is often
-                                overkill.</strong>{" "}
-                            The Jetson costs &euro;350 and was slower than the
-                            phone. Consumer devices are fast enough for most
-                            inference tasks at this model scale.
+                            Dedicated edge hardware is often overkill. The
+                            &euro;350 Jetson was slower than the phone, and for a
+                            model this size, ordinary consumer devices are fast
+                            enough for most inference.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong
-                                >Preprocessing parity is
-                                non-negotiable.</strong>{" "}
-                            A subtle difference in resize interpolation between
-                            training and inference silently destroys accuracy.
-                            Match your preprocessing pipeline exactly across
-                            all targets.
+                            Preprocessing has to match exactly. A small difference
+                            in resize interpolation between training and
+                            inference wrecks accuracy without any error, so every
+                            target needs the exact same preprocessing.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong
-                                >Rust's compile times are real.</strong>{" "}
-                            Plan for 5+ minute release builds. Incremental
-                            debug builds are fast, but CI and release cycles
-                            feel the weight.
+                            Rust's compile times are a real cost. Expect release
+                            builds of 5+ minutes. Incremental debug builds are
+                            fast, but CI and releases are slow.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            <strong
-                                >Tauri v2 is well-suited for ML
-                                applications.</strong>{" "}
-                            Rust backend with a web frontend gives you native
-                            GPU access with modern UI tooling. The
-                            command/event system bridges both worlds cleanly.
+                            Tauri v2 works well for ML apps. A Rust backend with a
+                            web frontend gives you native GPU access and modern UI
+                            tools, and the command/event system connects the two
+                            cleanly.
                         </li>
                     </ul>
 
@@ -846,38 +826,37 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Conclusion</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        What started as "can we run ML on a farm?" became a
-                        full exploration of Rust's ML ecosystem. The answer is
-                        yes, with caveats.
+                        The project started with the question "can we run ML on
+                        a farm?" and turned into a long look at Rust's ML
+                        ecosystem. The answer is yes, with caveats.
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        The semi-supervised pipeline turned 20% labeled data
-                        into results comparable to 60% labeled training. The
-                        Burn framework compiled the same model to desktop GPU,
-                        CPU fallback, and (via ONNX) the browser. Tauri v2 tied
-                        it together into a real application with a proper GUI.
+                        With semi-supervised learning, 20% labeled data gave
+                        results comparable to training on 60% labeled data.
+                        Burn compiled the same model for desktop GPU and CPU,
+                        and through ONNX it also runs in the browser. Tauri v2
+                        turned all of that into a real application with a
+                        proper GUI.
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        Rust's ML ecosystem is still young compared to
-                        Python's, and there are rough edges. But for the
-                        specific problem of getting a trained model onto
-                        constrained devices that need to work offline, it
-                        delivered exactly what was needed. The entire project,
-                        from data loading to augmentation to training to
-                        inference, runs in one language. That simplicity has
-                        real engineering value.
+                        Rust's ML ecosystem is younger than Python's and still
+                        has rough edges. For getting a trained model onto
+                        limited devices that have to work offline, though, it
+                        did what I needed. Data loading, augmentation, training,
+                        and inference are all in one language, and that made
+                        the project a lot simpler to work on.
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph, blogStyles.articleFooterMetadata)}>
-                        Research Project &ndash; Semester 5 &ndash; Howest MCT
+                        Research project &middot; Semester 5 &middot; Howest MCT
                         |
                         <a
                             href="https://github.com/tracel-ai/burn"
                             target="_blank"
                             {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
-                            >Burn Framework</a
+                            >Burn</a
                         >
                         |
                         <a
@@ -899,7 +878,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
             <section {...stylex.attrs(blogStyles.nextSteps)}>
                 <a href={`${basePath}index.html#work-title`} {...stylex.attrs(portfolioStyles.link, blogStyles.nextStepLink)}>
-                    <span {...stylex.attrs(blogStyles.nextStepLabel)}>Liked this deep dive?</span>
+                    <span {...stylex.attrs(blogStyles.nextStepLabel)}>More of my work</span>
                     See all my projects
                     <span >&rarr;</span>
                 </a>
