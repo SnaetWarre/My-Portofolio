@@ -18,13 +18,13 @@ const experience = [
     title: "Medical imaging at 2Ai IPCA",
     context: "AI & software engineering intern",
     href: `${base}work/medical-imaging.html`,
-    description: "International internship using real clinical imaging data. I built a Python DICOM/OCR pipeline, validation and review tools, resumable batch processing, ECG extraction, and a source-video matcher. Metadata-guided alignment reduced one representative run from about 23 hours to 21 minutes.",
+    description: "An international internship working with real clinical imaging data. I wrote a Python pipeline that reads measurements out of DICOM studies with OCR, along with review tools, resumable batch processing, ECG extraction, and a source-video matcher. Filtering candidates on metadata before aligning images cut one representative run from about 21 hours to 23 minutes.",
   },
   {
     title: "Apolloon 24-hour run system",
     context: "Software engineer, paid client work",
     href: `${base}work/apolloon.html`,
-    description: "I built local event infrastructure where every Electron host owns a writable SQLite database. Hosts pair once, rediscover peers through signed UDP on the LAN, and reconcile only missing operation deltas over authenticated HTTP.",
+    description: "Software for running a 24-hour relay on the event's own network. Every Electron host has its own writable SQLite database. Hosts pair once, find each other again through signed UDP announcements on the LAN, and send each other only the operations the other side is missing, over authenticated HTTP.",
   },
 ];
 
@@ -32,32 +32,32 @@ const selectedWork = [
   {
     title: "AWS Fargate & Vault workload identity",
     href: `${base}work/aws-fargate-vault.html`,
-    description: "A tested Terraform architecture for private ECS Fargate workloads behind an ALB, with two-AZ networking, IAM-based Vault authentication, CloudWatch observability, autoscaling, health checks, and deployment safeguards.",
+    description: "Terraform for private ECS Fargate tasks behind an ALB, spread over two availability zones. Tasks log in to Vault with their IAM role, and the setup includes CloudWatch monitoring, autoscaling, health checks, and safeguards around deploys. The plans are tested against mocked providers.",
   },
   {
     title: "Financial AI agent",
     href: `${base}work/financial-agent.html`,
-    description: "A six-service application with FastAPI streaming, MCP tool execution, RAG, PostgreSQL, React, ChromaDB, and local Ollama inference. In this two-person academic project, I owned the backend architecture, orchestration, persistence, containers, tests, and most frontend integration.",
+    description: "A chat app for a simulated investment portfolio, split over six services: a streaming FastAPI backend, tools behind MCP, RAG with ChromaDB, PostgreSQL, a React frontend, and local models through Ollama. We were two people on this school project. I did the backend architecture, orchestration, persistence, containers, and tests, plus most of the frontend integration.",
   },
   {
     title: "Azure ML lifecycle",
     href: `${base}work/azure-mlops.html`,
-    description: "Individual MLOps coursework covering Azure ML compute, parallel data preparation, model registration, MLflow, FastAPI, Docker, Kubernetes manifests, and GitHub Actions.",
+    description: "Solo MLOps coursework. Data preparation runs in parallel on Azure ML compute, runs are tracked with MLflow, and the registered model is served by FastAPI in Docker, with Kubernetes manifests and GitHub Actions for delivery.",
   },
   {
     title: "Semi-supervised learning in Rust",
     href: `${base}blog/blog.html`,
-    description: "Bachelor research into data-efficient plant-disease classification on edge devices. The saved SSL checkpoint reached 94.90% held-out accuracy and shipped as an approximately 26 MB offline application tested on iPhone.",
+    description: "My bachelor research: classifying plant diseases on edge devices when only a small part of the data is labeled. The semi-supervised model scored 94.90% on a held-out test set and runs in an offline app of about 26 MB, which I tested on an iPhone.",
   },
   {
     title: "Event chatbot for XPO Group",
     href: `${base}work/xpo-chatbot.html`,
-    description: "Academic team project for an external client: a full-stack RAG system using Azure OpenAI, Cosmos DB, .NET, Next.js, and Python ingestion.",
+    description: "A school team project for an outside client. It's a full-stack RAG chatbot: Python scrapers collect the event content, a .NET API answers questions with Azure OpenAI and Cosmos DB, and a Next.js dashboard shows the analytics.",
   },
   {
     title: "Dataset query system",
     href: `${base}work/dataset-query.html`,
-    description: "A Python client-server analysis application with authentication, moderation, statistics, broadcasts, and a PySide6 interface.",
+    description: "A Python client-server app for querying a shared dataset. It has logins, moderator tools, usage statistics, server broadcasts, and a PySide6 desktop interface.",
   },
 ];
 
@@ -66,7 +66,7 @@ const openSource = [
     title: "Athas code editor",
     context: "Maintainer & contributor",
     href: `${base}work/athas.html`,
-    description: "I contribute across its React/TypeScript and Tauri/Rust codebase. Merged work includes C# language support, image diffing, Linux UI improvements, dynamic proxy ports, resource- and memory-leak fixes, and an LSP race-condition fix.",
+    description: "I work on both the React/TypeScript side and the Tauri/Rust side of the editor. My merged changes include C# language support, image diffs, Linux UI fixes, dynamic proxy ports, fixes for resource and memory leaks, and a fix for a race condition in the language server handling.",
   },
 ];
 
@@ -88,7 +88,7 @@ const profileSchema = {
   experimental={experimental}
   sculpture
   title="Warre Snaet | Backend & Applied AI Engineer"
-  description="Portfolio of Warre Snaet, a backend and applied AI engineer building dependable Python systems, data pipelines, agent infrastructure, and ML applications."
+  description="Portfolio of Warre Snaet, a backend and applied AI engineer from Belgium. Mostly Python: backend systems, data pipelines, agent infrastructure, and machine learning applications."
 >
   <Fragment slot="head"><script is:inline type="application/ld+json" set:html={JSON.stringify(profileSchema)} /></Fragment>
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#main">Skip to content</a>
@@ -105,9 +105,9 @@ const profileSchema = {
 
     <section {...stylex.attrs(portfolioStyles.introduction)} aria-labelledby="about-title">
       <h2 {...stylex.attrs(portfolioStyles.visuallyHidden)} id="about-title">About</h2>
-      <p {...stylex.attrs(portfolioStyles.lead)}>I’m a backend and applied AI engineer from Belgium. I graduated with distinction in AI Engineering at Howest.</p>
-      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>My strongest work is in Python: APIs, data pipelines, computer vision, OCR, and applied machine learning, including reinforcement learning and generative AI. I also work with AWS and Azure, Terraform, containers, Kubernetes, and CI/CD, with a particular interest in agent infrastructure and MLOps.</p>
-      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I’m open to junior cloud, backend, software, data, and applied AI engineering roles.</p>
+      <p {...stylex.attrs(portfolioStyles.lead)}>I’m a backend and applied AI engineer from Belgium. I studied AI Engineering at Howest and graduated with distinction.</p>
+      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I do my best work in Python. That covers APIs, data pipelines, computer vision and OCR, and machine learning, including reinforcement learning and generative AI. For infrastructure I use AWS, Azure, Terraform, containers, Kubernetes, and CI/CD. The areas I’m most interested in are agent infrastructure and MLOps.</p>
+      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I’m looking for a junior role in cloud, backend, software, data, or applied AI engineering.</p>
       <div {...stylex.attrs(portfolioStyles.contactRow)}>
         <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>View my CV</a>
@@ -136,13 +136,13 @@ const profileSchema = {
       <ProjectList projects={[{
         title: "How I built a 26 MB offline AI with Rust and Burn",
         href: `${base}blog/blog.html`,
-        description: "The research and implementation behind my bachelor project, from semi-supervised learning to running the model on a phone.",
+        description: "How my bachelor project works, from the semi-supervised training to getting the model running offline on a phone.",
       }]} />
     </section>
 
     <footer {...stylex.attrs(portfolioStyles.pageFooter)}>
       <h2 {...stylex.attrs(portfolioStyles.footerHeading)}>Get in touch</h2>
-      <p {...stylex.attrs(portfolioStyles.paragraph)}>Have a role or a project in mind? Reach me at warresnaet@icloud.com.</p>
+      <p {...stylex.attrs(portfolioStyles.paragraph)}>If you have a role or a project in mind, email me at warresnaet@icloud.com.</p>
       <div {...stylex.attrs(portfolioStyles.contactRow)}>
         <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>

@@ -10,7 +10,7 @@ const base = basePath;
 
 <BaseLayout
   title="Page not found | Warre Snaet"
-  description="The requested page could not be found. Return to Warre Snaet's portfolio or browse the selected work."
+  description="This page doesn't exist. Go back to Warre Snaet's portfolio or look through the selected work."
   experimental
   sculpture
 >
@@ -18,7 +18,7 @@ const base = basePath;
   <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="not-found" tabindex="-1">
     <header {...stylex.attrs(portfolioStyles.pageHeader)}>
       <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading)}>Page not found</h1>
-      <p {...stylex.attrs(portfolioStyles.lead)}>This address does not lead anywhere, but the rest of the portfolio is still here.</p>
+      <p {...stylex.attrs(portfolioStyles.lead)}>There’s nothing at this address. The rest of the portfolio is still here.</p>
       <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Page not found actions">
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={base}>Return home</a>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>View selected work</a>

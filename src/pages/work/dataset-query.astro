@@ -8,42 +8,42 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
 <CaseStudyLayout
   title="Dataset Query System | Warre Snaet"
-  description="Case study of a Python client-server dataset analysis application with PySide6 and PostgreSQL."
+  description="A Python client-server app for analyzing a shared dataset, with PySide6 desktop interfaces and PostgreSQL."
   kicker="Individual academic project · 2025"
   heading="Dataset query system"
-  lead="A socket-based analysis application where authenticated clients query a server-owned dataset through a desktop interface."
+  lead="Logged-in users query a dataset that stays on the server, from a desktop app that talks to it over TCP sockets."
   meta={[
-    { label: "My role", value: "Designed and implemented the complete application" },
+    { label: "My role", value: "Designed and built the whole application" },
     { label: "Stack", value: "Python, TCP sockets, PySide6, PostgreSQL, pandas, matplotlib" },
     { label: "Data", value: "Los Angeles arrest dataset" },
   ]}
 >
-  <CaseSection label="Problem" title="Query shared data without distributing the dataset">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The server owns the dataset and analysis logic while clients request specific statistics and visualizations. The application therefore needed a clear network protocol, concurrent client handling, authentication, moderation, and responsive desktop interfaces on both sides.</p>
+  <CaseSection label="Problem" title="Querying data without handing out the dataset">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The dataset and the analysis code live on the server, and clients ask it for specific statistics and charts. That meant the app needed a clear network protocol, a server that handles several clients at once, authentication, moderation, and desktop interfaces on both sides that stay responsive.</p>
   </CaseSection>
 
   <CaseSection label="Architecture" title="Separate interface, protocol, and processing">
     <div {...stylex.attrs(caseStudyStyles.architecture)} aria-label="Dataset query client-server architecture">
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Client</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>PySide6 desktop application</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Authentication, parameterized queries, results, messages, and history</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Client</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>PySide6 desktop application</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Login, parameterized queries, results, messages, and history</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↕ TCP</div>
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Server</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Threaded client handlers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>One handler per connection with structured request routing</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Server</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Threaded client handlers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>One handler per connection, routing structured requests</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
       <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Data layer</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>PostgreSQL and pandas</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Users, query history, dataset analysis, and generated plots</span></div>
     </div>
   </CaseSection>
 
-  <CaseSection label="Delivered" title="Support users and moderators in one system">
+  <CaseSection label="Delivered" title="Users and moderators in one app">
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Implemented registration and login, stored user data, and role-aware moderator capabilities.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built parameterized dataset queries and returned both structured results and generated visualizations.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added query history, popularity statistics, connection monitoring, realtime logs, and server broadcasts.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Used worker threads and Qt signals to keep networking and large query results from blocking the interface.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Migrated persistence from SQLite to PostgreSQL and added pooling, timeout handling, and memory controls.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built registration and login, stored user data, and added moderator features that depend on the user's role.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built parameterized queries on the dataset that return structured results along with generated charts.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added query history, statistics on which queries are popular, connection monitoring, live logs, and broadcasts from the server.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Used worker threads and Qt signals so networking and large query results don't block the interface.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Moved storage from SQLite to PostgreSQL and added connection pooling, timeout handling, and memory controls.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}><a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/Server-Client-Python">View repository ↗</a></div>
   </CaseSection>
 
   <CaseSection label="Lesson" title="Concurrency is part of interface design">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The most important engineering constraint was not the individual query logic but keeping network traffic, analysis work, and GUI updates separated. A correct result still produces a poor application if receiving data or generating a plot freezes the interface.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The query logic itself wasn't the hard constraint. Keeping network traffic, analysis work, and GUI updates apart was. A correct result doesn't help much if the window freezes while the data comes in or a plot is being generated.</p>
   </CaseSection>
 </CaseStudyLayout>

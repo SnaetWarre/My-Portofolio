@@ -8,18 +8,18 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
 <CaseStudyLayout
   title="Azure ML Lifecycle | Warre Snaet"
-  description="An end-to-end Azure ML and MLOps coursework project covering cloud training, model registry, inference and CI/CD."
+  description="MLOps coursework on Azure ML: training in the cloud, a model registry, an inference service, and CI/CD."
   kicker="Individual MLOps coursework · 2026"
   heading="Azure ML lifecycle"
-  lead="A reproducible machine-learning workflow from cloud data preparation and training to versioned models, containerized inference, deployment manifests, and automated verification."
+  lead="A machine-learning workflow that can be rerun from start to finish. Data preparation and training happen in the cloud, and the model is versioned, served from a container, described in deployment manifests, and checked automatically."
   meta={[
     { label: "Role", value: "Individual implementation" },
     { label: "Stack", value: "Azure ML, MLflow, Python, FastAPI, Docker, Kubernetes, GitHub Actions" },
     { label: "Model", value: "15-class sports-ball image classifier" },
   ]}
 >
-  <CaseSection label="Lifecycle" title="More than model training">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The coursework treated the model as one part of a larger system. Azure resources, data assets, environments, pipeline components, model versions, inference services, and deployment checks were represented explicitly.</p>
+  <CaseSection label="Lifecycle" title="Everything around the model">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>In this course the model was only one piece of the system. Azure resources, data assets, environments, pipeline components, model versions, inference services, and deployment checks were all defined explicitly.</p>
     <div {...stylex.attrs(caseStudyStyles.architecture)} role="img" aria-label="Azure MLOps lifecycle from data assets to deployment verification">
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
         <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Stage 1</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Azure data assets</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Fifteen classes prepared in parallel</span></div>
@@ -28,32 +28,32 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
       </div>
       <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ metrics + artifacts ↓</p>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Stage 4</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Model registry</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Versioned model and associated metadata</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Serving</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>FastAPI inference</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Predictions, health endpoint and PostgreSQL history</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Delivery</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>CI/CD workflow</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Build, deploy, health check and notification</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Stage 4</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Model registry</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Versioned model with its metadata</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Serving</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>FastAPI inference</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Predictions, a health endpoint, and prediction history in PostgreSQL</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Delivery</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>CI/CD workflow</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Build, deploy, health check, and notification</span></div>
       </div>
     </div>
   </CaseSection>
 
-  <CaseSection label="Implementation" title="Concrete cloud and platform work">
+  <CaseSection label="Implementation" title="What I built">
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Provisioned an Azure ML workspace and compute cluster and defined reusable command components and environments.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Set up an Azure ML workspace and compute cluster, and defined reusable command components and environments.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Built a four-stage Azure ML pipeline: parallel preprocessing, splitting, CNN training, and model registration.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Used MLflow-compatible tracking and versioned model artifacts rather than treating a local file as the deployment boundary.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built a FastAPI inference service and Streamlit Grad-CAM dashboard backed by PostgreSQL prediction history.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Containerized the system with Docker Compose and authored Kubernetes deployments, services, persistent volumes, secrets, resource limits, and health probes.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Automated setup, training, model download, local deployment, health verification, cleanup, and Discord status notifications with GitHub Actions.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Tracked runs in an MLflow-compatible way and versioned the model artifacts, so deployment starts from a registered model instead of a local file.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built a FastAPI inference service and a Streamlit dashboard with Grad-CAM, backed by a history of predictions in PostgreSQL.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Containerized the system with Docker Compose and wrote Kubernetes deployments, services, persistent volumes, secrets, resource limits, and health probes.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Used GitHub Actions to automate setup, training, downloading the model, local deployment, health checks, cleanup, and status messages to Discord.</li>
     </ul>
   </CaseSection>
 
-  <CaseSection label="Engineering" title="A reproducible path from data to a running service">
+  <CaseSection label="Engineering" title="From raw data to a running service">
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Versioned boundaries</strong>Data assets, environments, components, models, and container tags are identifiable and reproducible.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cloud execution</strong>Preprocessing and model training run on created Azure ML resources rather than only on a local workstation.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Deployment checks</strong>The workflow verifies service health and a test prediction and reports pipeline status to Discord.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Explainability</strong>The Streamlit dashboard uses Grad-CAM to show which image regions influenced a prediction.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Operational manifests</strong>Kubernetes definitions include probes, resource limits, persistence, secrets, and multiple API replicas.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Precise scope</strong>Azure ML training and registration were executed in the cloud; Kubernetes was delivered as deployment manifests, not presented as a live production cluster.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Versioning</strong>Data assets, environments, components, models, and container tags all have versions, so every step can be identified and repeated.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cloud execution</strong>Preprocessing and training run on the Azure ML resources I created, not only on a local machine.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Deployment checks</strong>The workflow checks the service's health, runs a test prediction, and posts the pipeline status to Discord.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Explainability</strong>The Streamlit dashboard uses Grad-CAM to show which parts of an image influenced a prediction.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Kubernetes manifests</strong>The manifests include probes, resource limits, persistent storage, secrets, and several API replicas.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Scope</strong>Training and model registration ran in the cloud on Azure ML. The Kubernetes part is a set of deployment manifests, and I don't present it as a live production cluster.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}><a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/mlops-sports-ball-classification">View repository ↗</a></div>
   </CaseSection>
