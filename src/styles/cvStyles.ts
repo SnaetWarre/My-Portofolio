@@ -142,6 +142,13 @@ export const cvStyles = stylex.create({
       "@media (max-width: 780px)": "left",
     },
   },
+  contactLink: {
+    // Keep phone and email links comfortably tappable on small screens.
+    lineHeight: {
+      default: null,
+      "@media (max-width: 780px)": "24px",
+    },
+  },
   summary: {
     display: "grid",
     gridTemplateColumns: {
