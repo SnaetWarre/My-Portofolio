@@ -6,6 +6,8 @@ import { obsidianStyles } from "../styles/obsidianStyles";
 import * as stylex from "@stylexjs/stylex";
 import { basePath } from "../lib/paths";
 import { portfolioStyles } from "../styles/portfolioStyles";
+import StructuredData from "./StructuredData.astro";
+import { gitDates, person, personId, profileLinks, siteUrl, website, websiteId } from "../lib/site";
 
 interface Props { experimental?: boolean; }
 const { experimental = false } = Astro.props;
@@ -70,18 +72,21 @@ const openSource = [
   },
 ];
 
-const profileSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  mainEntity: {
-    "@type": "Person",
-    name: "Warre Snaet",
-    jobTitle: "Junior Backend and Applied AI Engineer",
-    url: "https://snaetwarre.github.io/My-Portofolio/",
-    sameAs: ["https://www.linkedin.com/in/warre-snaet-272354370/", "https://github.com/SnaetWarre"],
-    alumniOf: { "@type": "EducationalOrganization", name: "Howest University of Applied Sciences" },
+const homeDates = gitDates("src/components/PortfolioHome.astro");
+const structuredData = [
+  {
+    "@type": "ProfilePage",
+    "@id": `${siteUrl}#profile`,
+    url: siteUrl,
+    name: "Warre Snaet | Backend & Applied AI Engineer",
+    inLanguage: "en",
+    isPartOf: { "@id": websiteId },
+    mainEntity: { "@id": personId },
+    ...(homeDates && { dateCreated: homeDates.created, dateModified: homeDates.modified }),
   },
-};
+  person,
+  website,
+];
 ---
 
 <BaseLayout
@@ -90,7 +95,12 @@ const profileSchema = {
   title="Warre Snaet | Backend & Applied AI Engineer"
   description="Portfolio of Warre Snaet, a backend and applied AI engineer from Belgium. Mostly Python: backend systems, data pipelines, agent infrastructure, and machine learning applications."
 >
-  <Fragment slot="head"><script is:inline type="application/ld+json" set:html={JSON.stringify(profileSchema)} /></Fragment>
+  <Fragment slot="head">
+    {!experimental && <meta name="google-site-verification" content="6eWn6i2uGzI9GNa1ChJIQHg27HSQm1WzUL74ts5Uf0E" />}
+    <link rel="me" href={profileLinks.linkedIn} />
+    <link rel="me" href={profileLinks.gitHub} />
+    <StructuredData graph={structuredData} />
+  </Fragment>
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#main">Skip to content</a>
   <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="main" tabindex="-1">
     <div {...stylex.attrs(obsidianStyles.hero)}>

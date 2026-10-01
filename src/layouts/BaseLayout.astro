@@ -4,11 +4,13 @@ import ThemeSetup from "../components/ThemeSetup.astro";
 import ObsidianScene from "../components/ObsidianScene.astro";
 import ThemeControl from "../components/ThemeControl.astro";
 import SiteIcons from "../components/SiteIcons.astro";
+import FontPreload from "../components/FontPreload.astro";
 import SocialMetadata from "../components/SocialMetadata.astro";
 import * as stylex from "@stylexjs/stylex";
 import StyleXDevStyles from "../components/StyleXDevStyles.astro";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import { obsidianTheme } from "../styles/obsidianStyles";
+import { basePath } from "../lib/paths";
 
 interface Props {
   experimental?: boolean;
@@ -38,12 +40,14 @@ const canonical = new URL(canonicalPath, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <FontPreload />
     <SiteIcons />
     {sculpture && <ThemeSetup />}
     <title>{title}</title>
     <meta name="author" content="Warre Snaet" />
-    <meta name="robots" content={experimental ? "noindex, nofollow" : "index, follow"} />
+    <meta name="robots" content={experimental ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
     <SocialMetadata {title} {description} {canonical} imagePath={socialImage} imageAlt={socialImageAlt} type={socialType} />
+    <link rel="sitemap" type="application/xml" href={`${basePath}sitemap.xml`} />
     <StyleXDevStyles />
     <slot name="head" />
   </head>

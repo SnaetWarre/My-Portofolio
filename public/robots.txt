@@ -1,3 +1,5 @@
+# Crawlers only read robots.txt at the host root (snaetwarre.github.io/robots.txt),
+# so this file is informational. Submit the sitemap in Google Search Console instead.
 User-agent: *
 Allow: /
 Sitemap: https://snaetwarre.github.io/My-Portofolio/sitemap.xml

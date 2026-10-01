@@ -3,7 +3,11 @@ import { basePath } from "../../lib/paths";
 import ThemeSetup from "../../components/ThemeSetup.astro";
 import ThemeControl from "../../components/ThemeControl.astro";
 import ObsidianScene from "../../components/ObsidianScene.astro";
+import MathFormula from "../../components/MathFormula.astro";
+import StructuredData from "../../components/StructuredData.astro";
+import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteId } from "../../lib/site";
 import SiteIcons from "../../components/SiteIcons.astro";
+import FontPreload from "../../components/FontPreload.astro";
 import SocialMetadata from "../../components/SocialMetadata.astro";
 import { obsidianTheme } from "../../styles/obsidianStyles";
 import * as stylex from "@stylexjs/stylex";
@@ -15,7 +19,34 @@ import "../../styles/reset.css";
 
 const title = "Semi-supervised plant disease detection in Rust | Warre Snaet";
 const description = "Building an offline plant disease classifier with Rust, the Burn ML framework, and a pseudo-labeling pipeline that triples usable training data.";
-const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
+const canonical = absoluteUrl("blog/blog.html");
+const dates = gitDates("src/pages/blog/blog.astro");
+const structuredData = [
+    {
+        "@type": "TechArticle",
+        "@id": `${canonical}#article`,
+        url: canonical,
+        mainEntityOfPage: canonical,
+        headline: "Semi-supervised plant disease detection in Rust",
+        alternativeHeadline: "Building an offline ML pipeline with Burn, pseudo-labeling, and multi-platform deployment",
+        description,
+        image: absoluteUrl("social/blog-rust.png"),
+        inLanguage: "en",
+        genre: "Artificial Intelligence",
+        keywords: "Rust, Burn Framework, Semi-Supervised Learning, Edge AI, Pseudo-Labeling, Tauri",
+        author: { "@id": personId },
+        publisher: { "@id": personId },
+        isPartOf: { "@id": websiteId },
+        datePublished: "2026-01-21",
+        dateModified: dates?.modified ?? "2026-09-17",
+    },
+    breadcrumbs([
+        { name: "Warre Snaet", path: "" },
+        { name: "Semi-supervised plant disease detection in Rust", path: "blog/blog.html" },
+    ]),
+    person,
+    website,
+];
 ---
 
 <!doctype html>
@@ -23,6 +54,7 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <FontPreload />
         <SiteIcons />
         <ThemeSetup />
         <title>{title}</title>
@@ -33,7 +65,8 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
             content="Rust, Burn Framework, Edge AI, Semi-Supervised Learning, Pseudo-Labeling, Tauri, ONNX, Plant Disease Detection, Machine Learning"
         />
         <meta name="author" content="Warre Snaet" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        <link rel="sitemap" type="application/xml" href={`${basePath}sitemap.xml`} />
         <SocialMetadata
             {title}
             {description}
@@ -43,82 +76,17 @@ const canonical = new URL("/My-Portofolio/blog/blog.html", Astro.site);
             imageAlt="Semi-supervised plant disease detection in Rust, an engineering article by Warre Snaet"
         />
 
-        <!-- Structured Data (JSON-LD) -->
-        <script is:inline type="application/ld+json">
-            [
-                {
-                    "@context": "https://schema.org",
-                    "@type": "TechArticle",
-                    "headline": "Semi-supervised plant disease detection in Rust",
-                    "alternativeHeadline": "Building an offline ML pipeline with Burn, pseudo-labeling, and multi-platform deployment",
-                    "image": "https://snaetwarre.github.io/My-Portofolio/social/blog-rust.png",
-                    "author": {
-                        "@type": "Person",
-                        "name": "Warre Snaet",
-                        "url": "https://snaetwarre.github.io/My-Portofolio/"
-                    },
-                    "genre": "Artificial Intelligence",
-                    "keywords": "Rust, Burn Framework, Semi-Supervised Learning, Edge AI, Pseudo-Labeling, Tauri",
-                    "wordcount": "2500",
-                    "url": "https://snaetwarre.github.io/My-Portofolio/blog/blog.html",
-                    "datePublished": "2026-01-21",
-                    "dateModified": "2026-09-17",
-                    "description": "How I built an offline plant disease detector in Rust with the Burn framework, trained it with semi-supervised pseudo-labeling, and deployed it to several platforms through Tauri and ONNX."
-                },
-                {
-                    "@context": "https://schema.org",
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                        {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Home",
-                            "item": "https://snaetwarre.github.io/My-Portofolio/"
-                        },
-                        {
-                            "@type": "ListItem",
-                            "position": 2,
-                            "name": "Blog",
-                            "item": "https://snaetwarre.github.io/My-Portofolio/#writing-title"
-                        },
-                        {
-                            "@type": "ListItem",
-                            "position": 3,
-                            "name": "Semi-supervised plant disease detection",
-                            "item": "https://snaetwarre.github.io/My-Portofolio/blog/blog.html"
-                        }
-                    ]
-                }
-            ]
-        </script>
+        <StructuredData graph={structuredData} />
 
-        <link rel="icon" type="image/svg+xml" href={`${basePath}favicon.svg`} />
-        <link rel="alternate icon" href={`${basePath}favicon.ico`} />
         <StyleXDevStyles />
-        <script>
-            import renderMathInElement from "katex/contrib/auto-render";
-            document.addEventListener("astro:page-load", function() {
-                const article = document.querySelector<HTMLElement>("#article");
-                if (!article) return;
-                renderMathInElement(article, {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false},
-                        {left: '\\(', right: '\\)', display: false},
-                        {left: '\\[', right: '\\]', display: true}
-                    ],
-                    throwOnError: false
-                });
-            });
-        </script>
     </head>
     <body {...stylex.attrs(portfolioStyles.body)}>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink, blogStyles.skipLink)} href="#article">Skip to article</a>
 
         <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)} aria-label="Article navigation">
-            <a href={`${basePath}index.html`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
+            <a href={basePath} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
             <div {...stylex.attrs(blogStyles.navigationLinks)}>
-                <a href={`${basePath}index.html#work-title`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
+                <a href={`${basePath}#work-title`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
                 <a href={`${basePath}blog/blog.html`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} aria-current="page">Writing</a>
             </div>
         </nav>
@@ -356,21 +324,21 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         depends on the details.
                     </p>
 
-                    <p {...stylex.attrs(blogStyles.articleParagraph)}>For each unlabeled sample $x_u$, the model produces:</p>
-                    $$p = \text&lbrace;softmax&rbrace;(f(x_u))$$
+                    <p {...stylex.attrs(blogStyles.articleParagraph)}>For each unlabeled sample <MathFormula tex={String.raw`x_u`} />, the model produces:</p>
+                    <MathFormula display tex={String.raw`p = \text{softmax}(f(x_u))`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         The predicted class and its confidence are:
                     </p>
 
-                    $$\hat&lbrace;y&rbrace; = \arg\max(p), \quad c = \max(p)$$
+                    <MathFormula display tex={String.raw`\hat{y} = \arg\max(p), \quad c = \max(p)`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         A pseudo-label is only accepted when the confidence
-                        reaches a threshold $\tau$:
+                        reaches a threshold <MathFormula tex={String.raw`\tau`} />:
                     </p>
 
-                    $$c \geq \tau \quad (\tau = 0.9)$$
+                    <MathFormula display tex={String.raw`c \geq \tau \quad (\tau = 0.9)`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         A 90% threshold is strict on purpose, because
@@ -386,7 +354,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         For labeled data, the loss is standard cross-entropy:
                     </p>
 
-                    $$\mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;labeled&rbrace;&rbrace; = -\frac&lbrace;1&rbrace;&lbrace;N&rbrace;\sum_&lbrace;i=1&rbrace;^&lbrace;N&rbrace; \log\left(\text&lbrace;softmax&rbrace;(f(x_i))_&lbrace;y_i&rbrace;\right)$$
+                    <MathFormula display tex={String.raw`\mathcal{L}_{\text{labeled}} = -\frac{1}{N}\sum_{i=1}^{N} \log\left(\text{softmax}(f(x_i))_{y_i}\right)`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         Pseudo-labeled data uses a negative log-likelihood
@@ -395,23 +363,23 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         that pseudo-label:
                     </p>
 
-                    $$\mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;pseudo&rbrace;&rbrace; = \frac&lbrace;\sum_&lbrace;i=1&rbrace;^&lbrace;M&rbrace; w_i \cdot \left(-\log\left(\text&lbrace;softmax&rbrace;(f(x_i))_&lbrace;\hat&lbrace;y&rbrace;_i&rbrace;\right)\right)&rbrace;&lbrace;\sum_&lbrace;i=1&rbrace;^&lbrace;M&rbrace; w_i + \epsilon&rbrace;$$
+                    <MathFormula display tex={String.raw`\mathcal{L}_{\text{pseudo}} = \frac{\sum_{i=1}^{M} w_i \cdot \left(-\log\left(\text{softmax}(f(x_i))_{\hat{y}_i}\right)\right)}{\sum_{i=1}^{M} w_i + \epsilon}`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        where $w_i$ is the confidence score of pseudo-label
-                        $i$ and $\epsilon = 10^&lbrace;-8&rbrace;$ prevents division by zero.
+                        where <MathFormula tex={String.raw`w_i`} /> is the confidence score of pseudo-label{" "}
+                        <MathFormula tex={String.raw`i`} /> and <MathFormula tex={String.raw`\epsilon = 10^{-8}`} /> prevents division by zero.
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>The total loss adds the two, with a ramp-up on the pseudo-label term:</p>
 
-                    $$\mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;total&rbrace;&rbrace; = \mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;labeled&rbrace;&rbrace; + \lambda \cdot \text&lbrace;ramp&rbrace;(t) \cdot \mathcal&lbrace;L&rbrace;_&lbrace;\text&lbrace;pseudo&rbrace;&rbrace;$$
+                    <MathFormula display tex={String.raw`\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{labeled}} + \lambda \cdot \text{ramp}(t) \cdot \mathcal{L}_{\text{pseudo}}`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         The ramp-up raises the pseudo-label weight linearly over
-                        the first $T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace;$ epochs:
+                        the first <MathFormula tex={String.raw`T_{\text{ramp}}`} /> epochs:
                     </p>
 
-                    $$\text&lbrace;ramp&rbrace;(t) = \min\left(\frac&lbrace;t&rbrace;&lbrace;T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace;&rbrace;, 1\right), \quad T_&lbrace;\text&lbrace;ramp&rbrace;&rbrace; = 10$$
+                    <MathFormula display tex={String.raw`\text{ramp}(t) = \min\left(\frac{t}{T_{\text{ramp}}}, 1\right), \quad T_{\text{ramp}} = 10`} />
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         Early in training the predictions are still unreliable,
@@ -438,8 +406,8 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             images from the stream pool.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
-                            Keep predictions with a confidence of at least
-                            $\tau = 0.9$, capped at 500 pseudo-labels per class
+                            Keep predictions with a confidence of at least{" "}
+                            <MathFormula tex={String.raw`\tau = 0.9`} />, capped at 500 pseudo-labels per class
                             so the classes stay balanced.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
@@ -740,7 +708,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <div {...stylex.attrs(blogStyles.monospace, blogStyles.methodsGrid)}>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
-                            <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>Fine-tuning</h4>
+                            <h3 {...stylex.attrs(blogStyles.articleMinorHeading)}>Fine-tuning</h3>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
                                 Retrain on the new data. It's simple, but the model can
                                 forget classes it learned before (catastrophic
@@ -748,7 +716,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             </p>
                         </div>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
-                            <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>LwF (Learning without Forgetting)</h4>
+                            <h3 {...stylex.attrs(blogStyles.articleMinorHeading)}>LwF (Learning without Forgetting)</h3>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
                                 Distills knowledge from the old model, so it keeps what
                                 it learned without storing the old training
@@ -756,7 +724,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             </p>
                         </div>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
-                            <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>EWC (Elastic Weight Consolidation)</h4>
+                            <h3 {...stylex.attrs(blogStyles.articleMinorHeading)}>EWC (Elastic Weight Consolidation)</h3>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
                                 Uses the Fisher information matrix to penalize changes
                                 to important weights. It needs little memory and
@@ -764,7 +732,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                             </p>
                         </div>
                         <div {...stylex.attrs(blogStyles.methodCard)}>
-                            <h4 {...stylex.attrs(blogStyles.articleMinorHeading)}>Rehearsal</h4>
+                            <h3 {...stylex.attrs(blogStyles.articleMinorHeading)}>Rehearsal</h3>
                             <p {...stylex.attrs(blogStyles.methodDescription)}>
                                 Replays stored samples from earlier tasks, picked by
                                 herding, at random, or by distance.
@@ -877,7 +845,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
             </article>
 
             <section {...stylex.attrs(blogStyles.nextSteps)}>
-                <a href={`${basePath}index.html#work-title`} {...stylex.attrs(portfolioStyles.link, blogStyles.nextStepLink)}>
+                <a href={`${basePath}#work-title`} {...stylex.attrs(portfolioStyles.link, blogStyles.nextStepLink)}>
                     <span {...stylex.attrs(blogStyles.nextStepLabel)}>More of my work</span>
                     See all my projects
                     <span >&rarr;</span>

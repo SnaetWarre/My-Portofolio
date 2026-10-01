@@ -5,6 +5,8 @@ import * as stylex from "@stylexjs/stylex";
 import { basePath } from "../lib/paths";
 import { caseStudyStyles } from "../styles/caseStudyStyles";
 import { portfolioStyles } from "../styles/portfolioStyles";
+import StructuredData from "../components/StructuredData.astro";
+import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteId } from "../lib/site";
 
 interface MetaItem {
   label: string;
@@ -25,9 +27,34 @@ const base = basePath;
 const slug = Astro.url.pathname.split("/").at(-1)?.replace(/\.html$/, "") ?? "work";
 const socialImage = `social/${slug}.png`;
 const socialImageAlt = `${heading}, an engineering case study by Warre Snaet`;
+const pageUrl = absoluteUrl(`work/${slug}.html`);
+const dates = gitDates(`src/pages/work/${slug}.astro`);
+const structuredData = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    url: pageUrl,
+    mainEntityOfPage: pageUrl,
+    headline: heading,
+    description,
+    image: absoluteUrl(socialImage),
+    inLanguage: "en",
+    author: { "@id": personId },
+    publisher: { "@id": personId },
+    isPartOf: { "@id": websiteId },
+    ...(dates && { datePublished: dates.created, dateModified: dates.modified }),
+  },
+  breadcrumbs([
+    { name: "Warre Snaet", path: "" },
+    { name: heading, path: `work/${slug}.html` },
+  ]),
+  person,
+  website,
+];
 ---
 
-<BaseLayout {title} {description} {socialImage} {socialImageAlt} sculpture>
+<BaseLayout {title} {description} {socialImage} {socialImageAlt} socialType="article" sculpture>
+  <StructuredData slot="head" graph={structuredData} />
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
   <main {...stylex.attrs(caseStudyStyles.mainContent, obsidianStyles.article)} id="case-content" tabindex="-1">
     <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation)} aria-label="Case study navigation">
