@@ -2,6 +2,8 @@ import * as stylex from "@stylexjs/stylex";
 import { colorTokens, layoutTokens, typographyTokens } from "./tokens.stylex";
 
 const mobile = "@media (max-width: 700px)";
+// Below this width the text column is too narrow to share with a label column.
+const narrow = "@media (max-width: 1000px)";
 
 export const portfolioStyles = stylex.create({
   document: {
@@ -16,6 +18,7 @@ export const portfolioStyles = stylex.create({
     fontSize: "1rem",
     lineHeight: 1.6,
     textRendering: "optimizeLegibility",
+    textWrap: "pretty",
   },
   mainContent: {
     width: {
@@ -43,6 +46,7 @@ export const portfolioStyles = stylex.create({
     fontWeight: 500,
     letterSpacing: "-0.045em",
     lineHeight: 1.15,
+    textWrap: "balance",
   },
   navigation: {
     display: "flex",
@@ -92,7 +96,7 @@ export const portfolioStyles = stylex.create({
     display: "grid",
     gridTemplateColumns: {
       default: "7.5rem minmax(0, 1fr)",
-      [mobile]: "minmax(0, 1fr)",
+      [narrow]: "minmax(0, 1fr)",
     },
     columnGap: "2.5rem",
     rowGap: "1rem",
@@ -100,6 +104,13 @@ export const portfolioStyles = stylex.create({
     scrollMarginTop: "2rem",
   },
   sectionHeading: {
+    // The label stays in view while a long list scrolls past it.
+    position: {
+      default: "sticky",
+      [narrow]: "static",
+    },
+    top: "1.5rem",
+    alignSelf: "start",
     margin: 0,
     paddingTop: "0.5rem",
     color: colorTokens.mutedForeground,
@@ -195,6 +206,9 @@ export const portfolioStyles = stylex.create({
   },
   projectContext: {
     display: "block",
+    // Sit with the title above, not with the description below.
+    marginTop: "-0.3rem",
+    paddingBottom: "0.4rem",
     color: colorTokens.mutedForeground,
     fontSize: "0.875rem",
     fontWeight: 400,
@@ -223,6 +237,32 @@ export const portfolioStyles = stylex.create({
     flexWrap: "wrap",
     gap: "0.5rem 1.5rem",
     marginTop: "2rem",
+  },
+  pageEnd: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    gap: "0.5rem 2rem",
+    marginTop: layoutTokens.sectionGap,
+    paddingTop: "1.5rem",
+    borderTopWidth: 1,
+    borderTopStyle: "solid",
+    borderTopColor: colorTokens.borderLight,
+  },
+  pageEndNext: {
+    margin: 0,
+    fontSize: "1.0625rem",
+    fontWeight: 500,
+    letterSpacing: "-0.015em",
+    lineHeight: 1.45,
+  },
+  pageEndLabel: {
+    display: "block",
+    color: colorTokens.mutedForeground,
+    fontSize: "0.875rem",
+    fontWeight: 400,
+    letterSpacing: 0,
   },
   copyNotification: {
     position: "fixed",

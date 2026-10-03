@@ -1,0 +1,23 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import { basePath } from "../lib/paths";
+import { nextProject } from "../lib/projects";
+import { portfolioStyles } from "../styles/portfolioStyles";
+
+interface Props {
+  /** Site-relative address of the current page, as listed in lib/projects. */
+  href: string;
+}
+
+const next = nextProject(Astro.props.href);
+---
+
+<footer {...stylex.attrs(portfolioStyles.pageEnd)}>
+  {next && (
+    <p {...stylex.attrs(portfolioStyles.pageEndNext)}>
+      <span {...stylex.attrs(portfolioStyles.pageEndLabel)}>Next project</span>
+      <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.primaryProjectLink)} href={next.href}>{next.title}</a>
+    </p>
+  )}
+  <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${basePath}#work-title`}>Back to selected work</a>
+</footer>

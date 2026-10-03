@@ -47,7 +47,12 @@ export const blogStyles = stylex.create({
     justifyContent: "space-between",
     paddingTop: {
       default: "5.5rem",
-      [mobileBreakpoint]: "5rem",
+      [mobileBreakpoint]: "1.5rem",
+    },
+    // Leave room for the theme control, which shares this row on phones.
+    paddingRight: {
+      default: 0,
+      [mobileBreakpoint]: `calc(${layoutTokens.pageGutter} + 3.75rem)`,
     },
   },
   navigationLinks: {
@@ -97,6 +102,55 @@ export const blogStyles = stylex.create({
     lineHeight: 1.08,
     letterSpacing: "-0.025em",
     fontWeight: 500,
+    textWrap: "balance",
+  },
+  // Same label-and-list arrangement as the sections on the home page.
+  contents: {
+    display: "grid",
+    gridTemplateColumns: {
+      default: "7.5rem minmax(0, 1fr)",
+      [mobileBreakpoint]: "minmax(0, 1fr)",
+    },
+    columnGap: "2.5rem",
+    rowGap: "0.25rem",
+    marginTop: "2rem",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+    borderTopWidth: "1px",
+    borderTopStyle: "solid",
+    borderTopColor: colorTokens.borderLight,
+    borderBottomWidth: "1px",
+    borderBottomStyle: "solid",
+    borderBottomColor: colorTokens.borderLight,
+  },
+  contentsHeading: {
+    margin: 0,
+    paddingTop: "0.3rem",
+    color: colorTokens.mutedForeground,
+    fontSize: "0.875rem",
+    fontWeight: 500,
+    lineHeight: 1.6,
+  },
+  contentsList: {
+    columnCount: {
+      default: 2,
+      [mobileBreakpoint]: 1,
+    },
+    columnGap: "2rem",
+    margin: 0,
+    padding: 0,
+    listStyle: "none",
+    fontSize: "0.9375rem",
+  },
+  contentsLink: {
+    display: "block",
+    padding: "0.3rem 0",
+    color: colorTokens.foreground,
+    textDecorationLine: {
+      default: "none",
+      ":hover": "underline",
+    },
+    breakInside: "avoid",
   },
   articleContent: {
     maxWidth: layoutTokens.contentMeasure,
@@ -122,6 +176,7 @@ export const blogStyles = stylex.create({
     fontSize: "1.45rem",
     lineHeight: 1.25,
     fontWeight: 500,
+    scrollMarginTop: "1.5rem",
   },
   articleSubheading: {
     marginTop: "2rem",
@@ -219,9 +274,9 @@ export const blogStyles = stylex.create({
     overflowX: "auto",
     borderWidth: "1px",
     borderStyle: "solid",
-    borderColor: colorTokens.border,
-    backgroundColor: colorTokens.foreground,
-    color: colorTokens.background,
+    borderColor: colorTokens.borderLight,
+    backgroundColor: colorTokens.muted,
+    color: colorTokens.foreground,
     fontSize: "0.78rem",
     lineHeight: 1.55,
   },
@@ -261,9 +316,8 @@ export const blogStyles = stylex.create({
     verticalAlign: "top",
   },
   tableHeading: {
-    borderColor: colorTokens.foreground,
-    backgroundColor: colorTokens.foreground,
-    color: colorTokens.background,
+    backgroundColor: colorTokens.muted,
+    fontWeight: 600,
   },
   tableRow: {
     backgroundColor: {
@@ -282,10 +336,7 @@ export const blogStyles = stylex.create({
     height: "auto",
     borderWidth: "1px",
     borderStyle: "solid",
-    borderColor: {
-      default: colorTokens.borderLight,
-      ":hover": colorTokens.foreground,
-    },
+    borderColor: colorTokens.borderLight,
   },
   imageCaption: {
     marginTop: "0.6rem",
@@ -384,23 +435,6 @@ export const blogStyles = stylex.create({
     marginTop: "2.5rem",
     color: colorTokens.mutedForeground,
     fontSize: "0.88rem",
-  },
-  nextSteps: {
-    marginTop: "3rem",
-    paddingTop: "1.25rem",
-    borderTopWidth: "1px",
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.borderLight,
-  },
-  nextStepLink: {
-    display: "inline-flex",
-    flexWrap: "wrap",
-    columnGap: "0.3rem",
-    rowGap: "0.3rem",
-    alignItems: "baseline",
-  },
-  nextStepLabel: {
-    color: colorTokens.mutedForeground,
   },
   footer: {
     marginBottom: "4rem",

@@ -20,6 +20,12 @@ html[data-obsidian][data-theme="dark"] {
   color-scheme: dark;
 }
 
+/* Selected text inverts to ink on paper, matching the rest of the palette. */
+html[data-obsidian] ::selection {
+  background-color: rgb(var(--obsidian-ink));
+  color: rgb(var(--obsidian-paper));
+}
+
 /* Circular ink reveal for the theme toggle. The toggle temporarily folds
    every Astro-renamed snapshot into one "theme-wipe" group (see
    ThemeControl), so the wipe always has the full page to reveal.
