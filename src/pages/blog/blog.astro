@@ -5,6 +5,7 @@ import ThemeControl from "../../components/ThemeControl.astro";
 import ObsidianScene from "../../components/ObsidianScene.astro";
 import MathFormula from "../../components/MathFormula.astro";
 import StructuredData from "../../components/StructuredData.astro";
+import PageEnd from "../../components/PageEnd.astro";
 import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteId } from "../../lib/site";
 import SiteIcons from "../../components/SiteIcons.astro";
 import FontPreload from "../../components/FontPreload.astro";
@@ -20,6 +21,18 @@ import "../../styles/reset.css";
 const title = "Semi-supervised plant disease detection in Rust | Warre Snaet";
 const description = "Building an offline plant disease classifier with Rust, the Burn ML framework, and a pseudo-labeling pipeline that triples usable training data.";
 const canonical = absoluteUrl("blog/blog.html");
+// Mirrors the article's main headings, in reading order, for the contents list.
+const sections = [
+    { id: "problem", title: "The problem" },
+    { id: "why-rust", title: "Why Rust and Burn" },
+    { id: "architecture", title: "Model architecture" },
+    { id: "pipeline", title: "The semi-supervised pipeline" },
+    { id: "deployment", title: "Deployment" },
+    { id: "benchmarks", title: "Benchmarks" },
+    { id: "incremental-learning", title: "Incremental learning" },
+    { id: "lessons", title: "What I learned" },
+    { id: "conclusion", title: "Conclusion" },
+];
 const dates = gitDates("src/pages/blog/blog.astro");
 const structuredData = [
     {
@@ -50,7 +63,7 @@ const structuredData = [
 ---
 
 <!doctype html>
-<html transition:animate="none" lang="en" data-obsidian {...stylex.attrs(portfolioStyles.document, blogStyles.document, obsidianTheme)}>
+<html transition:animate="none" lang="en" data-obsidian data-pose="blog" {...stylex.attrs(portfolioStyles.document, blogStyles.document, obsidianTheme)}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -83,7 +96,7 @@ const structuredData = [
     <body {...stylex.attrs(portfolioStyles.body)}>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink, blogStyles.skipLink)} href="#article">Skip to article</a>
 
-        <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)} aria-label="Article navigation">
+        <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)} aria-label="Site">
             <a href={basePath} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
             <div {...stylex.attrs(blogStyles.navigationLinks)}>
                 <a href={`${basePath}#work-title`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
@@ -149,7 +162,16 @@ const structuredData = [
                         <a {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)} href="https://github.com/SnaetWarre/Research_Project_Rust_Semi-Supervised_Learning" target="_blank">public repository</a>.
                     </p>
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>The problem</h2>
+                    <nav {...stylex.attrs(blogStyles.contents)} aria-labelledby="contents-title">
+                        <h2 {...stylex.attrs(blogStyles.contentsHeading)} id="contents-title">Contents</h2>
+                        <ol {...stylex.attrs(blogStyles.contentsList)} role="list">
+                            {sections.map((section) => (
+                                <li><a {...stylex.attrs(portfolioStyles.link, blogStyles.contentsLink)} href={`#${section.id}`}>{section.title}</a></li>
+                            ))}
+                        </ol>
+                    </nav>
+
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="problem">The problem</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         The users are farmers who need to recognize plant
@@ -184,7 +206,7 @@ const structuredData = [
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Why Rust and Burn</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="why-rust">Why Rust and Burn</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         I chose Rust and{" "}
@@ -201,7 +223,7 @@ const structuredData = [
                     <h3 {...stylex.attrs(blogStyles.articleSubheading)}>One binary to ship</h3>
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         Burn compiles to a single binary with no external
-                        runtime dependencies. With LTO and
+                        runtime dependencies. With LTO and{" "}
                         <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>codegen-units = 1</code> in the release profile,
                         the model and the inference runtime ship as one file.
                         There's no virtual environment, package manager, or
@@ -243,7 +265,7 @@ const structuredData = [
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Model architecture</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="architecture">Model architecture</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         The classifier is a small CNN with four convolutional
@@ -292,7 +314,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>The semi-supervised pipeline</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="pipeline">The semi-supervised pipeline</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         This is the main part of the project. Only 20% of the
@@ -482,7 +504,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Deployment</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="deployment">Deployment</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         There are three deployment targets, and they don't all
@@ -501,7 +523,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         with a SvelteKit 5 frontend and a Rust backend. The
                         backend exposes more than 30 Tauri commands that connect
                         the Svelte UI straight to GPU operations, so it does a
-                        lot more than wrap a webview. Training runs inside
+                        lot more than wrap a webview. Training runs inside{" "}
                         <code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode)}>tokio::task::spawn_blocking</code> and sends events to the frontend as it goes, so the GUI
                         can show training progress, confidence distributions,
                         and benchmark results live.
@@ -603,7 +625,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Benchmarks</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="benchmarks">Benchmarks</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         I ran the same benchmark on every hardware setup: 100
@@ -689,7 +711,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Incremental learning</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="incremental-learning">Incremental learning</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         If the model can't learn new diseases after it's
@@ -749,7 +771,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>What I learned</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="lessons">What I learned</h2>
 
                     <ul {...stylex.attrs(blogStyles.articleList)}>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
@@ -791,7 +813,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
 
                     <hr {...stylex.attrs(blogStyles.articleRule)} />
 
-                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)}>Conclusion</h2>
+                    <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="conclusion">Conclusion</h2>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
                         The project started with the question "can we run ML on
@@ -818,39 +840,15 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph, blogStyles.articleFooterMetadata)}>
-                        Research project &middot; Semester 5 &middot; Howest MCT
-                        |
-                        <a
-                            href="https://github.com/tracel-ai/burn"
-                            target="_blank"
-                            {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
-                            >Burn</a
-                        >
-                        |
-                        <a
-                            href="https://tauri.app"
-                            target="_blank"
-                            {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
-                            >Tauri</a
-                        >
-                        |
-                        <a
-                            href="https://onnxruntime.ai"
-                            target="_blank"
-                            {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
-                            >ONNX Runtime</a
-                        >
+                        A semester 5 research project at Howest MCT, built with{" "}
+                        <a href="https://github.com/tracel-ai/burn" target="_blank" {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}>Burn</a>,{" "}
+                        <a href="https://tauri.app" target="_blank" {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}>Tauri</a>, and{" "}
+                        <a href="https://onnxruntime.ai" target="_blank" {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}>ONNX Runtime</a>.
                     </p>
                 </div>
             </article>
 
-            <section {...stylex.attrs(blogStyles.nextSteps)}>
-                <a href={`${basePath}#work-title`} {...stylex.attrs(portfolioStyles.link, blogStyles.nextStepLink)}>
-                    <span {...stylex.attrs(blogStyles.nextStepLabel)}>More of my work</span>
-                    See all my projects
-                    <span >&rarr;</span>
-                </a>
-            </section>
+            <PageEnd href={`${basePath}blog/blog.html`} />
         </main>
 
         <footer {...stylex.attrs(blogStyles.footer)}>

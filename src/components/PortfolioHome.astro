@@ -8,69 +8,13 @@ import { basePath } from "../lib/paths";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import StructuredData from "./StructuredData.astro";
 import { gitDates, person, personId, profileLinks, siteUrl, website, websiteId } from "../lib/site";
+import { experience, openSource, selectedWork } from "../lib/projects";
 
 interface Props { experimental?: boolean; }
 const { experimental = false } = Astro.props;
 
 const base = basePath;
 const year = new Date().getFullYear();
-
-const experience = [
-  {
-    title: "Medical imaging at 2Ai IPCA",
-    context: "AI & software engineering intern",
-    href: `${base}work/medical-imaging.html`,
-    description: "An international internship working with real clinical imaging data. I wrote a Python pipeline that reads measurements out of DICOM studies with OCR, along with review tools, resumable batch processing, ECG extraction, and a source-video matcher. Filtering candidates on metadata before aligning images cut one representative run from about 21 hours to 23 minutes.",
-  },
-  {
-    title: "Apolloon 24-hour run system",
-    context: "Software engineer, paid client work",
-    href: `${base}work/apolloon.html`,
-    description: "Software for running a 24-hour relay on the event's own network. Every Electron host has its own writable SQLite database. Hosts pair once, find each other again through signed UDP announcements on the LAN, and send each other only the operations the other side is missing, over authenticated HTTP.",
-  },
-];
-
-const selectedWork = [
-  {
-    title: "AWS Fargate & Vault workload identity",
-    href: `${base}work/aws-fargate-vault.html`,
-    description: "Terraform for private ECS Fargate tasks behind an ALB, spread over two availability zones. Tasks log in to Vault with their IAM role, and the setup includes CloudWatch monitoring, autoscaling, health checks, and safeguards around deploys. The plans are tested against mocked providers.",
-  },
-  {
-    title: "Financial AI agent",
-    href: `${base}work/financial-agent.html`,
-    description: "A chat app for a simulated investment portfolio, split over six services: a streaming FastAPI backend, tools behind MCP, RAG with ChromaDB, PostgreSQL, a React frontend, and local models through Ollama. We were two people on this school project. I did the backend architecture, orchestration, persistence, containers, and tests, plus most of the frontend integration.",
-  },
-  {
-    title: "Azure ML lifecycle",
-    href: `${base}work/azure-mlops.html`,
-    description: "Solo MLOps coursework. Data preparation runs in parallel on Azure ML compute, runs are tracked with MLflow, and the registered model is served by FastAPI in Docker, with Kubernetes manifests and GitHub Actions for delivery.",
-  },
-  {
-    title: "Semi-supervised learning in Rust",
-    href: `${base}blog/blog.html`,
-    description: "My bachelor research: classifying plant diseases on edge devices when only a small part of the data is labeled. The semi-supervised model scored 94.90% on a held-out test set and runs in an offline app of about 26 MB, which I tested on an iPhone.",
-  },
-  {
-    title: "Event chatbot for XPO Group",
-    href: `${base}work/xpo-chatbot.html`,
-    description: "A school team project for an outside client. It's a full-stack RAG chatbot: Python scrapers collect the event content, a .NET API answers questions with Azure OpenAI and Cosmos DB, and a Next.js dashboard shows the analytics.",
-  },
-  {
-    title: "Dataset query system",
-    href: `${base}work/dataset-query.html`,
-    description: "A Python client-server app for querying a shared dataset. It has logins, moderator tools, usage statistics, server broadcasts, and a PySide6 desktop interface.",
-  },
-];
-
-const openSource = [
-  {
-    title: "Athas code editor",
-    context: "Maintainer & contributor",
-    href: `${base}work/athas.html`,
-    description: "I work on both the React/TypeScript side and the Tauri/Rust side of the editor. My merged changes include C# language support, image diffs, Linux UI fixes, dynamic proxy ports, fixes for resource and memory leaks, and a fix for a race condition in the language server handling.",
-  },
-];
 
 const homeDates = gitDates("src/components/PortfolioHome.astro");
 const structuredData = [
@@ -105,7 +49,7 @@ const structuredData = [
   <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="main" tabindex="-1">
     <div {...stylex.attrs(obsidianStyles.hero)}>
     <header {...stylex.attrs(portfolioStyles.pageHeader)}>
-      <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading)}>Warre Snaet</h1>
+      <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading, obsidianStyles.besideControls)}>Warre Snaet</h1>
       <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Portfolio and profile links">
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://github.com/SnaetWarre">GitHub</a>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>
@@ -152,7 +96,7 @@ const structuredData = [
 
     <footer {...stylex.attrs(portfolioStyles.pageFooter)}>
       <h2 {...stylex.attrs(portfolioStyles.footerHeading)}>Get in touch</h2>
-      <p {...stylex.attrs(portfolioStyles.paragraph)}>If you have a role or a project in mind, email me at warresnaet@icloud.com.</p>
+      <p {...stylex.attrs(portfolioStyles.paragraph)}>If you have a role or a project in mind, email me at <a {...stylex.attrs(portfolioStyles.link)} href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>.</p>
       <div {...stylex.attrs(portfolioStyles.contactRow)}>
         <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>

@@ -18,18 +18,20 @@ export const obsidianStyles = stylex.create({
     zIndex: 1,
     marginLeft: { default: "7vw", "@media (max-width: 700px)": 0 },
     width: { default: "min(44rem, 49vw)", "@media (max-width: 700px)": "auto" },
-    paddingTop: { default: "12vh", "@media (max-width: 700px)": "5rem" },
+    paddingTop: { default: "12vh", "@media (max-width: 700px)": "1.5rem" },
   },
   article: {
     position: "relative",
     zIndex: 1,
     marginLeft: { default: "7vw", "@media (max-width: 700px)": 0 },
     width: { default: "min(43rem, 49vw)", "@media (max-width: 700px)": "auto" },
-    paddingTop: { default: "6rem", "@media (max-width: 700px)": "5rem" },
+    paddingTop: { default: "6rem", "@media (max-width: 700px)": "1.5rem" },
   },
   controlsHost: {
-    position: "fixed",
-    top: "1rem",
+    // Fixed beside the sculpture on wide screens. On phones the control would
+    // cover the reading column, so it sits in the first row and scrolls away.
+    position: { default: "fixed", "@media (max-width: 700px)": "absolute" },
+    top: { default: "1rem", "@media (max-width: 700px)": "calc(1.5rem - 1px)" },
     right: "1.5rem",
     zIndex: 3,
   },
@@ -37,11 +39,18 @@ export const obsidianStyles = stylex.create({
     display: "flex",
     alignItems: "center",
     gap: "0.375rem",
-    padding: "0.25rem",
+    padding: { default: "0.25rem", "@media (max-width: 700px)": 0 },
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: colorTokens.borderLight,
     backgroundColor: "rgb(var(--obsidian-paper) / 92%)",
   },
   hero: {
-    minHeight: { default: "76vh", "@media (max-width: 700px)": "86svh" },
+    minHeight: { default: "76vh", "@media (max-width: 700px)": "auto" },
+  },
+  // Keeps the first row of a page clear of the theme control on phones.
+  besideControls: {
+    paddingRight: { default: null, "@media (max-width: 700px)": "3.75rem" },
   },
   heading: {
     fontSize: { default: "clamp(3rem, 5.2vw, 6rem)", "@media (max-width: 700px)": "clamp(2.5rem, 10vw, 4rem)" },
@@ -62,9 +71,28 @@ export const obsidianStyles = stylex.create({
     position: "absolute",
     inset: 0,
     backgroundImage: {
-      default: "linear-gradient(90deg, rgb(var(--obsidian-paper)) 0%, rgb(var(--obsidian-paper) / 98%) 38%, rgb(var(--obsidian-paper) / 94%) 56%, rgb(var(--obsidian-paper) / 12%) 72%, transparent 85%)",
+      // Solid under the text column, then clear before the sculpture begins.
+      default: "linear-gradient(90deg, rgb(var(--obsidian-paper)) 0%, rgb(var(--obsidian-paper) / 96%) 52%, rgb(var(--obsidian-paper) / 35%) 58%, transparent 64%)",
       "@media (max-width: 700px)": "linear-gradient(180deg, rgb(var(--obsidian-paper) / 84%), rgb(var(--obsidian-paper) / 88%) 55%, rgb(var(--obsidian-paper) / 82%))",
     },
+  },
+  // Says what the sculpture is showing on this page.
+  caption: {
+    position: "absolute",
+    right: "1.5rem",
+    bottom: "1.5rem",
+    maxWidth: "15rem",
+    margin: 0,
+    padding: "0.4rem 0.6rem",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: colorTokens.borderLight,
+    backgroundColor: "rgb(var(--obsidian-paper) / 92%)",
+    color: colorTokens.mutedForeground,
+    fontSize: "0.8125rem",
+    lineHeight: 1.45,
+    textAlign: "right",
+    textWrap: "balance",
   },
   iconButton: {
     display: "inline-flex",

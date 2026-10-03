@@ -45,6 +45,7 @@ export const caseStudyStyles = stylex.create({
     fontWeight: 500,
     letterSpacing: "-0.035em",
     lineHeight: 1.2,
+    textWrap: "balance",
   },
   lead: {
     marginTop: 0,
@@ -62,7 +63,7 @@ export const caseStudyStyles = stylex.create({
       "@media (max-width: 700px)": "5.5rem minmax(0, 1fr)",
     },
     gap: "0.75rem",
-    alignItems: "center",
+    alignItems: "baseline",
     padding: "0.3rem 0",
   },
   metadataTerm: {
@@ -128,8 +129,15 @@ export const caseStudyStyles = stylex.create({
   architecture: {
     marginTop: "1rem",
   },
+  // One tier of the diagram. Its nodes sit side by side where the column is
+  // wide enough, so tiers read top to bottom; otherwise they stack.
   flowRow: {
-    display: "contents",
+    display: {
+      default: "contents",
+      "@media (min-width: 1200px)": "grid",
+    },
+    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    columnGap: "1.25rem",
   },
   flowNode: {
     marginBottom: "0.65rem",
@@ -149,9 +157,10 @@ export const caseStudyStyles = stylex.create({
     marginTop: 0,
     marginRight: 0,
     marginBottom: "0.65rem",
-    marginLeft: "0.75rem",
+    marginLeft: "calc(0.75rem + 1px)",
     color: colorTokens.mutedForeground,
-    fontFamily: typographyTokens.monospaceFont,
+    fontSize: "0.8125rem",
+    fontWeight: 500,
   },
   figure: {
     marginTop: "1.25rem",
@@ -175,8 +184,5 @@ export const caseStudyStyles = stylex.create({
   },
   importantLink: {
     fontWeight: 600,
-  },
-  footer: {
-    marginTop: "3rem",
   },
 });

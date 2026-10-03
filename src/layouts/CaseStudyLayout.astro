@@ -6,6 +6,7 @@ import { basePath } from "../lib/paths";
 import { caseStudyStyles } from "../styles/caseStudyStyles";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import StructuredData from "../components/StructuredData.astro";
+import PageEnd from "../components/PageEnd.astro";
 import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteId } from "../lib/site";
 
 interface MetaItem {
@@ -53,11 +54,11 @@ const structuredData = [
 ];
 ---
 
-<BaseLayout {title} {description} {socialImage} {socialImageAlt} socialType="article" sculpture>
+<BaseLayout {title} {description} {socialImage} {socialImageAlt} socialType="article" sculpture pose={slug}>
   <StructuredData slot="head" graph={structuredData} />
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
   <main {...stylex.attrs(caseStudyStyles.mainContent, obsidianStyles.article)} id="case-content" tabindex="-1">
-    <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation)} aria-label="Case study navigation">
+    <nav {...stylex.attrs(portfolioStyles.navigation, caseStudyStyles.navigation, obsidianStyles.besideControls)} aria-label="Case study navigation">
       <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={base}>Warre Snaet</a>
       <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>Selected work</a>
     </nav>
@@ -80,6 +81,6 @@ const structuredData = [
 
     <slot />
 
-    <footer {...stylex.attrs(caseStudyStyles.footer)}><a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>Back to selected work</a></footer>
+    <PageEnd href={`${base}work/${slug}.html`} />
   </main>
 </BaseLayout>

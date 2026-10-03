@@ -15,6 +15,8 @@ import { basePath } from "../lib/paths";
 interface Props {
   experimental?: boolean;
   sculpture?: boolean;
+  /** Which form the sculpture takes on this page. See scripts/obsidianPoses. */
+  pose?: string;
   title: string;
   description: string;
   socialImage?: string;
@@ -27,6 +29,7 @@ const {
   description,
   experimental = false,
   sculpture = false,
+  pose = "home",
   socialImage = "social/home-v3.png",
   socialImageAlt = "Warre Snaet, Backend and Applied AI Engineer",
   socialType = "website",
@@ -36,7 +39,7 @@ const canonical = new URL(canonicalPath, Astro.site);
 ---
 
 <!doctype html>
-<html transition:animate="none" lang="en" data-obsidian={sculpture || undefined} {...stylex.attrs(portfolioStyles.document, sculpture && obsidianTheme)}>
+<html transition:animate="none" lang="en" data-obsidian={sculpture || undefined} data-pose={sculpture ? pose : undefined} {...stylex.attrs(portfolioStyles.document, sculpture && obsidianTheme)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
