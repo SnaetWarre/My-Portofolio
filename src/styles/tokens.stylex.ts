@@ -1,31 +1,34 @@
 import * as stylex from "@stylexjs/stylex";
 
+// --paper and --ink are set in appearance.css and switch with the theme.
 export const colorTokens = stylex.defineVars({
-  background: "#ffffff",
-  foreground: "#000000",
-  muted: "rgb(0 0 0 / 5%)",
-  mutedForeground: "rgb(0 0 0 / 64%)",
-  border: "rgb(0 0 0 / 18%)",
-  borderLight: "rgb(0 0 0 / 10%)",
-  accent: "#335e7a",
-  accentHover: "#26495f",
+  background: "rgb(var(--paper))",
+  foreground: "rgb(var(--ink))",
+  muted: "rgb(var(--ink) / 6%)",
+  mutedForeground: "rgb(var(--ink) / 66%)",
+  border: "rgb(var(--ink) / 44%)",
+  borderLight: "rgb(var(--ink) / 16%)",
+  accent: "rgb(var(--ink))",
+  accentHover: "rgb(var(--ink) / 80%)",
 });
 
 export const typographyTokens = stylex.defineVars({
-  bodyFont: 'Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
+  bodyFont: '"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif',
   monospaceFont: 'ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace',
 });
 
 export const layoutTokens = stylex.defineVars({
   contentMeasure: "43rem",
-  portfolioMeasure: "52rem",
-  pageLeft: "clamp(1.25rem, 11vw, 13rem)",
-  pageGutter: "1.5rem",
-  sectionGap: "3.5rem",
+  pageWidth: "70rem",
+  pageGutter: "1.25rem",
+  sectionGap: "2.5rem",
 });
 
+// The CV follows the site theme on screen. In print, appearance.css resets
+// paper and ink to white and black, so these print as before.
 export const cvColorTokens = stylex.defineVars({
-  secondaryInk: "rgb(0 0 0 / 68%)",
-  subtleRule: "rgb(0 0 0 / 26%)",
-  screenCanvas: "#f5f5f5",
+  secondaryInk: "rgb(var(--ink) / 68%)",
+  subtleRule: "rgb(var(--ink) / 26%)",
+  screenCanvas: "rgb(var(--paper))",
+  sheet: "color-mix(in srgb, rgb(var(--paper)), rgb(var(--ink)) 4%)",
 });

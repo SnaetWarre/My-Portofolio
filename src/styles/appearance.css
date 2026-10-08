@@ -1,29 +1,41 @@
-/* Defaults also work before JavaScript and when scripts are disabled. */
-html[data-obsidian] {
-  --obsidian-paper: 255 255 255;
-  --obsidian-ink: 0 0 0;
-  --obsidian-invert: 1;
+/* Paper and ink as RGB triplets so alpha variants stay cheap.
+   Defaults also work before JavaScript and when scripts are disabled. */
+html {
+  --paper: 230 229 225;
+  --ink: 32 33 36;
+  --invert: 0;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  html[data-obsidian]:not([data-theme="light"]) {
-    --obsidian-paper: 0 0 0;
-    --obsidian-ink: 255 255 255;
-    --obsidian-invert: 0;
+  html:not([data-theme="light"]) {
+    --paper: 27 28 30;
+    --ink: 216 215 211;
+    --invert: 1;
     color-scheme: dark;
   }
 }
-html[data-obsidian][data-theme="dark"] {
-  --obsidian-paper: 0 0 0;
-  --obsidian-ink: 255 255 255;
-  --obsidian-invert: 0;
+html[data-theme="dark"] {
+  --paper: 27 28 30;
+  --ink: 216 215 211;
+  --invert: 1;
   color-scheme: dark;
 }
 
-/* Selected text inverts to ink on paper, matching the rest of the palette. */
-html[data-obsidian] ::selection {
-  background-color: rgb(var(--obsidian-ink));
-  color: rgb(var(--obsidian-paper));
+/* Paper prints white whatever the theme. */
+@media print {
+  html,
+  html[data-theme="dark"],
+  html:not([data-theme="light"]) {
+    --paper: 255 255 255;
+    --ink: 0 0 0;
+    --invert: 0;
+    color-scheme: light;
+  }
+}
+
+::selection {
+  background-color: rgb(var(--ink));
+  color: rgb(var(--paper));
 }
 
 /* Circular ink reveal for the theme toggle. The toggle temporarily folds

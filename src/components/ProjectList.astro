@@ -1,13 +1,8 @@
 ---
 import * as stylex from "@stylexjs/stylex";
+import Schematic from "./Schematic.astro";
+import type { Project } from "../lib/projects";
 import { portfolioStyles } from "../styles/portfolioStyles";
-
-interface Project {
-  title: string;
-  href?: string;
-  description: string;
-  context?: string;
-}
 
 interface Props {
   projects: Project[];
@@ -17,13 +12,25 @@ const { projects } = Astro.props;
 ---
 
 <ul {...stylex.attrs(portfolioStyles.projectList)} role="list">
-  {projects.map((project) => (
-    <li {...stylex.attrs(portfolioStyles.projectRow)}>
-      <h3 {...stylex.attrs(portfolioStyles.projectHeading)}>
-        {project.href ? <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.primaryProjectLink)} href={project.href}>{project.title}</a> : project.title}
-        {project.context && <span {...stylex.attrs(portfolioStyles.projectContext)}>{project.context}</span>}
-      </h3>
-      <p {...stylex.attrs(portfolioStyles.projectDescription)}>{project.description}</p>
-    </li>
-  ))}
+  {projects.map((project) => {
+    const aside = project.drawing?.placement === "aside";
+    const below = project.drawing?.placement === "below";
+    return (
+      <li {...stylex.attrs(portfolioStyles.row, aside && portfolioStyles.rowAside)}>
+        <div>
+          <h3 {...stylex.attrs(portfolioStyles.rowHeading)}>
+            <a {...stylex.attrs(portfolioStyles.rowLink)} href={project.href}>{project.title}</a>
+            {project.context && <span {...stylex.attrs(portfolioStyles.rowRole)}>{project.context}</span>}
+          </h3>
+          <p {...stylex.attrs(portfolioStyles.rowText)}>{project.description}</p>
+        </div>
+        {aside && project.drawing && (
+          <div {...stylex.attrs(portfolioStyles.drawingAside)}><Schematic drawing={project.drawing.key} /></div>
+        )}
+        {below && project.drawing && (
+          <div {...stylex.attrs(portfolioStyles.drawingBelow)}><Schematic drawing={project.drawing.key} /></div>
+        )}
+      </li>
+    );
+  })}
 </ul>

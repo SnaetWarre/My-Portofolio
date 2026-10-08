@@ -1,0 +1,32 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import { portfolioStyles } from "../styles/portfolioStyles";
+
+interface Cell {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  heading: string;
+  tag?: string;
+  cells: Cell[];
+}
+
+const { heading, tag, cells } = Astro.props;
+---
+
+<div {...stylex.attrs(portfolioStyles.titleBlock)}>
+  <div {...stylex.attrs(portfolioStyles.titleBlockName)}>
+    <h1 {...stylex.attrs(portfolioStyles.titleBlockHeading)}>{heading}</h1>
+    {tag && <p {...stylex.attrs(portfolioStyles.titleBlockTag)}>{tag}</p>}
+  </div>
+  <dl {...stylex.attrs(portfolioStyles.titleBlockCells)}>
+    {cells.map((cell) => (
+      <div {...stylex.attrs(portfolioStyles.titleBlockCell)}>
+        <dt {...stylex.attrs(portfolioStyles.titleBlockLabel)}>{cell.label}</dt>
+        <dd style="margin: 0">{cell.value}</dd>
+      </div>
+    ))}
+  </dl>
+</div>

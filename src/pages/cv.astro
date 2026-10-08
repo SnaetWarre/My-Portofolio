@@ -6,6 +6,9 @@ import StyleXDevStyles from "../components/StyleXDevStyles.astro";
 import { basePath } from "../lib/paths";
 import { cvStyles } from "../styles/cvStyles";
 import StructuredData from "../components/StructuredData.astro";
+import ThemeSetup from "../components/ThemeSetup.astro";
+import ThemeControl from "../components/ThemeControl.astro";
+import ExternalLinks from "../components/ExternalLinks.astro";
 import { absoluteUrl, breadcrumbs, person, personId, siteUrl, website, websiteId } from "../lib/site";
 import "../styles/reset.css";
 
@@ -39,6 +42,7 @@ const structuredData = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SiteIcons />
+    <ThemeSetup />
     <title>{title}</title>
     <meta name="author" content="Warre Snaet" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -55,9 +59,11 @@ const structuredData = [
   </head>
   <body {...stylex.attrs(cvStyles.body)}>
     <nav {...stylex.attrs(cvStyles.toolbar)} aria-label="CV actions">
-      <a {...stylex.attrs(cvStyles.link, cvStyles.toolbarAction)} href={base}>← Portfolio</a>
+      <a {...stylex.attrs(cvStyles.link, cvStyles.toolbarAction)} href={base}>Portfolio</a>
       <a {...stylex.attrs(cvStyles.link, cvStyles.toolbarAction)} href={`${base}CV_Warre_Snaet.pdf`} download>Download PDF</a>
+      <ThemeControl boxed />
     </nav>
+    <ExternalLinks />
 
     <main {...stylex.attrs(cvStyles.resume)} id="resume">
       <header {...stylex.attrs(cvStyles.resumeHeader)}>

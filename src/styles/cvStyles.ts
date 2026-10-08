@@ -4,12 +4,8 @@ import { colorTokens, cvColorTokens } from "./tokens.stylex";
 export const cvStyles = stylex.create({
   document: {
     minWidth: 320,
-    backgroundColor: {
-      default: cvColorTokens.screenCanvas,
-      "@media print": colorTokens.background,
-    },
+    backgroundColor: cvColorTokens.screenCanvas,
     color: colorTokens.foreground,
-    colorScheme: "light",
     fontFamily: '"Liberation Sans", Arial, sans-serif',
     fontSize: "10pt",
     lineHeight: 1.36,
@@ -27,7 +23,7 @@ export const cvStyles = stylex.create({
   },
   link: {
     color: "inherit",
-    textDecorationColor: "rgb(0 0 0 / 50%)",
+    textDecorationColor: "rgb(var(--ink) / 50%)",
     textDecorationThickness: "0.7px",
     textUnderlineOffset: "1.5px",
   },
@@ -69,7 +65,7 @@ export const cvStyles = stylex.create({
     textDecorationLine: "none",
     outline: {
       default: "none",
-      ":focus-visible": "3px solid #000",
+      ":focus-visible": `3px solid ${colorTokens.foreground}`,
     },
     outlineOffset: {
       default: 0,
@@ -96,11 +92,17 @@ export const cvStyles = stylex.create({
       default: "13mm 14mm 12mm",
       "@media (max-width: 780px)": "1.2rem",
     },
-    backgroundColor: colorTokens.background,
-    boxShadow: {
-      default: "0 10px 40px rgb(0 0 0 / 12%)",
-      "@media (max-width: 780px)": "none",
+    backgroundColor: {
+      default: cvColorTokens.sheet,
+      "@media print": colorTokens.background,
     },
+    borderWidth: {
+      default: 1,
+      "@media (max-width: 780px)": 0,
+      "@media print": 0,
+    },
+    borderStyle: "solid",
+    borderColor: cvColorTokens.subtleRule,
   },
   resumeHeader: {
     display: "grid",

@@ -1,8 +1,8 @@
 ---
 import { basePath } from "../../lib/paths";
 import ThemeSetup from "../../components/ThemeSetup.astro";
-import ThemeControl from "../../components/ThemeControl.astro";
-import ObsidianScene from "../../components/ObsidianScene.astro";
+import TopLine from "../../components/TopLine.astro";
+import ExternalLinks from "../../components/ExternalLinks.astro";
 import MathFormula from "../../components/MathFormula.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import PageEnd from "../../components/PageEnd.astro";
@@ -10,7 +10,6 @@ import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteI
 import SiteIcons from "../../components/SiteIcons.astro";
 import FontPreload from "../../components/FontPreload.astro";
 import SocialMetadata from "../../components/SocialMetadata.astro";
-import { obsidianTheme } from "../../styles/obsidianStyles";
 import * as stylex from "@stylexjs/stylex";
 import StyleXDevStyles from "../../components/StyleXDevStyles.astro";
 import { blogStyles } from "../../styles/blogStyles";
@@ -63,7 +62,7 @@ const structuredData = [
 ---
 
 <!doctype html>
-<html transition:animate="none" lang="en" data-obsidian data-pose="blog" {...stylex.attrs(portfolioStyles.document, blogStyles.document, obsidianTheme)}>
+<html transition:animate="none" lang="en" {...stylex.attrs(portfolioStyles.document, blogStyles.document)}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -96,13 +95,7 @@ const structuredData = [
     <body {...stylex.attrs(portfolioStyles.body)}>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink, blogStyles.skipLink)} href="#article">Skip to article</a>
 
-        <nav {...stylex.attrs(blogStyles.pageColumn, blogStyles.siteNavigation)} aria-label="Site">
-            <a href={basePath} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Warre Snaet</a>
-            <div {...stylex.attrs(blogStyles.navigationLinks)}>
-                <a href={`${basePath}#work-title`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)}>Work</a>
-                <a href={`${basePath}blog/blog.html`} {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} aria-current="page">Writing</a>
-            </div>
-        </nav>
+        <div {...stylex.attrs(blogStyles.pageColumn)}><TopLine /></div>
 
         <main {...stylex.attrs(blogStyles.blogPost, blogStyles.pageColumn)} id="article" tabindex="-1">
             <article>
@@ -868,7 +861,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                 >
             </div>
         </footer>
-        <ThemeControl />
-        <ObsidianScene />
+        <ExternalLinks />
     </body>
 </html>
