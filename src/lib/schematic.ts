@@ -2,8 +2,7 @@
  * Builds the site's architecture drawings as SVG strings at build time.
  *
  * A drawing is a list of nodes and edges on a small grid. Edges run
- * orthogonally between the nearest sides of two nodes, so their lengths can
- * be computed here and used for the draw-on animation without any client code.
+ * orthogonally between the nearest sides of two nodes.
  */
 
 export type NodeKind = "box" | "cylinder" | "phone" | "group" | "note";
@@ -42,10 +41,8 @@ export interface Schematic {
 }
 
 export interface RenderOptions {
-  /** Extra classes on the root, e.g. "cover" or "lead". */
+  /** Extra class on the root, e.g. "lead". */
   className?: string;
-  /** Draw the lines on load and send one packet along the first edge. */
-  animated?: boolean;
 }
 
 type Placed = Required<Omit<SchematicNode, "kind">> & { kind: NodeKind };
@@ -77,7 +74,7 @@ export function renderSchematic(spec: Schematic, options: RenderOptions = {}): s
   const lineHeight = spec.lineHeight ?? 13;
   const marker = `arrow-${spec.id}`;
   const parts: string[] = [];
-  const classes = ["schematic", options.className, options.animated && "animated"].filter(Boolean).join(" ");
+  const classes = ["schematic", options.className].filter(Boolean).join(" ");
 
   parts.push(
     `<svg class="${classes}" viewBox="0 0 ${spec.width} ${spec.height}" role="img" aria-label="${escape(spec.alt)}" xmlns="http://www.w3.org/2000/svg">`,
@@ -87,56 +84,36 @@ export function renderSchematic(spec: Schematic, options: RenderOptions = {}): s
   // Edges first, so boxes cover the line ends.
   const edges: string[] = [];
   const labels: string[] = [];
-  let firstPath = "";
-  spec.edges.forEach((e, index) => {
+  for (const e of spec.edges) {
     const a = nodes.get(e.from), b = nodes.get(e.to);
     if (!a || !b) throw new Error(`Schematic ${spec.id}: edge ${e.from} -> ${e.to} names a missing node`);
     const [sa, sb] = sides(a, b);
     const [x1, y1] = port(a, sa), [x2, y2] = port(b, sb);
-    let d: string;
-    let length: number;
-    if (sa === "r" || sa === "l") {
-      const mx = (x1 + x2) / 2;
-      d = `M${x1} ${y1} H${mx} V${y2} H${x2}`;
-      length = Math.abs(mx - x1) + Math.abs(y2 - y1) + Math.abs(x2 - mx);
-    } else {
-      const my = (y1 + y2) / 2;
-      d = `M${x1} ${y1} V${my} H${x2} V${y2}`;
-      length = Math.abs(my - y1) + Math.abs(x2 - x1) + Math.abs(y2 - my);
-    }
-    if (!firstPath) firstPath = d;
+    const d = sa === "r" || sa === "l"
+      ? `M${x1} ${y1} H${(x1 + x2) / 2} V${y2} H${x2}`
+      : `M${x1} ${y1} V${(y1 + y2) / 2} H${x2} V${y2}`;
     const arrows = e.arrows ?? "end";
     const markers =
       (arrows === "end" || arrows === "both" ? ` marker-end="url(#${marker})"` : "") +
       (arrows === "both" ? ` marker-start="url(#${marker})"` : "");
-    let style = "";
-    if (options.animated) {
-      // Dashed lines keep their pattern; solid lines draw in from zero.
-      const dash = e.dashed ? "3 3" : String(length);
-      style = ` style="stroke-dasharray:${dash};stroke-dashoffset:${length};animation-delay:${300 + index * 180}ms"`;
-    }
-    edges.push(`<path class="edge${e.dashed ? " dashed" : ""}" d="${d}"${markers}${style}/>`);
+    edges.push(`<path class="edge${e.dashed ? " dashed" : ""}" d="${d}"${markers}/>`);
     if (e.label) {
-      const delay = options.animated ? ` style="animation-delay:${600 + index * 180}ms"` : "";
-      labels.push(`<text class="note label" x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 + 4}" text-anchor="middle"${delay}>${escape(e.label)}</text>`);
+      labels.push(`<text class="note label" x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 + 4}" text-anchor="middle">${escape(e.label)}</text>`);
     }
-  });
+  }
   parts.push(`<g>${edges.join("")}${labels.join("")}</g>`);
 
-  let nodeIndex = 0;
   for (const n of nodes.values()) {
-    const delay = options.animated ? ` style="animation-delay:${200 + nodeIndex * 120}ms"` : "";
-    nodeIndex += 1;
     const inner: string[] = [];
     if (n.kind === "group") {
       inner.push(`<rect class="box group" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}"/>`);
       inner.push(`<text class="note" x="${n.x + 6}" y="${n.y + 14}">${escape(n.label)}</text>`);
-      parts.push(`<g class="node"${delay}>${inner.join("")}</g>`);
+      parts.push(`<g class="node">${inner.join("")}</g>`);
       continue;
     }
     if (n.kind === "note") {
       inner.push(`<text class="note" x="${n.x + n.w / 2}" y="${n.y + n.h / 2 + 4}" text-anchor="middle">${escape(n.label)}</text>`);
-      parts.push(`<g class="node"${delay}>${inner.join("")}</g>`);
+      parts.push(`<g class="node">${inner.join("")}</g>`);
       continue;
     }
     if (n.kind === "cylinder") {
@@ -154,15 +131,7 @@ export function renderSchematic(spec: Schematic, options: RenderOptions = {}): s
       const y = n.y + n.h / 2 + 4 + (i - (lines.length - 1) / 2) * lineHeight;
       inner.push(`<text x="${n.x + n.w / 2}" y="${y}" text-anchor="middle">${escape(line)}</text>`);
     });
-    parts.push(`<g class="node"${delay}>${inner.join("")}</g>`);
-  }
-
-  if (options.animated && firstPath) {
-    // One packet travels the first edge after the drawing has appeared.
-    parts.push(
-      `<path id="route-${spec.id}" d="${firstPath}" fill="none" stroke="none"/>`,
-      `<circle class="packet" r="3" opacity="0"><set attributeName="opacity" to="1" begin="2.2s" fill="freeze"/><animateMotion dur="6s" begin="2.2s" repeatCount="indefinite"><mpath href="#route-${spec.id}"/></animateMotion></circle>`,
-    );
+    parts.push(`<g class="node">${inner.join("")}</g>`);
   }
 
   parts.push("</svg>");

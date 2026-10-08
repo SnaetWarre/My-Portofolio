@@ -5,29 +5,6 @@ import type { Schematic } from "./schematic";
  * the drawing says otherwise. Keep labels short: they are set at 11.5px.
  */
 export const drawings = {
-  /** The home page cover: Apolloon hosts syncing over the event network. */
-  cover: {
-    id: "cover",
-    alt: "Four event hosts on a local network with no internet. They announce themselves over signed UDP, pair once, and exchange missing operations over authenticated HTTP.",
-    width: 1120,
-    height: 330,
-    lineHeight: 17,
-    nodes: [
-      { id: "a", label: "Finish line host|Electron, SQLite", x: 60, y: 60, w: 160, h: 52 },
-      { id: "b", label: "Registration host|Electron, SQLite", x: 460, y: 40, w: 160, h: 52 },
-      { id: "c", label: "Scoreboard host|Electron, SQLite", x: 250, y: 220, w: 160, h: 52 },
-      { id: "d", label: "Spare host|joins later", x: 520, y: 200, w: 160, h: 52 },
-      { id: "lan", label: "Event LAN, no internet", x: 10, y: 6, w: 690, h: 310, kind: "group" },
-    ],
-    edges: [
-      { from: "a", to: "b", label: "signed UDP announcements", arrows: "both" },
-      { from: "a", to: "c", label: "missing operations, authenticated HTTP", arrows: "both" },
-      { from: "b", to: "c", arrows: "both" },
-      { from: "b", to: "d", dashed: true, label: "pair once", arrows: "both" },
-      { from: "c", to: "d", dashed: true, arrows: "both" },
-    ],
-  },
-
   /** Wide pipeline shown under the medical imaging entry on the home page. */
   dicomWide: {
     id: "dicom-wide",
@@ -71,6 +48,28 @@ export const drawings = {
       { from: "o", to: "m" },
       { from: "v", to: "r" },
       { from: "m", to: "r", dashed: true },
+    ],
+  },
+
+  /** Wide version shown under the Apolloon entry on the home page. */
+  apolloonWide: {
+    id: "apolloon-wide",
+    alt: "Four event hosts on a local network with no internet. They announce themselves over signed UDP, pair once, and exchange missing operations over authenticated HTTP.",
+    width: 820,
+    height: 244,
+    nodes: [
+      { id: "a", label: "Finish line host|Electron, SQLite", x: 40, y: 102, w: 140, h: 40 },
+      { id: "b", label: "Registration host|Electron, SQLite", x: 300, y: 28, w: 140, h: 40 },
+      { id: "c", label: "Scoreboard host|Electron, SQLite", x: 300, y: 176, w: 140, h: 40 },
+      { id: "d", label: "Spare host|joins later", x: 600, y: 102, w: 140, h: 40 },
+      { id: "lan", label: "Event LAN, no internet", x: 8, y: 6, w: 804, h: 232, kind: "group" },
+    ],
+    edges: [
+      { from: "a", to: "b", label: "signed UDP announcements", arrows: "both" },
+      { from: "a", to: "c", label: "missing operations, authenticated HTTP", arrows: "both" },
+      { from: "b", to: "c", arrows: "both" },
+      { from: "b", to: "d", dashed: true, label: "pair once", arrows: "both" },
+      { from: "c", to: "d", dashed: true, arrows: "both" },
     ],
   },
 

@@ -24,6 +24,7 @@ export const experience: Project[] = [
     context: "software engineer, paid client work",
     href: `${basePath}work/apolloon.html`,
     description: "It runs a 24-hour relay on the event's own network. Every Electron host has its own writable SQLite database. Hosts pair once and find each other again through signed UDP announcements on the LAN. Over authenticated HTTP, they send each other only the operations the other side is missing.",
+    drawing: { key: "apolloonWide", placement: "below" },
   },
 ];
 

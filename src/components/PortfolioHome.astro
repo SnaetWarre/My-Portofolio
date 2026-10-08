@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectList from "./ProjectList.astro";
-import Schematic from "./Schematic.astro";
 import TitleBlock from "./TitleBlock.astro";
 import TopLine from "./TopLine.astro";
 import * as stylex from "@stylexjs/stylex";
@@ -50,9 +49,6 @@ const structuredData = [
     <TopLine home />
 
     <header {...stylex.attrs(portfolioStyles.cover)}>
-      <div {...stylex.attrs(portfolioStyles.coverDrawing)}>
-        <Schematic drawing="cover" size="cover" animated />
-      </div>
       <TitleBlock
         heading="Warre Snaet"
         tag="I build backends and applied AI, mostly in Python."

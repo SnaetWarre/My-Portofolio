@@ -5,13 +5,12 @@ import { renderSchematic } from "../lib/schematic";
 
 interface Props {
   drawing: DrawingKey;
-  /** "cover" for the page-wide drawing, "lead" for a small drawing shown large. */
-  size?: "cover" | "lead" | "inline";
-  animated?: boolean;
+  /** "lead" for a small drawing shown large. */
+  size?: "lead" | "inline";
 }
 
-const { drawing, size = "inline", animated = false } = Astro.props;
-const svg = renderSchematic(drawings[drawing], { className: size === "inline" ? undefined : size, animated });
+const { drawing, size = "inline" } = Astro.props;
+const svg = renderSchematic(drawings[drawing], { className: size === "lead" ? "lead" : undefined });
 ---
 
 <Fragment set:html={svg} />
