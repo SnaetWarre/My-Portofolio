@@ -7,69 +7,72 @@ import { caseStudyStyles } from "../../styles/caseStudyStyles";
 
 <CaseStudyLayout
   title="Apolloon Race Operations | Warre Snaet"
-  description="How Apolloon runs a 24-hour relay without the cloud: Electron hosts that work offline, find each other on the LAN, and replicate their SQLite data."
-  kicker="Paid client project, 2026"
+  description="How Apolloon runs a 24-hour relay without the cloud: three Electron laptops that each hold the full SQLite database and agree on every change by majority vote."
+  kicker="Paid client project, 2025–2026"
   heading="Apolloon race operations"
-  lead="I built the software for a 24-hour relay race. It runs on the event's wired LAN instead of a cloud service: every Electron host has its own Node backend and its own writable SQLite database."
+  lead="I built the software for a 24-hour relay race. It runs on three laptops on the event's wired network, with no cloud service. Each laptop keeps the whole race in SQLite, and the three agree on every change by majority vote, so a laptop can die without losing a confirmed lap."
   meta={[
-    { label: "Role", value: "Software engineer, built it end to end" },
-    { label: "Stack", value: "React, TypeScript, Express, tRPC, Socket.IO, SQLite, Electron" },
-    { label: "Runtime", value: "Electron hosts, wired LAN, local SQLite" },
+    { label: "Role", value: "Sole developer, built it end to end" },
+    { label: "Stack", value: "React, TypeScript, Express, tRPC, SQLite, Electron" },
+    { label: "Runtime", value: "Three Electron laptops, wired LAN, browser screens" },
   ]}
 >
   <CaseSection label="Purpose" title="Running a race without the cloud">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>For 24 hours, the software has to register runners, manage the queue, record laps, fix mistakes, show the live race state, and export results. None of that should stop because the Wi-Fi drops, the internet goes down, or a laptop dies.</p>
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>So Apolloon is deployed to the event LAN itself. One Electron laptop can run the whole event on its own. When several host laptops share a wired switch, each one keeps a full writable copy of the database and catches up after it loses its connection.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>For 24 hours, the software registers runners, runs the queue and the warm-up, records laps, fixes mistakes, shows the live race on TVs, and exports results to Excel and CSV. The timer records a lap by typing the runner's number or pressing Space. The people at the tables aren't technical, so a failing laptop must never need a decision from them, and no two laptops may ever disagree about the queue or the laps.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Works alone</strong>One packaged host can run an event with no internet, no PostgreSQL, and no other managed service.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Hosts and thin clients</strong>Operator laptops and display screens that only run a browser connect over the LAN and don't store any data.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Live updates</strong>After a local write succeeds, connected screens get a small update over Socket.IO.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Three laptops</strong>Timing, the queue desk, and the warm-up post. Each one holds the full database, and changes can be made from any of their screens.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Browser screens</strong>TVs and extra laptops open a laptop's address in a browser and store nothing. When their laptop dies, they reopen the same page on another laptop within 2.5 to 8 seconds.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Live updates</strong>Screens get every change through a tRPC subscription over WebSocket.</li>
     </ul>
   </CaseSection>
 
   <CaseSection label="Runtime" title="A desktop app with its own backend">
     <div {...stylex.attrs(caseStudyStyles.architecture)}>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>LAN clients</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Operator and display browsers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Connect to an Electron host for race control, live state, imports, and exports</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host runtime</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Electron + local Node process</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Bundles the React UI, the Express and tRPC API, the Socket.IO bridge, and static files</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Host storage</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>SQLite state and operation log</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Every host has its own writable data, and each local change also writes a record for replication</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>LAN clients</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Operator and TV browsers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Show the live race and move to another laptop when theirs stops answering</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Laptop runtime</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Electron + local Node process</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Bundles the React UI, the Express and tRPC API, and the static files</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Laptop storage</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>SQLite and a replication log</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Every laptop holds the full race, and only the current leader writes new changes</span></div>
       </div>
-      <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ signed UDP discovery + authenticated HTTP delta sync ↓</p>
+      <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ UDP broadcast discovery + Raft over WebSocket ↓</p>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Pair once</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Persisted host identities</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>A new host joins with a creator URL and a short pairing code, and keeps a recovery copy before its data is replaced</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Rediscover routes</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>HMAC-signed UDP announcements</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Hosts find each other again after a reconnect or a LAN IP change, with no central server involved</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Reconcile state</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Missing operation deltas only</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Peers authenticate, check that they are compatible, and replay operations in a fixed canonical order</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Find</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Announcements every 2 seconds</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Laptops find each other again when an address changes, and a laptop on its own lists the groups it can join</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Link</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Automatic linking</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>An empty laptop joins the group that holds runners within about five seconds. Linking two groups that both hold runners takes a button press</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Agree</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>One leader, majority vote</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>The leader puts every change in order and confirms it once two of the three laptops store it</span></div>
       </div>
     </div>
   </CaseSection>
 
   <CaseSection label="Consistency" title="What a single write goes through">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Before changing anything, the local server checks the command and whether the race is in a state that allows it. The data change and its immutable replication record are committed in one SQLite transaction. Only after that does the UI get a response and do connected clients get the live update.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>A change made on any screen goes to the leader. The leader writes the change and its log entry in one SQLite transaction, sends the entry to the other laptops at once, and confirms it to the screen once a majority has stored it. Nothing ever needs merging, because only one laptop decides the order.</p>
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Exactly-once retries</strong>Sending a command ID again with the same payload returns the original result. Using that ID for a different write is rejected.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Atomic replication</strong>If an incoming batch is invalid, nothing changes: not the race data, not the operation log, and not the recorded progress for that peer.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Deterministic recovery</strong>When hosts that wrote at the same time reconnect, their histories can be rebuilt from a checkpoint in canonical operation order.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Durable local storage</strong>Every host runs SQLite in WAL mode with full synchronization in production.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Exactly-once retries</strong>Every change carries a request ID. If the leader dies while a change is on its way, the next leader applies it once.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>No lost laps</strong>Only a laptop that holds every confirmed change can win an election, so a takeover never loses confirmed data.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>No two leaders</strong>A leader that can't reach a majority for 1.5 seconds steps down. A laptop behind a broken cable stops saving instead of recording laps the others never see.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Catching up</strong>A laptop that comes back catches up from the leader. If it holds changes the group never confirmed, it backs up its database first and then installs a full copy from the leader.</li>
     </ul>
   </CaseSection>
 
-  <CaseSection label="Safety" title="No automatic failover, on purpose">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Registration, the queue, and admin stay writable on every host. Timing works differently. One host is the timing controller, and a planned handover can only go to a peer that is reachable and fully caught up. When two laptops lose contact, they have no safe way to elect a new controller by themselves, so Apolloon doesn't try.</p>
+  <CaseSection label="Failover" title="Automatic, by majority vote">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The leader sends a heartbeat every 150 ms. When a laptop hears nothing for 1.5 to 3 seconds, it checks whether an election could succeed and then asks the others for their votes. With two of the three laptops up, everything keeps working. With one left, nothing is saved until a second one is back, unless someone confirms that the others are gone for good. That's why the design needs three laptops: with two, losing either one stops saving.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Guarded timing takeover</strong>If the controller is lost, a caught-up replica can take over once an operator confirms it. When the system can't be sure it has every timing action, it shows a warning instead of hiding the gap.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Replication is not backup</strong>Every production host also takes a SQLite snapshot every five minutes, checks its integrity, and records it in a SHA-256 manifest.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Version checks</strong>Before exchanging any operations, peers compare their schema, replication format, app version, and release identity.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Shared clock</strong>The laptops have no internet time, so each one measures its offset to the leader's clock every two seconds.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Replication is not backup</strong>Every laptop takes a SQLite backup every five minutes and checks it with <code>quick_check</code> and <code>foreign_key_check</code>. It keeps the last 48 scheduled backups, and a restore covers the whole group.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Version checks</strong>Laptops only link when their app version and database schema match.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cross-platform builds</strong>The same self-contained Electron app is packaged for Linux, Windows, and macOS.</li>
     </ul>
   </CaseSection>
 
+  <CaseSection label="Testing" title="Tested on the real laptops">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The repository has about 45 test files, including end-to-end tests of a linked group and a simulation of the Raft algorithm. A failover benchmark measures how long screens take to move to another laptop. A rehearsal script runs on the actual event laptops: it kills the app, cuts cables with firewall rules, and freezes laptops.</p>
+  </CaseSection>
+
   <CaseSection label="Ownership" title="What I built">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>This is paid client work, so the code isn't public. This is the product and systems work I was responsible for:</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>This is paid client work, so the code isn't public. I wrote all of it, from October 2025 on:</p>
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The local-first architecture, the Electron runtime, the typed boundary between browser and server, the SQLite data model, and replication through the operation log.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Host discovery on the LAN, authenticated exchange of missing operations, compatibility checks between peers, reconnect handling, backups, and the safeguards around timing handover.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>The operator screens for registration, the queue, timing, corrections, imports, exports, and the live race state.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Regression and end-to-end tests for standalone writes, several hosts converging, catching up after a reconnect, rolling back invalid batches, peers changing address, and timing conflicts.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The Electron runtime, the typed API between browser and server, and the SQLite data model.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The Raft group: elections, replication, catching up, automatic linking, discovery on the LAN, and browsers that move between laptops.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The operator screens for registration, the queue and warm-up, timing, lap corrections, the live race, and exports.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>The tests, the Raft simulation, the failover benchmark, and the hardware rehearsal.</li>
     </ul>
   </CaseSection>
 </CaseStudyLayout>

@@ -7,40 +7,47 @@ import { caseStudyStyles } from "../../styles/caseStudyStyles";
 
 <CaseStudyLayout
   title="Medical Imaging Pipeline | Warre Snaet"
-  description="A clinical imaging pipeline Warre Snaet built during an international internship at 2Ai IPCA in Barcelos, Portugal."
+  description="A clinical imaging pipeline Warre Snaet built during an international internship at 2Ai IPCA in Barcelos, Portugal: OCR on echocardiography studies, ECG extraction, and a GPU image search that finds each measurement's source video."
   kicker="International internship, Feb–Jun 2026"
   heading="Medical imaging pipeline"
-  lead="A Python pipeline that reads the measurements embedded in echocardiographic studies and turns them into structured research data that a person can review."
+  lead="A Python pipeline that reads the measurements burned into echocardiography studies, finds the video frame each measurement was taken from, and turns the result into structured research data that a person can review."
   meta={[
     { label: "My role", value: "AI & software engineering intern" },
-    { label: "Stack", value: "Python, DICOM, OpenCV, OCR, image processing" },
+    { label: "Stack", value: "Python, pydicom, OpenCV, PyTorch, CUDA, OCR, PySide6" },
     { label: "Context", value: "2Ai IPCA, Barcelos, Portugal" },
   ]}
 >
   <CaseSection label="Problem" title="Measurements stuck inside images">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The measurements the research needed were burned into the echocardiographic images instead of being stored as separate fields. Copying them out by hand was slow, hard to repeat, and hard to check across large batches of studies.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The measurements the research needed were burned into the echocardiography images instead of being stored as separate fields. Copying them out by hand was slow, hard to repeat, and hard to check across large batches of studies. The researchers also needed to know which ultrasound video each measurement image came from.</p>
   </CaseSection>
 
-  <CaseSection label="Pipeline" title="Detection, extraction, and review">
+  <CaseSection label="Pipeline" title="OCR, ECG, source matching, and review">
+    <ol {...stylex.attrs(caseStudyStyles.list)}>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Walk the studies by patient and exam, and load the saved state if a run is resuming.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Find the measurement panel, cut it into lines, and OCR each line. A word list built from the known labels reranks the OCR guesses, and each line is split into name, value, and unit.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Extract the ECG trace and its marker dots from the frames.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>For every single-frame measurement image, search the videos of the same exam for the frame it was taken from.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Write JSON and CSV, give every measurement a status code, and send uncertain rows to a review queue.</li>
+    </ol>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Each stage can run as its own pass and resumes where it stopped, so a long batch doesn't start over after an interruption.</p>
+  </CaseSection>
+
+  <CaseSection label="Source matching" title="An image search that took most of the time">
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Finding the source video is a similarity search. The matcher filters the exam's videos on content time and DICOM metadata, uses the ultrasound region from the metadata as a starting point, and aligns the measurement image against sampled frames with ECC. A coarse pass ranks the videos, a fine pass checks the best ones, and the top three videos come out with their best frame and scores.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>This search was the slow part of every run. With OpenCV, <code>findTransformECC</code> took about 96% of the matcher's time, and a profile showed that preparing candidate frames was also expensive. I fixed it in two steps:</p>
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Read echocardiographic DICOM studies and found the regions that contain burned-in measurements.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Combined OCR and image processing to extract the values and export them as normalized JSON.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Made batch processing resumable, so a long run can pick up where it left off after an interruption.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added validation queues and review tools so a person can see and check any output the pipeline is unsure about.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Extracted ECG traces for later analysis.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Decode only the videos that pass the filter, decode each one once, and compute each video's mask once. The output stayed identical.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Port OpenCV's ECC to PyTorch and compile it for CUDA, so it solves the frames of all candidate videos in batches on the GPU. It keeps OpenCV's warp precision, masked statistics, and stopping rules, and falls back to OpenCV when no GPU is available.</li>
     </ul>
-  </CaseSection>
-
-  <CaseSection label="Optimization" title="Check the metadata before matching images">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>I wrote a source-video matcher that uses DICOM metadata and OpenCV ECC alignment. Filtering on metadata first leaves far fewer candidates to align, which brought one representative run down from roughly 21 hours to 23 minutes.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>On a benchmark of 39 measurement images, source matching went from 1182 seconds to 234 seconds with the faster frame preparation, and to 80 seconds with the GPU ECC and three workers. That's 14.9 times faster. On 192 measurements, the GPU version picked the same best video as OpenCV every time and the same best frame 186 times. OpenCV matches its own result 184 times when its input is nudged by one floating-point step, so the GPU version is as close to OpenCV as OpenCV is to itself.</p>
   </CaseSection>
 
   <CaseSection label="Engineering" title="Reliable enough for research work">
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resumable work</strong>Saved intermediate state means an interrupted batch doesn't start over from zero.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Human validation</strong>Uncertain extractions go to a review queue, separate from accepted output.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Traceable output</strong>The structured exports record which source study each extracted value came from.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Practical handoff</strong>Documentation for each platform lets other people run the pipeline on their own machines, not just mine.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resumable work</strong>Saved state means an interrupted batch doesn't start over, and each stage can be rerun on its own.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Human validation</strong>Every measurement gets a status code from 0 to 4. A PySide6 review tool picks rows by status so a person can accept or correct them.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Speedups that keep the results</strong>I rejected faster settings, like fewer ECC iterations or warm starts from nearby frames, when they changed the rankings.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Traceable output</strong>The exports are keyed by patient, exam, and DICOM, so every value points back to its source study.</li>
     </ul>
   </CaseSection>
 </CaseStudyLayout>

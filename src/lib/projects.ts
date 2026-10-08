@@ -16,14 +16,14 @@ export const experience: Project[] = [
     title: "Medical imaging at 2Ai IPCA",
     context: "AI and software engineering intern, Portugal",
     href: `${basePath}work/medical-imaging.html`,
-    description: "Filtering candidates on metadata before aligning images cut one representative run from about 21 hours to 23 minutes. I wrote a Python pipeline that reads measurements out of DICOM studies with OCR. Around it I built review tools, resumable batch processing, ECG extraction and a matcher that finds the source video. It was an international internship, working with real clinical imaging data.",
+    description: "I wrote a Python pipeline that reads the measurements burned into echocardiography DICOM studies with OCR, extracts ECG traces, and finds the video frame each measurement image came from. That last step is an image similarity search, and it took most of the run time. I sped up the frame preparation and rewrote OpenCV's ECC alignment in PyTorch so it runs in batches on the GPU. Together, that made the search 14.9 times faster on a benchmark of 39 images, from 1182 to 80 seconds. A review tool lets a person check every value. It was an international internship, working with real clinical imaging data.",
     drawing: { key: "dicomWide", placement: "below" },
   },
   {
     title: "Apolloon 24-hour run system",
     context: "software engineer, paid client work",
     href: `${basePath}work/apolloon.html`,
-    description: "It runs a 24-hour relay on the event's own network. Every Electron host has its own writable SQLite database. Hosts pair once and find each other again through signed UDP announcements on the LAN. Over authenticated HTTP, they send each other only the operations the other side is missing.",
+    description: "It runs a 24-hour relay on three laptops on the event's own network, with no cloud. Each Electron laptop holds the whole race in SQLite. The laptops find each other through UDP broadcasts and elect a leader by majority vote with Raft. A change counts once two of the three laptops store it, so any one laptop can die without losing a lap. I built it alone.",
     drawing: { key: "apolloonWide", placement: "below" },
   },
 ];
@@ -33,47 +33,47 @@ export const selectedWork: Project[] = [
     title: "AWS Fargate and Vault workload identity",
     context: "Terraform on AWS",
     href: `${basePath}work/aws-fargate-vault.html`,
-    description: "Private ECS Fargate tasks log in to Vault with their IAM role. The Terraform puts them behind an ALB, spread over two availability zones. It also sets up CloudWatch monitoring, autoscaling, health checks and safeguards around deploys. I tested the plans against mocked providers.",
+    description: "Terraform for private ECS Fargate tasks behind a public ALB, with subnets in two availability zones. In Vault mode, a Vault Agent sidecar logs in to an external Vault with the task's IAM role and hands the app the one secret it may read. It also sets up CloudWatch logs, CPU autoscaling from 1 to 3 tasks, and a deploy circuit breaker that rolls back. CI tests three plan variants against mocked providers and never deploys.",
     drawing: { key: "awsFargateVault", placement: "aside" },
   },
   {
     title: "Financial AI agent",
     context: "school project, team of two",
     href: `${basePath}work/financial-agent.html`,
-    description: "Six services behind one chat app for a simulated investment portfolio. It has a streaming FastAPI backend, tools behind MCP, RAG with ChromaDB, PostgreSQL, a React frontend and local models through Ollama. I did the backend architecture, orchestration, persistence, containers and tests. I also did most of the frontend integration.",
+    description: "A chat app for a simulated investment portfolio, made of six containers. A streaming FastAPI backend sorts messages into questions and trade commands. Questions go through RAG on ChromaDB, and trades go through eight MCP tools and need a confirmation. It uses PostgreSQL, a React frontend, and Qwen2.5 running locally through Ollama. I did the backend architecture, orchestration, persistence, containers and tests, and most of the frontend integration.",
   },
   {
     title: "Azure ML lifecycle",
     context: "solo MLOps coursework",
     href: `${basePath}work/azure-mlops.html`,
-    description: "Data preparation runs in parallel on Azure ML compute, and MLflow tracks the runs. FastAPI serves the registered model from a Docker container. Kubernetes manifests and GitHub Actions handle delivery.",
+    description: "A CNN that sorts photos into 15 kinds of sports ball. An Azure ML pipeline prepares each class in a parallel job, splits the data, trains the model and registers it. GitHub Actions sets up Azure, runs the pipeline, serves the model with FastAPI in Docker, checks it with a test prediction, and deletes the Azure resources afterwards.",
   },
   {
     title: "Semi-supervised learning in Rust",
     context: "bachelor research, Rust and Burn",
     href: `${basePath}blog/blog.html`,
-    description: "The model scored 94.90% on a held-out test set. It classifies plant diseases on edge devices, trained on data where only a small part is labeled. It runs in an offline app of about 26 MB, which I tested on an iPhone.",
+    description: "A small CNN in Rust that classifies 38 plant diseases, trained with only 20% of the images labeled. Pseudo-labeling on the rest raised test accuracy from 86.06% to 94.90%. The release binary is about 26 MB and runs offline, and the model takes about 80 ms per image on an iPhone 12.",
   },
   {
-    title: "Event chatbot for XPO Group",
-    context: "school team project for XPO Group",
+    title: "Event chatbot for Kortrijk Xpo",
+    context: "school team project, lead developer",
     href: `${basePath}work/xpo-chatbot.html`,
-    description: "We built a full-stack RAG chatbot for an outside client. Python scrapers collect the event content. A .NET API answers questions with Azure OpenAI and Cosmos DB. A Next.js dashboard shows the analytics.",
+    description: "A RAG chatbot for three trade fairs, built by a team of four for an outside client. I wrote most of it. A Scrapy pipeline collects the event websites. A .NET API embeds the content with Azure OpenAI, stores it in Cosmos DB, ranks it by cosine similarity, and answers with GPT-4. A Next.js dashboard shows the analytics.",
   },
   {
     title: "Dataset query system",
     context: "Python client-server app",
     href: `${basePath}work/dataset-query.html`,
-    description: "Users query a shared dataset through a Python client and server. It has logins, moderator tools, usage statistics and server broadcasts. The desktop interface uses PySide6.",
+    description: "Users log in and query a dataset of Los Angeles arrests through a PySide6 desktop app. The server handles each client in its own thread over TCP and runs the pandas queries in a worker pool. A separate server window shows who is connected and what they query, and can message one client or all of them.",
   },
 ];
 
 export const openSource: Project[] = [
   {
     title: "Athas code editor",
-    context: "maintainer and contributor",
+    context: "contributor, 9 merged pull requests",
     href: `${basePath}work/athas.html`,
-    description: "I added C# language support, image diffs and dynamic proxy ports. I fixed Linux UI issues, resource and memory leaks, and a race condition in the language server handling. All of it is merged. I work on the React and TypeScript side and on the Tauri and Rust side.",
+    description: "My largest change makes the editor, language servers and terminal stream large files. I also hardened how it handles untrusted input, added C# support, image diffs and dynamic proxy ports, and fixed Linux UI issues, resource and memory leaks, and a race condition in the language server handling. I work on the React and TypeScript side and on the Tauri and Rust side.",
   },
 ];
 

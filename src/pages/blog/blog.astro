@@ -18,7 +18,7 @@ import "katex/dist/katex.min.css";
 import "../../styles/reset.css";
 
 const title = "Semi-supervised plant disease detection in Rust | Warre Snaet";
-const description = "Building an offline plant disease classifier with Rust, the Burn ML framework, and a pseudo-labeling pipeline that triples usable training data.";
+const description = "Building an offline plant disease classifier with Rust, the Burn ML framework, and a pseudo-labeling pipeline that raised test accuracy from 86% to 94.9% with only 20% of the images labeled.";
 const canonical = absoluteUrl("blog/blog.html");
 // Mirrors the article's main headings, in reading order, for the contents list.
 const sections = [
@@ -209,7 +209,7 @@ const structuredData = [
                             {...stylex.attrs(portfolioStyles.link, blogStyles.articleLink)}
                             >Burn</a
                         >{" "}
-                        (v0.20.0-pre) because what this project needed lines up
+                        (v0.21.0) because what this project needed lines up
                         well with what Rust is good at.
                     </p>
 
@@ -326,9 +326,8 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     <pre {...stylex.attrs(blogStyles.monospace, blogStyles.codeBlock)}><code {...stylex.attrs(blogStyles.monospace, blogStyles.inlineCode, blogStyles.codeInsideBlock)}>Total dataset (~87K images)
   |-- Test set:       10% (~8.7K)   -- never seen during training
   |-- Validation set: 10% (~8.7K)   -- for monitoring and early stopping
-  |-- Remaining:      80% (~69.6K)
-       |-- Labeled pool:  20% (~13.9K)  -- used for supervised training
-       |-- Stream pool:   80% (~55.7K)  -- unlabeled, used for SSL</code></pre>
+  |-- Labeled pool:   20% (~17.4K)  -- used for supervised training
+  |-- Stream pool:    60% (~52.2K)  -- unlabeled, used for SSL</code></pre>
 
                     <h3 {...stylex.attrs(blogStyles.articleSubheading)}>Pseudo-labeling</h3>
 
@@ -427,7 +426,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             Collect them in a buffer until it reaches the
-                            retraining threshold (200-500 samples).
+                            retraining threshold of 200 samples.
                         </li>
                         <li {...stylex.attrs(blogStyles.articleListItem)}>
                             Retrain on the labeled data plus the collected
@@ -815,8 +814,7 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                     </p>
 
                     <p {...stylex.attrs(blogStyles.articleParagraph)}>
-                        With semi-supervised learning, 20% labeled data gave
-                        results comparable to training on 60% labeled data.
+                        With only 20% of the images labeled, pseudo-labeling raised test accuracy from 86.06% for the supervised baseline to 94.90%.
                         Burn compiled the same model for desktop GPU and CPU,
                         and through ONNX it also runs in the browser. Tauri v2
                         turned all of that into a real application with a

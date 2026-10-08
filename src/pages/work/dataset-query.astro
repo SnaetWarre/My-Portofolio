@@ -11,34 +11,34 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
   description="A Python client-server app for analyzing a shared dataset, with PySide6 desktop interfaces and PostgreSQL."
   kicker="Individual academic project, 2025"
   heading="Dataset query system"
-  lead="Logged-in users query a dataset that stays on the server, from a desktop app that talks to it over TCP sockets."
+  lead="Logged-in users query a dataset of Los Angeles arrests that stays on the server, from a desktop app that talks to it over TCP sockets. A separate server window lets the operator watch clients and send them messages."
   meta={[
     { label: "My role", value: "Designed and built the whole application" },
-    { label: "Stack", value: "Python, TCP sockets, PySide6, PostgreSQL, pandas, matplotlib" },
-    { label: "Data", value: "Los Angeles arrest dataset" },
+    { label: "Stack", value: "Python, TCP sockets, pickle, PySide6, PostgreSQL, pandas, matplotlib, folium" },
+    { label: "Data", value: "Los Angeles arrests from 2020 on (Kaggle)" },
   ]}
 >
   <CaseSection label="Problem" title="Querying data without handing out the dataset">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The dataset and the analysis code live on the server, and clients ask it for specific statistics and charts. That meant the app needed a clear network protocol, a server that handles several clients at once, authentication, moderation, and desktop interfaces on both sides that stay responsive.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The dataset and the analysis code live on the server, and clients ask it for specific statistics and charts. That meant the app needed a clear network protocol, a server that handles several clients at once, authentication, a moderator view, and desktop interfaces on both sides that stay responsive.</p>
   </CaseSection>
 
   <CaseSection label="Architecture" title="Separate interface, protocol, and processing">
     <div {...stylex.attrs(caseStudyStyles.architecture)} aria-label="Dataset query client-server architecture">
       <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Client</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>PySide6 desktop application</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Login, parameterized queries, results, messages, and history</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↕ TCP</div>
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Server</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Threaded client handlers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>One handler per connection, routing structured requests</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Server</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Threaded client handlers</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>One thread per connection. Messages are pickled Python objects with a length prefix, gzipped above 1 MB</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Data layer</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>PostgreSQL and pandas</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Users, query history, dataset analysis, and generated plots</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Data layer</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>PostgreSQL and pandas</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>PostgreSQL holds users and query history. A pool of four workers runs the pandas queries with a timeout</span></div>
     </div>
   </CaseSection>
 
-  <CaseSection label="Delivered" title="Users and moderators in one app">
+  <CaseSection label="Delivered" title="A client app and a server app">
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built registration and login, stored user data, and added moderator features that depend on the user's role.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built parameterized queries on the dataset that return structured results along with generated charts.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added query history, statistics on which queries are popular, connection monitoring, live logs, and broadcasts from the server.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built registration and login, and a separate PySide6 server window for the moderator, with tabs for server control, messages, clients, and statistics.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built four parameterized queries: arrests by area and date with an age filter, how a charge type changes over time, arrests by descent and sex, and arrest hotspots within a radius drawn on a folium map.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Let the moderator see who is connected, each client's query history, which queries are popular, and the live log, and send a message to everyone or to one client.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Used worker threads and Qt signals so networking and large query results don't block the interface.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Moved storage from SQLite to PostgreSQL and added connection pooling, timeout handling, and memory controls.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Moved storage from SQLite to PostgreSQL in Docker, with a connection pool, query timeouts, and memory limits.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}><a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/Server-Client-Python">View repository ↗</a></div>
   </CaseSection>

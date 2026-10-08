@@ -71,9 +71,7 @@
                   documentation.
                 </li>
                 <li>
-                  Developed a source-video matcher with OpenCV ECC alignment and
-                  DICOM metadata, reducing one representative run from roughly
-                  21 hours to 23 minutes.
+                  Built a source-video matcher that searches same-exam videos for the frame each measurement came from, and ported OpenCV's ECC alignment to batched PyTorch on CUDA. With faster frame preparation, matching ran 14.9× faster (1182 s to 80 s on a 39-image benchmark).
                 </li>
               </ul>
             </article>
@@ -84,17 +82,14 @@
                   <h3>Software Engineer · Paid Client Project</h3>
                   <p class="organisation">Apolloon 24-Hour Run System · Belgium</p>
                 </div>
-                <p class="date">2026</p>
+                <p class="date">2025–2026</p>
               </div>
               <ul>
                 <li>
-                  Built a local-first race operations platform with React,
-                  TypeScript, Express, Electron, SQLite, tRPC, and Socket.IO.
+                  As the sole developer, built a local-first race operations platform with React, TypeScript, Express, Electron, SQLite, and tRPC.
                 </li>
                 <li>
-                  Implemented operator workflows, live displays, imports and
-                  exports, automatic LAN discovery, realtime synchronisation, and
-                  replicated hot-standby failover for unreliable event conditions.
+                  Replicated the race across three laptops with Raft: majority-vote leader election, automatic failover, UDP discovery on the LAN, and browser screens that move to a live laptop. Tested it with a Raft simulation and failure drills on the event hardware.
                 </li>
               </ul>
             </article>
@@ -110,10 +105,7 @@
                 </a>
               </h3>
               <p>
-                Built an end-to-end Burn/Rust plant-disease classifier. The saved
-                SSL checkpoint reached 94.90% held-out top-1 accuracy; packaged
-                weights were about 916 KB and the offline application about 26 MB,
-                with inference tested on an iPhone 12.
+                Built an end-to-end Burn/Rust plant-disease classifier trained with 20% labeled data. Pseudo-labeling raised held-out top-1 accuracy from 86.06% to 94.90%. The weights are about 916 KB, the offline release binary about 26 MB, and inference takes about 80 ms on an iPhone 12.
               </p>
             </article>
 
@@ -126,20 +118,18 @@
               <p>
                   In a two-person academic project, owned backend architecture,
                   orchestration, MCP integration, persistence, containers, tests,
-                  and most frontend integration across a six-service application.
+                  and most frontend integration across a six-container application.
               </p>
             </article>
 
             <article class="compact-entry">
               <h3>
                 <a href="https://github.com/athasdev/athas">
-                  Athas Code Editor · Open-Source Maintainer
+                  Athas Code Editor · Open-Source Contributor
                 </a>
               </h3>
               <p>
-                Merged contributions across React/TypeScript and Tauri/Rust:
-                C# support, image diffing, Linux UI, proxy handling, resource and
-                memory leaks, and an LSP race-condition fix.
+                Nine merged pull requests across React/TypeScript and Tauri/Rust: large-file streaming, input hardening, C# support, image diffing, Linux UI, proxy handling, resource and memory leaks, and an LSP race-condition fix.
               </p>
             </article>
           </section>
@@ -153,7 +143,7 @@
             <p class="date side-date">Sep 2023–Jun 2026</p>
             <p><strong>Graduated with distinction</strong></p>
             <p class="small">
-              MLOps 18/20 · Azure ML pipelines, MLflow, Docker, Kubernetes &amp; CI/CD
+              MLOps 18/20 · Azure ML pipelines, Docker, Kubernetes &amp; CI/CD
             </p>
           </section>
 
@@ -169,7 +159,7 @@
             </div>
             <div class="skill-group">
               <h3>Cloud &amp; platform</h3>
-              <p>Azure ML · MLflow · Docker · GitHub Actions · REST APIs · Testing</p>
+              <p>Azure ML · Docker · GitHub Actions · REST APIs · Testing</p>
             </div>
             <div class="skill-group">
               <h3>Additional</h3>

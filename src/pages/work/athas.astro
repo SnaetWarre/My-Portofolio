@@ -8,48 +8,51 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
 <CaseStudyLayout
   title="Athas Open-Source Contributions | Warre Snaet"
-  description="Warre Snaet's work as a maintainer and contributor on Athas, an open-source code editor built with Rust, Tauri, React, and TypeScript."
-  kicker="Open-source maintainer and contributor, 2025–2026"
+  description="Warre Snaet's merged contributions to Athas, an open-source code editor built with Rust, Tauri, React, and TypeScript."
+  kicker="Open-source contributor, 2025–2026"
   heading="Athas code editor"
-  lead="I help maintain Athas and have contributed to its React and TypeScript interface, its Tauri and Rust desktop core, the remote tooling, and the language-server integration."
+  lead="I have nine merged pull requests in Athas. They touch its React and TypeScript interface, its Tauri and Rust desktop core, the remote tooling, the language-server integration, and how the editor handles large files."
   meta={[
-    { label: "My role", value: "Maintainer and contributor" },
+    { label: "My role", value: "Contributor, 9 merged pull requests" },
     { label: "Stack", value: "Rust, Tauri, React, TypeScript, LSP, SSH" },
     { label: "Project", value: "Open-source code editor" },
   ]}
 >
   <CaseSection label="Scope" title="Features and reliability fixes">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>My changes are spread over several parts of the editor: language support, how the editor UI behaves, remote connections, resource cleanup, and how language servers are started and stopped. All of it runs in a desktop app that has to work on more than one platform.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>My changes are spread over several parts of the editor: language support, how the editor UI behaves, remote connections, resource cleanup, how language servers are started and stopped, large files, and input from untrusted sources. All of it runs in a desktop app that has to work on more than one platform.</p>
   </CaseSection>
 
   <CaseSection label="Merged work" title="Features, fixes, and maintenance">
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added C# language support and image diffs.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Made the editor, the language servers, and the terminal stream large files instead of loading them whole, and sped up scrolling and tokenizing. This is my largest change: 63 files and about 4,400 added lines.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Hardened untrusted input: agent file and terminal access stays inside the workspace, language-server and debugger messages have size limits, and credentials stay out of connection strings and git errors.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added C# language support, and image diffs with zoom for git.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Fixed how the menu bar behaves on Linux and made the interface more consistent across platforms.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Replaced a hard-coded proxy port with dynamic port selection.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Closed SSH and SFTP resource leaks and fixed memory leaks in React components.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Fixed a race condition that could start the same language server twice.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Made smaller fixes to formatting, TypeScript, pre-commit hooks, and CI.</li>
-    </ul>
+          </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}>
       <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas">View Athas on GitHub ↗</a>
       <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/319">Linux UI contribution ↗</a>
       <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/336">Dynamic proxy port ↗</a>
       <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/410">SSH resource cleanup ↗</a>
       <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/496">LSP race-condition fix ↗</a>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/756">Large-file streaming ↗</a>
+      <a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/athasdev/athas/pull/757">Input hardening ↗</a>
     </div>
   </CaseSection>
 
-  <CaseSection label="Engineering" title="Small fixes that keep a session stable">
+  <CaseSection label="Engineering" title="Fixes that keep a session stable">
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Language server lifecycle</strong>The LSP fix stops duplicate server processes from starting and fighting over editor state.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Resource ownership</strong>SSH and SFTP handles get closed explicitly instead of leaking from one remote session into the next.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cross-platform behavior</strong>The Linux-specific UI changes still match how the rest of the desktop app looks and behaves.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Repository hygiene</strong>Fixes to formatting, type checks, hooks, and CI keep the codebase in a state where other maintainers can merge their work.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Large files</strong>Opening a big file no longer pushes the whole file through the editor, the language server, and the terminal at once.</li>
     </ul>
   </CaseSection>
 
   <CaseSection label="Open source" title="Working inside an existing project">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>In a project with other maintainers, a change has to fit the architecture that's already there and get through review and CI, and not every feature someone proposes belongs in the product. That's why I point to merged work: those are the changes that actually became part of the shared codebase.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>In a project someone else maintains, a change has to fit the architecture that's already there and get through review and CI, and not every feature someone proposes belongs in the product. That's why I point to merged work: those are the changes that actually became part of the shared codebase.</p>
   </CaseSection>
 </CaseStudyLayout>

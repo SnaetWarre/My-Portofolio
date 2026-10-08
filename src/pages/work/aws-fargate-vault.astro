@@ -8,7 +8,7 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
 <CaseStudyLayout
   title="AWS Fargate and Vault Infrastructure | Warre Snaet"
-  description="Terraform for private ECS Fargate workloads on AWS: an ALB in front, Vault login through IAM, CloudWatch, autoscaling, and tested safeguards around deploys."
+  description="Terraform for private ECS Fargate workloads on AWS: an ALB in front, an optional Vault login through IAM, CloudWatch logs, autoscaling, and safeguards around deploys."
   kicker="Individual cloud infrastructure project, 2026"
   heading="AWS Fargate infrastructure with Vault workload identity"
   lead="Terraform for running private Fargate workloads, written with production in mind. The task definition contains no cloud credentials and no Vault tokens."
@@ -21,8 +21,8 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
   <CaseSection label="Problem" title="An identity instead of a static secret">
     <p {...stylex.attrs(caseStudyStyles.paragraph)}>A small service had to be reachable from the internet while its containers stayed private. It also had to read its runtime content from Vault, without a long-lived Vault token or AWS access key sitting in the task definition.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>2 availability zones</strong>Public subnets for the load balancer and private subnets for Fargate.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>0 static tokens</strong>The ECS task role logs in to Vault directly through the AWS auth method.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>2 availability zones</strong>A public and a private subnet in each zone, for the load balancer and for Fargate.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>0 static tokens</strong>A Vault Agent sidecar logs in with the ECS task role through Vault's AWS auth method.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>3 tested variants</strong>Plans for AWS only, with Vault, and with HTTPS through ACM.</li>
     </ul>
   </CaseSection>
@@ -42,9 +42,9 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
       </div>
       <p {...stylex.attrs(caseStudyStyles.flowArrow)}>↓ operations and external secret service ↓</p>
       <div {...stylex.attrs(caseStudyStyles.flowRow)}>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Secrets</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Vault AWS auth</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Role bound to one exact ARN, short token lifetime, and a narrow read policy</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Secrets</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Vault AWS auth</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>An external Vault (HCP or self-managed). Role bound to one exact ARN, 15-minute tokens, and a narrow read policy</span></div>
         <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Observability</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>CloudWatch</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Container logs, 30-day retention, and Container Insights</span></div>
-        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Reliability</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Health and scaling</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>ALB checks, container checks, rollback, and CPU autoscaling</span></div>
+        <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Reliability</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Health and scaling</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>ALB checks, container checks, rollback, and 1 to 3 tasks scaled on CPU</span></div>
       </div>
     </div>
   </CaseSection>
@@ -57,7 +57,7 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
       <li {...stylex.attrs(caseStudyStyles.listItem)}>The agent writes what it gets back to an ephemeral volume scoped to the task.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Once that file exists, the app reports healthy and the ALB starts sending it requests.</li>
     </ol>
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The app container itself never holds a Vault token or an AWS access key, and it has no permission to read any other secrets.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The app container itself never holds a Vault token or an AWS access key, and it has no permission to read any other secrets. Vault mode is optional: the default plan runs the same service without Vault, and Terraform writes the Vault role and policy before it creates the service.</p>
   </CaseSection>
 
   <CaseSection label="Delivery" title="CI that can't deploy by accident">
@@ -74,9 +74,9 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Network isolation</strong>Only the load balancer is public. The tasks run privately and have no public IP addresses.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Workload identity</strong>Credentials managed by ECS take the place of long-lived keys and static Vault tokens.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Observability</strong>Both containers send structured output through awslogs, and Container Insights is enabled.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Availability</strong>The service runs in two availability zones with health checks, rolling replacement, rollback, and autoscaling.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cost</strong>Most of the scheduling weight goes to Fargate Spot, scaling has fixed limits, and the NAT setup is a deliberate tradeoff for a demo.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Observability</strong>Both containers log to CloudWatch through awslogs with 30-day retention, and Container Insights is enabled. There are no CloudWatch alarms yet.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Availability</strong>The subnets cover two availability zones. The service runs 1 to 3 tasks, scaled to keep CPU near 60%, with health checks, rolling replacement, and rollback. With one task and one NAT gateway, it doesn't survive losing a zone.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Cost</strong>Fargate Spot gets four times the weight of regular Fargate, scaling has fixed limits, and the single NAT gateway is a deliberate tradeoff for a demo.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Scope</strong>I verified the configuration and the three mocked plan variants locally. I don't present this as production experience with a live AWS deployment.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}>

@@ -12,26 +12,26 @@ const base = basePath;
 <CaseStudyLayout
   title="Financial AI Agent | Warre Snaet"
   description="How a financial AI agent built with FastAPI, MCP, RAG, PostgreSQL, React, and Ollama is put together."
-  kicker="Two-person academic project, 2026"
+  kicker="Two-person academic project, 2025"
   heading="Financial AI agent"
   lead="A chat app for managing a simulated portfolio, built as a set of real services. Responses stream in, answers can draw on retrieved documents, tools run through a standard protocol, sessions are saved, and every trade needs an explicit confirmation."
   meta={[
     { label: "My role", value: "Backend architecture, orchestration, persistence, delivery, and most frontend integration" },
-    { label: "Stack", value: "Python, FastAPI, MCP, React, PostgreSQL, ChromaDB, Ollama, Docker" },
+    { label: "Stack", value: "Python, FastAPI, FastMCP, React, PostgreSQL, ChromaDB, Ollama, Docker" },
     { label: "Scope", value: "Proof of concept using projected historical market data" },
   ]}
 >
   <CaseSection label="Problem" title="A chatbot you can look inside">
     <p {...stylex.attrs(caseStudyStyles.paragraph)}>Generating text about finance was only a small part of the job. The agent also had to look up relevant knowledge, tell a request for advice apart from an instruction, call portfolio tools, save state, stream its progress, and ask for confirmation before changing the simulated portfolio.</p>
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>6 services</strong>Each in a container, with health checks and persistent volumes.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>7 MCP tools</strong>Portfolio, market data, and order operations, all behind a protocol boundary.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>6 containers</strong>Five services plus a container for loading the knowledge base, with four persistent volumes.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>8 MCP tools</strong>Prices, price history, portfolio metrics, single and batch orders, and a reset, all behind a protocol boundary.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>2-step trades</strong>A trade command becomes a pending action that has to be confirmed.</li>
     </ul>
   </CaseSection>
 
   <CaseSection label="Architecture" title="Separate reasoning, retrieval, and actions">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The FastAPI orchestrator sends each request to general chat, RAG retrieval, or trade handling. MCP keeps the tools that actually do things apart from the model. PostgreSQL holds portfolio and session state, ChromaDB holds the knowledge used for retrieval, and Ollama runs generation and embeddings locally.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The FastAPI orchestrator asks the model whether a message is a trade command or a question, and only treats it as a trade above 0.6 confidence. Questions go through retrieval: ChromaDB holds guides on six asset types and about 200 daily market snapshots, and a small cross-encoder reranks the results. The orchestrator, not the model, calls the MCP tools, so the model never touches the portfolio directly. PostgreSQL holds the portfolio and the chat sessions, and Ollama runs Qwen2.5 for chat and nomic-embed-text for embeddings on the local machine.</p>
     <figure {...stylex.attrs(caseStudyStyles.figure)}>
       <img {...stylex.attrs(caseStudyStyles.figureImage)} src={`${base}images/financial-agent-architecture.png`} alt="Architecture diagram connecting a React frontend to FastAPI inference, MCP and PostgreSQL, RAG and ChromaDB, and local Ollama models" />
       <figcaption {...stylex.attrs(caseStudyStyles.figureCaption)}>Responses and processing events reach the React client as server-sent events.</figcaption>
@@ -39,13 +39,13 @@ const base = basePath;
   </CaseSection>
 
   <CaseSection label="Ownership" title="What I did">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>We were two people on this school project. I was responsible for the backend architecture, agent orchestration, MCP integration, persistence, containers, and tests, and did most of the frontend integration.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>We were two people on this school project. I was responsible for the backend architecture, agent orchestration, MCP integration, persistence, containers, and tests, and did most of the frontend integration. The commits in the repository are mine.</p>
     <ul {...stylex.attrs(caseStudyStyles.list)}>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Built and refined the FastAPI chat orchestrator, the trade-intent flow, guardrails, error handling, and the server-sent event protocol.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Moved portfolio state from JSON to PostgreSQL and moved tool execution to FastMCP.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Wired up RAG queries, citations, visible MCP tool calls, saved sessions, and the React view that shows each processing step.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Containerized the frontend, inference API, MCP server, RAG pipeline, PostgreSQL, and Ollama with Docker Compose.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Wrote targeted tests for the guardrails, RAG price lookups, trade execution, persistence, and the confirmation step.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Containerized the frontend, inference API, MCP server, knowledge loader, PostgreSQL, and Ollama with Docker Compose.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Wrote 18 tests for the guardrails, RAG price lookups, and the trade flow, plus database tests for the MCP server.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}><a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/Financial_AI_Agent">View repository ↗</a></div>
   </CaseSection>
@@ -53,10 +53,10 @@ const base = basePath;
   <CaseSection label="Engineering" title="Designed for safety and visibility">
     <ul {...stylex.attrs(caseStudyStyles.list, caseStudyStyles.factsList)}>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Explicit confirmation</strong>A detected trade command becomes a pending action, so the agent can't change the simulated portfolio without the user seeing it.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Protocol boundary</strong>The model calls typed MCP operations and never gets direct access to the database.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Protocol boundary</strong>The orchestrator calls typed MCP tools over SSE with an API key. The model only classifies and writes text, and never gets access to the database.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Visible processing</strong>The interface shows RAG queries, tool calls, citations, and progress as it streams, so the agent loop isn't hidden.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Persistent state</strong>PostgreSQL stores portfolios and sessions. Container health checks and volumes make the multi-service setup reproducible.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Input controls</strong>Guardrails and tests cover prompt injection patterns, financial intent, price lookups, and the confirmation flow.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Persistent state</strong>PostgreSQL stores portfolios, trades, and sessions. Health checks on the database, Ollama, and the MCP server make the stack start in the right order.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Input controls</strong>Simple keyword guardrails block off-topic requests and a known prompt-injection phrase. Tests cover them, price lookups, and the confirmation flow.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}><strong {...stylex.attrs(caseStudyStyles.emphasizedFact)}>Scope</strong>Prices are projected from historical data, which makes this a controlled proof of concept. It doesn't give live financial advice or make real trades.</li>
     </ul>
   </CaseSection>

@@ -8,14 +8,14 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
 <CaseStudyLayout
   title="XPO Event Chatbot | Warre Snaet"
-  description="A full-stack event chatbot for Kortrijk Xpo Group, built with .NET, Azure OpenAI, Cosmos DB, Next.js, and Python ingestion."
+  description="A full-stack event chatbot for Kortrijk Xpo, built with .NET, Azure OpenAI, Cosmos DB, Next.js, and Python ingestion."
   kicker="Academic team project for an external client, 2025"
-  heading="Event chatbot for XPO Group"
-  lead="An event assistant that answers visitor questions from exhibitor and event-site content. It also handles registration and collects usable analytics."
+  heading="Event chatbot for Kortrijk Xpo"
+  lead="A chatbot for three Kortrijk Xpo trade fairs: Abiss, Artisan, and Flanders Flooring Days. It answers visitor questions from the event websites' content, links to registration, and records analytics for the organisers."
   meta={[
-    { label: "My role", value: "Backend, retrieval, ingestion, integration, and deployment work" },
+    { label: "My role", value: "Lead developer in a team of four: scraper, .NET API, retrieval, analytics backend, Docker" },
     { label: "Stack", value: ".NET, C#, Azure OpenAI, Cosmos DB, Next.js, Python, Scrapy" },
-    { label: "Context", value: "Team project for Kortrijk Xpo Group" },
+    { label: "Context", value: "Team project for Kortrijk Xpo" },
   ]}
 >
   <CaseSection label="Problem" title="Answers from content that keeps changing">
@@ -24,28 +24,29 @@ import { portfolioStyles } from "../../styles/portfolioStyles";
 
   <CaseSection label="Architecture" title="From ingestion to chat and analytics">
     <div {...stylex.attrs(caseStudyStyles.architecture)} aria-label="XPO chatbot data flow">
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Ingestion</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Python and Scrapy</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Collect and clean event-site content</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Ingestion</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Python and Scrapy</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>A Scrapy spider crawls each event site, a clean step writes JSON, and an upload script sends it to the API</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Retrieval API</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>.NET and Azure OpenAI</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Create embeddings and run semantic search</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Retrieval API</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>.NET and Azure OpenAI</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Embeds documents with ada-002, ranks them by cosine similarity in C#, and answers with GPT-4</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Storage</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Cosmos DB</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Store event documents, profiles, sessions, and analytics</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Storage</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Cosmos DB</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>One container per event for documents and embeddings, plus profiles, sessions, and analytics</span></div>
       <div {...stylex.attrs(caseStudyStyles.flowArrow)}>↓</div>
-      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Experience</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Chat widget and Next.js dashboard</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>Answer visitors and show how the system is being used</span></div>
+      <div {...stylex.attrs(caseStudyStyles.flowNode)}><small {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.flowNodeContent)}>Experience</small><strong {...stylex.attrs(caseStudyStyles.flowNodeContent)}>Chat widget and Next.js dashboard</strong><span {...stylex.attrs(caseStudyStyles.flowNodeDescription)}>A JavaScript widget on each event site, and a dashboard behind a JWT login</span></div>
     </div>
   </CaseSection>
 
   <CaseSection label="Contribution" title="From source website to answer">
     <ul {...stylex.attrs(caseStudyStyles.list)}>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Worked on the Python pipeline that scrapes and cleans several event websites.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Built and refined .NET endpoints for embeddings, semantic search, chat, authentication, registration, and analytics.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Started the project and wrote most of its code: 97 of the 124 commits.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Wrote the Python pipeline that scrapes and cleans the event websites and uploads the result.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Wrote nearly all of the .NET API: embeddings, the similarity search, chat, JWT authentication, registration tracking, and analytics.</li>
       <li {...stylex.attrs(caseStudyStyles.listItem)}>Connected Azure OpenAI and Cosmos DB, including retries for bulk uploads that hit rate limits.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added prompts per event, stand-number handling in several languages, input sanitization, rate limiting, and frontend behavior that can be configured.</li>
-      <li {...stylex.attrs(caseStudyStyles.listItem)}>Worked on the production deployment configuration, better logging, the CORS setup, and the flow behind the analytics dashboard.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Added a prompt per event, conversation memory, stand-number lookup in several languages, a cache for context documents, input sanitization, and rate limiting.</li>
+      <li {...stylex.attrs(caseStudyStyles.listItem)}>Put the backend, the pipeline, and the dashboard in Docker Compose, and built the dashboard's sign-in and chat history views. Teammates built most of the dashboard charts.</li>
     </ul>
     <div {...stylex.attrs(caseStudyStyles.links)}><a {...stylex.attrs(portfolioStyles.link, caseStudyStyles.importantLink)} href="https://github.com/SnaetWarre/Industry-Project-Xpo-Group">View repository ↗</a></div>
   </CaseSection>
 
   <CaseSection label="Result" title="One backend for several events">
-    <p {...stylex.attrs(caseStudyStyles.paragraph)}>The finished app served several events' datasets and bot configurations from the same retrieval service. Each event's content could be scraped, embedded, queried through the chatbot, and followed through registration and analytics, without a separate backend for every event.</p>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>One backend serves all three events, each with its own Cosmos DB container, prompt, and chat widget. The search loads every embedded document and ranks them in memory, which is fast enough for a few event websites but would need a vector index to grow much further.</p>
   </CaseSection>
 </CaseStudyLayout>
