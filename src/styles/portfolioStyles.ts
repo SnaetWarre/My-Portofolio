@@ -95,7 +95,9 @@ export const portfolioStyles = stylex.create({
   },
   titleBlock: {
     display: "grid",
-    gridTemplateColumns: { default: "minmax(0, 1fr) auto", [narrow]: "minmax(0, 1fr)" },
+    // The name keeps at least 16rem, so long cell values wrap instead of
+    // pushing the name into a column with no width.
+    gridTemplateColumns: { default: "minmax(16rem, 1fr) auto", [narrow]: "minmax(0, 1fr)" },
     fontSize: "0.8125rem",
   },
   titleBlockName: {
@@ -117,12 +119,16 @@ export const portfolioStyles = stylex.create({
   titleBlockCells: {
     display: "grid",
     gridAutoFlow: { default: "column", [narrow]: "row" },
-    gridAutoColumns: "minmax(8.5rem, auto)",
-    gridTemplateColumns: { default: "none", [narrow]: "repeat(auto-fit, minmax(6.5rem, 1fr))" },
+    gridAutoColumns: "minmax(8.5rem, 16rem)",
+    gridTemplateColumns: { default: "none", [narrow]: "minmax(0, 1fr)" },
   },
   titleBlockCell: {
-    padding: "0.45rem 0.875rem 0.55rem",
-    paddingLeft: { default: null, [narrow]: { default: null, ":first-child": 0 } },
+    // On phones each cell is one row: label on the left, value on the right.
+    display: { default: null, [narrow]: "grid" },
+    gridTemplateColumns: { default: null, [narrow]: "6rem minmax(0, 1fr)" },
+    gap: { default: null, [narrow]: "1rem" },
+    alignItems: { default: null, [narrow]: "baseline" },
+    padding: { default: "0.45rem 0.875rem 0.55rem", [narrow]: "0.3rem 0" },
     paddingRight: { default: null, ":last-child": 0 },
     lineHeight: 1.35,
     overflowWrap: "anywhere",

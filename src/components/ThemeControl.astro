@@ -15,7 +15,9 @@ const { boxed = false } = Astro.props;
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   const root = document.documentElement;
-  const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  // Look the button up each time: client-side navigation swaps it for a new
+  // one without re-running this script.
+  const currentToggle = () => document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
   const systemTheme = matchMedia("(prefers-color-scheme: dark)");
   const storageKey = "portfolio-theme";
   const paper = { light: "#e6e5e1", dark: "#1b1c1e" };
@@ -29,6 +31,7 @@ const { boxed = false } = Astro.props;
   function updateToggle() {
     const isDark = effectiveTheme() === "dark";
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? paper.dark : paper.light);
+    const toggle = currentToggle();
     if (!toggle) return;
     // The button names the theme it switches to.
     toggle.textContent = isDark ? "Light" : "Dark";
@@ -74,6 +77,7 @@ const { boxed = false } = Astro.props;
     const doc = document as Document & {
       startViewTransition?: (update: () => void) => SameDocumentTransition;
     };
+    const toggle = currentToggle();
     if (reducedMotion.matches || !toggle || wiping) {
       choose(next);
       return;
