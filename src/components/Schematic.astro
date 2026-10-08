@@ -1,0 +1,17 @@
+---
+import "../styles/schematic.css";
+import { drawings, type DrawingKey } from "../lib/drawings";
+import { renderSchematic } from "../lib/schematic";
+
+interface Props {
+  drawing: DrawingKey;
+  /** "cover" for the page-wide drawing, "lead" for a small drawing shown large. */
+  size?: "cover" | "lead" | "inline";
+  animated?: boolean;
+}
+
+const { drawing, size = "inline", animated = false } = Astro.props;
+const svg = renderSchematic(drawings[drawing], { className: size === "inline" ? undefined : size, animated });
+---
+
+<Fragment set:html={svg} />

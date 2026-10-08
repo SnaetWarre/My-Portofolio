@@ -1,22 +1,17 @@
 ---
 import "../styles/reset.css";
 import ThemeSetup from "../components/ThemeSetup.astro";
-import ObsidianScene from "../components/ObsidianScene.astro";
-import ThemeControl from "../components/ThemeControl.astro";
 import SiteIcons from "../components/SiteIcons.astro";
 import FontPreload from "../components/FontPreload.astro";
 import SocialMetadata from "../components/SocialMetadata.astro";
 import * as stylex from "@stylexjs/stylex";
 import StyleXDevStyles from "../components/StyleXDevStyles.astro";
+import ExternalLinks from "../components/ExternalLinks.astro";
 import { portfolioStyles } from "../styles/portfolioStyles";
-import { obsidianTheme } from "../styles/obsidianStyles";
 import { basePath } from "../lib/paths";
 
 interface Props {
   experimental?: boolean;
-  sculpture?: boolean;
-  /** Which form the sculpture takes on this page. See scripts/obsidianPoses. */
-  pose?: string;
   title: string;
   description: string;
   socialImage?: string;
@@ -28,9 +23,7 @@ const {
   title,
   description,
   experimental = false,
-  sculpture = false,
-  pose = "home",
-  socialImage = "social/home-v3.png",
+  socialImage = "social/home-v4.png",
   socialImageAlt = "Warre Snaet, Backend and Applied AI Engineer",
   socialType = "website",
 } = Astro.props;
@@ -39,13 +32,13 @@ const canonical = new URL(canonicalPath, Astro.site);
 ---
 
 <!doctype html>
-<html transition:animate="none" lang="en" data-obsidian={sculpture || undefined} data-pose={sculpture ? pose : undefined} {...stylex.attrs(portfolioStyles.document, sculpture && obsidianTheme)}>
+<html transition:animate="none" lang="en" {...stylex.attrs(portfolioStyles.document)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <FontPreload />
     <SiteIcons />
-    {sculpture && <ThemeSetup />}
+    <ThemeSetup />
     <title>{title}</title>
     <meta name="author" content="Warre Snaet" />
     <meta name="robots" content={experimental ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1"} />
@@ -56,6 +49,6 @@ const canonical = new URL(canonicalPath, Astro.site);
   </head>
   <body {...stylex.attrs(portfolioStyles.body)}>
     <slot />
-    {sculpture && <><ThemeControl /><ObsidianScene /></>}
+    <ExternalLinks />
   </body>
 </html>

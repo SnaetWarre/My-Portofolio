@@ -15,9 +15,9 @@ const next = nextProject(Astro.props.href);
 <footer {...stylex.attrs(portfolioStyles.pageEnd)}>
   {next && (
     <p {...stylex.attrs(portfolioStyles.pageEndNext)}>
-      <span {...stylex.attrs(portfolioStyles.pageEndLabel)}>Next project</span>
-      <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.primaryProjectLink)} href={next.href}>{next.title}</a>
+      <span {...stylex.attrs(portfolioStyles.pageEndLabel)}>Next</span>
+      <a {...stylex.attrs(portfolioStyles.rowLink)} href={next.href}>{next.title}</a>
     </p>
   )}
-  <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${basePath}#work-title`}>Back to selected work</a>
+  <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${basePath}#work`}>Back to the list</a>
 </footer>

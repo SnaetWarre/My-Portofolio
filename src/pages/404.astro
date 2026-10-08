@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TopLine from "../components/TopLine.astro";
+import TitleBlock from "../components/TitleBlock.astro";
 import { basePath } from "../lib/paths";
-import { obsidianStyles } from "../styles/obsidianStyles";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import * as stylex from "@stylexjs/stylex";
 
@@ -10,21 +11,31 @@ const base = basePath;
 
 <BaseLayout
   title="Page not found | Warre Snaet"
-  description="This page doesn't exist. Go back to Warre Snaet's portfolio or look through the selected work."
+  description="This page doesn't exist. Go back to Warre Snaet's portfolio or look through the work."
   experimental
-  sculpture
-  pose="not-found"
 >
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#not-found">Skip to message</a>
-  <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="not-found" tabindex="-1">
-    <header {...stylex.attrs(portfolioStyles.pageHeader)}>
-      <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading, obsidianStyles.besideControls)}>Page not found</h1>
-      <p {...stylex.attrs(portfolioStyles.lead)}>There’s nothing at this address. The rest of the portfolio is still here.</p>
-      <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Page not found actions">
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={base}>Return home</a>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}#work-title`}>View selected work</a>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>Open CV</a>
-      </nav>
+  <div {...stylex.attrs(portfolioStyles.page)}>
+    <TopLine />
+    <header {...stylex.attrs(portfolioStyles.cover)} style="min-height: 14rem">
+      <TitleBlock
+        heading="Page not found"
+        tag="There's nothing at this address."
+        cells={[
+          { label: "Looked for", value: "A page that does not exist" },
+          { label: "Try instead", value: "The home page or the CV" },
+        ]}
+      />
     </header>
-  </main>
+    <main {...stylex.attrs(portfolioStyles.intro)} id="not-found" tabindex="-1">
+      <div>
+        <p {...stylex.attrs(portfolioStyles.lead)}>The page may have moved, or the link was wrong.</p>
+        <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Page not found actions">
+          <a {...stylex.attrs(portfolioStyles.navigationLink)} href={base}>Back to the home page</a>
+          <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${base}#work`}>See the work</a>
+          <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${base}cv.html`}>Read my CV</a>
+        </nav>
+      </div>
+    </main>
+  </div>
 </BaseLayout>

@@ -6,12 +6,12 @@ import { ClientRouter } from "astro:transitions";
 <ClientRouter fallback="swap" />
 
 <script is:inline>
-      // Resolve before paint so a saved choice never flashes the opposite theme.
-      let saved = null;
-      try {
-        saved = localStorage.getItem("portfolio-theme");
-      } catch { /* System appearance remains available without storage. */ }
-      if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
-      const dark = saved === "dark" || (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
-      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#000000" : "#ffffff");
+  // Resolve before paint so a saved choice never flashes the opposite theme.
+  let saved = null;
+  try {
+    saved = localStorage.getItem("portfolio-theme");
+  } catch { /* System appearance remains available without storage. */ }
+  if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+  const dark = saved === "dark" || (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#1b1c1e" : "#e6e5e1");
 </script>

@@ -1,188 +1,155 @@
 import * as stylex from "@stylexjs/stylex";
-import { colorTokens, layoutTokens, typographyTokens } from "./tokens.stylex";
+import { colorTokens, layoutTokens } from "./tokens.stylex";
+
+const phone = "@media (max-width: 700px)";
+const narrow = "@media (max-width: 860px)";
 
 export const caseStudyStyles = stylex.create({
+  // The project's drawing, shown large beside the title block.
+  drawing: {
+    width: { default: "calc(100% - 27rem)", [narrow]: "100%" },
+    maxWidth: { default: "36rem", [narrow]: "24rem" },
+    padding: { default: "1.5rem 0 0.5rem", [narrow]: "1.25rem 0 0" },
+  },
   mainContent: {
-    width: {
-      default: `min(${layoutTokens.contentMeasure}, calc(100% - ${layoutTokens.pageLeft} - ${layoutTokens.pageGutter}))`,
-      "@media (max-width: 700px)": "auto",
-    },
-    marginLeft: {
-      default: layoutTokens.pageLeft,
-      "@media (max-width: 700px)": 0,
-    },
-    padding: {
-      default: "4.5rem 0 6rem",
-      "@media (max-width: 700px)": `2.5rem ${layoutTokens.pageGutter} 4rem`,
-    },
+    maxWidth: layoutTokens.contentMeasure,
+    padding: "2rem 0 0",
   },
-  navigation: {
-    justifyContent: "space-between",
-    marginBottom: "2.25rem",
-  },
-  header: {
-    marginBottom: "2.25rem",
-  },
+  navigation: {},
+  header: {},
   metadataLabel: {
     color: colorTokens.mutedForeground,
-    fontFamily: typographyTokens.bodyFont,
     fontSize: "0.8125rem",
     fontWeight: 500,
-    letterSpacing: 0,
-    textTransform: "none",
   },
-  kicker: {
-    marginTop: 0,
-    marginBottom: "0.55rem",
-  },
+  kicker: {},
   heading: {
-    marginTop: 0,
-    marginBottom: "0.75rem",
-    fontSize: {
-      default: "2.25rem",
-      "@media (max-width: 700px)": "1.85rem",
-    },
-    fontWeight: 500,
-    letterSpacing: "-0.035em",
+    margin: "0 0 0.75rem",
+    fontSize: "2rem",
+    fontWeight: 300,
     lineHeight: 1.2,
-    textWrap: "balance",
   },
   lead: {
-    marginTop: 0,
-    marginBottom: "1.25rem",
-    fontSize: "1.125rem",
-    lineHeight: 1.65,
+    margin: "0 0 1rem",
+    fontSize: "1.1875rem",
+    fontWeight: 300,
+    lineHeight: 1.5,
   },
-  metadataList: {
-    margin: 0,
-  },
-  metadataRow: {
-    display: "grid",
-    gridTemplateColumns: {
-      default: "6.5rem minmax(0, 1fr)",
-      "@media (max-width: 700px)": "5.5rem minmax(0, 1fr)",
-    },
-    gap: "0.75rem",
-    alignItems: "baseline",
-    padding: "0.3rem 0",
-  },
-  metadataTerm: {
-    margin: 0,
-  },
-  metadataDescription: {
-    margin: 0,
-    fontSize: "0.9375rem",
-  },
+  metadataList: { margin: 0 },
+  metadataRow: {},
+  metadataTerm: {},
+  metadataDescription: {},
+
+  // Sections read like notes in a drawing's margin: a short label on the
+  // left, the text on the right. They stack on narrow screens.
   section: {
-    marginTop: "2.75rem",
+    display: "grid",
+    gridTemplateColumns: { default: "7.5rem minmax(0, 1fr)", [phone]: "minmax(0, 1fr)" },
+    columnGap: "1.5rem",
+    marginTop: "1.75rem",
+    paddingTop: "1.25rem",
+    borderTopWidth: 1,
+    borderTopStyle: "solid",
+    borderTopColor: colorTokens.borderLight,
   },
   sectionLabel: {
-    marginTop: 0,
-    marginBottom: "0.35rem",
+    margin: { default: "0.15rem 0 0", [phone]: "0 0 0.35rem" },
   },
   sectionHeading: {
-    marginTop: 0,
-    marginRight: 0,
-    marginBottom: "0.75rem",
-    marginLeft: 0,
-    fontSize: "1.3rem",
-    fontWeight: 500,
-    letterSpacing: "-0.02em",
+    margin: "0 0 0.6rem",
+    fontSize: "1.1875rem",
+    fontWeight: 400,
     lineHeight: 1.3,
   },
   paragraph: {
-    marginTop: 0,
-    marginBottom: {
-      default: "1rem",
+    margin: {
+      default: "0 0 0.875rem",
       ":last-child": 0,
     },
+    color: colorTokens.mutedForeground,
   },
   subheading: {
-    marginTop: "1.5rem",
-    marginRight: 0,
-    marginBottom: "0.55rem",
-    marginLeft: 0,
-    fontSize: "1.05rem",
+    margin: "1.25rem 0 0.4rem",
+    fontSize: "1rem",
+    fontWeight: 500,
   },
   list: {
-    marginTop: 0,
-    marginBottom: {
-      default: "1rem",
+    margin: {
+      default: "0 0 0.875rem",
       ":last-child": 0,
     },
-    paddingLeft: "1.2rem",
+    paddingLeft: "1.1rem",
+    color: colorTokens.mutedForeground,
   },
   listItem: {
-    marginBottom: "0.65rem",
-    paddingLeft: "0.15rem",
+    marginBottom: "0.5rem",
   },
   factsList: {
-    marginTop: "1rem",
+    marginTop: "0.75rem",
     marginBottom: 0,
   },
   emphasizedFact: {
-    fontWeight: 600,
+    color: colorTokens.foreground,
+    fontWeight: 500,
     "::after": {
       content: '": "',
     },
   },
   architecture: {
-    marginTop: "1rem",
+    marginTop: "0.75rem",
   },
-  // One tier of the diagram. Its nodes sit side by side where the column is
-  // wide enough, so tiers read top to bottom; otherwise they stack.
+  // One tier of a text diagram. Nodes sit side by side when the column
+  // allows it; otherwise they stack.
   flowRow: {
     display: {
       default: "contents",
-      "@media (min-width: 1200px)": "grid",
+      "@media (min-width: 1100px)": "grid",
     },
     gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-    columnGap: "1.25rem",
+    columnGap: "1rem",
   },
   flowNode: {
     marginBottom: "0.65rem",
-    paddingLeft: "0.75rem",
-    borderLeftWidth: "1px",
-    borderLeftStyle: "solid",
-    borderLeftColor: colorTokens.foreground,
+    padding: "0.5rem 0.75rem",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: colorTokens.border,
+    fontSize: "0.9375rem",
   },
   flowNodeContent: {
     display: "block",
+    color: colorTokens.foreground,
+    fontWeight: 400,
   },
   flowNodeDescription: {
     display: "block",
     color: colorTokens.mutedForeground,
+    fontSize: "0.875rem",
   },
   flowArrow: {
-    marginTop: 0,
-    marginRight: 0,
-    marginBottom: "0.65rem",
-    marginLeft: "calc(0.75rem + 1px)",
+    margin: "0 0 0.65rem",
     color: colorTokens.mutedForeground,
     fontSize: "0.8125rem",
-    fontWeight: 500,
   },
   figure: {
-    marginTop: "1.25rem",
-    marginRight: 0,
-    marginBottom: 0,
-    marginLeft: 0,
+    margin: "1rem 0 0",
   },
   figureImage: {
+    display: "block",
     width: "100%",
-    borderWidth: "1px",
+    borderWidth: 1,
     borderStyle: "solid",
     borderColor: colorTokens.borderLight,
   },
   figureCaption: {
     marginTop: "0.5rem",
     color: colorTokens.mutedForeground,
-    fontSize: "0.82rem",
+    fontSize: "0.8125rem",
   },
   links: {
-    marginTop: "1rem",
+    marginTop: "0.75rem",
   },
   importantLink: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
 });

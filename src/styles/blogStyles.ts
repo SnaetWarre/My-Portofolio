@@ -13,26 +13,11 @@ export const blogStyles = stylex.create({
   pageColumn: {
     position: "relative",
     zIndex: 1,
-    width: {
-      default: `min(${layoutTokens.contentMeasure}, 49vw)`,
-      [mobileBreakpoint]: "auto",
-    },
-    marginLeft: {
-      default: "7vw",
-      [mobileBreakpoint]: 0,
-    },
-    marginRight: {
-      default: 0,
-      [mobileBreakpoint]: 0,
-    },
-    paddingLeft: {
-      default: 0,
-      [mobileBreakpoint]: layoutTokens.pageGutter,
-    },
-    paddingRight: {
-      default: 0,
-      [mobileBreakpoint]: layoutTokens.pageGutter,
-    },
+    width: `min(${layoutTokens.contentMeasure}, 100%)`,
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingLeft: layoutTokens.pageGutter,
+    paddingRight: layoutTokens.pageGutter,
   },
   image: {
     display: "block",
@@ -463,7 +448,7 @@ export const blogStyles = stylex.create({
     margin: 0,
   },
   footerLogo: {
-    filter: "invert(calc(1 - var(--obsidian-invert)))",
+    filter: "invert(var(--invert))",
     width: "2rem",
     height: "2rem",
   },

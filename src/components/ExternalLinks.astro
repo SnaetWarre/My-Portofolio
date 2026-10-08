@@ -1,0 +1,16 @@
+<!-- Links that leave the site, and the PDFs, open in a new tab so the
+     portfolio stays open behind them. Runs again after client-side navigation. -->
+<script>
+  const markExternalLinks = () => {
+    for (const link of Array.from(document.links)) {
+      if (!/^https?:$/.test(link.protocol)) continue;
+      const external = link.host !== location.host;
+      const file = /\.pdf$/i.test(link.pathname);
+      if (!external && !file) continue;
+      link.target = "_blank";
+      link.rel = link.rel.includes("noopener") ? link.rel : `${link.rel} noopener`.trim();
+    }
+  };
+  markExternalLinks();
+  document.addEventListener("astro:page-load", markExternalLinks);
+</script>

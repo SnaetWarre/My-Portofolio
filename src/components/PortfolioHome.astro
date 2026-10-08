@@ -1,14 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectList from "./ProjectList.astro";
-import { obsidianStyles } from "../styles/obsidianStyles";
-
+import Schematic from "./Schematic.astro";
+import TitleBlock from "./TitleBlock.astro";
+import TopLine from "./TopLine.astro";
 import * as stylex from "@stylexjs/stylex";
 import { basePath } from "../lib/paths";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import StructuredData from "./StructuredData.astro";
 import { gitDates, person, personId, profileLinks, siteUrl, website, websiteId } from "../lib/site";
-import { experience, openSource, selectedWork } from "../lib/projects";
+import { experience, openSource, selectedWork, writing } from "../lib/projects";
 
 interface Props { experimental?: boolean; }
 const { experimental = false } = Astro.props;
@@ -35,7 +36,6 @@ const structuredData = [
 
 <BaseLayout
   experimental={experimental}
-  sculpture
   title="Warre Snaet | Backend & Applied AI Engineer"
   description="Portfolio of Warre Snaet, a backend and applied AI engineer from Belgium. Mostly Python: backend systems, data pipelines, agent infrastructure, and machine learning applications."
 >
@@ -46,67 +46,76 @@ const structuredData = [
     <StructuredData graph={structuredData} />
   </Fragment>
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#main">Skip to content</a>
-  <main {...stylex.attrs(portfolioStyles.mainContent, obsidianStyles.content)} id="main" tabindex="-1">
-    <div {...stylex.attrs(obsidianStyles.hero)}>
-    <header {...stylex.attrs(portfolioStyles.pageHeader)}>
-      <h1 {...stylex.attrs(portfolioStyles.primaryHeading, obsidianStyles.heading, obsidianStyles.besideControls)}>Warre Snaet</h1>
-      <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Portfolio and profile links">
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://github.com/SnaetWarre">GitHub</a>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>CV</a>
-      </nav>
+  <div {...stylex.attrs(portfolioStyles.page)}>
+    <TopLine home />
+
+    <header {...stylex.attrs(portfolioStyles.cover)}>
+      <div {...stylex.attrs(portfolioStyles.coverDrawing)}>
+        <Schematic drawing="cover" size="cover" animated />
+      </div>
+      <TitleBlock
+        heading="Warre Snaet"
+        tag="I build backends and applied AI, mostly in Python."
+        cells={[
+          { label: "Based in", value: "Vilvoorde, Belgium" },
+          { label: "Works in", value: "Python, Rust" },
+          { label: "Looking for", value: "A junior role" },
+        ]}
+      />
     </header>
 
-    <section {...stylex.attrs(portfolioStyles.introduction)} aria-labelledby="about-title">
-      <h2 {...stylex.attrs(portfolioStyles.visuallyHidden)} id="about-title">About</h2>
-      <p {...stylex.attrs(portfolioStyles.lead)}>I’m a backend and applied AI engineer from Belgium. I studied AI Engineering at Howest and graduated with distinction.</p>
-      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I do my best work in Python. That covers APIs, data pipelines, computer vision and OCR, and machine learning, including reinforcement learning and generative AI. For infrastructure I use AWS, Azure, Terraform, containers, Kubernetes, and CI/CD. The areas I’m most interested in are agent infrastructure and MLOps.</p>
-      <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I’m looking for a junior role in cloud, backend, software, data, or applied AI engineering.</p>
-      <div {...stylex.attrs(portfolioStyles.contactRow)}>
-        <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>View my CV</a>
-      </div>
-    </section>
+    <main id="main" tabindex="-1">
+      <section {...stylex.attrs(portfolioStyles.intro)} aria-labelledby="about-title">
+        <div>
+          <h2 {...stylex.attrs(portfolioStyles.visuallyHidden)} id="about-title">About</h2>
+          <p {...stylex.attrs(portfolioStyles.lead)}>I'm Warre, a backend and applied AI engineer from Vilvoorde, Belgium. I studied AI Engineering at Howest and graduated with distinction.</p>
+          <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I work mostly in Python, and also in Rust. I build APIs, data pipelines, computer vision and OCR, and machine learning, including reinforcement learning and generative AI. I also set up what it runs on, with AWS, Azure, Terraform, containers, Kubernetes and CI/CD.</p>
+          <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I'm looking for a junior role in cloud, backend, software, data or applied AI engineering. Agent infrastructure and MLOps interest me most.</p>
+        </div>
+        <div {...stylex.attrs(portfolioStyles.contactColumn)}>
+          <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
+          <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>Read my CV</a>
+        </div>
+      </section>
 
-    </div>
+      <section aria-labelledby="work">
+        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="work">Work</h2>
+        <ProjectList projects={experience} />
+      </section>
 
-    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="experience-title">
-      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="experience-title">Experience</h2>
-      <ProjectList projects={experience} />
-    </section>
+      <section aria-labelledby="projects">
+        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="projects">Projects</h2>
+        <ProjectList projects={selectedWork} />
+      </section>
 
-    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="work-title">
-      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="work-title">Selected work</h2>
-      <ProjectList projects={selectedWork} />
-    </section>
+      <section aria-labelledby="open-source">
+        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="open-source">Open source</h2>
+        <ProjectList projects={openSource} />
+      </section>
 
-    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="open-source-title">
-      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="open-source-title">Open source</h2>
-      <ProjectList projects={openSource} />
-    </section>
-
-    <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="writing-title">
-      <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="writing-title">Writing</h2>
-      <ProjectList projects={[{
-        title: "How I built a 26 MB offline AI with Rust and Burn",
-        href: `${base}blog/blog.html`,
-        description: "How my bachelor project works, from the semi-supervised training to getting the model running offline on a phone.",
-      }]} />
-    </section>
+      <section aria-labelledby="writing">
+        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="writing">Writing</h2>
+        <ProjectList projects={writing} />
+      </section>
+    </main>
 
     <footer {...stylex.attrs(portfolioStyles.pageFooter)}>
-      <h2 {...stylex.attrs(portfolioStyles.footerHeading)}>Get in touch</h2>
-      <p {...stylex.attrs(portfolioStyles.paragraph)}>If you have a role or a project in mind, email me at <a {...stylex.attrs(portfolioStyles.link)} href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>.</p>
-      <div {...stylex.attrs(portfolioStyles.contactRow)}>
-        <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href="https://www.linkedin.com/in/warre-snaet-272354370/">LinkedIn</a>
+      <div {...stylex.attrs(portfolioStyles.footerColumn)}>
+        <h2 {...stylex.attrs(portfolioStyles.footerHeading)}>Get in touch</h2>
+        <p {...stylex.attrs(portfolioStyles.paragraph)} style="margin: 0">If you have a role that fits, or a question about any of this, send me an email.</p>
+        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.emailLink)} href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>
+        <div {...stylex.attrs(portfolioStyles.contactRow)}>
+          <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
+          <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={profileLinks.linkedIn}>LinkedIn</a>
+        </div>
       </div>
-      <div {...stylex.attrs(portfolioStyles.footerMeta)}>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download the ATS CV</a>
+      <div {...stylex.attrs(portfolioStyles.footerAside)}>
+        <a {...stylex.attrs(portfolioStyles.link)} href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download the ATS CV</a>
+        <br />
         <span>Warre Snaet, {year}</span>
       </div>
     </footer>
-  </main>
+  </div>
 
   <div {...stylex.attrs(portfolioStyles.copyNotification)} id="copy-notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>
 
@@ -117,7 +126,6 @@ const structuredData = [
     const copyPortfolioEmailAddress = async (): Promise<boolean> => {
       try {
         if (!navigator.clipboard?.writeText) return false;
-
         await navigator.clipboard.writeText(portfolioEmailAddress);
         return true;
       } catch {
@@ -127,26 +135,25 @@ const structuredData = [
 
     // Delegation also covers the new homepage DOM after client-side navigation.
     document.addEventListener("click", async (event) => {
-        if (!(event.target instanceof Element) || !event.target.closest("[data-copy-email]")) return;
-        const emailWasCopied = await copyPortfolioEmailAddress();
+      if (!(event.target instanceof Element) || !event.target.closest("[data-copy-email]")) return;
+      const emailWasCopied = await copyPortfolioEmailAddress();
 
-        const copyNotification = document.querySelector<HTMLDivElement>("#copy-notification");
-        if (!copyNotification) return;
+      const copyNotification = document.querySelector<HTMLDivElement>("#copy-notification");
+      if (!copyNotification) return;
 
-        copyNotification.textContent = emailWasCopied
-          ? `Email address copied: ${portfolioEmailAddress}`
-          : `Copy failed. Email address: ${portfolioEmailAddress}`;
-        copyNotification.hidden = false;
+      copyNotification.textContent = emailWasCopied
+        ? `Copied ${portfolioEmailAddress}`
+        : `Copy failed. The address is ${portfolioEmailAddress}`;
+      copyNotification.hidden = false;
 
-        if (copyNotificationDismissalTimer !== undefined) {
-          window.clearTimeout(copyNotificationDismissalTimer);
-        }
-
-        if (emailWasCopied) {
-          copyNotificationDismissalTimer = window.setTimeout(() => {
-            copyNotification.hidden = true;
-          }, 5000);
-        }
+      if (copyNotificationDismissalTimer !== undefined) {
+        window.clearTimeout(copyNotificationDismissalTimer);
+      }
+      if (emailWasCopied) {
+        copyNotificationDismissalTimer = window.setTimeout(() => {
+          copyNotification.hidden = true;
+        }, 4000);
+      }
     });
   </script>
 </BaseLayout>

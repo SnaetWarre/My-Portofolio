@@ -1,0 +1,27 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import ThemeControl from "./ThemeControl.astro";
+import { basePath } from "../lib/paths";
+import { profileLinks } from "../lib/site";
+import { portfolioStyles } from "../styles/portfolioStyles";
+
+interface Props {
+  /** Shown on the left. On the home page it is plain text, elsewhere a link home. */
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+---
+
+<div {...stylex.attrs(portfolioStyles.topline)}>
+  {home
+    ? <span>Warre Snaet</span>
+    : <a {...stylex.attrs(portfolioStyles.navigationLink)} href={basePath}>Warre Snaet</a>}
+  <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Site">
+    {!home && <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${basePath}#work`}>Work</a>}
+    <a {...stylex.attrs(portfolioStyles.navigationLink)} href={profileLinks.gitHub}>GitHub</a>
+    <a {...stylex.attrs(portfolioStyles.navigationLink)} href={profileLinks.linkedIn}>LinkedIn</a>
+    <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${basePath}cv.html`}>CV</a>
+    <ThemeControl />
+  </nav>
+</div>

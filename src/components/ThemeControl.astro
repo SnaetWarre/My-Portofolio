@@ -1,25 +1,24 @@
 ---
 import * as stylex from "@stylexjs/stylex";
-import ControlIcon from "./ControlIcon.astro";
-import { obsidianStyles as styles } from "../styles/obsidianStyles";
+import { portfolioStyles } from "../styles/portfolioStyles";
+import { cvStyles } from "../styles/cvStyles";
+
+interface Props {
+  /** Match the boxed buttons of the CV toolbar. */
+  boxed?: boolean;
+}
+const { boxed = false } = Astro.props;
 ---
 
-<div {...stylex.attrs(styles.controlsHost)} data-theme-controls hidden transition:persist="appearance-controls" transition:animate="none">
-  <div {...stylex.attrs(styles.themeControls)} role="group" aria-label="Appearance">
-    <button {...stylex.attrs(styles.iconButton)} type="button" data-theme-toggle aria-label="Switch to dark theme" title="Switch to dark theme" aria-pressed="false">
-      <span data-icon-sun hidden><ControlIcon name="sun" /></span>
-      <span data-icon-moon><ControlIcon name="moon" /></span>
-    </button>
-  </div>
-</div>
+<button {...stylex.attrs(boxed ? cvStyles.toolbarAction : portfolioStyles.navigationLink, portfolioStyles.textButton)} type="button" data-theme-toggle aria-pressed="false">Dark</button>
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   const root = document.documentElement;
   const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
-  const controls = document.querySelector<HTMLElement>("[data-theme-controls]");
   const systemTheme = matchMedia("(prefers-color-scheme: dark)");
   const storageKey = "portfolio-theme";
+  const paper = { light: "#e6e5e1", dark: "#1b1c1e" };
 
   function effectiveTheme(): "light" | "dark" {
     if (root.dataset.theme === "dark") return "dark";
@@ -29,17 +28,12 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
 
   function updateToggle() {
     const isDark = effectiveTheme() === "dark";
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#000000" : "#ffffff");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? paper.dark : paper.light);
     if (!toggle) return;
-    const label = isDark ? "Switch to light theme" : "Switch to dark theme";
+    // The button names the theme it switches to.
+    toggle.textContent = isDark ? "Light" : "Dark";
     toggle.setAttribute("aria-pressed", String(isDark));
-    toggle.setAttribute("aria-label", label);
-    toggle.title = label;
-    const sun = toggle.querySelector<HTMLElement>("[data-icon-sun]");
-    const moon = toggle.querySelector<HTMLElement>("[data-icon-moon]");
-    // Show the action: sun in dark mode, moon in light mode.
-    if (sun) sun.hidden = !isDark;
-    if (moon) moon.hidden = isDark;
+    toggle.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
   }
 
   function choose(theme: "light" | "dark") {
@@ -52,20 +46,17 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
 
   type SameDocumentTransition = { ready: Promise<void>; finished: Promise<void> };
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  // The button persists across Astro navigations while this script re-runs,
-  // so guard against stacking duplicate listeners on the same element.
+  // The script re-runs after client-side navigation, so guard the listeners.
   const boundFlag = "__themeToggleBound";
-  const alreadyBound =
-    (window as Window & { [boundFlag]?: boolean })[boundFlag] === true;
+  const alreadyBound = (window as Window & { [boundFlag]?: boolean })[boundFlag] === true;
   let wiping = false;
 
   function dipToTheme(next: "light" | "dark") {
-    // No View Transitions API: cover in the current paper color (seamless,
-    // same as the background), swap underneath, then fade back in.
-    const paper = effectiveTheme() === "dark" ? "#000000" : "#ffffff";
+    // No View Transitions API: cover in the current paper colour, swap
+    // underneath, then fade back in.
     const veil = document.createElement("div");
     veil.setAttribute("aria-hidden", "true");
-    veil.style.cssText = `position:fixed;inset:0;z-index:2147483646;background:${paper};opacity:0;pointer-events:none;transition:opacity 160ms ease-out;`;
+    veil.style.cssText = `position:fixed;inset:0;z-index:2147483646;background:${paper[effectiveTheme()]};opacity:0;pointer-events:none;transition:opacity 160ms ease-out;`;
     document.body.appendChild(veil);
     requestAnimationFrame(() => requestAnimationFrame(() => {
       veil.style.opacity = "1";
@@ -83,7 +74,6 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
     const doc = document as Document & {
       startViewTransition?: (update: () => void) => SameDocumentTransition;
     };
-    // Reduced motion stays instant by design; a mid-wipe click applies at once.
     if (reducedMotion.matches || !toggle || wiping) {
       choose(next);
       return;
@@ -92,8 +82,7 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
       dipToTheme(next);
       return;
     }
-    // Aim the wipe at the button. CSS keyframes read these custom props,
-    // so no WAAPI pseudo-element animation is required.
+    // Aim the circular wipe at the button. CSS keyframes read these custom props.
     const rect = toggle.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
@@ -101,10 +90,9 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
     root.style.setProperty("--reveal-x", `${x}px`);
     root.style.setProperty("--reveal-y", `${y}px`);
     root.style.setProperty("--reveal-r", `${radius}px`);
-    // Astro's ClientRouter gives html/scene/controls generated
-    // view-transition-names (with animation:none), which leaves the default
-    // "root" snapshot empty and the wipe with nothing to reveal. Fold every
-    // named snapshot back into one "theme-wipe" group for this toggle only.
+    // Astro's ClientRouter gives some elements generated view-transition-names,
+    // which would leave the default "root" snapshot empty. Fold every named
+    // snapshot into one "theme-wipe" group for this toggle only.
     const renamed: Array<{ el: HTMLElement; prev: string }> = [];
     const rename = (el: Element, name: string) => {
       if (!(el instanceof HTMLElement)) return;
@@ -134,7 +122,10 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
 
   if (!alreadyBound) {
     (window as Window & { [boundFlag]?: boolean })[boundFlag] = true;
-    toggle?.addEventListener("click", toggleTheme);
+    // Delegation keeps working after client-side navigation swaps the button.
+    document.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("[data-theme-toggle]")) toggleTheme();
+    });
     systemTheme.addEventListener("change", updateToggle);
     window.addEventListener("storage", (event) => {
       if (event.key !== storageKey && event.key !== null) return;
@@ -142,16 +133,13 @@ import { obsidianStyles as styles } from "../styles/obsidianStyles";
       else delete root.dataset.theme;
       updateToggle();
     });
-    // Apply the current choice to the incoming document before any new content paints.
+    // Carry the current choice onto the incoming document before it paints.
     document.addEventListener("astro:before-swap", (event: TransitionBeforeSwapEvent) => {
-      // Native transition snapshots can briefly hide a paused WebGL canvas.
-      // Keep Astro's DOM swap and persistence, but show the live scene throughout.
-      event.viewTransition.skipTransition();
       const incoming = event.newDocument.documentElement;
       if (root.dataset.theme) incoming.dataset.theme = root.dataset.theme;
       else delete incoming.dataset.theme;
     });
+    document.addEventListener("astro:page-load", updateToggle);
   }
   updateToggle();
-  if (controls) controls.hidden = false;
 </script>
