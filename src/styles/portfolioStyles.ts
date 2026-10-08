@@ -100,9 +100,6 @@ export const portfolioStyles = stylex.create({
   },
   titleBlockName: {
     padding: { default: "0.75rem 1.25rem 0.75rem 0", [narrow]: "0.75rem 0 0.625rem" },
-    borderRightWidth: { default: 1, [narrow]: 0 },
-    borderRightStyle: "solid",
-    borderRightColor: colorTokens.border,
   },
   titleBlockHeading: {
     margin: 0,
@@ -127,9 +124,6 @@ export const portfolioStyles = stylex.create({
     padding: "0.45rem 0.875rem 0.55rem",
     paddingLeft: { default: null, [narrow]: { default: null, ":first-child": 0 } },
     paddingRight: { default: null, ":last-child": 0 },
-    borderRightWidth: { default: 1, ":last-child": 0 },
-    borderRightStyle: "solid",
-    borderRightColor: colorTokens.border,
     lineHeight: 1.35,
     overflowWrap: "anywhere",
   },
@@ -271,9 +265,6 @@ export const portfolioStyles = stylex.create({
   footerAside: {
     paddingTop: "1.1rem",
     paddingLeft: { default: "1.5rem", [narrow]: 0 },
-    borderLeftWidth: { default: 1, [narrow]: 0 },
-    borderLeftStyle: "solid",
-    borderLeftColor: colorTokens.borderLight,
     textAlign: { default: "right", [narrow]: "left" },
   },
   footerHeading: {
