@@ -92,16 +92,10 @@ export const portfolioStyles = stylex.create({
   // Cover: the title block drawn as a strip across the page.
   cover: {
     marginTop: "1.25rem",
-    borderBottomWidth: 1,
-    borderBottomStyle: "solid",
-    borderBottomColor: colorTokens.border,
   },
   titleBlock: {
     display: "grid",
     gridTemplateColumns: { default: "minmax(0, 1fr) auto", [narrow]: "minmax(0, 1fr)" },
-    borderTopWidth: 1,
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.border,
     fontSize: "0.8125rem",
   },
   titleBlockName: {
@@ -109,9 +103,6 @@ export const portfolioStyles = stylex.create({
     borderRightWidth: { default: 1, [narrow]: 0 },
     borderRightStyle: "solid",
     borderRightColor: colorTokens.border,
-    borderBottomWidth: { default: 0, [narrow]: 1 },
-    borderBottomStyle: "solid",
-    borderBottomColor: colorTokens.border,
   },
   titleBlockHeading: {
     margin: 0,
@@ -154,9 +145,6 @@ export const portfolioStyles = stylex.create({
     gridTemplateColumns: { default: "minmax(0, 60ch) 1fr", [narrow]: "minmax(0, 1fr)" },
     gap: "1.5rem 2.5rem",
     padding: "2.5rem 0 2.75rem",
-    borderBottomWidth: 1,
-    borderBottomStyle: "solid",
-    borderBottomColor: colorTokens.borderLight,
   },
   lead: {
     margin: "0 0 0.875rem",
@@ -222,9 +210,6 @@ export const portfolioStyles = stylex.create({
   },
   row: {
     padding: "1.35rem 0 1.5rem",
-    borderTopWidth: 1,
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.borderLight,
   },
   rowAside: {
     display: "grid",
@@ -277,9 +262,6 @@ export const portfolioStyles = stylex.create({
     display: "grid",
     gridTemplateColumns: { default: "1fr 1fr", [narrow]: "1fr" },
     marginTop: "3rem",
-    borderTopWidth: 1,
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.border,
     fontSize: "0.875rem",
     color: colorTokens.mutedForeground,
   },
@@ -316,9 +298,6 @@ export const portfolioStyles = stylex.create({
     gap: "0.5rem 2rem",
     marginTop: layoutTokens.sectionGap,
     paddingTop: "1.25rem",
-    borderTopWidth: 1,
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.border,
   },
   pageEndNext: {
     margin: 0,

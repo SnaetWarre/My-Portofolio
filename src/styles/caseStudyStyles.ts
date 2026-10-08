@@ -48,9 +48,6 @@ export const caseStudyStyles = stylex.create({
     columnGap: "1.5rem",
     marginTop: "1.75rem",
     paddingTop: "1.25rem",
-    borderTopWidth: 1,
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.borderLight,
   },
   sectionLabel: {
     margin: { default: "0.15rem 0 0", [phone]: "0 0 0.35rem" },

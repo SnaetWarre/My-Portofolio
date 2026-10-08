@@ -101,12 +101,6 @@ export const blogStyles = stylex.create({
     marginTop: "2rem",
     paddingTop: "1rem",
     paddingBottom: "1rem",
-    borderTopWidth: "1px",
-    borderTopStyle: "solid",
-    borderTopColor: colorTokens.borderLight,
-    borderBottomWidth: "1px",
-    borderBottomStyle: "solid",
-    borderBottomColor: colorTokens.borderLight,
   },
   contentsHeading: {
     margin: 0,
@@ -187,7 +181,6 @@ export const blogStyles = stylex.create({
     marginBottom: "3rem",
     marginLeft: 0,
     borderWidth: 0,
-    backgroundColor: colorTokens.borderLight,
   },
   statisticGrid: {
     display: "grid",
