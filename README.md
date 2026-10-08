@@ -1,5 +1,5 @@
 # Warre Snaet
-**Junior Backend & Applied AI Engineer | Python**
+**Junior Applied AI Engineer | Python**
 
 > 🚧 **This profile is just the code storage.**
 > The real breakdown of my projects, deep-dive case studies, and edge-AI research is on my portfolio.
