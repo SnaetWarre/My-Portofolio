@@ -20,7 +20,7 @@ The home page shows the name in a drafting title block with three facts (based i
 
 Preconditions: the baseline in the README.
 
-- **Layout.** Run `$S/check.mjs $B /tmp/verify-portfolio/evidence/home --pages "",obsidian.html --widths 1920,1280,900,390 --schemes light,dark --full`. Every line reads `ok`. In the PNGs the three fact cells sit to the right of the name on desktop and as rows on phones.
+- **Layout.** Run `$S/check.mjs $B /tmp/verify-portfolio/evidence/home --pages "",obsidian.html --widths 1920,1280,900,390 --schemes light,dark --full`. Every line reads `ok`. In the PNGs the three fact cells sit to the right of the name on desktop and as rows on phones. Copy email and Read my CV sit in one row right under the intro text. Until 2026-10-09 they floated alone at the far right of the page.
 - **Copy email.** Run `$S/check.mjs $B /tmp/verify-portfolio/evidence/home-copy --pages "" --widths 1280 --eval "(async () => { document.querySelector('[data-copy-email]').click(); await new Promise(r => setTimeout(r, 400)); const n = document.querySelector('#copy-notification'); return { toast: n.textContent, hidden: n.hidden, clipboard: await navigator.clipboard.readText() }; })()"`. The result shows `toast: "Copied warresnaet@icloud.com"`, `hidden: false`, and the same address in the clipboard.
 - **Open a project.** Run `$S/check.mjs $B /tmp/verify-portfolio/evidence/home-nav --pages "" --widths 1280 --eval "document.querySelector('a[href\$=\"work/financial-agent.html\"]').click()"`. The output shows `now at .../work/financial-agent.html` and the PNG shows that page with its styles.
 

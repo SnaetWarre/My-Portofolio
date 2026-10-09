@@ -67,10 +67,10 @@ const structuredData = [
           <p {...stylex.attrs(portfolioStyles.lead)}>I'm Warre, a backend and applied AI engineer from Vilvoorde, Belgium. I studied AI Engineering at Howest and graduated with distinction.</p>
           <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I work mostly in Python, and also in Rust. I build APIs, data pipelines, computer vision and OCR, and machine learning, including reinforcement learning and generative AI. I also set up what it runs on, with AWS, Azure, Terraform, containers, Kubernetes and CI/CD.</p>
           <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I'm looking for a junior role in cloud, backend, software, data or applied AI engineering. Agent infrastructure and MLOps interest me most.</p>
-        </div>
-        <div {...stylex.attrs(portfolioStyles.contactColumn)}>
-          <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
-          <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>Read my CV</a>
+          <div {...stylex.attrs(portfolioStyles.contactRow)}>
+            <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
+            <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>Read my CV</a>
+          </div>
         </div>
       </section>
 

@@ -158,15 +158,6 @@ export const portfolioStyles = stylex.create({
   supportingText: {
     color: colorTokens.mutedForeground,
   },
-  contactColumn: {
-    alignSelf: "end",
-    justifySelf: { default: "end", [narrow]: "start" },
-    display: "flex",
-    flexDirection: "column",
-    alignItems: { default: "flex-end", [narrow]: "flex-start" },
-    gap: "0.25rem",
-    fontSize: "0.875rem",
-  },
   contactRow: {
     display: "flex",
     alignItems: "center",
