@@ -15,14 +15,6 @@ const { experimental = false } = Astro.props;
 const base = basePath;
 const year = new Date().getFullYear();
 
-const numbers = [
-  ["faster frame search at 2Ai IPCA", "14.9×"],
-  ["test accuracy with 20% of labels", "94.9%"],
-  ["offline release binary", "26 MB"],
-  ["inference on an iPhone 12", "80 ms"],
-  ["merged pull requests to Athas", "9"],
-];
-
 const homeDates = gitDates("src/components/PortfolioHome.astro");
 const structuredData = [
   {
@@ -65,18 +57,6 @@ const structuredData = [
           <button {...stylex.attrs(portfolioStyles.button)} type="button" data-copy-email>Copy email</button>
           <a {...stylex.attrs(portfolioStyles.button)} href={`${base}cv.html`}>Read my CV</a>
         </div>
-      </section>
-
-      <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="numbers">
-        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="numbers">Numbers</h2>
-        <dl {...stylex.attrs(portfolioStyles.numbers)}>
-          {numbers.map(([label, value]) => (
-            <div {...stylex.attrs(portfolioStyles.numberRow)}>
-              <dt {...stylex.attrs(portfolioStyles.numberLabel)}>{label}</dt>
-              <dd {...stylex.attrs(portfolioStyles.numberValue)}>{value}</dd>
-            </div>
-          ))}
-        </dl>
       </section>
 
       <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="work">

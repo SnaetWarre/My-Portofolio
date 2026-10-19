@@ -1,11 +1,10 @@
 # Home page
 
-The home page follows shadcn.com: one narrow column on the left with a breadcrumb top line (warre snaet / github / linkedin / cv, theme button on the right), three short intro lines and a paragraph, grey Copy email and Read my CV buttons, a Numbers list with mono values, then Work, Projects, Open source, Writing and Contact. Only links are underlined; section headings are plain. `obsidian.html` renders the same page as an experimental variant.
+The home page follows shadcn.com: one narrow column on the left with a breadcrumb top line (warre snaet / github / linkedin / cv, theme button on the right), three short intro lines and a paragraph, grey Copy email and Read my CV buttons, then Work, Projects, Open source, Writing and Contact. Only links are underlined; section headings are plain. `obsidian.html` renders the same page as an experimental variant.
 
 ## Sub-features
 
 - `home-intro` shows the intro lines (the first is the page's h1), the paragraph, Copy email and Read my CV.
-- `home-numbers` shows label and value rows, values right-aligned in JetBrains Mono.
 - `home-lists` shows the Work, Projects, Open source and Writing sections. Each entry title is an underlined link with the role in grey under it.
 - `home-contact` shows the email link, Copy email, LinkedIn and the ATS CV.
 - `home-copy` copies the email address and shows a status message.

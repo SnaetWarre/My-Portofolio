@@ -149,28 +149,6 @@ export const portfolioStyles = stylex.create({
     scrollMarginTop: "1.5rem",
   },
 
-  // Label on the left, value on the right, one fact per row.
-  numbers: {
-    margin: 0,
-  },
-  numberRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "baseline",
-    gap: "1rem",
-    lineHeight: "1.5625rem",
-  },
-  numberLabel: {
-    color: colorTokens.text,
-  },
-  numberValue: {
-    margin: 0,
-    fontFamily: typographyTokens.monospaceFont,
-    fontWeight: 500,
-    fontVariantNumeric: "tabular-nums",
-    whiteSpace: "nowrap",
-  },
-
   projectList: {
     display: "grid",
     gap: "1.75rem",
