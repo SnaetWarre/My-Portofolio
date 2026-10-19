@@ -1,6 +1,6 @@
 # Home page
 
-The home page shows the name in a drafting title block with three facts (based in, works in, looking for), a short intro with Copy email and Read my CV, and lists of work, projects, open source and writing. A few entries carry an architecture drawing. `obsidian.html` renders the same page as an experimental variant.
+The home page shows the name in a drafting title block with three facts (based in, languages, works at), a short intro with Copy email and Read my CV, and lists of work, projects, open source and writing. A few entries carry an architecture drawing. `obsidian.html` renders the same page as an experimental variant.
 
 ## Sub-features
 

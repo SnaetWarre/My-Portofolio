@@ -8,23 +8,34 @@ export interface Project {
   /** Role or setting, shown after the title. */
   context?: string;
   /** Optional drawing on the home page and where it sits. */
-  drawing?: { key: DrawingKey; placement: "aside" | "below" };
+  drawing?: {
+    key: DrawingKey;
+    placement: "aside" | "below";
+    /** Smaller drawing shown instead when the page is one column. */
+    compact?: DrawingKey;
+  };
 }
 
 export const experience: Project[] = [
+  {
+    title: "Robot vision at Captic",
+    context: "physical AI engineer, from November 2026",
+    href: "https://captic.com",
+    description: "Captic is a startup in Ghent that makes AI vision kits for factory robots. The software finds the next bag or box on a pallet and sends the robot a pick pose, or checks bags for damage. It runs on the machine itself, not in the cloud.",
+  },
   {
     title: "Medical imaging at 2Ai IPCA",
     context: "AI and software engineering intern, Portugal",
     href: `${basePath}work/medical-imaging.html`,
     description: "I wrote a Python pipeline that reads the measurements burned into echocardiography DICOM studies with OCR, extracts ECG traces, and finds the video frame each measurement image came from. That last step is an image similarity search, and it took most of the run time. I sped up the frame preparation and rewrote OpenCV's ECC alignment in PyTorch so it runs in batches on the GPU. Together, that made the search 14.9 times faster on a benchmark of 39 images, from 1182 to 80 seconds. A review tool lets a person check every value. It was an international internship, working with real clinical imaging data.",
-    drawing: { key: "dicomWide", placement: "below" },
+    drawing: { key: "dicomWide", placement: "below", compact: "medicalImaging" },
   },
   {
     title: "Apolloon 24-hour run system",
     context: "software engineer, paid client work",
     href: `${basePath}work/apolloon.html`,
     description: "It runs a 24-hour relay on three laptops on the event's own network, with no cloud. Each Electron laptop holds the whole race in SQLite. The laptops find each other through UDP broadcasts and elect a leader by majority vote with Raft. A change counts once two of the three laptops store it, so any one laptop can die without losing a lap. I built it alone.",
-    drawing: { key: "apolloonWide", placement: "below" },
+    drawing: { key: "apolloonWide", placement: "below", compact: "apolloon" },
   },
 ];
 

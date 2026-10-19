@@ -28,7 +28,10 @@ const { projects } = Astro.props;
           <div {...stylex.attrs(portfolioStyles.drawingAside)}><Schematic drawing={project.drawing.key} /></div>
         )}
         {below && project.drawing && (
-          <div {...stylex.attrs(portfolioStyles.drawingBelow)}><Schematic drawing={project.drawing.key} /></div>
+          <div {...stylex.attrs(portfolioStyles.drawingBelow, project.drawing.compact && portfolioStyles.wideOnly)}><Schematic drawing={project.drawing.key} /></div>
+        )}
+        {below && project.drawing?.compact && (
+          <div {...stylex.attrs(portfolioStyles.drawingBelow, portfolioStyles.narrowOnly)}><Schematic drawing={project.drawing.compact} size="lead" /></div>
         )}
       </li>
     );

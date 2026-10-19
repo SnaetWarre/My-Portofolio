@@ -86,6 +86,8 @@ export const portfolioStyles = stylex.create({
     borderRadius: 0,
     backgroundColor: "transparent",
     fontFamily: "inherit",
+    fontSize: "inherit",
+    lineHeight: "inherit",
     cursor: "pointer",
   },
 
@@ -142,7 +144,7 @@ export const portfolioStyles = stylex.create({
   // Intro under the cover.
   intro: {
     display: "grid",
-    gridTemplateColumns: { default: "minmax(0, 60ch) 1fr", [narrow]: "minmax(0, 1fr)" },
+    gridTemplateColumns: { default: "minmax(0, 60ch) 1fr", [narrow]: "minmax(0, 60ch)" },
     gap: "1.5rem 2.5rem",
     padding: "2.5rem 0 2.75rem",
   },
@@ -179,7 +181,7 @@ export const portfolioStyles = stylex.create({
     },
     fontFamily: "inherit",
     fontSize: "0.875rem",
-    lineHeight: 1.5,
+    lineHeight: "inherit",
     cursor: "pointer",
     ...underline,
     ...focusRing,
@@ -246,6 +248,15 @@ export const portfolioStyles = stylex.create({
   drawingBelow: {
     maxWidth: "51rem",
     margin: "1.4rem 0 0.25rem",
+  },
+  // Below the narrow width a wide drawing's labels get too small to read, so
+  // its compact version takes its place.
+  wideOnly: {
+    display: { default: null, [narrow]: "none" },
+  },
+  narrowOnly: {
+    display: { default: "none", [narrow]: "block" },
+    maxWidth: "26rem",
   },
 
   // Page footer with the email.

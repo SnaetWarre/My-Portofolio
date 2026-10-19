@@ -10,7 +10,7 @@ interface Props {
 const { boxed = false } = Astro.props;
 ---
 
-<button {...stylex.attrs(boxed ? cvStyles.toolbarAction : portfolioStyles.navigationLink, portfolioStyles.textButton)} type="button" data-theme-toggle aria-pressed="false">Dark</button>
+<button {...stylex.attrs(portfolioStyles.textButton, boxed ? cvStyles.toolbarAction : portfolioStyles.navigationLink)} type="button" data-theme-toggle aria-pressed="false">Dark</button>
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";

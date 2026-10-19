@@ -1,5 +1,5 @@
 # Warre Snaet
-**Junior Applied AI Engineer | Python**
+**Physical AI Engineer at [Captic](https://captic.com) | Python**
 
 > 🚧 **This profile is just the code storage.**
 > The real breakdown of my projects, deep-dive case studies, and edge-AI research is on my portfolio.
@@ -10,7 +10,7 @@
 
 ### What I'm Building
 I build dependable software around applied AI: Python backends, data pipelines, computer vision, APIs, validation tools, and deployable applications.
-*   **Currently:** Open to junior backend, software, data, and applied AI engineering roles.
+*   **Currently:** Starting as a physical AI engineer at [Captic](https://captic.com) in Ghent in November 2026. Captic makes AI vision kits for factory robots.
 *   **Education:** Graduated with distinction in AI Engineering from Howest.
 *   **Recent work:** A medical-imaging OCR and source-matching pipeline at 2Ai IPCA, plus a paid local-first race operations platform.
 *   **On the side:** Exploring Rust, Burn, and edge AI through personal projects.

@@ -14,7 +14,7 @@ import "../styles/reset.css";
 
 const base = basePath;
 const title = "Warre Snaet | CV";
-const description = "CV of Warre Snaet, a backend and applied AI engineer from Belgium working across Python systems, applied machine learning, cloud, and MLOps.";
+const description = "CV of Warre Snaet, a physical AI engineer at Captic in Belgium, working across Python systems, applied machine learning, cloud, and MLOps.";
 const canonical = absoluteUrl("cv.html");
 const structuredData = [
   {
@@ -69,7 +69,7 @@ const structuredData = [
       <header {...stylex.attrs(cvStyles.resumeHeader)}>
         <div>
           <h1 {...stylex.attrs(cvStyles.primaryHeading)}>Warre Snaet</h1>
-          <p {...stylex.attrs(cvStyles.role)}>Junior Backend &amp; Applied AI Engineer</p>
+          <p {...stylex.attrs(cvStyles.role)}>Physical AI Engineer</p>
         </div>
         <address {...stylex.attrs(cvStyles.contactList)}>
           <span>Vilvoorde, Belgium</span>
@@ -84,7 +84,7 @@ const structuredData = [
       <section {...stylex.attrs(cvStyles.summary)} aria-labelledby="profile-heading">
         <h2 {...stylex.attrs(cvStyles.sectionHeading, cvStyles.summaryContent)} id="profile-heading">Profile</h2>
         <p {...stylex.attrs(cvStyles.paragraph, cvStyles.summaryContent)}>
-          AI Engineering graduate with distinction. I build Python backends, agent infrastructure, applied AI systems, and data pipelines, and I have taken unfamiliar problems from raw data to validated software, including cloud ML workflows, APIs, and deployable applications. Looking for a junior backend, applied AI, or MLOps role where I can contribute and learn from experienced engineers.
+          Joining Captic as a physical AI engineer in November 2026. AI Engineering graduate with distinction. I build Python backends, agent infrastructure, applied AI systems, and data pipelines, and I have taken unfamiliar problems from raw data to validated software, including cloud ML workflows, APIs, and deployable applications.
         </p>
       </section>
 
@@ -94,6 +94,19 @@ const structuredData = [
             <h2 {...stylex.attrs(cvStyles.sectionHeading)} id="experience-heading">Technical experience</h2>
 
             <article>
+              <div {...stylex.attrs(cvStyles.entryHeading)}>
+                <div>
+                  <h3 {...stylex.attrs(cvStyles.subsectionHeading)}>Physical AI Engineer</h3>
+                  <p {...stylex.attrs(cvStyles.organisation)}>Captic · Ghent, Belgium</p>
+                </div>
+                <p {...stylex.attrs(cvStyles.date)}>From Nov 2026</p>
+              </div>
+              <ul {...stylex.attrs(cvStyles.list)}>
+                <li {...stylex.attrs(cvStyles.listItem)}>Startup that makes AI vision kits for factory robots. The software finds the next bag or box on a pallet and sends the robot a pick pose.</li>
+              </ul>
+            </article>
+
+            <article {...stylex.attrs(cvStyles.spacedEntry)}>
               <div {...stylex.attrs(cvStyles.entryHeading)}>
                 <div>
                   <h3 {...stylex.attrs(cvStyles.subsectionHeading)}>AI &amp; Software Engineering Intern</h3>
