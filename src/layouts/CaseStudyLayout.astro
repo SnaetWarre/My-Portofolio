@@ -12,6 +12,10 @@ import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteI
 interface MetaItem {
   label: string;
   value: string;
+  /** Links the value. */
+  href?: string;
+  /** Plain text after a linked value. */
+  suffix?: string;
 }
 
 interface Props {
@@ -68,7 +72,7 @@ const structuredData = [
           {meta.map((item) => (
             <div {...stylex.attrs(caseStudyStyles.factRow)}>
               <dt {...stylex.attrs(caseStudyStyles.factLabel)}>{item.label}</dt>
-              <dd {...stylex.attrs(caseStudyStyles.factValue)}>{item.value}</dd>
+              <dd {...stylex.attrs(caseStudyStyles.factValue)}>{item.href ? <a {...stylex.attrs(portfolioStyles.link)} href={item.href}>{item.value}</a> : item.value}{item.suffix}</dd>
             </div>
           ))}
         </dl>
