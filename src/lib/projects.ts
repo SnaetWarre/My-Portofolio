@@ -1,19 +1,11 @@
 import { basePath } from "./paths";
-import type { DrawingKey } from "./drawings";
 
 export interface Project {
   title: string;
   href: string;
   description: string;
-  /** Role or setting, shown after the title. */
+  /** Role or setting, shown under the title. */
   context?: string;
-  /** Optional drawing on the home page and where it sits. */
-  drawing?: {
-    key: DrawingKey;
-    placement: "aside" | "below";
-    /** Smaller drawing shown instead when the page is one column. */
-    compact?: DrawingKey;
-  };
 }
 
 export const experience: Project[] = [
@@ -28,14 +20,12 @@ export const experience: Project[] = [
     context: "AI and software engineering intern, Portugal",
     href: `${basePath}work/medical-imaging.html`,
     description: "I wrote a Python pipeline that reads the measurements burned into echocardiography DICOM studies with OCR, extracts ECG traces, and finds the video frame each measurement image came from. That last step is an image similarity search, and it took most of the run time. I sped up the frame preparation and rewrote OpenCV's ECC alignment in PyTorch so it runs in batches on the GPU. Together, that made the search 14.9 times faster on a benchmark of 39 images, from 1182 to 80 seconds. A review tool lets a person check every value. It was an international internship, working with real clinical imaging data.",
-    drawing: { key: "dicomWide", placement: "below", compact: "medicalImaging" },
   },
   {
     title: "Apolloon 24-hour run system",
     context: "software engineer, paid client work",
     href: `${basePath}work/apolloon.html`,
     description: "It runs a 24-hour relay on three laptops on the event's own network, with no cloud. Each Electron laptop holds the whole race in SQLite. The laptops find each other through UDP broadcasts and elect a leader by majority vote with Raft. A change counts once two of the three laptops store it, so any one laptop can die without losing a lap. I built it alone.",
-    drawing: { key: "apolloonWide", placement: "below", compact: "apolloon" },
   },
 ];
 
@@ -45,7 +35,6 @@ export const selectedWork: Project[] = [
     context: "Terraform on AWS",
     href: `${basePath}work/aws-fargate-vault.html`,
     description: "Terraform for private ECS Fargate tasks behind a public ALB, with subnets in two availability zones. In Vault mode, a Vault Agent sidecar logs in to an external Vault with the task's IAM role and hands the app the one secret it may read. It also sets up CloudWatch logs, CPU autoscaling from 1 to 3 tasks, and a deploy circuit breaker that rolls back. CI tests three plan variants against mocked providers and never deploys.",
-    drawing: { key: "awsFargateVault", placement: "aside" },
   },
   {
     title: "Financial AI agent",

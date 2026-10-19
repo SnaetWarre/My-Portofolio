@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectList from "./ProjectList.astro";
-import TitleBlock from "./TitleBlock.astro";
 import TopLine from "./TopLine.astro";
 import * as stylex from "@stylexjs/stylex";
 import { basePath } from "../lib/paths";
@@ -16,13 +15,21 @@ const { experimental = false } = Astro.props;
 const base = basePath;
 const year = new Date().getFullYear();
 
+const numbers = [
+  ["faster frame search at 2Ai IPCA", "14.9×"],
+  ["test accuracy with 20% of labels", "94.9%"],
+  ["offline release binary", "26 MB"],
+  ["inference on an iPhone 12", "80 ms"],
+  ["merged pull requests to Athas", "9"],
+];
+
 const homeDates = gitDates("src/components/PortfolioHome.astro");
 const structuredData = [
   {
     "@type": "ProfilePage",
     "@id": `${siteUrl}#profile`,
     url: siteUrl,
-    name: "Warre Snaet | Backend & Applied AI Engineer",
+    name: "Warre Snaet | AI Engineer",
     inLanguage: "en",
     isPartOf: { "@id": websiteId },
     mainEntity: { "@id": personId },
@@ -35,8 +42,8 @@ const structuredData = [
 
 <BaseLayout
   experimental={experimental}
-  title="Warre Snaet | Backend & Applied AI Engineer"
-  description="Python backends, data pipelines and machine learning. Based in Belgium."
+  title="Warre Snaet | AI Engineer"
+  description="AI engineer from Belgium. Python backends, computer vision and machine learning. Physical AI engineer at Captic from November 2026."
 >
   <Fragment slot="head">
     {!experimental && <meta name="google-site-verification" content="6eWn6i2uGzI9GNa1ChJIQHg27HSQm1WzUL74ts5Uf0E" />}
@@ -48,68 +55,61 @@ const structuredData = [
   <div {...stylex.attrs(portfolioStyles.page)}>
     <TopLine home />
 
-    <header {...stylex.attrs(portfolioStyles.cover)}>
-      <TitleBlock
-        heading="Warre Snaet"
-        tag="I build backends and applied AI, mostly in Python."
-        cells={[
-          { label: "Based in", value: "Vilvoorde, Belgium" },
-          { label: "Languages", value: "Python, Rust" },
-          { label: "Works at", value: "Captic" },
-        ]}
-      />
-    </header>
-
-    <main id="main" tabindex="-1">
-      <section {...stylex.attrs(portfolioStyles.intro)} aria-labelledby="about-title">
-        <div>
-          <h2 {...stylex.attrs(portfolioStyles.visuallyHidden)} id="about-title">About</h2>
-          <p {...stylex.attrs(portfolioStyles.lead)}>I'm Warre, an AI engineer from Vilvoorde, Belgium. In November&nbsp;2026 I start as a physical AI engineer at Captic in Ghent.</p>
-          <p {...stylex.attrs(portfolioStyles.paragraph, portfolioStyles.supportingText)}>I studied AI Engineering at Howest and graduated with distinction. I work mostly in Python, and also in Rust. I build APIs, data pipelines, computer vision and OCR, and machine learning, including reinforcement learning and generative AI. I also set up what it runs on, with AWS, Azure, Terraform, containers, Kubernetes and CI/CD.</p>
-          <div {...stylex.attrs(portfolioStyles.contactRow)}>
-            <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
-            <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={`${base}cv.html`}>Read my CV</a>
-          </div>
+    <main {...stylex.attrs(portfolioStyles.column)} id="main" tabindex="-1">
+      <section {...stylex.attrs(portfolioStyles.intro)}>
+        <h1 {...stylex.attrs(portfolioStyles.introLine, portfolioStyles.introHeading)}>I'm Warre Snaet, an AI engineer from Vilvoorde, Belgium.</h1>
+        <p {...stylex.attrs(portfolioStyles.introLine)}>In November&nbsp;2026 I start as a physical AI engineer at <a {...stylex.attrs(portfolioStyles.link)} href="https://captic.com">Captic</a>.</p>
+        <p {...stylex.attrs(portfolioStyles.introLine)}>I graduated in AI Engineering at Howest, with distinction.</p>
+        <p {...stylex.attrs(portfolioStyles.paragraph)}>I work mostly in Python, and also in Rust. I build APIs, data pipelines, computer vision and OCR, and machine learning, including reinforcement learning and generative AI. I also set up what it runs on, with AWS, Azure, Terraform, containers, Kubernetes and CI/CD.</p>
+        <div {...stylex.attrs(portfolioStyles.buttonRow)}>
+          <button {...stylex.attrs(portfolioStyles.button)} type="button" data-copy-email>Copy email</button>
+          <a {...stylex.attrs(portfolioStyles.button)} href={`${base}cv.html`}>Read my CV</a>
         </div>
       </section>
 
-      <section aria-labelledby="work">
+      <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="numbers">
+        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="numbers">Numbers</h2>
+        <dl {...stylex.attrs(portfolioStyles.numbers)}>
+          {numbers.map(([label, value]) => (
+            <div {...stylex.attrs(portfolioStyles.numberRow)}>
+              <dt {...stylex.attrs(portfolioStyles.numberLabel)}>{label}</dt>
+              <dd {...stylex.attrs(portfolioStyles.numberValue)}>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="work">
         <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="work">Work</h2>
         <ProjectList projects={experience} />
       </section>
 
-      <section aria-labelledby="projects">
+      <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="projects">
         <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="projects">Projects</h2>
         <ProjectList projects={selectedWork} />
       </section>
 
-      <section aria-labelledby="open-source">
+      <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="open-source">
         <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="open-source">Open source</h2>
         <ProjectList projects={openSource} />
       </section>
 
-      <section aria-labelledby="writing">
+      <section {...stylex.attrs(portfolioStyles.section)} aria-labelledby="writing">
         <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="writing">Writing</h2>
         <ProjectList projects={writing} />
       </section>
-    </main>
 
-    <footer {...stylex.attrs(portfolioStyles.pageFooter)}>
-      <div {...stylex.attrs(portfolioStyles.footerColumn)}>
-        <h2 {...stylex.attrs(portfolioStyles.footerHeading)}>Get in touch</h2>
-        <p {...stylex.attrs(portfolioStyles.paragraph)} style="margin: 0">If you have a question about any of this, send me an email.</p>
-        <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.emailLink)} href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>
-        <div {...stylex.attrs(portfolioStyles.contactRow)}>
-          <button {...stylex.attrs(portfolioStyles.copyEmailButton)} type="button" data-copy-email>Copy email</button>
-          <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink)} href={profileLinks.linkedIn}>LinkedIn</a>
+      <footer {...stylex.attrs(portfolioStyles.section)} aria-labelledby="contact">
+        <h2 {...stylex.attrs(portfolioStyles.sectionHeading)} id="contact">Contact</h2>
+        <p {...stylex.attrs(portfolioStyles.introLine)}>If you have a question about any of this, send me an email at <a {...stylex.attrs(portfolioStyles.link)} href="mailto:warresnaet@icloud.com">warresnaet@icloud.com</a>.</p>
+        <div {...stylex.attrs(portfolioStyles.buttonRow)}>
+          <button {...stylex.attrs(portfolioStyles.button)} type="button" data-copy-email>Copy email</button>
+          <a {...stylex.attrs(portfolioStyles.button)} href={profileLinks.linkedIn}>LinkedIn</a>
+          <a {...stylex.attrs(portfolioStyles.button)} href={`${base}CV_Warre_Snaet_ATS.pdf`}>ATS CV (PDF)</a>
         </div>
-      </div>
-      <div {...stylex.attrs(portfolioStyles.footerAside)}>
-        <a {...stylex.attrs(portfolioStyles.link)} href={`${base}CV_Warre_Snaet_ATS.pdf`}>Download the ATS CV</a>
-        <br />
-        <span>Warre Snaet, {year}</span>
-      </div>
-    </footer>
+        <p {...stylex.attrs(portfolioStyles.footnote)}>Warre Snaet, {year}</p>
+      </footer>
+    </main>
   </div>
 
   <div {...stylex.attrs(portfolioStyles.copyNotification)} id="copy-notification" role="status" aria-live="polite" aria-atomic="true" hidden></div>

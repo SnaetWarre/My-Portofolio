@@ -4,9 +4,6 @@ import CaseSection from "../../components/CaseSection.astro";
 import * as stylex from "@stylexjs/stylex";
 import { caseStudyStyles } from "../../styles/caseStudyStyles";
 import { portfolioStyles } from "../../styles/portfolioStyles";
-import { basePath } from "../../lib/paths";
-
-const base = basePath;
 ---
 
 <CaseStudyLayout
@@ -32,10 +29,7 @@ const base = basePath;
 
   <CaseSection label="Architecture" title="Separate reasoning, retrieval, and actions">
     <p {...stylex.attrs(caseStudyStyles.paragraph)}>The FastAPI orchestrator asks the model whether a message is a trade command or a question, and only treats it as a trade above 0.6 confidence. Questions go through retrieval: ChromaDB holds guides on six asset types and about 200 daily market snapshots, and a small cross-encoder reranks the results. The orchestrator, not the model, calls the MCP tools, so the model never touches the portfolio directly. PostgreSQL holds the portfolio and the chat sessions, and Ollama runs Qwen2.5 for chat and nomic-embed-text for embeddings on the local machine.</p>
-    <figure {...stylex.attrs(caseStudyStyles.figure)}>
-      <img {...stylex.attrs(caseStudyStyles.figureImage)} src={`${base}images/financial-agent-architecture.png`} alt="Architecture diagram connecting a React frontend to FastAPI inference, MCP and PostgreSQL, RAG and ChromaDB, and local Ollama models" />
-      <figcaption {...stylex.attrs(caseStudyStyles.figureCaption)}>Responses and processing events reach the React client as server-sent events.</figcaption>
-    </figure>
+    <p {...stylex.attrs(caseStudyStyles.paragraph)}>Responses and processing events reach the React client as server-sent events.</p>
   </CaseSection>
 
   <CaseSection label="Ownership" title="What I did">

@@ -13,5 +13,5 @@ import { ClientRouter } from "astro:transitions";
   } catch { /* System appearance remains available without storage. */ }
   if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
   const dark = saved === "dark" || (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#1b1c1e" : "#e6e5e1");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#09090b" : "#ffffff");
 </script>

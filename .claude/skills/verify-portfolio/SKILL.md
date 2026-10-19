@@ -44,7 +44,7 @@ Useful flags:
 - `--pages "",work/financial-agent.html,cv.html` checks only these paths. `""` is the home page.
 - `--widths 1920,1280,900,390` sets the window widths. 860 px is the breakpoint where layouts switch to one column, so 900 and 390 cover both sides of it.
 - `--schemes light,dark` covers both themes.
-- `--full` captures the whole page instead of the first screen. Use it to look at drawings and sections further down.
+- `--full` captures the whole page instead of the first screen. Use it to look at sections further down.
 - `--eval "<js>"` runs an expression after load. Use it to click as a user would, for example `document.querySelector('[data-theme-toggle]').click()`. The return value is printed as `eval-result`. If the click navigates, the checks and screenshot run on the new page and the output shows `now at <url>`.
 - `--media print` emulates print. The CV must print on white.
 
@@ -62,7 +62,7 @@ What it flags:
 
 The checks skip text hidden on purpose: screen-reader-only headings, the off-screen skip link, and KaTeX formulas.
 
-A clean report is not the whole proof. Open the PNGs of the pages you changed and look at them. The checker cannot judge spacing, alignment or whether a drawing still makes sense.
+A clean report is not the whole proof. Open the PNGs of the pages you changed and look at them. The checker cannot judge spacing or alignment.
 
 ## Evidence
 
@@ -73,7 +73,7 @@ Proof standards:
 - Check the built site, which is what GitHub Pages serves. The dev server also injects StyleX styles in a different way, so a dev-only check proves less.
 - For interactive features, click the real control with `--eval`. Record the state before and after in the return value, and capture the screenshot of the result.
 - For navigation, click the link from the page a visitor starts on. Do not load the target URL directly. A dev-only bug on 2026-10-03 removed all styles after an in-site navigation.
-- After a fix, rerun the whole site, not just the page you touched. The title block, top line and page end are shared by many pages.
+- After a fix, rerun the whole site, not just the page you touched. The top line, buttons and page end are shared by many pages.
 
 ## Cleanup
 

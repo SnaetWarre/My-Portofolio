@@ -95,20 +95,19 @@ const structuredData = [
     <body {...stylex.attrs(portfolioStyles.body)}>
         <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink, blogStyles.skipLink)} href="#article">Skip to article</a>
 
-        <div {...stylex.attrs(blogStyles.pageColumn)}><TopLine /></div>
+        <div {...stylex.attrs(portfolioStyles.page)}>
+        <TopLine trail={[{ label: "writing", href: `${basePath}#writing` }, { label: "rust and burn" }]} />
 
-        <main {...stylex.attrs(blogStyles.blogPost, blogStyles.pageColumn)} id="article" tabindex="-1">
+        <main {...stylex.attrs(portfolioStyles.column)} id="article" tabindex="-1">
             <article>
                 <header {...stylex.attrs(blogStyles.blogHeader)}>
-                    <div {...stylex.attrs(blogStyles.metadata)}>
-                        <span {...stylex.attrs(blogStyles.metadataItem)}>Jan 24, 2026</span>
-                        <span {...stylex.attrs(blogStyles.metadataItem)}
-                            >Rust / Burn / semi-supervised learning / edge AI</span
-                        >
-                    </div>
                     <h1 {...stylex.attrs(blogStyles.title)}>
                         Semi-supervised plant disease detection in Rust
                     </h1>
+                    <p {...stylex.attrs(blogStyles.metadata)}>
+                        <span>Jan 24, 2026</span>
+                        <span>Rust, Burn, semi-supervised learning, edge AI</span>
+                    </p>
                 </header>
 
                 <div {...stylex.attrs(blogStyles.articleContent)}>
@@ -197,7 +196,6 @@ const structuredData = [
                         subset.
                     </p>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="why-rust">Why Rust and Burn</h2>
 
@@ -256,7 +254,6 @@ const structuredData = [
                         inference time.
                     </p>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="architecture">Model architecture</h2>
 
@@ -305,7 +302,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
     fc2: Linear&lt;B&gt;,
 &rbrace;</code></pre>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="pipeline">The semi-supervised pipeline</h2>
 
@@ -494,7 +490,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         field.
                     </p>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="deployment">Deployment</h2>
 
@@ -552,9 +547,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                                 >Rust weights</span
                             >
                         </div>
-                        <span {...stylex.attrs(blogStyles.pipelineArrow)} aria-hidden="true"
-                            >&rarr;</span
-                        >
                         <div {...stylex.attrs(blogStyles.pipelineStep)}>
                             <span {...stylex.attrs(blogStyles.pipelineLabel)}
                                 >JSON export</span
@@ -563,9 +555,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                                 >Weight extraction</span
                             >
                         </div>
-                        <span {...stylex.attrs(blogStyles.pipelineArrow)} aria-hidden="true"
-                            >&rarr;</span
-                        >
                         <div {...stylex.attrs(blogStyles.pipelineStep)}>
                             <span {...stylex.attrs(blogStyles.pipelineLabel)}
                                 >ONNX conversion</span
@@ -574,9 +563,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                                 >via a PyTorch bridge</span
                             >
                         </div>
-                        <span {...stylex.attrs(blogStyles.pipelineArrow)} aria-hidden="true"
-                            >&rarr;</span
-                        >
                         <div {...stylex.attrs(blogStyles.pipelineStep)}>
                             <span {...stylex.attrs(blogStyles.pipelineLabel)}
                                 >ONNX Runtime Web</span
@@ -615,7 +601,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         </div>
                     </div>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="benchmarks">Benchmarks</h2>
 
@@ -701,7 +686,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         comes in at 250ms.
                     </p>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="incremental-learning">Incremental learning</h2>
 
@@ -761,7 +745,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         through the cloud or being redeployed.
                     </p>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="lessons">What I learned</h2>
 
@@ -803,7 +786,6 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
                         </li>
                     </ul>
 
-                    <hr {...stylex.attrs(blogStyles.articleRule)} />
 
                     <h2 {...stylex.attrs(blogStyles.articleSectionHeading)} id="conclusion">Conclusion</h2>
 
@@ -842,23 +824,8 @@ pub struct PlantClassifier&lt;B: Backend&gt; &lbrace;
             <PageEnd href={`${basePath}blog/blog.html`} />
         </main>
 
-        <footer {...stylex.attrs(blogStyles.footer)}>
-            <div {...stylex.attrs(blogStyles.pageColumn, blogStyles.footerContent)}>
-                <div {...stylex.attrs(blogStyles.footerBrand)}>
-                    <img
-                        src={`${basePath}logo.svg`}
-                        alt="Warre Snaet Logo"
-                        {...stylex.attrs(blogStyles.image, blogStyles.footerLogo)}
-                    />
-                    <p {...stylex.attrs(blogStyles.footerBrandParagraph)}>Warre Snaet &copy; 2026</p>
-                </div>
-                <a
-                    href="mailto:warresnaet@icloud.com"
-                    {...stylex.attrs(portfolioStyles.link, portfolioStyles.navigationLink, blogStyles.footerCallToAction)}
-                    >Email me</a
-                >
-            </div>
-        </footer>
+        <p {...stylex.attrs(portfolioStyles.column, portfolioStyles.footnote)}>Warre Snaet, 2026. Questions about this? <a {...stylex.attrs(portfolioStyles.link)} href="mailto:warresnaet@icloud.com">Email me</a>.</p>
+        </div>
         <ExternalLinks />
     </body>
 </html>

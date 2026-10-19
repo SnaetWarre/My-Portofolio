@@ -29,8 +29,8 @@ Each feature file starts with an H1 and one paragraph about what the visitor see
 
 ## Features
 
-- [Home page](./home.md) covers the title block, intro, project lists with drawings, and Copy email.
-- [Project pages](./project-pages.md) covers the eight case studies: drawing, title block, sections, and the link to the next project.
-- [Theme toggle](./theme-toggle.md) covers the Dark/Light button, the saved choice, and the system theme.
+- [Home page](./home.md) covers the intro, the numbers, the project lists, and Copy email.
+- [Project pages](./project-pages.md) covers the eight case studies: heading, facts, sections, and the link to the next project.
+- [Theme toggle](./theme-toggle.md) covers the dark/light button, the saved choice, and the system theme.
 - [CV page](./cv.md) covers the on-screen CV, its toolbar, the PDF download and the print layout.
 - [Blog post](./blog.md) covers the long write-up with KaTeX formulas.

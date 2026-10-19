@@ -1,14 +1,12 @@
 import * as stylex from "@stylexjs/stylex";
-import { colorTokens, cvColorTokens } from "./tokens.stylex";
+import { colorTokens, cvColorTokens, layoutTokens, typographyTokens } from "./tokens.stylex";
 
 export const cvStyles = stylex.create({
   document: {
     minWidth: 320,
     backgroundColor: cvColorTokens.screenCanvas,
     color: colorTokens.foreground,
-    fontFamily: '"Liberation Sans", Arial, sans-serif',
-    fontSize: "10pt",
-    lineHeight: 1.36,
+    fontFamily: typographyTokens.bodyFont,
   },
   body: {
     width: {
@@ -27,55 +25,21 @@ export const cvStyles = stylex.create({
     textDecorationThickness: "0.7px",
     textUnderlineOffset: "1.5px",
   },
+  // Same top line as the rest of the site, hidden in print.
   toolbar: {
     display: {
-      default: "flex",
+      default: "block",
       "@media print": "none",
     },
-    position: "sticky",
-    zIndex: 2,
-    top: 0,
-    justifyContent: "center",
-    gap: "0.8rem",
-    padding: "0.7rem",
-    borderBottomWidth: "2px",
-    borderBottomStyle: "solid",
-    borderBottomColor: colorTokens.foreground,
-    backgroundColor: colorTokens.background,
+    padding: `${layoutTokens.pageInset} ${layoutTokens.pageInset} 0`,
+    fontSize: "0.875rem",
+    lineHeight: 1.43,
   },
-  toolbarAction: {
-    boxSizing: "border-box",
-    display: "inline-flex",
-    minHeight: 44,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0.45rem 0.75rem",
-    borderWidth: "2px",
-    borderStyle: "solid",
-    borderColor: colorTokens.foreground,
-    backgroundColor: {
-      default: "transparent",
-      ":hover": colorTokens.foreground,
-    },
-    color: {
-      default: colorTokens.foreground,
-      ":hover": colorTokens.background,
-    },
-    fontWeight: 700,
-    textDecorationLine: "none",
-    outline: {
-      default: "none",
-      ":focus-visible": `3px solid ${colorTokens.foreground}`,
-    },
-    outlineOffset: {
-      default: 0,
-      ":focus-visible": 3,
-    },
-    transitionDuration: "100ms",
-    transitionProperty: "background-color, color",
-  },
+  // The sheet sets its own print sizes, so rem stays the site's 16px.
   resume: {
     boxSizing: "border-box",
+    fontSize: "10pt",
+    lineHeight: 1.36,
     width: {
       default: "210mm",
       "@media (max-width: 780px)": "100%",
@@ -85,9 +49,11 @@ export const cvStyles = stylex.create({
       "@media (max-width: 780px)": "auto",
     },
     margin: {
-      default: "1.5rem auto 3rem",
-      "@media (max-width: 780px)": 0,
+      default: `3.75rem ${layoutTokens.pageInset} 6rem`,
+      "@media (max-width: 780px)": "2rem 0 0",
     },
+    marginBlock: { default: null, "@media print": 0 },
+    marginInline: { default: null, "@media print": 0 },
     padding: {
       default: "13mm 14mm 12mm",
       "@media (max-width: 780px)": "1.2rem",
@@ -96,12 +62,16 @@ export const cvStyles = stylex.create({
       default: cvColorTokens.sheet,
       "@media print": colorTokens.background,
     },
+    // StyleX can't combine a width query and a print query on one property,
+    // so the phone rule sets the width and the print rule the style.
     borderWidth: {
       default: 1,
       "@media (max-width: 780px)": 0,
-      "@media print": 0,
     },
-    borderStyle: "solid",
+    borderStyle: {
+      default: "solid",
+      "@media print": "none",
+    },
     borderColor: cvColorTokens.subtleRule,
   },
   resumeHeader: {
@@ -113,25 +83,24 @@ export const cvStyles = stylex.create({
     alignItems: "start",
     gap: "12mm",
     paddingBottom: "5mm",
-    borderBottomWidth: "2px",
+    borderBottomWidth: "1px",
     borderBottomStyle: "solid",
-    borderBottomColor: colorTokens.foreground,
+    borderBottomColor: cvColorTokens.subtleRule,
   },
   primaryHeading: {
     marginTop: 0,
     marginBottom: "1.5mm",
-    fontFamily: 'Georgia, "Times New Roman", serif',
-    fontSize: "29pt",
-    fontWeight: 500,
-    letterSpacing: "-0.04em",
+    fontSize: "24pt",
+    fontWeight: 600,
+    letterSpacing: "-0.025em",
     lineHeight: 1,
   },
   role: {
     marginTop: 0,
     marginBottom: 0,
     color: cvColorTokens.secondaryInk,
-    fontSize: "12pt",
-    fontWeight: 700,
+    fontSize: "11pt",
+    fontWeight: 500,
   },
   contactList: {
     display: "grid",
@@ -190,15 +159,15 @@ export const cvStyles = stylex.create({
   sectionHeading: {
     marginTop: 0,
     marginBottom: "3mm",
-    fontSize: "9.4pt",
-    letterSpacing: "0.11em",
+    fontSize: "10.5pt",
+    fontWeight: 600,
     lineHeight: 1.1,
-    textTransform: "uppercase",
   },
   subsectionHeading: {
     marginTop: 0,
     marginBottom: "0.4mm",
     fontSize: "9.8pt",
+    fontWeight: 600,
     lineHeight: 1.2,
   },
   paragraph: {
@@ -227,7 +196,7 @@ export const cvStyles = stylex.create({
     marginTop: 0,
     marginBottom: 0,
     color: cvColorTokens.secondaryInk,
-    fontWeight: 700,
+    fontWeight: 500,
   },
   date: {
     marginTop: 0,
@@ -263,8 +232,8 @@ export const cvStyles = stylex.create({
   },
   skillHeading: {
     marginBottom: "0.8mm",
-    fontSize: "8.4pt",
-    letterSpacing: "0.04em",
-    textTransform: "uppercase",
+    color: cvColorTokens.secondaryInk,
+    fontSize: "8.6pt",
+    fontWeight: 500,
   },
 });

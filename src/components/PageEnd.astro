@@ -14,10 +14,10 @@ const next = nextProject(Astro.props.href);
 
 <footer {...stylex.attrs(portfolioStyles.pageEnd)}>
   {next && (
-    <p {...stylex.attrs(portfolioStyles.pageEndNext)}>
-      <span {...stylex.attrs(portfolioStyles.pageEndLabel)}>Next</span>
-      <a {...stylex.attrs(portfolioStyles.rowLink)} href={next.href}>{next.title}</a>
-    </p>
+    <>
+      <p {...stylex.attrs(portfolioStyles.pageEndLabel)}>Next</p>
+      <p {...stylex.attrs(portfolioStyles.pageEndNext)}><a {...stylex.attrs(portfolioStyles.rowLink)} href={next.href}>{next.title}</a></p>
+    </>
   )}
-  <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${basePath}#work`}>Back to the list</a>
+  <a {...stylex.attrs(portfolioStyles.link)} href={`${basePath}#work`}>Back to the list</a>
 </footer>

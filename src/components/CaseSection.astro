@@ -11,9 +11,7 @@ const { label, title } = Astro.props;
 ---
 
 <section {...stylex.attrs(caseStudyStyles.section)}>
-  <p {...stylex.attrs(caseStudyStyles.metadataLabel, caseStudyStyles.sectionLabel)}>{label}</p>
-  <div>
-    <h2 {...stylex.attrs(caseStudyStyles.sectionHeading)}>{title}</h2>
-    <slot />
-  </div>
+  <p {...stylex.attrs(caseStudyStyles.sectionLabel)}>{label}</p>
+  <h2 {...stylex.attrs(caseStudyStyles.sectionHeading)}>{title}</h2>
+  <slot />
 </section>

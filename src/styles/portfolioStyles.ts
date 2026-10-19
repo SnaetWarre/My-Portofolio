@@ -1,20 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 import { colorTokens, layoutTokens, typographyTokens } from "./tokens.stylex";
 
-const phone = "@media (max-width: 700px)";
-// Below this width a drawing no longer fits beside its text.
-const narrow = "@media (max-width: 860px)";
-
-const underline = {
-  textDecorationLine: "underline",
-  textDecorationThickness: "1px",
-  textDecorationColor: {
-    default: colorTokens.border,
-    ":hover": "currentColor",
-  },
-  textUnderlineOffset: "4px",
-} as const;
-
 const focusRing = {
   outline: {
     default: null,
@@ -22,8 +8,20 @@ const focusRing = {
   },
   outlineOffset: {
     default: null,
-    ":focus-visible": "3px",
+    ":focus-visible": "2px",
   },
+} as const;
+
+// Only links are underlined. Headings never are, so nothing looks clickable
+// that isn't.
+const underline = {
+  textDecorationLine: "underline",
+  textDecorationThickness: "1px",
+  textDecorationColor: {
+    default: "color-mix(in srgb, currentColor 45%, transparent)",
+    ":hover": "currentColor",
+  },
+  textUnderlineOffset: "4px",
 } as const;
 
 export const portfolioStyles = stylex.create({
@@ -34,50 +32,48 @@ export const portfolioStyles = stylex.create({
     backgroundColor: colorTokens.background,
     color: colorTokens.foreground,
     fontFamily: typographyTokens.bodyFont,
-    fontSize: "1rem",
-    lineHeight: 1.55,
+    fontSize: "0.875rem",
+    lineHeight: 1.43,
     textRendering: "optimizeLegibility",
     WebkitFontSmoothing: "antialiased",
     textWrap: "pretty",
   },
   page: {
-    maxWidth: layoutTokens.pageWidth,
-    margin: "0 auto",
-    padding: `0 ${layoutTokens.pageGutter} 3rem`,
+    padding: `${layoutTokens.pageInset} ${layoutTokens.pageInset} 6rem`,
+  },
+  column: {
+    maxWidth: layoutTokens.column,
   },
 
-  // The first row of every page: name on the left, links on the right.
+  // The first row of every page: a trail of links, and the theme button.
   topline: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "baseline",
     flexWrap: "wrap",
-    gap: "0 1rem",
-    paddingTop: "0.75rem",
-    fontSize: "0.875rem",
-    color: colorTokens.mutedForeground,
+    alignItems: "baseline",
+    justifyContent: "space-between",
+    gap: "0.5rem 1rem",
   },
-  navigation: {
+  trail: {
     display: "flex",
     flexWrap: "wrap",
-    alignItems: "center",
-    columnGap: "1.1rem",
+    alignItems: "baseline",
+    margin: 0,
+    padding: 0,
+    listStyle: "none",
   },
-  navigationLink: {
-    display: "inline-flex",
-    alignItems: "center",
-    minHeight: 44,
+  trailSeparator: {
+    padding: "0 0.6rem",
+    color: colorTokens.mutedForeground,
+  },
+  trailCurrent: {
+    color: colorTokens.mutedForeground,
+  },
+  link: {
     color: {
-      default: colorTokens.mutedForeground,
+      default: colorTokens.text,
       ":hover": colorTokens.foreground,
     },
-    fontSize: "0.875rem",
-    textDecorationLine: {
-      default: "none",
-      ":hover": "underline",
-    },
-    textDecorationThickness: "1px",
-    textUnderlineOffset: "4px",
+    ...underline,
     ...focusRing,
   },
   textButton: {
@@ -90,248 +86,149 @@ export const portfolioStyles = stylex.create({
     lineHeight: "inherit",
     cursor: "pointer",
   },
-
-  // Cover: the title block drawn as a strip across the page.
-  cover: {
-    marginTop: "1.25rem",
-  },
-  titleBlock: {
-    display: "grid",
-    // The name keeps at least 16rem, so long cell values wrap instead of
-    // pushing the name into a column with no width.
-    gridTemplateColumns: { default: "minmax(16rem, 1fr) auto", [narrow]: "minmax(0, 1fr)" },
-    fontSize: "0.8125rem",
-  },
-  titleBlockName: {
-    padding: { default: "0.75rem 1.25rem 0.75rem 0", [narrow]: "0.75rem 0 0.625rem" },
-  },
-  titleBlockHeading: {
-    margin: 0,
-    fontSize: "1.75rem",
-    fontWeight: 300,
-    letterSpacing: "-0.01em",
-    lineHeight: 1.15,
-    textWrap: "balance",
-  },
-  titleBlockTag: {
-    margin: "0.25rem 0 0",
-    color: colorTokens.mutedForeground,
-    textWrap: "pretty",
-  },
-  titleBlockCells: {
-    display: "grid",
-    gridAutoFlow: { default: "column", [narrow]: "row" },
-    gridAutoColumns: "minmax(8.5rem, 16rem)",
-    gridTemplateColumns: { default: "none", [narrow]: "minmax(0, 1fr)" },
-  },
-  titleBlockCell: {
-    // On phones each cell is one row: label on the left, value on the right.
-    display: { default: null, [narrow]: "grid" },
-    gridTemplateColumns: { default: null, [narrow]: "6rem minmax(0, 1fr)" },
-    gap: { default: null, [narrow]: "1rem" },
-    alignItems: { default: null, [narrow]: "baseline" },
-    padding: { default: "0.45rem 0.875rem 0.55rem", [narrow]: "0.3rem 0" },
-    paddingRight: { default: null, ":last-child": 0 },
-    lineHeight: 1.35,
-    overflowWrap: "anywhere",
-  },
-  titleBlockLabel: {
-    display: "block",
-    color: colorTokens.mutedForeground,
-    fontSize: "0.75rem",
-  },
-
-  // Intro under the cover.
-  intro: {
-    display: "grid",
-    gridTemplateColumns: { default: "minmax(0, 60ch) 1fr", [narrow]: "minmax(0, 60ch)" },
-    gap: "1.5rem 2.5rem",
-    padding: "2.5rem 0 2.75rem",
-  },
-  lead: {
-    margin: "0 0 0.875rem",
-    fontSize: "1.1875rem",
-    fontWeight: 300,
-    lineHeight: 1.5,
-  },
-  paragraph: {
-    margin: "0 0 0.875rem",
-  },
-  supportingText: {
-    color: colorTokens.mutedForeground,
-  },
-  contactRow: {
-    display: "flex",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "0.25rem 1.25rem",
-    marginTop: "0.5rem",
-  },
-  copyEmailButton: {
+  // Square grey buttons, as on shadcn.com.
+  button: {
     display: "inline-flex",
     alignItems: "center",
-    minHeight: 44,
-    padding: 0,
-    borderWidth: 0,
-    borderRadius: 0,
-    backgroundColor: "transparent",
-    color: {
-      default: colorTokens.foreground,
-      ":active": colorTokens.mutedForeground,
+    height: "1.75rem",
+    padding: "0 0.5rem",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: {
+      default: colorTokens.controlBorder,
+      ":hover": colorTokens.foreground,
     },
+    borderRadius: 0,
+    backgroundColor: {
+      default: colorTokens.control,
+      ":active": colorTokens.muted,
+    },
+    color: colorTokens.foreground,
     fontFamily: "inherit",
     fontSize: "0.875rem",
-    lineHeight: "inherit",
+    lineHeight: 1,
+    textDecorationLine: "none",
+    whiteSpace: "nowrap",
     cursor: "pointer",
-    ...underline,
     ...focusRing,
   },
+  buttonRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.5rem",
+    marginTop: "1.25rem",
+  },
 
-  // Lists of work.
-  sectionHeading: {
+  // Intro: a few short lines, then the longer paragraph.
+  intro: {
+    marginTop: "3.75rem",
+  },
+  introLine: {
     margin: 0,
-    padding: "2.5rem 0 0.4rem",
-    color: colorTokens.mutedForeground,
-    fontSize: "0.875rem",
+    lineHeight: "1.75rem",
+  },
+  // The first line doubles as the page heading, in the same size as the rest.
+  introHeading: {
+    fontSize: "inherit",
+    fontWeight: "inherit",
+  },
+  paragraph: {
+    margin: "1rem 0 0",
+    color: colorTokens.text,
+    lineHeight: 1.625,
+  },
+
+  section: {
+    marginTop: "4.5rem",
+  },
+  sectionHeading: {
+    margin: "0 0 0.75rem",
+    fontSize: "1rem",
     fontWeight: 500,
+    lineHeight: "1.5rem",
     scrollMarginTop: "1.5rem",
   },
+
+  // Label on the left, value on the right, one fact per row.
+  numbers: {
+    margin: 0,
+  },
+  numberRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    gap: "1rem",
+    lineHeight: "1.5625rem",
+  },
+  numberLabel: {
+    color: colorTokens.text,
+  },
+  numberValue: {
+    margin: 0,
+    fontFamily: typographyTokens.monospaceFont,
+    fontWeight: 500,
+    fontVariantNumeric: "tabular-nums",
+    whiteSpace: "nowrap",
+  },
+
   projectList: {
+    display: "grid",
+    gap: "1.75rem",
     margin: 0,
     padding: 0,
     listStyle: "none",
   },
-  row: {
-    padding: "1.35rem 0 1.5rem",
-  },
-  rowAside: {
-    display: "grid",
-    gridTemplateColumns: { default: "minmax(0, 1fr) 18.75rem", [narrow]: "minmax(0, 1fr)" },
-    gap: "0.75rem 3rem",
-    alignItems: "start",
-  },
   rowHeading: {
     margin: 0,
-    fontSize: "1.1875rem",
-    fontWeight: 400,
-    lineHeight: 1.3,
-    letterSpacing: "-0.005em",
+    fontSize: "0.875rem",
+    fontWeight: 500,
+    lineHeight: "1.25rem",
   },
   rowLink: {
     color: colorTokens.foreground,
-    textDecorationLine: {
-      default: "none",
-      ":hover": "underline",
-    },
-    textDecorationThickness: "1px",
-    textUnderlineOffset: "4px",
+    ...underline,
     ...focusRing,
   },
   rowRole: {
-    display: { default: "inline", [phone]: "block" },
-    marginLeft: { default: "0.75rem", [phone]: 0 },
-    marginTop: { default: 0, [phone]: "0.15rem" },
+    margin: "0.125rem 0 0",
     color: colorTokens.mutedForeground,
-    fontSize: "0.875rem",
-    fontWeight: 400,
-    letterSpacing: 0,
   },
   rowText: {
-    margin: "0.4rem 0 0",
-    maxWidth: "62ch",
-    color: colorTokens.mutedForeground,
-  },
-  drawingAside: {
-    maxWidth: { default: null, [narrow]: "20rem" },
-    marginTop: { default: "0.25rem", [narrow]: "0.75rem" },
-  },
-  drawingBelow: {
-    maxWidth: "51rem",
-    margin: "1.4rem 0 0.25rem",
-  },
-  // Below the narrow width a wide drawing's labels get too small to read, so
-  // its compact version takes its place.
-  wideOnly: {
-    display: { default: null, [narrow]: "none" },
-  },
-  narrowOnly: {
-    display: { default: "none", [narrow]: "block" },
-    maxWidth: "26rem",
+    margin: "0.5rem 0 0",
+    color: colorTokens.text,
+    lineHeight: 1.625,
   },
 
-  // Page footer with the email.
-  pageFooter: {
-    display: "grid",
-    gridTemplateColumns: { default: "1fr 1fr", [narrow]: "1fr" },
-    marginTop: "3rem",
-    fontSize: "0.875rem",
+  footnote: {
+    marginTop: "4.5rem",
     color: colorTokens.mutedForeground,
-  },
-  footerColumn: {
-    paddingTop: "1.1rem",
-  },
-  footerAside: {
-    paddingTop: "1.1rem",
-    paddingLeft: { default: "1.5rem", [narrow]: 0 },
-    textAlign: { default: "right", [narrow]: "left" },
-  },
-  footerHeading: {
-    margin: "0 0 0.4rem",
-    color: colorTokens.mutedForeground,
-    fontSize: "0.875rem",
-    fontWeight: 500,
-  },
-  emailLink: {
-    display: "inline-block",
-    marginTop: "0.4rem",
-    color: colorTokens.foreground,
-    fontSize: "1.125rem",
   },
 
   // End of a project page: what to read next.
   pageEnd: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    gap: "0.5rem 2rem",
-    marginTop: layoutTokens.sectionGap,
-    paddingTop: "1.25rem",
-  },
-  pageEndNext: {
-    margin: 0,
-    fontSize: "1.1875rem",
-    fontWeight: 400,
-    lineHeight: 1.3,
+    marginTop: "4.5rem",
   },
   pageEndLabel: {
-    display: "block",
+    margin: "0 0 0.25rem",
     color: colorTokens.mutedForeground,
-    fontSize: "0.875rem",
+  },
+  pageEndNext: {
+    margin: "0 0 1.25rem",
+    fontWeight: 500,
   },
 
-  // Shared
-  link: {
-    color: {
-      default: colorTokens.foreground,
-      ":hover": colorTokens.foreground,
-    },
-    ...underline,
-    ...focusRing,
-  },
   copyNotification: {
     position: "fixed",
-    left: layoutTokens.pageGutter,
-    bottom: "1.25rem",
+    left: layoutTokens.pageInset,
+    bottom: "1.5rem",
     zIndex: 20,
-    maxWidth: `min(26rem, calc(100% - ${layoutTokens.pageGutter} * 2))`,
-    padding: "0.75rem 0.875rem",
+    maxWidth: `min(${layoutTokens.column}, calc(100% - 3rem))`,
+    padding: "0.5rem 0.75rem",
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: colorTokens.border,
     backgroundColor: colorTokens.background,
     color: colorTokens.foreground,
-    fontSize: "0.875rem",
     overflowWrap: "anywhere",
   },
   skipLink: {
@@ -343,7 +240,7 @@ export const portfolioStyles = stylex.create({
       default: "translateY(-200%)",
       ":focus": "none",
     },
-    padding: "0.75rem 1rem",
+    padding: "0.5rem 0.75rem",
     backgroundColor: colorTokens.foreground,
     color: colorTokens.background,
   },

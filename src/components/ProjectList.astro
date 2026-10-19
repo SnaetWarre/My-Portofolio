@@ -1,6 +1,5 @@
 ---
 import * as stylex from "@stylexjs/stylex";
-import Schematic from "./Schematic.astro";
 import type { Project } from "../lib/projects";
 import { portfolioStyles } from "../styles/portfolioStyles";
 
@@ -12,28 +11,13 @@ const { projects } = Astro.props;
 ---
 
 <ul {...stylex.attrs(portfolioStyles.projectList)} role="list">
-  {projects.map((project) => {
-    const aside = project.drawing?.placement === "aside";
-    const below = project.drawing?.placement === "below";
-    return (
-      <li {...stylex.attrs(portfolioStyles.row, aside && portfolioStyles.rowAside)}>
-        <div>
-          <h3 {...stylex.attrs(portfolioStyles.rowHeading)}>
-            <a {...stylex.attrs(portfolioStyles.rowLink)} href={project.href}>{project.title}</a>
-            {project.context && <span {...stylex.attrs(portfolioStyles.rowRole)}>{project.context}</span>}
-          </h3>
-          <p {...stylex.attrs(portfolioStyles.rowText)}>{project.description}</p>
-        </div>
-        {aside && project.drawing && (
-          <div {...stylex.attrs(portfolioStyles.drawingAside)}><Schematic drawing={project.drawing.key} /></div>
-        )}
-        {below && project.drawing && (
-          <div {...stylex.attrs(portfolioStyles.drawingBelow, project.drawing.compact && portfolioStyles.wideOnly)}><Schematic drawing={project.drawing.key} /></div>
-        )}
-        {below && project.drawing?.compact && (
-          <div {...stylex.attrs(portfolioStyles.drawingBelow, portfolioStyles.narrowOnly)}><Schematic drawing={project.drawing.compact} size="lead" /></div>
-        )}
-      </li>
-    );
-  })}
+  {projects.map((project) => (
+    <li>
+      <h3 {...stylex.attrs(portfolioStyles.rowHeading)}>
+        <a {...stylex.attrs(portfolioStyles.rowLink)} href={project.href}>{project.title}</a>
+      </h3>
+      {project.context && <p {...stylex.attrs(portfolioStyles.rowRole)}>{project.context}</p>}
+      <p {...stylex.attrs(portfolioStyles.rowText)}>{project.description}</p>
+    </li>
+  ))}
 </ul>

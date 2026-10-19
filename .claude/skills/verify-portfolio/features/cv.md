@@ -1,6 +1,6 @@
 # CV page
 
-`cv.html` is the HTML version of the CV. It has a boxed toolbar (Portfolio, Download PDF, theme button), contact links, experience, projects, and a side column with education, skills and languages. On screen it follows the site theme. When printed it is always black on white.
+`cv.html` is the HTML version of the CV. It has the site's breadcrumb top line (warre snaet / cv, then download pdf and the theme button), contact links, experience, projects, and a side column with education, skills and languages. On screen it follows the site theme. When printed it is always black on white.
 
 ## Sub-features
 
@@ -24,4 +24,6 @@ Preconditions: the baseline in the README. `npm run build` copies the PDFs into 
 ## Gotchas
 
 - `--media print` emulates print CSS on screen. It does not paginate. For real page breaks, print to PDF with Chrome's `Page.printToPDF` or open the PDF.
+- The sheet sets its font size in pt on `#resume`, not on `<html>`, so rem stays 16px and the top line matches the other pages.
+- StyleX turns a property that has both a width query and a print query into an invalid media query, and the browser drops it. Keep phone and print rules on different properties (see `resume` in `cvStyles.ts`).
 - The downloadable PDFs come from `npm run build:cv`, not from `cv.astro`. Changing `cv.astro` does not change the PDFs.

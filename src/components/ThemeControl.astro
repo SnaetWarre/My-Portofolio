@@ -1,16 +1,9 @@
 ---
 import * as stylex from "@stylexjs/stylex";
 import { portfolioStyles } from "../styles/portfolioStyles";
-import { cvStyles } from "../styles/cvStyles";
-
-interface Props {
-  /** Match the boxed buttons of the CV toolbar. */
-  boxed?: boolean;
-}
-const { boxed = false } = Astro.props;
 ---
 
-<button {...stylex.attrs(portfolioStyles.textButton, boxed ? cvStyles.toolbarAction : portfolioStyles.navigationLink)} type="button" data-theme-toggle aria-pressed="false">Dark</button>
+<button {...stylex.attrs(portfolioStyles.textButton, portfolioStyles.link)} type="button" data-theme-toggle aria-pressed="false">dark</button>
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
@@ -20,7 +13,7 @@ const { boxed = false } = Astro.props;
   const currentToggle = () => document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
   const systemTheme = matchMedia("(prefers-color-scheme: dark)");
   const storageKey = "portfolio-theme";
-  const paper = { light: "#e6e5e1", dark: "#1b1c1e" };
+  const paper = { light: "#ffffff", dark: "#09090b" };
 
   function effectiveTheme(): "light" | "dark" {
     if (root.dataset.theme === "dark") return "dark";
@@ -34,7 +27,7 @@ const { boxed = false } = Astro.props;
     const toggle = currentToggle();
     if (!toggle) return;
     // The button names the theme it switches to.
-    toggle.textContent = isDark ? "Light" : "Dark";
+    toggle.textContent = isDark ? "light" : "dark";
     toggle.setAttribute("aria-pressed", String(isDark));
     toggle.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
   }

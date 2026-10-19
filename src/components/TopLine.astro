@@ -5,23 +5,44 @@ import { basePath } from "../lib/paths";
 import { profileLinks } from "../lib/site";
 import { portfolioStyles } from "../styles/portfolioStyles";
 
-interface Props {
-  /** Shown on the left. On the home page it is plain text, elsewhere a link home. */
-  home?: boolean;
+interface Crumb {
+  label: string;
+  href?: string;
 }
 
-const { home = false } = Astro.props;
+interface Props {
+  /** On the home page the trail lists the outside links instead. */
+  home?: boolean;
+  /** Steps after the name, the last one being the current page. */
+  trail?: Crumb[];
+}
+
+const { home = false, trail = [] } = Astro.props;
+const crumbs: Crumb[] = home
+  ? [
+      { label: "warre snaet" },
+      { label: "github", href: profileLinks.gitHub },
+      { label: "linkedin", href: profileLinks.linkedIn },
+      { label: "cv", href: `${basePath}cv.html` },
+    ]
+  : [{ label: "warre snaet", href: basePath }, ...trail];
 ---
 
-<div {...stylex.attrs(portfolioStyles.topline)}>
-  {home
-    ? <span>Warre Snaet</span>
-    : <a {...stylex.attrs(portfolioStyles.navigationLink)} href={basePath}>Warre Snaet</a>}
-  <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Site">
-    {!home && <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${basePath}#work`}>Work</a>}
-    <a {...stylex.attrs(portfolioStyles.navigationLink)} href={profileLinks.gitHub}>GitHub</a>
-    <a {...stylex.attrs(portfolioStyles.navigationLink)} href={profileLinks.linkedIn}>LinkedIn</a>
-    <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${basePath}cv.html`}>CV</a>
-    <ThemeControl />
+<div {...stylex.attrs(portfolioStyles.topline, portfolioStyles.column)}>
+  <nav aria-label="Site">
+    <ol {...stylex.attrs(portfolioStyles.trail)}>
+      {crumbs.map((crumb, index) => (
+        <li>
+          {index > 0 && <span {...stylex.attrs(portfolioStyles.trailSeparator)} aria-hidden="true">/</span>}
+          {crumb.href
+            ? <a {...stylex.attrs(portfolioStyles.link)} href={crumb.href}>{crumb.label}</a>
+            : <span {...stylex.attrs(index > 0 && portfolioStyles.trailCurrent)} aria-current={index > 0 ? "page" : undefined}>{crumb.label}</span>}
+        </li>
+      ))}
+    </ol>
   </nav>
+  <div {...stylex.attrs(portfolioStyles.trail)}>
+    <slot />
+    <ThemeControl />
+  </div>
 </div>

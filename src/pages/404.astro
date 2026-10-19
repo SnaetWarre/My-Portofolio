@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TopLine from "../components/TopLine.astro";
-import TitleBlock from "../components/TitleBlock.astro";
 import { basePath } from "../lib/paths";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import * as stylex from "@stylexjs/stylex";
@@ -16,25 +15,14 @@ const base = basePath;
 >
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#not-found">Skip to message</a>
   <div {...stylex.attrs(portfolioStyles.page)}>
-    <TopLine />
-    <header {...stylex.attrs(portfolioStyles.cover)}>
-      <TitleBlock
-        heading="Page not found"
-        tag="There's nothing at this address."
-        cells={[
-          { label: "Looked for", value: "A page that does not exist" },
-          { label: "Try instead", value: "The home page or the CV" },
-        ]}
-      />
-    </header>
-    <main {...stylex.attrs(portfolioStyles.intro)} id="not-found" tabindex="-1">
-      <div>
-        <p {...stylex.attrs(portfolioStyles.lead)}>The page may have moved, or the link was wrong.</p>
-        <nav {...stylex.attrs(portfolioStyles.navigation)} aria-label="Page not found actions">
-          <a {...stylex.attrs(portfolioStyles.navigationLink)} href={base}>Back to the home page</a>
-          <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${base}#work`}>See the work</a>
-          <a {...stylex.attrs(portfolioStyles.navigationLink)} href={`${base}cv.html`}>Read my CV</a>
-        </nav>
+    <TopLine trail={[{ label: "not found" }]} />
+    <main {...stylex.attrs(portfolioStyles.column, portfolioStyles.intro)} id="not-found" tabindex="-1">
+      <h1 {...stylex.attrs(portfolioStyles.introLine, portfolioStyles.introHeading)}>There's nothing at this address.</h1>
+      <p {...stylex.attrs(portfolioStyles.introLine)}>The page may have moved, or the link was wrong.</p>
+      <div {...stylex.attrs(portfolioStyles.buttonRow)}>
+        <a {...stylex.attrs(portfolioStyles.button)} href={base}>Home page</a>
+        <a {...stylex.attrs(portfolioStyles.button)} href={`${base}#work`}>See the work</a>
+        <a {...stylex.attrs(portfolioStyles.button)} href={`${base}cv.html`}>Read my CV</a>
       </div>
     </main>
   </div>

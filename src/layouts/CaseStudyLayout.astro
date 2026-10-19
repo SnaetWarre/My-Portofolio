@@ -6,10 +6,7 @@ import { caseStudyStyles } from "../styles/caseStudyStyles";
 import { portfolioStyles } from "../styles/portfolioStyles";
 import StructuredData from "../components/StructuredData.astro";
 import PageEnd from "../components/PageEnd.astro";
-import Schematic from "../components/Schematic.astro";
-import TitleBlock from "../components/TitleBlock.astro";
 import TopLine from "../components/TopLine.astro";
-import type { DrawingKey } from "../lib/drawings";
 import { absoluteUrl, breadcrumbs, gitDates, person, personId, website, websiteId } from "../lib/site";
 
 interface MetaItem {
@@ -26,22 +23,9 @@ interface Props {
   meta: MetaItem[];
 }
 
-/** The drawing at the top of each project page. */
-const drawingForPage: Record<string, DrawingKey> = {
-  "medical-imaging": "medicalImaging",
-  apolloon: "apolloon",
-  "aws-fargate-vault": "awsFargateVault",
-  "financial-agent": "financialAgent",
-  "azure-mlops": "azureMlops",
-  "xpo-chatbot": "xpoChatbot",
-  "dataset-query": "datasetQuery",
-  athas: "athas",
-};
-
 const { title, description, kicker, heading, lead, meta } = Astro.props;
 const base = basePath;
 const slug = Astro.url.pathname.split("/").at(-1)?.replace(/\.html$/, "") ?? "work";
-const drawing = drawingForPage[slug];
 const socialImage = `social/${slug}.png`;
 const socialImageAlt = `${heading}, an engineering case study by Warre Snaet`;
 const pageUrl = absoluteUrl(`work/${slug}.html`);
@@ -74,18 +58,21 @@ const structuredData = [
   <StructuredData slot="head" graph={structuredData} />
   <a {...stylex.attrs(portfolioStyles.link, portfolioStyles.skipLink)} href="#case-content">Skip to case study</a>
   <div {...stylex.attrs(portfolioStyles.page)}>
-    <TopLine />
+    <TopLine trail={[{ label: "work", href: `${base}#work` }, { label: slug.replaceAll("-", " ") }]} />
 
-    <header {...stylex.attrs(portfolioStyles.cover)}>
-      {drawing && (
-        <div {...stylex.attrs(caseStudyStyles.drawing)}>
-          <Schematic drawing={drawing} size="lead" />
-        </div>
-      )}
-      <TitleBlock heading={heading} tag={kicker} cells={meta} />
-    </header>
-
-    <main {...stylex.attrs(caseStudyStyles.mainContent)} id="case-content" tabindex="-1">
+    <main {...stylex.attrs(portfolioStyles.column)} id="case-content" tabindex="-1">
+      <header {...stylex.attrs(portfolioStyles.intro)}>
+        <h1 {...stylex.attrs(caseStudyStyles.heading)}>{heading}</h1>
+        <p {...stylex.attrs(caseStudyStyles.kicker)}>{kicker}</p>
+        <dl {...stylex.attrs(caseStudyStyles.facts)}>
+          {meta.map((item) => (
+            <div {...stylex.attrs(caseStudyStyles.factRow)}>
+              <dt {...stylex.attrs(caseStudyStyles.factLabel)}>{item.label}</dt>
+              <dd {...stylex.attrs(caseStudyStyles.factValue)}>{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </header>
       <p {...stylex.attrs(caseStudyStyles.lead)}>{lead}</p>
       <slot />
       <PageEnd href={`${base}work/${slug}.html`} />
